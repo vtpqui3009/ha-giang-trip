@@ -384,13 +384,25 @@
   .expense-row .meta{font-size:11px; color:#6b7a5e; font-family:'JetBrains Mono',monospace;}
   .settle-box{background:rgba(200,149,68,0.12); border-left:3px solid var(--gold); border-radius:8px; padding:14px 16px; margin-top:16px; font-size:13px;}
 
-  /* alerts */
+  /* alerts / news feed */
   .alert-card{display:flex; gap:12px; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:10px;}
   .alert-sev{width:8px; border-radius:4px; flex-shrink:0;}
   .alert-sev.info{background:var(--moss);}
   .alert-sev.warn{background:var(--gold);}
   .alert-sev.danger{background:var(--terracotta);}
   .alert-card .meta{font-size:10.5px; color:#6b7a5e; font-family:'JetBrains Mono',monospace; margin-top:4px;}
+  .news-card{display:block; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:10px; text-decoration:none; color:inherit; transition:.15s;}
+  .news-card:hover{border-color:var(--terracotta); transform:translateX(2px);}
+  .news-card h4{font-size:14px; font-weight:700; margin-bottom:4px;}
+  .news-card .meta{font-size:10.5px; color:#6b7a5e; font-family:'JetBrains Mono',monospace;}
+
+  .sort-row{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .sort-lbl{font-size:12px; font-weight:700; color:#6b7a5e; margin-right:2px;}
+  .sort-btn{
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:700; padding:6px 12px;
+    border-radius:100px; border:1.5px solid var(--line); background:var(--card); cursor:pointer;
+  }
+  .sort-btn.active{background:var(--ink); color:var(--stone); border-color:var(--ink);}
 
   .toast{
     position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
@@ -434,18 +446,17 @@
 <div id="drawer" class="drawer">
   <button id="drawerClose" class="drawer-close">✕</button>
   <h3>Cài đặt Trợ Lý Chuyến Đi</h3>
-  <div class="sub">Lưu trên trình duyệt của bạn — không gửi cho ai ngoài các dịch vụ bạn tự kết nối bên dưới.</div>
+  <div class="sub">Chat, chỗ ở và chi phí dùng chung một Firebase do người tổ chức chuyến đi cấu hình sẵn — bạn không cần nhập gì để xem. Chỉ 2 mục dưới đây là riêng cho bạn, lưu trên trình duyệt của bạn.</div>
 
-  <label>Tên của bạn (hiện trong chat/chi phí)</label>
+  <label>Kết nối dữ liệu chung <span id="fbStatus" class="status-pill bad">chưa kết nối</span></label>
+  <div class="help" id="fbHelp">Đang kiểm tra kết nối tới Firebase chung của chuyến đi...</div>
+
+  <label>Tên của bạn (hiện trong chat/vote đề xuất)</label>
   <input id="cfgName" type="text" placeholder="VD: An, Bình, Chi...">
-
-  <label>Firebase config (JSON) <span id="fbStatus" class="status-pill bad">chưa kết nối</span></label>
-  <textarea id="cfgFirebase" placeholder='{"apiKey":"...","authDomain":"...","projectId":"...","storageBucket":"...","messagingSenderId":"...","appId":"..."}'></textarea>
-  <div class="help">Tạo project miễn phí tại <a href="https://console.firebase.google.com" target="_blank">console.firebase.google.com</a> → Add project → Build → Firestore Database → tạo ở chế độ <b>test mode</b> → vào Project settings → phần "Your apps" → chọn Web (&lt;/&gt;) → copy nguyên object <code>firebaseConfig</code> dán vào đây.</div>
 
   <label>Anthropic API key <span id="aiStatus" class="status-pill bad">chưa có key</span></label>
   <input id="cfgApiKey" type="password" placeholder="sk-ant-...">
-  <div class="help">Lấy tại <a href="https://console.anthropic.com/settings/keys" target="_blank">console.anthropic.com</a>. Key chỉ lưu trên máy bạn, dùng để gọi thẳng API khi bấm "Nhờ AI soạn đề xuất".</div>
+  <div class="help">Chỉ cần nếu bạn muốn tự bấm "Nhờ AI soạn đề xuất". Lấy tại <a href="https://console.anthropic.com/settings/keys" target="_blank">console.anthropic.com</a>. Key chỉ lưu trên máy bạn, gọi thẳng từ trình duyệt của bạn tới Anthropic — không đi qua ai khác.</div>
 
   <button id="drawerSave" class="drawer-save">Lưu cài đặt</button>
 </div>
@@ -1044,7 +1055,7 @@
     <div class="sec-head">
       <div class="sec-eyebrow">Dùng trong lúc đi — cần Cài đặt (⚙️ góc trên) trước</div>
       <h2 class="sec-title">Trợ Lý Chuyến Đi</h2>
-      <p class="sec-desc">Chat đề xuất đổi lịch trình có AI soạn nháp, theo dõi GPS &amp; thời tiết trực tiếp, nhắc check-in chỗ ở, và sổ chi phí chung cho cả 3 người. Dữ liệu đồng bộ qua Firebase bạn tự tạo (miễn phí) — bấm ⚙️ để nhập tên, Firebase config và Anthropic API key trước khi dùng.</p>
+      <p class="sec-desc">Chat đề xuất đổi lịch trình có AI soạn nháp, theo dõi GPS &amp; thời tiết trực tiếp, nhắc check-in chỗ ở, sổ chi phí công khai cho cả nhóm, và tin tức thời tiết/sạt lở tự động cập nhật. Dữ liệu dùng chung một Firebase do người tổ chức cấu hình sẵn — mở trang là dùng được ngay, chỉ cần đặt tên trong ⚙️ nếu muốn chat/vote.</p>
     </div>
 
     <div class="identity-bar">
@@ -1119,21 +1130,35 @@
       </form>
       <div class="expense-summary" id="expenseSummary"></div>
       <div class="settle-box" id="settleBox"></div>
-      <div id="expenseList" style="margin-top:18px;"></div>
+      <div class="sort-row">
+        <span class="sort-lbl">Sắp xếp:</span>
+        <button class="sort-btn active" data-sort="newest">Mới nhất</button>
+        <button class="sort-btn" data-sort="amount-desc">Số tiền cao→thấp</button>
+        <button class="sort-btn" data-sort="amount-asc">Số tiền thấp→cao</button>
+        <button class="sort-btn" data-sort="payer">Theo người (A→Z)</button>
+      </div>
+      <div id="expenseList" style="margin-top:14px;"></div>
     </div>
 
-    <!-- ALERTS -->
+    <!-- ALERTS / NEWS FEED -->
     <div id="panelAlert" class="app-panel">
-      <form id="alertForm" class="add-form">
-        <input id="alertMsg" placeholder="Thấy tin gì trên mạng/đường? Đăng lên đây cho cả nhóm" required>
-        <select id="alertSev">
-          <option value="info">Thông tin</option>
-          <option value="warn">Cảnh báo</option>
-          <option value="danger">Nguy hiểm</option>
-        </select>
-        <button type="submit">+ Đăng cảnh báo</button>
-      </form>
-      <div id="alertList"></div>
+      <div class="note-box" style="margin-bottom:18px;">
+        📡 Danh sách dưới đây <b>tự động lấy tin</b> từ Google News (lọc từ khoá "Hà Giang" + sạt lở/mưa lũ/giao thông), cập nhật lại mỗi 15 phút — không phải do nhóm tự đăng. Nếu Netlify Function chưa được deploy, danh sách sẽ trống, xem link nguồn chính thức bên dưới thay thế.
+      </div>
+      <div id="newsStatus" style="font-size:12.5px; color:#77816a; margin-bottom:14px;">Đang tải tin...</div>
+      <div id="newsList"></div>
+
+      <div class="side-card" style="margin-top:24px;">
+        <h5>Nguồn chính thức để tự kiểm tra thêm</h5>
+        <div class="stay-opt">
+          <div class="name">Trung tâm Dự báo KTTV Quốc gia — Thời tiết nguy hiểm</div>
+          <div class="note"><a href="https://kttv.gov.vn/kttvsite/vi-VN/1/thoi-tiet-nguy-hiem-5-15.html" target="_blank">kttv.gov.vn — cảnh báo mưa lớn, bão, thiên tai chính thức</a></div>
+        </div>
+        <div class="stay-opt">
+          <div class="name">Hệ thống cảnh báo lũ quét, sạt lở đất thời gian thực</div>
+          <div class="note"><a href="https://luquetsatlo.nchmf.gov.vn/" target="_blank">luquetsatlo.nchmf.gov.vn — cập nhật mỗi 1 giờ, chi tiết đến cấp xã</a></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1226,7 +1251,31 @@
   'use strict';
 
   const TRIP_ID = 'ha-giang-04-07-11-2026';
-  const LSK = { name:'hgl_name', firebase:'hgl_firebase_cfg', apiKey:'hgl_anthropic_key' };
+  const LSK = { name:'hgl_name', apiKey:'hgl_anthropic_key' };
+
+  // ================================================================
+  // CẤU HÌNH DÙNG CHUNG CHO CẢ NHÓM — người tổ chức chuyến đi điền 1
+  // LẦN vào đây trước khi deploy, để bất kỳ ai mở link cũng thấy cùng
+  // một dữ liệu chat/chỗ ở/chi phí (không cần mỗi người tự cấu hình).
+  //
+  // Cách lấy: console.firebase.google.com → Add project (miễn phí) →
+  // Build → Firestore Database → tạo ở chế độ TEST MODE → Project
+  // settings → "Your apps" → chọn Web (</>) → copy object bên dưới.
+  //
+  // Firebase config phía client KHÔNG phải bí mật (an toàn khi để lộ
+  // trong code công khai) — bảo mật thật sự nằm ở Firestore Security
+  // Rules, không phải ở việc giấu config này. Xem CONTEXT.md mục
+  // "Quyết định thiết kế có chủ đích".
+  // ================================================================
+  const FIREBASE_CONFIG = {
+    apiKey: "PASTE_YOUR_API_KEY_HERE",
+    authDomain: "PASTE_YOUR_AUTH_DOMAIN_HERE",
+    projectId: "PASTE_YOUR_PROJECT_ID_HERE",
+    storageBucket: "PASTE_YOUR_STORAGE_BUCKET_HERE",
+    messagingSenderId: "PASTE_YOUR_SENDER_ID_HERE",
+    appId: "PASTE_YOUR_APP_ID_HERE",
+  };
+  const FIREBASE_NOT_CONFIGURED = FIREBASE_CONFIG.apiKey === 'PASTE_YOUR_API_KEY_HERE';
 
   // ---------- small utils ----------
   function $(id){ return document.getElementById(id); }
@@ -1251,11 +1300,10 @@
     return d.toLocaleString('vi-VN', {day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit'});
   }
 
-  // ---------- settings / identity ----------
+  // ---------- settings / identity (chỉ Tên + AI key — riêng từng người) ----------
   function loadCfg(){
     return {
       name: localStorage.getItem(LSK.name) || '',
-      firebase: localStorage.getItem(LSK.firebase) || '',
       apiKey: localStorage.getItem(LSK.apiKey) || '',
     };
   }
@@ -1264,10 +1312,14 @@
   function refreshIdentityUI(){
     $('whoName').textContent = cfg.name || '(chưa đặt tên)';
     $('cfgName').value = cfg.name;
-    $('cfgFirebase').value = cfg.firebase;
     $('cfgApiKey').value = cfg.apiKey;
-    $('fbStatus').textContent = db ? 'đã kết nối' : 'chưa kết nối';
+    $('fbStatus').textContent = db ? 'đã kết nối' : (FIREBASE_NOT_CONFIGURED ? 'chưa cấu hình' : 'lỗi kết nối');
     $('fbStatus').className = 'status-pill ' + (db ? 'ok' : 'bad');
+    $('fbHelp').textContent = db
+      ? 'Đang dùng chung dữ liệu chuyến đi với cả nhóm — không cần làm gì thêm.'
+      : (FIREBASE_NOT_CONFIGURED
+          ? 'Người tổ chức chuyến đi chưa điền FIREBASE_CONFIG trong index.html — xem CONTEXT.md.'
+          : 'Không kết nối được — kiểm tra lại FIREBASE_CONFIG trong index.html.');
     $('aiStatus').textContent = cfg.apiKey ? 'đã có key' : 'chưa có key';
     $('aiStatus').className = 'status-pill ' + (cfg.apiKey ? 'ok' : 'bad');
     $('connDot').className = 'conn-dot' + (db ? ' on' : '');
@@ -1286,32 +1338,28 @@
 
   $('drawerSave').addEventListener('click', ()=>{
     cfg.name = $('cfgName').value.trim();
-    cfg.firebase = $('cfgFirebase').value.trim();
     cfg.apiKey = $('cfgApiKey').value.trim();
     localStorage.setItem(LSK.name, cfg.name);
-    localStorage.setItem(LSK.firebase, cfg.firebase);
     localStorage.setItem(LSK.apiKey, cfg.apiKey);
-    initFirebase();
     refreshIdentityUI();
     closeDrawer();
     toast('Đã lưu cài đặt ✓');
   });
 
-  // ---------- Firebase ----------
+  // ---------- Firebase (cấu hình chung, tự kết nối khi tải trang) ----------
   let db = null;
   function tripCol(name){ return db.collection('trips').doc(TRIP_ID).collection(name); }
 
   function initFirebase(){
-    if(!cfg.firebase){ db = null; return; }
+    if(FIREBASE_NOT_CONFIGURED){ db = null; return; }
     try{
-      const parsed = JSON.parse(cfg.firebase);
-      if(!firebase.apps || !firebase.apps.length) firebase.initializeApp(parsed);
+      if(!firebase.apps || !firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
       db = firebase.firestore();
       wireRealtimeListeners();
     }catch(e){
       console.error('Firebase config lỗi:', e);
       db = null;
-      toast('Firebase config không hợp lệ — kiểm tra lại JSON trong ⚙️');
+      toast('Không kết nối được dữ liệu chung — báo người tổ chức chuyến đi kiểm tra FIREBASE_CONFIG');
     }
   }
 
@@ -1643,27 +1691,51 @@
   });
 
   // ---------- EXPENSES ----------
+  let lastExpenseDocs = [];
+  let expenseSort = 'newest';
+
+  function sortExpenseDocs(docs){
+    const arr = docs.map(d=>({ id:d.id, ...d.data() }));
+    switch(expenseSort){
+      case 'amount-desc': return arr.sort((a,b)=> (b.amount||0)-(a.amount||0));
+      case 'amount-asc': return arr.sort((a,b)=> (a.amount||0)-(b.amount||0));
+      case 'payer': return arr.sort((a,b)=> (a.payer||'').localeCompare(b.payer||'', 'vi'));
+      case 'newest':
+      default:
+        return arr.sort((a,b)=>{
+          const ta = a.createdAt && a.createdAt.toMillis ? a.createdAt.toMillis() : 0;
+          const tb = b.createdAt && b.createdAt.toMillis ? b.createdAt.toMillis() : 0;
+          return tb - ta;
+        });
+    }
+  }
+
   function renderExpenses(docs){
+    lastExpenseDocs = docs;
     const list = $('expenseList');
-    list.innerHTML = '';
+    const sorted = sortExpenseDocs(docs);
     const paid = {};
     let total = 0;
     docs.forEach(doc=>{
       const ex = doc.data();
       total += Number(ex.amount||0);
       paid[ex.payer] = (paid[ex.payer]||0) + Number(ex.amount||0);
+    });
+
+    list.innerHTML = '';
+    sorted.forEach(ex=>{
       const row = document.createElement('div');
       row.className = 'expense-row';
       row.innerHTML = `<span>${ex.note} <span class="meta">— ${ex.payer} · ${fmtTime(ex.createdAt)}</span></span><b>${fmtVND(ex.amount)}</b>`;
       list.appendChild(row);
     });
 
-    const names = Object.keys(paid);
+    const names = Object.keys(paid).sort((a,b)=>paid[b]-paid[a]);
     const n = names.length || 1;
     const share = total / n;
 
     const summary = $('expenseSummary');
-    summary.innerHTML = `<div class="expense-person"><div class="amt">${fmtVND(total)}</div><div class="lbl">Tổng chi phí</div></div>` +
+    summary.innerHTML = `<div class="expense-person"><div class="amt">${fmtVND(total)}</div><div class="lbl">Tổng chi phí (${docs.length} khoản)</div></div>` +
       names.map(nm=>`<div class="expense-person"><div class="amt">${fmtVND(paid[nm])}</div><div class="lbl">${nm} đã trả</div></div>`).join('');
 
     if(names.length >= 2){
@@ -1685,6 +1757,15 @@
     }
   }
 
+  document.querySelectorAll('.sort-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      expenseSort = btn.dataset.sort;
+      renderExpenses(lastExpenseDocs);
+    });
+  });
+
   $('expenseForm').addEventListener('submit', e=>{
     e.preventDefault();
     if(!db){ toast('Kết nối Firebase trong ⚙️ trước đã nhé'); return; }
@@ -1696,33 +1777,47 @@
     }).then(()=>{ e.target.reset(); toast('Đã ghi chi phí ✓'); });
   });
 
-  // ---------- ALERTS ----------
-  function renderAlerts(docs){
-    const list = $('alertList');
-    list.innerHTML = '';
-    docs.forEach(doc=>{
-      const a = doc.data();
-      const card = document.createElement('div');
-      card.className = 'alert-card';
-      card.innerHTML = `<div class="alert-sev ${a.sev||'info'}"></div>
-        <div><div>${a.text}</div><div class="meta">${a.author||'Ẩn danh'} · ${fmtTime(a.createdAt)}</div></div>`;
-      list.appendChild(card);
-    });
+  // ---------- NEWS FEED (thay cho đăng cảnh báo thủ công) ----------
+  // Lấy tự động từ Google News RSS (lọc "Hà Giang" + sạt lở/mưa lũ) qua một
+  // Netlify Function server-side (tránh lỗi CORS khi gọi RSS thẳng từ trình
+  // duyệt). Xem netlify/functions/community-news.js. Cần deploy qua Netlify
+  // "Import from Git" (không phải kéo-thả) để function này chạy được.
+  const NEWS_ENDPOINT = './.netlify/functions/community-news';
+  let newsTimer = null;
+
+  function renderNews(items){
+    const list = $('newsList');
+    const status = $('newsStatus');
+    if(!items || !items.length){
+      list.innerHTML = '';
+      status.textContent = 'Chưa có tin nào — có thể Netlify Function chưa được deploy, xem link nguồn chính thức bên dưới.';
+      return;
+    }
+    status.textContent = `Cập nhật lúc ${new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'})} · ${items.length} tin`;
+    list.innerHTML = items.map(n => `
+      <a class="news-card" href="${n.link}" target="_blank" rel="noopener">
+        <h4>${n.title}</h4>
+        <div class="meta">${n.source || ''} ${n.pubDate ? '· ' + new Date(n.pubDate).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : ''}</div>
+      </a>`).join('');
   }
-  $('alertForm').addEventListener('submit', e=>{
-    e.preventDefault();
-    if(!db){ toast('Kết nối Firebase trong ⚙️ trước đã nhé'); return; }
-    tripCol('alerts').add({
-      text: $('alertMsg').value.trim(),
-      sev: $('alertSev').value,
-      author: cfg.name || 'Ẩn danh',
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    }).then(()=>{
-      e.target.reset();
-      toast('Đã đăng cảnh báo ✓');
-      notifyEveryone('⚠️ Cảnh báo mới từ nhóm', $('alertMsg').value);
-    });
-  });
+
+  async function fetchNews(){
+    try{
+      const res = await fetch(NEWS_ENDPOINT);
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      renderNews(data.items || []);
+    }catch(e){
+      console.warn('Không lấy được tin tức tự động:', e);
+      $('newsStatus').textContent = 'Chưa lấy được tin tự động (Netlify Function có thể chưa deploy) — dùng link nguồn chính thức bên dưới.';
+    }
+  }
+
+  function startNewsPolling(){
+    fetchNews();
+    clearInterval(newsTimer);
+    newsTimer = setInterval(fetchNews, 15*60*1000); // 15 phút
+  }
 
   // ---------- REALTIME LISTENERS ----------
   let unsub = [];
@@ -1736,7 +1831,6 @@
     unsub.push(tripCol('proposals').orderBy('createdAt','desc').onSnapshot(snap=>renderProposals(snap.docs)));
     unsub.push(tripCol('accommodations').orderBy('createdAt').onSnapshot(snap=>renderStays(snap.docs)));
     unsub.push(tripCol('expenses').orderBy('createdAt').onSnapshot(snap=>renderExpenses(snap.docs)));
-    unsub.push(tripCol('alerts').orderBy('createdAt','desc').onSnapshot(snap=>renderAlerts(snap.docs)));
     refreshIdentityUI();
   }
 
@@ -1746,6 +1840,7 @@
       navigator.serviceWorker.register('./service-worker.js').catch(e=>console.warn('SW lỗi', e));
     });
   }
+  startNewsPolling();
   initFirebase();
   refreshIdentityUI();
 })();

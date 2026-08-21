@@ -21,44 +21,63 @@ mới hoặc upload file này trong lần chat sau.
 ## File trong repo
 
 ```
-index.html          toàn bộ trang: kế hoạch tĩnh + app tương tác (1 file, không build step)
-manifest.json        PWA manifest (để "Thêm vào Màn hình chính")
-service-worker.js    cache offline cơ bản + relay hiển thị local notification
-CONTEXT.md            (file này)
+index.html                          toàn bộ trang: kế hoạch tĩnh + app tương tác (1 file, không build step)
+manifest.json                       PWA manifest (để "Thêm vào Màn hình chính")
+service-worker.js                   cache offline cơ bản + relay hiển thị local notification
+netlify.toml                        cấu hình build Netlify (publish dir + functions dir)
+netlify/functions/community-news.js Netlify Function kéo tin thật (Google News RSS) cho tab Cảnh báo
+CONTEXT.md                          (file này)
 ```
 
-Không có build step, không có `package.json`, không có server riêng — đây là
-static site thuần, deploy bằng cách kéo cả 3 file kia vào Netlify Drop (hoặc
-GitHub Pages / bất kỳ static host nào, miễn là 3 file nằm cùng thư mục gốc).
+**Quan trọng:** vì có Netlify Function, từ v6 trở đi **phải deploy qua
+"Import from Git"** (kết nối repo GitHub) — kéo-thả (Netlify Drop) sẽ KHÔNG
+chạy được function, tab "Cảnh báo cộng đồng" sẽ trống (vẫn không lỗi, chỉ là
+list tin rỗng, có link nguồn chính thức thay thế).
 
 ## Tech stack
 
-- Vanilla HTML/CSS/JS, không framework, không bundler.
+- Vanilla HTML/CSS/JS, không framework, không bundler cho frontend.
 - Font: Be Vietnam Pro (chữ chính, hỗ trợ đầy đủ dấu tiếng Việt) + JetBrains
   Mono (số liệu/giờ/giá) — load qua Google Fonts CDN.
 - Bản đồ lịch trình: Leaflet.js + OpenStreetMap tiles (miễn phí, không cần key).
 - Dữ liệu dùng chung nhóm: Firebase Firestore, SDK compat v10.13.0 load qua
-  CDN (`firebase-app-compat.js`, `firebase-firestore-compat.js`).
+  CDN (`firebase-app-compat.js`, `firebase-firestore-compat.js`). **Từ v6,
+  config Firebase được bake thẳng vào code** (hằng số `FIREBASE_CONFIG` đầu
+  script trong `index.html`) thay vì mỗi người tự nhập — xem mục "Cấu hình
+  dùng chung" bên dưới.
 - AI soạn đề xuất: gọi thẳng Anthropic Messages API từ trình duyệt (model
   `claude-sonnet-5`), dùng header `anthropic-dangerous-direct-browser-access`
-  để vượt CORS — **không có server riêng**, key nằm trong `localStorage` trên
-  máy người dùng.
+  để vượt CORS — key này vẫn riêng từng người, lưu trong `localStorage`.
 - Thời tiết: Open-Meteo API (`api.open-meteo.com`), miễn phí, không cần đăng ký.
+- Tin tức cộng đồng: Netlify Function (`netlify/functions/community-news.js`,
+  Node, không cần npm dependency) fetch Google News RSS lọc từ khoá liên
+  quan Hà Giang, parse XML bằng regex thuần, trả JSON cho frontend poll mỗi
+  15 phút. Chạy server-side để tránh CORS (RSS không cho phép fetch thẳng từ
+  trình duyệt).
 - GPS: `navigator.geolocation.watchPosition`, tính khoảng cách bằng công thức
   Haversine (thuần JS, không thư viện).
 
-## Bảng màu / design system
+## Cấu hình dùng chung (bake vào code, KHÔNG còn nhập qua UI)
 
-CSS variables khai báo ở `:root` trong `index.html`:
-- `--stone` / `--stone-deep`: nền tông xanh rêu nhạt (đổi từ be/kem ban đầu
-  theo yêu cầu "xanh và mướt" gợi núi rừng Hà Giang)
-- `--indigo`: chàm (văn hoá nhuộm chàm H'Mông)
-- `--terracotta`: đất nung/đường đất đỏ
-- `--moss` / `--moss-deep` / `--moss-soft`: xanh rêu núi
-- `--gold`: vàng ochre
-- Có lớp trang trí "dãy núi" SVG ở hero + đường viền núi lặp lại ở đầu mỗi
-  section (`section:not(.hero)::before`) để xuyên suốt cảm giác "bị núi bao
-  quanh".
+Từ v6, Firebase config **không còn nhập qua drawer cài đặt** — người tổ chức
+chuyến đi điền trực tiếp vào hằng số `FIREBASE_CONFIG` ở đầu khối
+`<script>` cuối `index.html` (tìm comment "CẤU HÌNH DÙNG CHUNG CHO CẢ
+NHÓM"), commit vào code, rồi deploy. Bất kỳ ai mở link đã deploy sẽ tự động
+kết nối cùng một Firestore — không cần tự cấu hình gì để **xem** chat/chỗ
+ở/chi phí.
+
+Lý do đổi cách này: Firebase client config (apiKey, projectId...) **không
+phải bí mật** — an toàn khi để lộ trong code công khai, vì bảo mật thật sự
+nằm ở Firestore Security Rules chứ không phải ở việc giấu config. Bake sẵn
+giúp UX đơn giản hơn nhiều so với việc từng người phải copy-paste JSON.
+
+Riêng 2 mục sau **vẫn lưu trong `localStorage`, riêng từng máy** (đúng vì
+mỗi người khác nhau):
+
+| Key | Nội dung |
+|---|---|
+| `hgl_name` | Tên hiển thị của người dùng (dùng cho chat/vote) |
+| `hgl_anthropic_key` | Anthropic API key cá nhân, chỉ cần nếu tự bấm "Nhờ AI soạn đề xuất" |
 
 ## Cấu trúc dữ liệu Firestore
 
@@ -71,39 +90,54 @@ này nếu muốn tái dùng app cho chuyến khác).
 | `messages` | `text, author, type, timestamp` | `type` = `'chat'` hoặc `'system'` (thông báo hệ thống) |
 | `proposals` | `title, day, summary, details, status, votes{name:'yes'|'no'}, createdBy, createdAt` | `status` tự chuyển `'approved'` khi ≥2/3 vote `'yes'` |
 | `accommodations` | `day, name, lat, lng, note, addedBy, createdAt` | dùng để tính khoảng cách geofence |
-| `expenses` | `payer, amount, note, createdAt` | chia đều tự động theo số người distinct đã từng trả |
-| `alerts` | `text, sev('info'|'warn'|'danger'), author, createdAt` | bảng cảnh báo do người dùng tự đăng |
+| `expenses` | `payer, amount, note, createdAt` | public, có sort (mới nhất/số tiền/theo người), tự tính tổng + chia tiền |
+
+**Đã bỏ** collection `alerts` (v5) — thay bằng tin tức tự động (không lưu
+Firestore, gọi trực tiếp Netlify Function mỗi lần tải tab, không có lịch sử
+lưu trữ).
 
 Firestore đang ở **test mode** (ai có `firebaseConfig` cũng đọc/ghi được) —
-chấp nhận được vì nhóm 3 người riêng tư, **không phù hợp nếu public rộng**.
+chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu public rộng**.
 
-## Cấu hình runtime (không hardcode trong code)
+## Tab "Cảnh báo cộng đồng" — đổi từ v5 sang v6
 
-Lưu trong `localStorage` của từng trình duyệt, nhập qua drawer cài đặt (icon
-⚙️ góc trên bên phải):
+- **v5 (cũ):** form để nhóm tự đăng cảnh báo, lưu Firestore collection `alerts`.
+- **v6 (hiện tại):** **tự động kéo tin** từ Google News RSS (lọc "Hà Giang" +
+  sạt lở/mưa lũ/giao thông/thời tiết) qua Netlify Function, hiển thị dạng
+  card link ra bài báo gốc, tự refresh mỗi 15 phút. Không còn form đăng thủ
+  công. Kèm link tới 2 nguồn chính thức của Trung tâm Dự báo KTTV Quốc gia:
+  - `kttv.gov.vn` — trang "Thời tiết nguy hiểm" (bão, mưa lớn, thiên tai)
+  - `luquetsatlo.nchmf.gov.vn` — hệ thống cảnh báo lũ quét/sạt lở thời gian
+    thực, cập nhật mỗi 1 giờ, chi tiết đến cấp xã
+- Không tự động đọc được Facebook/Instagram — không có công cụ hợp pháp nào
+  cho một website làm việc này. Google News là nguồn tổng hợp báo chí công
+  khai, ổn định, không cần API key, gần nhất với yêu cầu "pull tin từ cộng
+  đồng" mà không phải tự đăng thủ công.
 
-| Key | Nội dung |
-|---|---|
-| `hgl_name` | Tên hiển thị của người dùng |
-| `hgl_firebase_cfg` | JSON `firebaseConfig` (apiKey, authDomain, projectId...) |
-| `hgl_anthropic_key` | Anthropic API key cá nhân, dùng gọi thẳng từ browser |
+## Tab "Chi phí" — public thật, có sort (v6)
 
-Mỗi người trong nhóm tự nhập cấu hình này trên máy mình — không có nơi lưu
-tập trung, không có tài khoản/đăng nhập thật.
+- Không cần cấu hình gì để xem — dùng chung `FIREBASE_CONFIG` bake sẵn.
+- Form nhập chi phí không gắn với identity (`cfg.name`) — ai cũng gõ tên
+  trực tiếp vào ô "Ai trả", không cần đặt tên trong ⚙️ trước.
+- Có 4 nút sort: Mới nhất / Số tiền cao→thấp / Số tiền thấp→cao / Theo
+  người (A→Z) — sort client-side trên dữ liệu đã tải, không query lại
+  Firestore.
+- Tự tính: tổng chi phí, số tiền từng người đã trả, và gợi ý "ai cần chuyển
+  bao nhiêu cho ai" (thuật toán greedy settlement đơn giản, giả định chia
+  đều theo số người đã từng trả ít nhất 1 khoản).
 
 ## Quyết định thiết kế có chủ đích (đọc trước khi "sửa lại cho đúng")
 
-- **Không có backend riêng** — mọi gọi API (Anthropic, Firestore, Open-Meteo)
-  đều chạy thẳng từ trình duyệt. Đây là lựa chọn có chủ đích để giữ deploy
-  đơn giản (static host), không phải thiếu sót.
+- **Không có backend riêng cho phần app** (ngoại trừ 1 Netlify Function nhỏ
+  cho tin tức) — mọi gọi API khác (Anthropic, Firestore, Open-Meteo) đều
+  chạy thẳng từ trình duyệt. Có chủ đích để giữ deploy đơn giản.
 - **Push notification chỉ ở mức "local notification"** qua Service Worker —
   hoạt động khi app đang mở hoặc mới chuyển nền, **KHÔNG đánh thức được máy
   khi tắt hẳn app/khoá màn hình lâu**. Muốn push thật 100% cần nâng cấp lên
   Firebase Cloud Messaging + Cloud Function (yêu cầu gói Firebase Blaze, xem
   mục Roadmap).
-- **Không tự động đọc Facebook/Instagram** để lấy cảnh báo sạt lở — không có
-  công cụ hợp pháp nào làm việc này từ một website. Thay bằng bảng cảnh báo
-  crowd-sourced để nhóm tự đăng tin.
+- **Tin tức cộng đồng là pull, không phải push từ nhóm** — đây là thay đổi
+  có chủ đích theo yêu cầu người dùng, khác với thiết kế v5 ban đầu.
 - **Pace-tracking (đang nhanh/chậm lịch trình) là heuristic ước lượng** — so
   khoảng cách Haversine tới waypoint gần nhất trong ngày + giờ kế hoạch
   hardcode sẵn, KHÔNG phải định tuyến đường bộ chính xác.
@@ -116,7 +150,10 @@ tập trung, không có tài khoản/đăng nhập thật.
   Leaflet là ước lượng gần đúng, không phải đo GPS thực tế tại chỗ.
 - Icon PWA trong `manifest.json` là SVG placeholder đơn giản (dãy núi cách
   điệu), chưa có icon thiết kế riêng.
-- Chưa có chức năng sửa/xoá tin nhắn, đề xuất, chi phí, cảnh báo đã đăng.
+- Chưa có chức năng sửa/xoá tin nhắn, đề xuất, chi phí đã đăng.
+- Netlify Function `community-news.js` phụ thuộc Google News RSS còn hoạt
+  động đúng cấu trúc XML hiện tại — nếu Google đổi format, parser regex
+  thuần có thể cần cập nhật (không có test tự động cho việc này).
 - Chưa test thực tế trên iOS Safari (đặc biệt phần Notification — iOS chỉ hỗ
   trợ push khi đã cài PWA qua "Thêm vào Màn hình chính", iOS ≥16.4).
 
@@ -125,37 +162,49 @@ tập trung, không có tài khoản/đăng nhập thật.
 - [ ] Push notification thật (Tier 2): Firebase Cloud Messaging + Cloud
       Function, cần nâng gói Firebase lên Blaze.
 - [ ] Firestore security rules chặt hơn thay vì test mode.
-- [ ] Cho sửa/xoá các mục đã đăng (tin nhắn, đề xuất, chi phí, cảnh báo).
+- [ ] Cho sửa/xoá các mục đã đăng (tin nhắn, đề xuất, chi phí).
 - [ ] Icon PWA thiết kế riêng thay placeholder.
 - [ ] Đổi `TRIP_ID` thành cấu hình được thay vì hardcode, để tái dùng app
       cho chuyến đi khác không cần sửa code.
 - [ ] Định tuyến đường bộ thật (OSRM/Google Directions) thay vì heuristic
       khoảng cách thẳng cho phần pace-tracking.
+- [ ] Thêm nguồn tin thứ 2 cho Netlify Function (VD: RSS chính thức của
+      kttv.gov.vn nếu tìm được endpoint máy-đọc-được ổn định) để đỡ phụ
+      thuộc hoàn toàn vào Google News.
 
 ## Lịch sử thay đổi
 
 - **v1** — trang tĩnh kế hoạch 4N3Đ: hero, tổng quan, lịch trình từng ngày,
   bản đồ Leaflet, chi phí dự kiến, lưu ý an toàn.
 - **v2** — bổ sung mục "Thực tế 2026" tổng hợp từ VOZ, group Facebook, TikTok,
-  cẩm nang du lịch cập nhật tháng 5/2026 (đông khách, giá tăng, an toàn thực
-  tế, điểm nên/không nên đi).
-- **v3** — đổi bảng màu nền từ be/kem sang tông xanh rêu núi rừng theo yêu
-  cầu "xanh và mướt".
+  cẩm nang du lịch cập nhật tháng 5/2026.
+- **v3** — đổi bảng màu nền từ be/kem sang tông xanh rêu núi rừng.
 - **v4** — thêm lớp trang trí núi (SVG hero + viền núi lặp ở đầu mỗi section)
-  và gradient xanh cho nền/card để tăng cảm giác "mướt".
-- **v5** — bổ sung Trợ Lý Chuyến Đi: chat nhóm + AI soạn đề xuất (Anthropic
-  API) + voting duyệt 2/3, theo dõi GPS/thời tiết trực tiếp (Open-Meteo) với
-  cảnh báo pace, sổ chỗ ở đã đặt + nhắc check-in geofence, sổ chi phí tự tính
-  chia tiền, bảng cảnh báo cộng đồng. Thêm `manifest.json` +
-  `service-worker.js` để cài như PWA.
+  và gradient xanh cho nền/card.
+- **v5** — bổ sung Trợ Lý Chuyến Đi: chat + AI soạn đề xuất (Anthropic API) +
+  voting 2/3, GPS/thời tiết trực tiếp, sổ chỗ ở + geofence, sổ chi phí, bảng
+  cảnh báo tự đăng thủ công. Thêm `manifest.json` + `service-worker.js`.
+- **v6** (hiện tại) — Firebase config bake sẵn vào code (bỏ yêu cầu mỗi
+  người tự cấu hình, chi phí giờ public thật); thêm sort cho sổ chi phí;
+  thay bảng cảnh báo tự đăng bằng tin tức tự động kéo từ Google News RSS
+  qua Netlify Function + link nguồn chính thức KTTV; thêm `netlify.toml` +
+  `netlify/functions/community-news.js`.
 
 ## Deploy
 
-Kéo **cả 3 file** (`index.html`, `manifest.json`, `service-worker.js`) cùng
-lúc vào https://app.netlify.com/drop — không kéo riêng lẻ, vì service worker
-và manifest cần nằm cùng thư mục gốc với `index.html` để trình duyệt tìm
-thấy đường dẫn tương đối (`./manifest.json`, `./service-worker.js`).
+**Từ v6, bắt buộc deploy qua Netlify "Import from an existing project" →
+GitHub** (không dùng Netlify Drop kéo-thả nữa, vì cần chạy Netlify
+Function):
 
-Nếu deploy qua GitHub Pages/Vercel/Firebase Hosting thay vì Netlify: chỉ cần
-đảm bảo 3 file nằm ở thư mục gốc (root) được serve, không cần cấu hình build
-gì thêm.
+1. Push repo lên GitHub (đã có sẵn, xem hướng dẫn phần trước trong lịch sử
+   chat, hoặc dùng `ha-giang-loop-repo.zip` đã chuẩn bị).
+2. Vào app.netlify.com → "Add new site" → "Import an existing project" →
+   chọn GitHub → chọn đúng repo.
+3. Build settings: để trống "Build command", Publish directory = `.`
+   (Netlify sẽ tự đọc `netlify.toml` cho phần functions).
+4. Deploy — từ lần sau, mỗi lần `git push` lên `main` sẽ tự động deploy lại.
+5. **Trước khi deploy lần đầu:** nhớ điền `FIREBASE_CONFIG` thật vào
+   `index.html` (xem mục "Cấu hình dùng chung" ở trên) — nếu chưa điền, app
+   vẫn chạy nhưng chat/chỗ ở/chi phí sẽ không lưu được, và drawer cài đặt sẽ
+   báo "chưa cấu hình".
+
