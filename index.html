@@ -446,17 +446,13 @@
 <div id="drawer" class="drawer">
   <button id="drawerClose" class="drawer-close">✕</button>
   <h3>Cài đặt Trợ Lý Chuyến Đi</h3>
-  <div class="sub">Chat, chỗ ở và chi phí dùng chung một Firebase do người tổ chức chuyến đi cấu hình sẵn — bạn không cần nhập gì để xem. Chỉ 2 mục dưới đây là riêng cho bạn, lưu trên trình duyệt của bạn.</div>
+  <div class="sub">Chat, chỗ ở, chi phí và AI soạn đề xuất dùng chung cấu hình do người tổ chức chuyến đi cài sẵn trên Netlify — bạn không cần nhập gì để dùng. Chỉ 1 mục dưới đây là riêng cho bạn.</div>
 
   <label>Kết nối dữ liệu chung <span id="fbStatus" class="status-pill bad">chưa kết nối</span></label>
   <div class="help" id="fbHelp">Đang kiểm tra kết nối tới Firebase chung của chuyến đi...</div>
 
   <label>Tên của bạn (hiện trong chat/vote đề xuất)</label>
   <input id="cfgName" type="text" placeholder="VD: An, Bình, Chi...">
-
-  <label>Anthropic API key <span id="aiStatus" class="status-pill bad">chưa có key</span></label>
-  <input id="cfgApiKey" type="password" placeholder="sk-ant-...">
-  <div class="help">Chỉ cần nếu bạn muốn tự bấm "Nhờ AI soạn đề xuất". Lấy tại <a href="https://console.anthropic.com/settings/keys" target="_blank">console.anthropic.com</a>. Key chỉ lưu trên máy bạn, gọi thẳng từ trình duyệt của bạn tới Anthropic — không đi qua ai khác.</div>
 
   <button id="drawerSave" class="drawer-save">Lưu cài đặt</button>
 </div>
@@ -909,20 +905,20 @@
 <section id="chiphi">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-eyebrow">Dự trù ngân sách</div>
-      <h2 class="sec-title">Chi phí ước tính — phần Hà Giang Loop</h2>
-      <p class="sec-desc">Tính cho 3 người, chia đều 2 xe số (thay phiên lái/ngồi sau) trong 4 ngày. Không bao gồm vé máy bay SGN–HAN (đã có) và chi tiêu riêng ở Hà Nội.</p>
+      <div class="sec-eyebrow">Dự trù ngân sách · đã review lại 21/08</div>
+      <h2 class="sec-title">Chi phí ước tính — trọn chuyến 6 ngày</h2>
+      <p class="sec-desc">Tính cho 3 người, <b>mỗi người 1 xe riêng</b> (chủ động hơn, không phải thay phiên lái/ngồi sau), gồm cả 2 ngày ở Hà Nội đầu/cuối chuyến. Không bao gồm vé máy bay SGN–HAN (đã có). Mức giá đã tính theo xu hướng tăng 40–60% từ 2023 do lượng khách tăng mạnh (xem mục "Thực tế 2026" bên dưới) — đây là mức chi tiêu <b>thoải mái</b>, không phải mức tiết kiệm tối đa.</p>
     </div>
     <div class="cost-grid">
       <div class="cost-card">
-        <div class="big">≈ 3,0 – 3,5tr</div>
+        <div class="big">≈ 4,7 – 5,5tr</div>
         <div class="lbl">VNĐ / người</div>
-        <p>Tổng chi phí phần Hà Giang Loop 4N3Đ, đã gồm xe khách khứ hồi, thuê xe máy, xăng, ăn ở, vé tham quan.</p>
+        <p>Tổng chi phí trọn chuyến 6 ngày (Hà Nội + Hà Giang Loop 4N3Đ), đã gồm xe khách khứ hồi, thuê xe máy riêng, xăng, ăn ở, vé tham quan, dự phòng.</p>
       </div>
       <div class="cost-card">
-        <div class="big">180–200k</div>
+        <div class="big">200–260k</div>
         <div class="lbl">VNĐ / xe / ngày</div>
-        <p>Giá thuê xe số phổ biến tại TP Hà Giang, thường đã gồm mũ bảo hiểm, áo mưa, bộ vá xe cơ bản.</p>
+        <p>Giá thuê xe số phổ biến 2026 tại TP Hà Giang (đã tăng so với mức 180–200k của vài năm trước), thường gồm mũ bảo hiểm, áo mưa, bộ vá xe cơ bản.</p>
       </div>
       <div class="cost-card">
         <div class="big">250–350k</div>
@@ -936,16 +932,20 @@
       </thead>
       <tbody>
         <tr><td>Xe khách Hà Nội ↔ Hà Giang (khứ hồi)</td><td class="mono">300.000đ/người × 2 chiều</td><td>1.800.000đ</td></tr>
-        <tr><td>Thuê xe máy số (2 xe × 4 ngày)</td><td class="mono">190.000đ/xe/ngày</td><td>1.520.000đ</td></tr>
-        <tr><td>Xăng cho cả hành trình (~450km, 2 xe)</td><td class="mono">~200.000đ/xe</td><td>400.000đ</td></tr>
-        <tr><td>Ăn uống (sáng/trưa/tối, 4 ngày)</td><td class="mono">200.000đ/người/ngày</td><td>2.400.000đ</td></tr>
-        <tr><td>Nghỉ đêm (3 đêm, chia phòng)</td><td class="mono">200.000đ/người/đêm</td><td>1.800.000đ</td></tr>
+        <tr><td>Thuê xe máy số — mỗi người 1 xe (3 xe × 4 ngày)</td><td class="mono">220.000đ/xe/ngày</td><td>2.640.000đ</td></tr>
+        <tr><td>Xăng cho cả hành trình (~450km, 3 xe)</td><td class="mono">~220.000đ/xe</td><td>660.000đ</td></tr>
+        <tr><td>Ăn uống trên loop (sáng/trưa/tối, 4 ngày)</td><td class="mono">280.000đ/người/ngày</td><td>3.360.000đ</td></tr>
+        <tr><td>Nghỉ đêm trên loop (3 đêm)</td><td class="mono">300.000đ/người/đêm</td><td>2.700.000đ</td></tr>
         <tr><td>Vé tham quan (Lũng Cú, Dinh Vua Mèo, Nhà của Pao)</td><td class="mono">80.000đ/người</td><td>240.000đ</td></tr>
-        <tr><td>Thuyền/cano ngắm hẻm Tu Sản</td><td class="mono">200.000đ/người</td><td>600.000đ</td></tr>
-        <tr><td>Dự phòng (vá xe, cà phê, quà, phát sinh)</td><td class="mono">200.000đ/người</td><td>600.000đ</td></tr>
-        <tr class="total"><td>Tổng cộng (3 người)</td><td></td><td>≈ 9.360.000đ</td></tr>
+        <tr><td>Thuyền/cano ngắm hẻm Tu Sản</td><td class="mono">250.000đ/người</td><td>750.000đ</td></tr>
+        <tr><td>Ăn uống + di chuyển nội thành 2 ngày Hà Nội</td><td class="mono">300.000đ/người</td><td>900.000đ</td></tr>
+        <tr><td>Dự phòng (vá xe, cà phê, quà, phát sinh)</td><td class="mono">350.000đ/người</td><td>1.050.000đ</td></tr>
+        <tr class="total"><td>Tổng cộng (3 người)</td><td></td><td>≈ 14.100.000đ</td></tr>
       </tbody>
     </table>
+    <div class="note-box" style="margin-top:18px;">
+      💡 <b>Muốn tiết kiệm hơn?</b> Nếu chia 2 xe thay vì mỗi người 1 xe riêng (thay phiên lái/ngồi sau), tiết kiệm được khoảng <b>750.000đ/người</b> — đưa tổng về gần mức <b>≈ 4,5tr/người</b>. Đây là lựa chọn ở bảng chi phí bản trước; bảng hiện tại ưu tiên sự chủ động (ai cũng tự lái xe mình) hơn là tiết kiệm tối đa.
+    </div>
   </div>
 </section>
 
@@ -1143,7 +1143,7 @@
     <!-- ALERTS / NEWS FEED -->
     <div id="panelAlert" class="app-panel">
       <div class="note-box" style="margin-bottom:18px;">
-        📡 Danh sách dưới đây <b>tự động lấy tin</b> từ Google News (lọc từ khoá "Hà Giang" + sạt lở/mưa lũ/giao thông), cập nhật lại mỗi 15 phút — không phải do nhóm tự đăng. Nếu Netlify Function chưa được deploy, danh sách sẽ trống, xem link nguồn chính thức bên dưới thay thế.
+        📡 Danh sách dưới đây <b>tự động lấy tin</b> từ Google News (lọc từ khoá "Hà Giang" + sạt lở/mưa lũ/giao thông, <b>chỉ trong 7 ngày gần nhất</b>), cập nhật lại mỗi 15 phút — không phải do nhóm tự đăng. Nếu Netlify Function chưa được deploy, danh sách sẽ trống, xem link nguồn chính thức bên dưới thay thế.
       </div>
       <div id="newsStatus" style="font-size:12.5px; color:#77816a; margin-bottom:14px;">Đang tải tin...</div>
       <div id="newsList"></div>
@@ -1251,7 +1251,7 @@
   'use strict';
 
   const TRIP_ID = 'ha-giang-04-07-11-2026';
-  const LSK = { name:'hgl_name', apiKey:'hgl_anthropic_key' };
+  const LSK = { name:'hgl_name' };
 
   // ================================================================
   // CẤU HÌNH DÙNG CHUNG CHO CẢ NHÓM — người tổ chức chuyến đi điền 1
@@ -1300,11 +1300,10 @@
     return d.toLocaleString('vi-VN', {day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit'});
   }
 
-  // ---------- settings / identity (chỉ Tên + AI key — riêng từng người) ----------
+  // ---------- settings / identity (chỉ Tên — riêng từng người) ----------
   function loadCfg(){
     return {
       name: localStorage.getItem(LSK.name) || '',
-      apiKey: localStorage.getItem(LSK.apiKey) || '',
     };
   }
   let cfg = loadCfg();
@@ -1312,7 +1311,6 @@
   function refreshIdentityUI(){
     $('whoName').textContent = cfg.name || '(chưa đặt tên)';
     $('cfgName').value = cfg.name;
-    $('cfgApiKey').value = cfg.apiKey;
     $('fbStatus').textContent = db ? 'đã kết nối' : (FIREBASE_NOT_CONFIGURED ? 'chưa cấu hình' : 'lỗi kết nối');
     $('fbStatus').className = 'status-pill ' + (db ? 'ok' : 'bad');
     $('fbHelp').textContent = db
@@ -1320,8 +1318,6 @@
       : (FIREBASE_NOT_CONFIGURED
           ? 'Người tổ chức chuyến đi chưa điền FIREBASE_CONFIG trong index.html — xem CONTEXT.md.'
           : 'Không kết nối được — kiểm tra lại FIREBASE_CONFIG trong index.html.');
-    $('aiStatus').textContent = cfg.apiKey ? 'đã có key' : 'chưa có key';
-    $('aiStatus').className = 'status-pill ' + (cfg.apiKey ? 'ok' : 'bad');
     $('connDot').className = 'conn-dot' + (db ? ' on' : '');
   }
 
@@ -1338,9 +1334,7 @@
 
   $('drawerSave').addEventListener('click', ()=>{
     cfg.name = $('cfgName').value.trim();
-    cfg.apiKey = $('cfgApiKey').value.trim();
     localStorage.setItem(LSK.name, cfg.name);
-    localStorage.setItem(LSK.apiKey, cfg.apiKey);
     refreshIdentityUI();
     closeDrawer();
     toast('Đã lưu cài đặt ✓');
@@ -1410,43 +1404,34 @@
   $('chatInput').addEventListener('keydown', e=>{ if(e.key==='Enter') $('chatSend').click(); });
 
   // ---------- AI DRAFT PROPOSAL ----------
+  // Gọi qua Netlify Function (netlify/functions/ai-draft.js) — key Anthropic
+  // nằm ở biến môi trường trên Netlify, dùng chung cho cả nhóm, không lộ
+  // trong code hay trình duyệt của ai cả.
   let lastMessages = [];
+  const AI_DRAFT_ENDPOINT = './.netlify/functions/ai-draft';
 
-  async function callClaude(system, userText){
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+  async function callClaude(convo){
+    const res = await fetch(AI_DRAFT_ENDPOINT, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': cfg.apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true',
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-5',
-        max_tokens: 700,
-        system,
-        messages: [{ role: 'user', content: userText }],
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ convo }),
     });
+    const data = await res.json().catch(()=>({}));
     if(!res.ok){
-      const t = await res.text();
-      throw new Error('Anthropic API lỗi ' + res.status + ': ' + t.slice(0,200));
+      throw new Error(data.error || ('Lỗi function ' + res.status));
     }
-    const data = await res.json();
-    return (data.content || []).filter(b=>b.type==='text').map(b=>b.text).join('\n');
+    return data.text || '';
   }
 
   $('aiDraftBtn').addEventListener('click', async ()=>{
-    if(!cfg.apiKey){ toast('Nhập Anthropic API key trong ⚙️ trước nhé'); return; }
     if(!db){ toast('Kết nối Firebase trong ⚙️ trước đã nhé'); return; }
     const btn = $('aiDraftBtn');
     btn.disabled = true;
     btn.textContent = '🤖 Đang soạn đề xuất...';
     try{
       const convo = lastMessages.filter(m=>m.type!=='system').slice(-20)
-        .map(m=>`${m.author}: ${m.text}`).join('\n') || '(chưa có tin nhắn nào, hãy soạn đề xuất chung chung dựa trên lịch trình 4 ngày Hà Giang Loop 4-7/11)';
-      const system = 'Bạn là trợ lý lập kế hoạch cho một nhóm 3 người đi Hà Giang Loop bằng xe máy từ 04-07/11. Dựa vào đoạn hội thoại nhóm, hãy soạn MỘT đề xuất thay đổi lịch trình rõ ràng, thực tế, khả thi về mặt địa lý/thời gian. Trả lời DUY NHẤT một JSON hợp lệ, không thêm chữ nào khác, không dùng markdown fence, đúng format: {"title":"tiêu đề ngắn","day":"Ngày mấy hoặc Chung","summary":"tóm tắt 1 câu","details":"mô tả cụ thể, tối đa 4 câu, tiếng Việt"}';
-      const raw = await callClaude(system, convo);
+        .map(m=>`${m.author}: ${m.text}`).join('\n');
+      const raw = await callClaude(convo);
       let jsonText = raw.trim().replace(/^```json/i,'').replace(/^```/,'').replace(/```$/,'').trim();
       let parsed;
       try{ parsed = JSON.parse(jsonText); }
@@ -1785,19 +1770,26 @@
   const NEWS_ENDPOINT = './.netlify/functions/community-news';
   let newsTimer = null;
 
+  function fmtNewsDate(pubDate){
+    const d = new Date(pubDate);
+    if(isNaN(d)) return '';
+    const pad = n => String(n).padStart(2,'0');
+    return `${pad(d.getDate())}/${pad(d.getMonth()+1)} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  }
+
   function renderNews(items){
     const list = $('newsList');
     const status = $('newsStatus');
     if(!items || !items.length){
       list.innerHTML = '';
-      status.textContent = 'Chưa có tin nào — có thể Netlify Function chưa được deploy, xem link nguồn chính thức bên dưới.';
+      status.textContent = 'Không có tin nào trong 7 ngày gần nhất (hoặc Netlify Function chưa được deploy) — xem link nguồn chính thức bên dưới.';
       return;
     }
     status.textContent = `Cập nhật lúc ${new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'})} · ${items.length} tin`;
     list.innerHTML = items.map(n => `
       <a class="news-card" href="${n.link}" target="_blank" rel="noopener">
         <h4>${n.title}</h4>
-        <div class="meta">${n.source || ''} ${n.pubDate ? '· ' + new Date(n.pubDate).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : ''}</div>
+        <div class="meta">${n.source || ''} ${n.pubDate ? '· ' + fmtNewsDate(n.pubDate) : ''}</div>
       </a>`).join('');
   }
 
@@ -1824,10 +1816,10 @@
   function wireRealtimeListeners(){
     unsub.forEach(u=>u());
     unsub = [];
-    unsub.push(tripCol('messages').orderBy('timestamp').limitToLast ? tripCol('messages').orderBy('timestamp').onSnapshot(snap=>{
+    unsub.push(tripCol('messages').orderBy('timestamp').onSnapshot(snap=>{
       lastMessages = snap.docs.map(d=>d.data());
       renderMessages(snap.docs);
-    }) : ()=>{});
+    }));
     unsub.push(tripCol('proposals').orderBy('createdAt','desc').onSnapshot(snap=>renderProposals(snap.docs)));
     unsub.push(tripCol('accommodations').orderBy('createdAt').onSnapshot(snap=>renderStays(snap.docs)));
     unsub.push(tripCol('expenses').orderBy('createdAt').onSnapshot(snap=>renderExpenses(snap.docs)));

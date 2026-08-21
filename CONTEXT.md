@@ -25,7 +25,8 @@ index.html                          toàn bộ trang: kế hoạch tĩnh + app t
 manifest.json                       PWA manifest (để "Thêm vào Màn hình chính")
 service-worker.js                   cache offline cơ bản + relay hiển thị local notification
 netlify.toml                        cấu hình build Netlify (publish dir + functions dir)
-netlify/functions/community-news.js Netlify Function kéo tin thật (Google News RSS) cho tab Cảnh báo
+netlify/functions/community-news.js Netlify Function kéo tin thật (Google News RSS, lọc 7 ngày) cho tab Cảnh báo
+netlify/functions/ai-draft.js       Netlify Function gọi Anthropic API server-side (key dùng chung qua env var)
 CONTEXT.md                          (file này)
 ```
 
@@ -45,19 +46,21 @@ list tin rỗng, có link nguồn chính thức thay thế).
   config Firebase được bake thẳng vào code** (hằng số `FIREBASE_CONFIG` đầu
   script trong `index.html`) thay vì mỗi người tự nhập — xem mục "Cấu hình
   dùng chung" bên dưới.
-- AI soạn đề xuất: gọi thẳng Anthropic Messages API từ trình duyệt (model
-  `claude-sonnet-5`), dùng header `anthropic-dangerous-direct-browser-access`
-  để vượt CORS — key này vẫn riêng từng người, lưu trong `localStorage`.
+- AI soạn đề xuất: **v7 trở đi gọi qua Netlify Function**
+  (`netlify/functions/ai-draft.js`) thay vì gọi thẳng từ trình duyệt — key
+  Anthropic nằm ở biến môi trường Netlify, dùng chung cho cả nhóm, không lộ
+  trong code hay network tab của trình duyệt. Model dùng: `claude-sonnet-5`.
 - Thời tiết: Open-Meteo API (`api.open-meteo.com`), miễn phí, không cần đăng ký.
 - Tin tức cộng đồng: Netlify Function (`netlify/functions/community-news.js`,
-  Node, không cần npm dependency) fetch Google News RSS lọc từ khoá liên
-  quan Hà Giang, parse XML bằng regex thuần, trả JSON cho frontend poll mỗi
-  15 phút. Chạy server-side để tránh CORS (RSS không cho phép fetch thẳng từ
-  trình duyệt).
+  Node, không cần npm dependency) fetch Google News RSS với toán tử
+  `when:7d` lọc theo khoá liên quan Hà Giang, **lọc lại lần 2 phía server
+  theo `pubDate` (loại tin quá 7 ngày)** để chắc chắn không lọt tin cũ, parse
+  XML bằng regex thuần, trả JSON cho frontend poll mỗi 15 phút. Chạy
+  server-side để tránh CORS (RSS không cho phép fetch thẳng từ trình duyệt).
 - GPS: `navigator.geolocation.watchPosition`, tính khoảng cách bằng công thức
   Haversine (thuần JS, không thư viện).
 
-## Cấu hình dùng chung (bake vào code, KHÔNG còn nhập qua UI)
+## Cấu hình dùng chung (bake vào code hoặc env var, KHÔNG còn nhập qua UI)
 
 Từ v6, Firebase config **không còn nhập qua drawer cài đặt** — người tổ chức
 chuyến đi điền trực tiếp vào hằng số `FIREBASE_CONFIG` ở đầu khối
@@ -71,13 +74,30 @@ phải bí mật** — an toàn khi để lộ trong code công khai, vì bảo 
 nằm ở Firestore Security Rules chứ không phải ở việc giấu config. Bake sẵn
 giúp UX đơn giản hơn nhiều so với việc từng người phải copy-paste JSON.
 
-Riêng 2 mục sau **vẫn lưu trong `localStorage`, riêng từng máy** (đúng vì
-mỗi người khác nhau):
+**Từ v7, Anthropic API key CŨNG chuyển sang dùng chung — nhưng khác cách
+với Firebase.** Key Anthropic **KHÔNG bake vào code** (vì đó là bí mật thật
+sự, lộ ra là ai cũng xài ké/rút tiền được), mà đặt làm **biến môi trường
+trên Netlify** (`ANTHROPIC_API_KEY`), chỉ Netlify Function
+`netlify/functions/ai-draft.js` đọc được, không nằm trong HTML/JS gửi về
+trình duyệt. Cách cấu hình (làm 1 lần, người tổ chức chuyến đi):
+
+1. Netlify dashboard → chọn site → **Site configuration → Environment
+   variables → Add a variable**
+2. Key: `ANTHROPIC_API_KEY`, Value: `sk-ant-...` (key thật từ
+   console.anthropic.com) → Save
+3. **Deploys → Trigger deploy** (bắt buộc, để function đọc được biến mới —
+   biến môi trường chỉ được nạp lúc build/deploy, không tự áp dụng ngay)
+
+Sau bước này, **ai trong nhóm bấm "Nhờ AI soạn đề xuất" cũng dùng chung 1
+key** mà không ai nhìn thấy key đó — kể cả người tổ chức cũng không cần dán
+key vào máy cá nhân sau bước cấu hình ban đầu.
+
+Riêng mục sau **vẫn lưu trong `localStorage`, riêng từng máy** (đúng vì mỗi
+người khác nhau):
 
 | Key | Nội dung |
 |---|---|
 | `hgl_name` | Tên hiển thị của người dùng (dùng cho chat/vote) |
-| `hgl_anthropic_key` | Anthropic API key cá nhân, chỉ cần nếu tự bấm "Nhờ AI soạn đề xuất" |
 
 ## Cấu trúc dữ liệu Firestore
 
@@ -171,6 +191,9 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
 - [ ] Thêm nguồn tin thứ 2 cho Netlify Function (VD: RSS chính thức của
       kttv.gov.vn nếu tìm được endpoint máy-đọc-được ổn định) để đỡ phụ
       thuộc hoàn toàn vào Google News.
+- [ ] Rate-limit hoặc giới hạn số lần gọi `ai-draft` mỗi ngày/mỗi người để
+      tránh spam vô tình đội chi phí Anthropic (hiện chưa có giới hạn nào
+      ngoài việc key chỉ ai trong nhóm biết link mới gọi được).
 
 ## Lịch sử thay đổi
 
@@ -184,11 +207,21 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
 - **v5** — bổ sung Trợ Lý Chuyến Đi: chat + AI soạn đề xuất (Anthropic API) +
   voting 2/3, GPS/thời tiết trực tiếp, sổ chỗ ở + geofence, sổ chi phí, bảng
   cảnh báo tự đăng thủ công. Thêm `manifest.json` + `service-worker.js`.
-- **v6** (hiện tại) — Firebase config bake sẵn vào code (bỏ yêu cầu mỗi
+- **v6** — Firebase config bake sẵn vào code (bỏ yêu cầu mỗi
   người tự cấu hình, chi phí giờ public thật); thêm sort cho sổ chi phí;
   thay bảng cảnh báo tự đăng bằng tin tức tự động kéo từ Google News RSS
   qua Netlify Function + link nguồn chính thức KTTV; thêm `netlify.toml` +
   `netlify/functions/community-news.js`.
+- **v7** (hiện tại) — Đổi Anthropic API key sang biến môi trường Netlify
+  dùng chung cho cả nhóm (không bake vào code như Firebase, vì đây là bí
+  mật thật sự) qua Netlify Function mới `netlify/functions/ai-draft.js`; bỏ
+  hẳn ô nhập API key trong drawer cài đặt — giờ chỉ còn "Tên của bạn". Tin
+  tức cộng đồng lọc chỉ còn 7 ngày gần nhất (`when:7d` + lọc lại theo
+  `pubDate` phía server). Review lại toàn bộ bảng chi phí: nâng lên mức
+  thoải mái hơn (mỗi người 1 xe riêng, ăn/ở theo giá 2026, thêm 2 ngày Hà
+  Nội) — từ ≈3,0–3,5tr/người (chỉ phần loop) lên ≈4,7–5,5tr/người (trọn
+  chuyến 6 ngày), có ghi chú phương án tiết kiệm hơn (chia 2 xe) trong box
+  riêng.
 
 ## Deploy
 
@@ -196,8 +229,7 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
 GitHub** (không dùng Netlify Drop kéo-thả nữa, vì cần chạy Netlify
 Function):
 
-1. Push repo lên GitHub (đã có sẵn, xem hướng dẫn phần trước trong lịch sử
-   chat, hoặc dùng `ha-giang-loop-repo.zip` đã chuẩn bị).
+1. Push repo lên GitHub.
 2. Vào app.netlify.com → "Add new site" → "Import an existing project" →
    chọn GitHub → chọn đúng repo.
 3. Build settings: để trống "Build command", Publish directory = `.`
@@ -207,4 +239,9 @@ Function):
    `index.html` (xem mục "Cấu hình dùng chung" ở trên) — nếu chưa điền, app
    vẫn chạy nhưng chat/chỗ ở/chi phí sẽ không lưu được, và drawer cài đặt sẽ
    báo "chưa cấu hình".
+6. **Sau khi deploy lần đầu (v7):** vào Site configuration → Environment
+   variables → thêm `ANTHROPIC_API_KEY` → **Trigger deploy lại** — nếu bỏ
+   qua bước "Trigger deploy lại", function sẽ không thấy biến môi trường
+   mới và nút "Nhờ AI soạn đề xuất" sẽ báo lỗi "Chưa cấu hình
+   ANTHROPIC_API_KEY".
 

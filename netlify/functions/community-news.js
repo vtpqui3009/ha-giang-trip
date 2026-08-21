@@ -8,10 +8,11 @@
 // khai, ổn định, không cần API key.
 
 const QUERY =
-  '"Hà Giang" (sạt lở OR "mưa lũ" OR "mưa lớn" OR "giao thông" OR "thời tiết" OR "cảnh báo" OR "sạt lở đất")';
+  '"Hà Giang" (sạt lở OR "mưa lũ" OR "mưa lớn" OR "giao thông" OR "thời tiết" OR "cảnh báo" OR "sạt lở đất") when:7d';
 const RSS_URL = `https://news.google.com/rss/search?q=${encodeURIComponent(
   QUERY
 )}&hl=vi&gl=VN&ceid=VN:vi`;
+const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000; // lọc lại phía server, phòng khi Google trả tin cũ hơn "when:7d"
 
 function decodeEntities(str) {
   return (str || '')
@@ -47,18 +48,29 @@ exports.handler = async function () {
     }
 
     const xml = await res.text();
+    const now = Date.now();
     const items = [];
     const itemBlocks = xml.split('<item>').slice(1);
 
-    for (const raw of itemBlocks.slice(0, 20)) {
+    for (const raw of itemBlocks.slice(0, 30)) {
       const block = raw.split('</item>')[0];
       const title = extractTag(block, 'title');
       const link = extractTag(block, 'link');
       const pubDate = extractTag(block, 'pubDate');
       const sourceMatch = /<source[^>]*>([\s\S]*?)<\/source>/i.exec(block);
       const source = sourceMatch ? decodeEntities(stripCdata(sourceMatch[1]).trim()) : '';
-      if (title && link) items.push({ title, link, pubDate, source });
+      if (!title || !link) continue;
+
+      // Lọc: chỉ giữ tin trong 7 ngày gần nhất (double-check ngoài "when:7d"
+      // vì Google News đôi khi vẫn trả vài tin cũ lẫn vào theo độ liên quan).
+      const t = pubDate ? Date.parse(pubDate) : NaN;
+      if (!isNaN(t) && now - t > MAX_AGE_MS) continue;
+
+      items.push({ title, link, pubDate, source });
     }
+
+    // Sắp mới nhất lên đầu
+    items.sort((a, b) => (Date.parse(b.pubDate) || 0) - (Date.parse(a.pubDate) || 0));
 
     return {
       statusCode: 200,
@@ -67,7 +79,7 @@ exports.handler = async function () {
         'Access-Control-Allow-Origin': '*',
         'Cache-Control': 'public, max-age=600', // cache 10 phút phía CDN Netlify
       },
-      body: JSON.stringify({ items, fetchedAt: new Date().toISOString() }),
+      body: JSON.stringify({ items: items.slice(0, 15), fetchedAt: new Date().toISOString() }),
     };
   } catch (err) {
     return { statusCode: 500, body: JSON.stringify({ error: String(err) }) };
