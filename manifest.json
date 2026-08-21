@@ -1,0 +1,25 @@
+{
+  "name": "Hà Giang Loop · Trợ Lý Chuyến Đi",
+  "short_name": "HG Loop",
+  "description": "Kế hoạch, chat nhóm, theo dõi GPS và chi phí cho chuyến Hà Giang Loop 04–07/11",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#E9F0E1",
+  "theme_color": "#24344D",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='36' fill='%2324344D'/%3E%3Cpath d='M20,150 C50,120 70,140 90,110 C115,75 130,100 172,55' stroke='%23B1502F' stroke-width='10' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='20' cy='150' r='10' fill='%23C89544'/%3E%3Ccircle cx='172' cy='55' r='10' fill='%23C89544'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='36' fill='%2324344D'/%3E%3Cpath d='M20,150 C50,120 70,140 90,110 C115,75 130,100 172,55' stroke='%23B1502F' stroke-width='10' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='20' cy='150' r='10' fill='%23C89544'/%3E%3Ccircle cx='172' cy='55' r='10' fill='%23C89544'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

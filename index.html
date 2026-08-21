@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#24344D">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HG Loop">
+<link rel="manifest" href="./manifest.json">
+<title>Hà Giang Loop · 04–07/11 · Kế hoạch hành trình</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,700;1,900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<style>
+  :root{
+    --stone:#E9F0E1;
+    --stone-deep:#D9E5CB;
+    --ink:#1F2A1A;
+    --indigo:#24344D;
+    --indigo-soft:#3C5170;
+    --terracotta:#B1502F;
+    --terracotta-soft:#CE7350;
+    --moss:#4A6741;
+    --moss-deep:#2F4A2A;
+    --moss-soft:#8FAE7D;
+    --gold:#C89544;
+    --pink:#C97C88;
+    --line:rgba(31,42,26,0.14);
+    --card:#F4F8EE;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 520px at 8% -8%, rgba(74,103,65,0.24), transparent 60%),
+      radial-gradient(ellipse 750px 480px at 96% 6%, rgba(143,174,125,0.28), transparent 55%),
+      radial-gradient(ellipse 1000px 620px at 45% 110%, rgba(47,74,42,0.20), transparent 58%),
+      radial-gradient(ellipse 600px 400px at 60% 45%, rgba(143,174,125,0.12), transparent 60%),
+      var(--stone);
+    background-attachment:fixed;
+    color:var(--ink);
+    font-family:'Be Vietnam Pro',sans-serif;
+    font-weight:400;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  section:not(.hero)::before{
+    content:'';
+    display:block;
+    height:22px;
+    width:100%;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='24' viewBox='0 0 140 24'%3E%3Cpolyline points='0,24 12,7 24,19 38,3 52,16 66,5 80,20 94,9 108,22 122,6 140,17' fill='none' stroke='%234A6741' stroke-opacity='0.28' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:repeat-x;
+    background-position:top;
+    background-size:140px 24px;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+  @media (max-width:640px){.wrap{padding:0 18px;}}
+
+  /* ---------- NAV ---------- */
+  header.topnav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(241,236,224,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .navrow{display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:1180px; margin:0 auto;}
+  .brandmark{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:0.02em; font-size:15px;}
+  .brandmark .dot{width:10px; height:10px; border-radius:50%; background:var(--terracotta);}
+  nav.links{display:flex; gap:22px; font-size:13.5px; font-weight:600; overflow-x:auto;}
+  nav.links a{white-space:nowrap; text-decoration:none; opacity:0.72; padding:4px 0; border-bottom:2px solid transparent; transition:.15s;}
+  nav.links a:hover{opacity:1; border-color:var(--terracotta);}
+  @media (max-width:900px){nav.links{display:none;}}
+  .settings-btn{
+    width:36px; height:36px; border-radius:50%; border:1px solid var(--line);
+    background:var(--card); font-size:16px; cursor:pointer; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; transition:.15s;
+  }
+  .settings-btn:hover{background:var(--indigo); transform:rotate(25deg);}
+
+  /* ---------- SETTINGS DRAWER ---------- */
+  .drawer-backdrop{
+    position:fixed; inset:0; background:rgba(20,26,16,0.45); backdrop-filter:blur(2px);
+    z-index:200; display:none;
+  }
+  .drawer-backdrop.open{display:block;}
+  .drawer{
+    position:fixed; top:0; right:0; height:100%; width:min(420px,92vw);
+    background:var(--stone); border-left:1px solid var(--line); z-index:201;
+    padding:26px 24px; overflow-y:auto; transform:translateX(100%); transition:.25s ease;
+    box-shadow:-10px 0 30px rgba(0,0,0,0.15);
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer h3{font-size:20px; font-weight:800; margin-bottom:6px;}
+  .drawer .sub{font-size:12.5px; color:#556047; margin-bottom:20px;}
+  .drawer label{display:block; font-size:12.5px; font-weight:700; margin:16px 0 6px; text-transform:uppercase; letter-spacing:.04em; color:#556047;}
+  .drawer input, .drawer textarea{
+    width:100%; padding:10px 12px; border-radius:8px; border:1px solid var(--line);
+    background:var(--card); font-family:inherit; font-size:13.5px; color:var(--ink);
+  }
+  .drawer textarea{min-height:90px; font-family:'JetBrains Mono',monospace; font-size:11.5px; resize:vertical;}
+  .drawer .help{font-size:11.5px; color:#77816a; margin-top:5px; line-height:1.5;}
+  .drawer .help a{color:var(--terracotta); font-weight:600;}
+  .drawer-close{position:absolute; top:20px; right:20px; background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink);}
+  .drawer-save{
+    margin-top:22px; width:100%; padding:12px; border-radius:8px; border:none;
+    background:var(--indigo); color:var(--stone); font-weight:800; font-size:14px; cursor:pointer;
+  }
+  .drawer-save:hover{background:var(--terracotta);}
+  .status-pill{display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:100px; margin-top:4px;}
+  .status-pill.ok{background:rgba(74,103,65,0.18); color:var(--moss-deep);}
+  .status-pill.bad{background:rgba(177,80,47,0.16); color:var(--terracotta);}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:64px 0 40px; position:relative; overflow:hidden;}
+  .hero-mountains{position:absolute; left:0; right:0; bottom:-4px; height:60%; z-index:0; pointer-events:none;}
+  .hero-mountains svg{width:100%; height:100%; display:block;}
+  .hero-grid{position:relative; z-index:1; display:grid; grid-template-columns:1.05fr 0.95fr; gap:40px; align-items:center;}
+  @media (max-width:900px){.hero-grid{grid-template-columns:1fr;}}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.09em; text-transform:uppercase;
+    color:var(--terracotta); font-weight:600; margin-bottom:18px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1.5px; background:var(--terracotta);}
+  h1.title{
+    font-size:clamp(34px,5.2vw,58px);
+    font-weight:900; font-style:italic;
+    line-height:1.04; letter-spacing:-0.01em;
+    color:var(--indigo);
+  }
+  h1.title span{color:var(--terracotta); font-style:italic;}
+  .subtitle{margin-top:18px; font-size:16.5px; max-width:46ch; color:#3a352c;}
+  .meta-chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .chip{
+    background:var(--card); border:1px solid var(--line); border-radius:100px;
+    padding:8px 16px; font-size:12.5px; font-weight:600; display:flex; align-items:center; gap:7px;
+  }
+  .chip b{font-family:'JetBrains Mono',monospace; color:var(--terracotta); font-weight:700;}
+  .hero-cta{margin-top:30px; display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:13px 22px; border-radius:8px;
+    font-weight:700; font-size:14px; text-decoration:none; border:1.5px solid var(--ink);
+    transition:.15s;
+  }
+  .btn.solid{background:var(--indigo); color:var(--stone); border-color:var(--indigo);}
+  .btn.solid:hover{background:var(--terracotta); border-color:var(--terracotta);}
+  .btn.ghost{background:transparent; color:var(--ink);}
+  .btn.ghost:hover{background:var(--ink); color:var(--stone);}
+
+  /* signature route ribbon */
+  .ribbon-wrap{position:relative;}
+  .ribbon-wrap svg{width:100%; height:auto;}
+  .ribbon-path{
+    fill:none; stroke:var(--terracotta); stroke-width:3.2; stroke-linecap:round;
+    stroke-dasharray:1400; stroke-dashoffset:1400;
+    animation:draw 2.6s ease forwards .2s;
+  }
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  .ribbon-node circle{fill:var(--stone); stroke-width:3;}
+  .ribbon-node text{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px; fill:var(--ink);}
+  .ribbon-label{font-family:'JetBrains Mono',monospace; font-size:10.5px; fill:#5c5647; letter-spacing:0.03em;}
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{padding:70px 0; position:relative;}
+  section.alt{
+    background:
+      radial-gradient(ellipse 800px 500px at 88% 0%, rgba(74,103,65,0.22), transparent 55%),
+      radial-gradient(ellipse 700px 460px at 4% 100%, rgba(143,174,125,0.20), transparent 55%),
+      var(--stone-deep);
+  }
+  .sec-head{margin-bottom:38px; max-width:70ch;}
+  .sec-eyebrow{font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.09em; text-transform:uppercase; color:var(--moss); font-weight:700; margin-bottom:10px;}
+  h2.sec-title{font-size:clamp(26px,3.4vw,38px); font-weight:800; letter-spacing:-0.01em; color:var(--ink);}
+  .sec-desc{margin-top:12px; color:#3a352c; font-size:15.5px;}
+
+  /* ---------- OVERVIEW TIMELINE (before/after) ---------- */
+  .flow{display:grid; grid-template-columns:repeat(6,1fr); gap:14px;}
+  @media (max-width:960px){.flow{grid-template-columns:repeat(3,1fr);}}
+  @media (max-width:600px){.flow{grid-template-columns:repeat(2,1fr);}}
+  .flow-card{
+    background:linear-gradient(160deg, var(--card), #E4EEDA);
+    border:1px solid var(--line); border-radius:10px; padding:18px 16px;
+    position:relative;
+  }
+  .flow-card .fd{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--terracotta); font-weight:700; margin-bottom:6px;}
+  .flow-card h4{font-size:14.5px; font-weight:800; margin-bottom:6px;}
+  .flow-card p{font-size:12.8px; color:#544e40;}
+  .flow-card.hl{background:var(--indigo); color:var(--stone);}
+  .flow-card.hl .fd{color:var(--gold);}
+  .flow-card.hl p{color:#d9dde6;}
+
+  /* ---------- DAY SECTIONS ---------- */
+  .day-hero{
+    display:flex; align-items:baseline; gap:18px; margin-bottom:8px; flex-wrap:wrap;
+  }
+  .day-num{font-family:'JetBrains Mono',monospace; font-size:46px; font-weight:700; line-height:1; opacity:0.9;}
+  .day-titlewrap h2{font-size:clamp(24px,3vw,32px); font-weight:800; font-style:italic;}
+  .day-date{font-family:'JetBrains Mono',monospace; font-size:13px; opacity:0.75; margin-top:4px;}
+  .day-stats{display:flex; gap:22px; flex-wrap:wrap; margin:22px 0 30px; font-size:13px;}
+  .day-stats div{display:flex; flex-direction:column; gap:2px;}
+  .day-stats b{font-family:'JetBrains Mono',monospace; font-size:16px;}
+  .day-stats span{opacity:0.65; font-size:11.5px; text-transform:uppercase; letter-spacing:.04em;}
+
+  .day-layout{display:grid; grid-template-columns:1.55fr 1fr; gap:34px; align-items:start;}
+  @media (max-width:900px){.day-layout{grid-template-columns:1fr;}}
+
+  .tline{border-left:2px solid var(--line); padding-left:22px; display:flex; flex-direction:column; gap:26px;}
+  .tstop{position:relative;}
+  .tstop::before{
+    content:''; position:absolute; left:-28.5px; top:4px; width:11px; height:11px; border-radius:50%;
+    background:var(--stone); border:2.5px solid var(--dc,var(--indigo));
+  }
+  .tstop .time{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px; color:var(--dc,var(--indigo));}
+  .tstop h4{font-size:16.5px; font-weight:700; margin:4px 0 5px;}
+  .tstop p{font-size:14px; color:#3d382c;}
+  .tstop .tag{
+    display:inline-block; margin-top:8px; font-size:11px; font-weight:700; font-family:'JetBrains Mono',monospace;
+    padding:3px 9px; border-radius:100px; background:rgba(0,0,0,0.05);
+  }
+  .tag.photo{background:rgba(200,149,68,0.18); color:#8a6323;}
+  .tag.ride{background:rgba(36,52,77,0.1); color:var(--indigo);}
+  .tag.stay{background:rgba(92,110,78,0.16); color:#3f4d33;}
+  .tag.eat{background:rgba(177,80,47,0.14); color:var(--terracotta);}
+
+  .side-card{
+    background:linear-gradient(165deg, var(--card), #E4EEDA); border:1px solid var(--line); border-radius:12px; padding:22px; margin-bottom:20px;
+  }
+  .side-card h5{font-family:'JetBrains Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:#6b6455; margin-bottom:14px; font-weight:700;}
+  .stay-opt{padding:12px 0; border-top:1px solid var(--line);}
+  .stay-opt:first-of-type{border-top:none; padding-top:0;}
+  .stay-opt .name{font-weight:700; font-size:14.5px;}
+  .stay-opt .price{font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--terracotta); font-weight:700; margin-top:2px;}
+  .stay-opt .note{font-size:12.5px; color:#665f50; margin-top:3px;}
+  .note-box{font-size:13px; background:rgba(177,80,47,0.08); border-left:3px solid var(--terracotta); padding:12px 14px; border-radius:6px; margin-top:6px;}
+
+  /* ---------- MAP ---------- */
+  #map{width:100%; height:560px; border-radius:14px; border:1px solid var(--line); overflow:hidden;}
+  .map-toggle{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;}
+  .map-btn{
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; font-weight:700; padding:9px 16px;
+    border-radius:100px; border:1.5px solid var(--line); background:var(--card); cursor:pointer;
+    transition:.15s; display:flex; align-items:center; gap:8px;
+  }
+  .map-btn .sw{width:9px; height:9px; border-radius:50%;}
+  .map-btn.active{border-color:var(--ink); background:var(--ink); color:var(--stone);}
+  .leaflet-popup-content-wrapper{border-radius:10px; font-family:'Be Vietnam Pro',sans-serif;}
+  .popup-t{font-weight:800; font-size:13.5px; margin-bottom:3px;}
+  .popup-d{font-size:12px; color:#5a5546;}
+
+  /* ---------- COST TABLE ---------- */
+  .cost-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:34px;}
+  @media (max-width:800px){.cost-grid{grid-template-columns:1fr;}}
+  .cost-card{background:linear-gradient(160deg, var(--card), #E4EEDA); border:1px solid var(--line); border-radius:12px; padding:22px;}
+  .cost-card .big{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:28px; color:var(--indigo);}
+  .cost-card .lbl{font-size:12.5px; text-transform:uppercase; letter-spacing:.05em; color:#6b6455; margin-top:4px; font-weight:700;}
+  .cost-card p{font-size:12.5px; margin-top:10px; color:#544e40;}
+
+  table.costtable{width:100%; border-collapse:collapse; font-size:14px; background:var(--card); border-radius:12px; overflow:hidden; border:1px solid var(--line);}
+  table.costtable th{
+    text-align:left; font-family:'JetBrains Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:.05em;
+    padding:14px 18px; background:var(--indigo); color:var(--stone); font-weight:700;
+  }
+  table.costtable td{padding:13px 18px; border-top:1px solid var(--line);}
+  table.costtable tr td:last-child, table.costtable tr th:last-child{text-align:right; font-family:'JetBrains Mono',monospace; font-weight:700;}
+  table.costtable tr.total td{background:rgba(200,149,68,0.14); font-weight:800; font-size:15px;}
+
+  /* ---------- TIPS ---------- */
+  .tips-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  @media (max-width:900px){.tips-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.tips-grid{grid-template-columns:1fr;}}
+  .tip-card{background:linear-gradient(160deg, var(--card), #E4EEDA); border:1px solid var(--line); border-radius:12px; padding:20px;}
+  .tip-card .n{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--terracotta); font-weight:700; margin-bottom:8px;}
+  .tip-card h4{font-size:15px; font-weight:800; margin-bottom:8px;}
+  .tip-card p{font-size:13px; color:#4a4536;}
+  .tip-card.wide{grid-column:span 2;}
+  @media (max-width:900px){.tip-card.wide{grid-column:span 1;}}
+
+  .admin-banner{
+    display:flex; gap:14px; align-items:flex-start; background:var(--indigo); color:var(--stone);
+    padding:20px 24px; border-radius:12px; margin-bottom:40px; font-size:13.5px;
+  }
+  .admin-banner b{color:var(--gold);}
+
+  /* ---------- TRỢ LÝ CHUYẾN ĐI (APP) ---------- */
+  .app-tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; border-bottom:1px solid var(--line); padding-bottom:14px;}
+  .app-tab{
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; font-weight:700; padding:9px 16px;
+    border-radius:100px; border:1.5px solid var(--line); background:var(--card); cursor:pointer;
+  }
+  .app-tab.active{background:var(--ink); color:var(--stone); border-color:var(--ink);}
+  .app-panel{display:none;}
+  .app-panel.active{display:block;}
+
+  .identity-bar{
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:22px;
+    background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 18px;
+  }
+  .identity-bar input{
+    padding:8px 12px; border-radius:8px; border:1px solid var(--line); background:var(--stone);
+    font-family:inherit; font-size:13.5px; max-width:180px;
+  }
+  .identity-bar .who{font-size:13px; color:#556047;}
+  .identity-bar .who b{color:var(--ink);}
+  .conn-dot{width:8px; height:8px; border-radius:50%; background:#B1502F; display:inline-block;}
+  .conn-dot.on{background:var(--moss);}
+
+  /* chat */
+  .chat-box{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    display:flex; flex-direction:column; height:420px; overflow:hidden; margin-bottom:18px;
+  }
+  .chat-feed{flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:12px;}
+  .msg{max-width:78%; padding:10px 14px; border-radius:12px; font-size:13.5px; line-height:1.45;}
+  .msg .who{font-size:10.5px; font-weight:700; font-family:'JetBrains Mono',monospace; margin-bottom:3px; opacity:0.7;}
+  .msg.mine{align-self:flex-end; background:var(--indigo); color:var(--stone); border-bottom-right-radius:2px;}
+  .msg.other{align-self:flex-start; background:var(--stone-deep); border-bottom-left-radius:2px;}
+  .msg.system{align-self:center; background:transparent; color:#6b7a5e; font-size:11.5px; font-style:italic; text-align:center; max-width:90%;}
+  .chat-input-row{display:flex; gap:8px; padding:12px; border-top:1px solid var(--line);}
+  .chat-input-row input{flex:1; padding:11px 14px; border-radius:100px; border:1px solid var(--line); background:var(--stone); font-family:inherit; font-size:13.5px;}
+  .chat-input-row button{padding:0 18px; border-radius:100px; border:none; background:var(--indigo); color:var(--stone); font-weight:700; cursor:pointer; font-size:13px;}
+  .ai-draft-btn{
+    width:100%; padding:13px; border-radius:10px; border:1.5px dashed var(--terracotta);
+    background:rgba(177,80,47,0.06); color:var(--terracotta); font-weight:800; font-size:13.5px; cursor:pointer; margin-bottom:24px;
+  }
+  .ai-draft-btn:hover{background:rgba(177,80,47,0.14);}
+  .ai-draft-btn:disabled{opacity:0.5; cursor:wait;}
+
+  .proposal-card{
+    background:var(--card); border:1px solid var(--line); border-left:4px solid var(--gold);
+    border-radius:10px; padding:18px; margin-bottom:14px;
+  }
+  .proposal-card.approved{border-left-color:var(--moss);}
+  .proposal-card.rejected{border-left-color:var(--terracotta); opacity:0.6;}
+  .proposal-card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .proposal-card .day-tag{font-family:'JetBrains Mono',monospace; font-size:10.5px; background:var(--stone-deep); padding:2px 8px; border-radius:100px; margin-bottom:8px; display:inline-block;}
+  .proposal-card p{font-size:13px; color:#3d382c; margin:6px 0;}
+  .proposal-actions{display:flex; align-items:center; gap:10px; margin-top:12px; flex-wrap:wrap;}
+  .vote-btn{padding:7px 14px; border-radius:100px; border:1.5px solid var(--line); background:var(--stone); font-size:12px; font-weight:700; cursor:pointer;}
+  .vote-btn.yes:hover, .vote-btn.yes.picked{background:var(--moss); color:var(--stone); border-color:var(--moss);}
+  .vote-btn.no:hover, .vote-btn.no.picked{background:var(--terracotta); color:var(--stone); border-color:var(--terracotta);}
+  .vote-count{font-size:11.5px; color:#6b7a5e; font-family:'JetBrains Mono',monospace;}
+
+  /* live tracking */
+  .track-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;}
+  @media (max-width:700px){.track-grid{grid-template-columns:1fr;}}
+  .track-card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px;}
+  .track-card h5{font-family:'JetBrains Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color:#6b7a5e; margin-bottom:12px; font-weight:700;}
+  .weather-num{font-size:38px; font-weight:800; font-family:'JetBrains Mono',monospace; color:var(--indigo);}
+  .pace-msg{font-size:15px; font-weight:700; margin-top:6px;}
+  .track-toggle{
+    padding:12px 20px; border-radius:100px; border:none; background:var(--moss); color:var(--stone);
+    font-weight:800; font-size:13.5px; cursor:pointer; margin-bottom:20px;
+  }
+  .track-toggle.off{background:var(--terracotta);}
+  .geo-list{display:flex; flex-direction:column; gap:10px;}
+  .geo-item{display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:var(--stone-deep); border-radius:8px; font-size:13px;}
+  .geo-item .dist{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:12px;}
+
+  /* accommodations */
+  .stay-track-card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px; margin-bottom:12px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;}
+  .stay-track-card .info h4{font-size:14.5px; font-weight:800;}
+  .stay-track-card .info p{font-size:12.5px; color:#556047; margin-top:3px;}
+  .stay-track-card .badge{align-self:flex-start; font-family:'JetBrains Mono',monospace; font-size:10.5px; font-weight:700; padding:4px 10px; border-radius:100px; background:var(--stone-deep);}
+  .stay-track-card .badge.here{background:var(--moss); color:var(--stone);}
+  .add-form{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px; margin-bottom:22px;}
+  .add-form input, .add-form select{padding:9px 11px; border-radius:7px; border:1px solid var(--line); background:var(--stone); font-family:inherit; font-size:13px;}
+  .add-form button{grid-column:1/-1; padding:11px; border-radius:8px; border:none; background:var(--indigo); color:var(--stone); font-weight:800; cursor:pointer;}
+
+  /* expenses */
+  .expense-summary{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:14px; margin-bottom:22px;}
+  .expense-person{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; text-align:center;}
+  .expense-person .amt{font-family:'JetBrains Mono',monospace; font-weight:800; font-size:20px; color:var(--indigo);}
+  .expense-person .lbl{font-size:11.5px; color:#6b7a5e; margin-top:3px;}
+  .expense-row{display:flex; justify-content:space-between; align-items:center; padding:11px 14px; background:var(--card); border:1px solid var(--line); border-radius:8px; margin-bottom:8px; font-size:13px;}
+  .expense-row .meta{font-size:11px; color:#6b7a5e; font-family:'JetBrains Mono',monospace;}
+  .settle-box{background:rgba(200,149,68,0.12); border-left:3px solid var(--gold); border-radius:8px; padding:14px 16px; margin-top:16px; font-size:13px;}
+
+  /* alerts */
+  .alert-card{display:flex; gap:12px; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:10px;}
+  .alert-sev{width:8px; border-radius:4px; flex-shrink:0;}
+  .alert-sev.info{background:var(--moss);}
+  .alert-sev.warn{background:var(--gold);}
+  .alert-sev.danger{background:var(--terracotta);}
+  .alert-card .meta{font-size:10.5px; color:#6b7a5e; font-family:'JetBrains Mono',monospace; margin-top:4px;}
+
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:var(--stone); padding:14px 22px; border-radius:100px;
+    font-size:13.5px; font-weight:600; z-index:300; opacity:0; transition:.25s; pointer-events:none;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25); max-width:90vw; text-align:center;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  footer{padding:50px 0 70px; border-top:1px solid var(--line);}
+  footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; font-size:12.5px; color:#655f50;}
+  footer .sources{max-width:60ch;}
+  footer .sources b{color:var(--ink);}
+
+  ::selection{background:var(--terracotta); color:var(--stone);}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="navrow">
+    <div class="brandmark"><span class="dot"></span>HÀ GIANG LOOP · 3 NGƯỜI</div>
+    <nav class="links">
+      <a href="#tongquan">Tổng quan</a>
+      <a href="#ngay1">Ngày 1</a>
+      <a href="#ngay2">Ngày 2</a>
+      <a href="#ngay3">Ngày 3</a>
+      <a href="#ngay4">Ngày 4</a>
+      <a href="#banddo">Bản đồ</a>
+      <a href="#chiphi">Chi phí</a>
+      <a href="#thucte">Thực tế 2026</a>
+      <a href="#luuy">Lưu ý</a>
+      <a href="#trolyai">Trợ Lý Chuyến Đi</a>
+    </nav>
+    <button id="settingsBtn" class="settings-btn" title="Cài đặt">⚙️</button>
+  </div>
+</header>
+
+<!-- ================= SETTINGS DRAWER ================= -->
+<div id="drawerBackdrop" class="drawer-backdrop"></div>
+<div id="drawer" class="drawer">
+  <button id="drawerClose" class="drawer-close">✕</button>
+  <h3>Cài đặt Trợ Lý Chuyến Đi</h3>
+  <div class="sub">Lưu trên trình duyệt của bạn — không gửi cho ai ngoài các dịch vụ bạn tự kết nối bên dưới.</div>
+
+  <label>Tên của bạn (hiện trong chat/chi phí)</label>
+  <input id="cfgName" type="text" placeholder="VD: An, Bình, Chi...">
+
+  <label>Firebase config (JSON) <span id="fbStatus" class="status-pill bad">chưa kết nối</span></label>
+  <textarea id="cfgFirebase" placeholder='{"apiKey":"...","authDomain":"...","projectId":"...","storageBucket":"...","messagingSenderId":"...","appId":"..."}'></textarea>
+  <div class="help">Tạo project miễn phí tại <a href="https://console.firebase.google.com" target="_blank">console.firebase.google.com</a> → Add project → Build → Firestore Database → tạo ở chế độ <b>test mode</b> → vào Project settings → phần "Your apps" → chọn Web (&lt;/&gt;) → copy nguyên object <code>firebaseConfig</code> dán vào đây.</div>
+
+  <label>Anthropic API key <span id="aiStatus" class="status-pill bad">chưa có key</span></label>
+  <input id="cfgApiKey" type="password" placeholder="sk-ant-...">
+  <div class="help">Lấy tại <a href="https://console.anthropic.com/settings/keys" target="_blank">console.anthropic.com</a>. Key chỉ lưu trên máy bạn, dùng để gọi thẳng API khi bấm "Nhờ AI soạn đề xuất".</div>
+
+  <button id="drawerSave" class="drawer-save">Lưu cài đặt</button>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-mountains" aria-hidden="true">
+    <svg viewBox="0 0 1440 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,400 L0,240 C160,180 280,270 440,205 C600,140 740,250 900,190 C1060,130 1220,220 1440,170 L1440,400 Z" fill="#8FAE7D" opacity="0.30"/>
+      <path d="M0,400 L0,290 C200,250 360,330 540,270 C700,220 880,310 1080,250 C1220,210 1340,270 1440,240 L1440,400 Z" fill="#4A6741" opacity="0.35"/>
+      <path d="M0,400 L0,335 C240,310 420,370 620,325 C800,285 980,355 1180,315 C1300,290 1380,320 1440,305 L1440,400 Z" fill="#2F4A2A" opacity="0.40"/>
+    </svg>
+  </div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">04 — 07 Tháng 11 · Cao nguyên đá Đồng Văn</div>
+      <h1 class="title">Vòng cung<br><span>Hà Giang.</span></h1>
+      <p class="subtitle">Kế hoạch chi tiết cho 3 người, tự lái xe số, xuất phát rạng sáng 04/11 sau chuyến xe đêm từ Hà Nội — khép vòng lúc chiều tối 07/11 trước khi lên xe khách trở lại Hà Nội. Đúng mùa hoa tam giác mạch.</p>
+      <div class="meta-chips">
+        <div class="chip">🗓️ <b>4 ngày&nbsp;3 đêm</b> trên yên xe</div>
+        <div class="chip">🛣️ <b>~450km</b> tổng quãng đường</div>
+        <div class="chip">🏍️ <b>Xe số</b> — khuyến nghị cho đèo dốc</div>
+        <div class="chip">🌡️ <b>12–24°C</b> · sáng sương, trưa nắng hanh</div>
+      </div>
+      <div class="hero-cta">
+        <a href="#ngay1" class="btn solid">Xem lịch trình từng ngày →</a>
+        <a href="#banddo" class="btn ghost">Mở bản đồ hành trình</a>
+      </div>
+    </div>
+    <div class="ribbon-wrap">
+      <svg viewBox="0 0 480 420" xmlns="http://www.w3.org/2000/svg">
+        <path class="ribbon-path" d="M60,60 C140,40 180,90 150,140 C110,200 60,190 90,250 C120,310 220,260 260,220 C310,170 380,180 400,230 C420,280 360,320 300,340 C240,360 190,330 150,360" />
+        <g class="ribbon-node" style="--c:var(--indigo)">
+          <circle cx="60" cy="60" r="13" stroke="var(--indigo)"/><text x="53" y="65">1</text>
+          <text class="ribbon-label" x="80" y="55">TP Hà Giang</text>
+        </g>
+        <g class="ribbon-node">
+          <circle cx="150" cy="140" r="13" stroke="var(--indigo)"/><text x="143" y="145">·</text>
+          <text class="ribbon-label" x="168" y="140">Đồng Văn</text>
+        </g>
+        <g class="ribbon-node">
+          <circle cx="400" cy="230" r="13" stroke="var(--terracotta)"/><text x="393" y="235">2</text>
+          <text class="ribbon-label" x="418" y="200">Mèo Vạc</text>
+        </g>
+        <g class="ribbon-node">
+          <circle cx="150" cy="360" r="13" stroke="var(--moss)"/><text x="143" y="365">3</text>
+          <text class="ribbon-label" x="60" y="395">Du Già</text>
+        </g>
+        <g class="ribbon-node">
+          <circle cx="260" cy="220" r="8" fill="var(--gold)" stroke="none"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TỔNG QUAN ================= -->
+<section id="tongquan">
+  <div class="wrap">
+    <div class="admin-banner">
+      <span>📍</span>
+      <div>Lưu ý hành chính: từ 01/07/2025, tỉnh <b>Hà Giang đã sáp nhập với tỉnh Tuyên Quang</b>, lấy tên chung là <b>tỉnh Tuyên Quang</b> (TP. Hà Giang cũ nay là các phường thuộc tỉnh Tuyên Quang). Nhà xe, bản đồ và người dân vẫn quen gọi khu vực này là "Hà Giang" — cao nguyên đá Đồng Văn, Lũng Cú, Mã Pí Lèng, Mèo Vạc vẫn giữ nguyên tên và vị trí, cứ tìm theo tên quen thuộc là được.</div>
+    </div>
+    <div class="sec-head">
+      <div class="sec-eyebrow">Toàn bộ hành trình</div>
+      <h2 class="sec-title">Từ Sài Gòn đến cực Bắc, và về lại.</h2>
+      <p class="sec-desc">6 ngày trọn vẹn — 2 ngày đầu/cuối ở Hà Nội, 4 ngày giữa là vòng lặp Hà Giang. Vé máy bay đã có (SGN–HAN 05:00–07:10 ngày 3/11, HAN–SGN 21:55 ngày 8/11).</p>
+    </div>
+    <div class="flow">
+      <div class="flow-card"><div class="fd">T3 — 03/11</div><h4>Hạ cánh Hà Nội</h4><p>07:10 đến Nội Bài → bus vào trung tâm chơi cả ngày → tối lên xe khách Bằng Phấn đi Hà Giang.</p></div>
+      <div class="flow-card hl"><div class="fd">T4 — 04/11</div><h4>Ngày 1: Loop</h4><p>Rạng sáng đến Hà Giang, nhận xe → Quản Bạ → Yên Minh → Đồng Văn.</p></div>
+      <div class="flow-card hl"><div class="fd">T5 — 05/11</div><h4>Ngày 2: Loop</h4><p>Lũng Cú → Dinh Vua Mèo → Mã Pí Lèng → Nho Quế → Mèo Vạc.</p></div>
+      <div class="flow-card hl"><div class="fd">T6 — 06/11</div><h4>Ngày 3: Loop</h4><p>Khâu Vai → cung đường Mậu Duệ → Du Già, tắm suối.</p></div>
+      <div class="flow-card hl"><div class="fd">T7 — 07/11</div><h4>Ngày 4: Loop</h4><p>Du Già → trả xe tại TP Hà Giang → tối lên xe khách về Hà Nội.</p></div>
+      <div class="flow-card"><div class="fd">CN — 08/11</div><h4>Hà Nội → Sài Gòn</h4><p>Sáng đến Hà Nội, chơi thêm 1 ngày → 21:55 bay về SGN.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NGÀY 1 ================= -->
+<section class="alt" id="ngay1" style="--dc:var(--indigo)">
+  <div class="wrap">
+    <div class="day-hero">
+      <div class="day-num" style="color:var(--indigo)">01</div>
+      <div class="day-titlewrap">
+        <h2>Hà Giang → Quản Bạ → Yên Minh → Đồng Văn</h2>
+        <div class="day-date">Thứ Tư · 04/11 · rạng sáng đến chiều tối</div>
+      </div>
+    </div>
+    <div class="day-stats">
+      <div><b>~154 km</b><span>Quãng đường</span></div>
+      <div><b>~9–10h</b><span>Tổng thời gian (kể cả dừng)</span></div>
+      <div><b>Dễ → Trung bình</b><span>Độ khó</span></div>
+      <div><b>06:00</b><span>Giờ xuất phát đề xuất</span></div>
+    </div>
+    <div class="day-layout">
+      <div class="tline" style="--dc:var(--indigo)">
+        <div class="tstop">
+          <div class="time">04:30 – 06:00</div>
+          <h4>Xe đêm cập bến, nhận xe máy</h4>
+          <p>Xe Bằng Phấn ghé thẳng cửa hàng thuê xe — rửa mặt, vệ sinh cá nhân, ăn sáng nhẹ (phở/cháo ấu tẩu quanh trung tâm). Kiểm tra kỹ xe: phanh trước/sau, còi, đèn, đổ đầy bình xăng, thử ga trước khi rời cửa hàng.</p>
+          <span class="tag stay">Chuẩn bị</span>
+        </div>
+        <div class="tstop">
+          <div class="time">06:45 – 07:30</div>
+          <h4>Xuất phát → Cổng Trời Quản Bạ (43km)</h4>
+          <p>Đường bằng dễ đi lúc sáng sớm, ít xe. Tới cổng trời, dừng 20–30 phút ngắm Núi Đôi Cô Tiên và thung lũng Quản Bạ trong sương sớm — đây là khung giờ ánh sáng đẹp nhất trong ngày cho điểm này.</p>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span>
+        </div>
+        <div class="tstop">
+          <div class="time">08:00 – 09:30</div>
+          <h4>Quản Bạ → Yên Minh (~65km)</h4>
+          <p>Bắt đầu vào đường đèo nhẹ, nhiều khúc cua. Ghé rừng thông Yên Minh (cách trung tâm ~2km) nếu còn thời gian — chỉ dừng nhanh 15 phút, ưu tiên giữ sức cho chặng dài phía sau thay vì nán lại quá lâu.</p>
+          <span class="tag ride">Chạy xe là chính</span>
+        </div>
+        <div class="tstop">
+          <div class="time">09:30 – 10:30</div>
+          <h4>Nghỉ trưa sớm / ăn nhẹ tại Yên Minh</h4>
+          <p>Nạp năng lượng, đổ thêm xăng nếu cần vì trạm xăng thưa dần từ đây. Cà phê hoặc mì gói ven đường đều ổn.</p>
+          <span class="tag eat">Ăn uống</span>
+        </div>
+        <div class="tstop">
+          <div class="time">11:00 – 12:00</div>
+          <h4>Cán Tỷ — cua chữ M</h4>
+          <p>Điểm dừng nhanh chụp khúc cua tay áo nổi tiếng nhìn từ trên cao, khoảng 10–15 phút là đủ, không cần đi bộ xuống sâu.</p>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span>
+        </div>
+        <div class="tstop">
+          <div class="time">12:00 – 14:00</div>
+          <h4>Sủng Là — ăn trưa &amp; Nhà của Pao</h4>
+          <p>Ăn trưa tại thung lũng hoa (nếu đúng mùa tam giác mạch, đây là một trong những cánh đồng đẹp nhất tuyến). Ghé Nhà của Pao (vé ~20.000đ/người) — kiến trúc trình tường H'Mông nguyên bản, bối cảnh phim "Chuyện của Pao". Dành khoảng 45 phút cho cả ăn và tham quan.</p>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span>
+        </div>
+        <div class="tstop">
+          <div class="time">14:00 – 15:30</div>
+          <h4>Sủng Là → Đồng Văn (~25km, đèo dốc)</h4>
+          <p>Đoạn đèo quanh co nhiều khúc cua liên tiếp — đi số thấp, không vượt ẩu. Đây là đoạn cần tập trung lái xe nhất trong ngày, hạn chế dừng chụp ảnh giữa đèo.</p>
+          <span class="tag ride">Chạy xe là chính</span>
+        </div>
+        <div class="tstop">
+          <div class="time">15:30 – 19:00</div>
+          <h4>Nhận phòng, dạo phố cổ Đồng Văn</h4>
+          <p>Nghỉ ngơi, tắm rửa. Chiều tối dạo quanh phố cổ, cà phê phố cổ dưới ánh đèn vàng, ăn tối. Nếu trùng cuối tuần sẽ có chợ đêm Đồng Văn.</p>
+          <span class="tag stay">Nghỉ đêm</span>
+        </div>
+      </div>
+      <div>
+        <div class="side-card">
+          <h5>Nghỉ đêm — Phố cổ Đồng Văn</h5>
+          <div class="stay-opt">
+            <div class="name">Đồng Văn B&amp;B</div>
+            <div class="price">≈ 480.000 – 550.000đ/phòng</div>
+            <div class="note">Ngay phố cổ, gần Lũng Cú &amp; Mèo Vạc; phòng bungalow 2–3 người.</div>
+          </div>
+          <div class="stay-opt">
+            <div class="name">Nhà Cổ Homestay (số 10, phố cổ)</div>
+            <div class="price">≈ 250.000 – 350.000đ/phòng</div>
+            <div class="note">Kiến trúc nhà trình tường cổ, tách biệt yên tĩnh.</div>
+          </div>
+          <div class="stay-opt">
+            <div class="name">CND Đồng Văn</div>
+            <div class="price">≈ 300.000 – 450.000đ/phòng</div>
+            <div class="note">Đánh giá cao, WiFi, sân vườn, gần trung tâm.</div>
+          </div>
+          <div class="stay-opt">
+            <div class="name">Nhà cổ Hoàng Thân (mới, giá bình dân)</div>
+            <div class="price">≈ 100.000đ/người</div>
+            <div class="note">Nhà cổ hơn 100 năm ngay phố cổ — theo VnExpress cập nhật 2026, một trong những lựa chọn rẻ nhất khu trung tâm.</div>
+          </div>
+          <div class="note-box"><b>Cập nhật 2026:</b> giá homestay Đồng Văn đã tăng khoảng 40–60% so với 2023 do lượng khách tăng mạnh — đặt trước bắt buộc từ tháng 10–4, nên đặt qua Booking/Agoda thay vì chỉ nhắn Zalo/WhatsApp vì nhiều nơi đã ngừng nhận đặt qua tin nhắn. Cuối tuần mùa hoa gần như không còn phòng trống nếu đến mà chưa đặt.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NGÀY 2 ================= -->
+<section id="ngay2" style="--dc:var(--terracotta)">
+  <div class="wrap">
+    <div class="day-hero">
+      <div class="day-num" style="color:var(--terracotta)">02</div>
+      <div class="day-titlewrap">
+        <h2>Đồng Văn → Lũng Cú → Mã Pí Lèng → Nho Quế → Mèo Vạc</h2>
+        <div class="day-date">Thứ Năm · 05/11</div>
+      </div>
+    </div>
+    <div class="day-stats">
+      <div><b>~100 km</b><span>+ đi thuyền</span></div>
+      <div><b>~9h</b><span>Tổng thời gian</span></div>
+      <div><b>Trung bình</b><span>Độ khó</span></div>
+      <div><b>07:30</b><span>Giờ xuất phát đề xuất</span></div>
+    </div>
+    <div class="day-layout">
+      <div class="tline" style="--dc:var(--terracotta)">
+        <div class="tstop">
+          <div class="time">06:30 – 07:30</div>
+          <h4>Ngắm bình minh phố cổ, ăn sáng</h4>
+          <p>Bánh cuốn Đồng Văn hoặc phở là lựa chọn phổ biến buổi sáng. Trời se lạnh, nên mặc thêm áo khoác mỏng lúc khởi hành.</p>
+          <span class="tag eat">Ăn uống</span>
+        </div>
+        <div class="tstop">
+          <div class="time">07:30 – 08:30</div>
+          <h4>Đồng Văn → Cột cờ Lũng Cú (~25km)</h4>
+          <p>Đường đẹp, khá dễ đi so với hôm qua. Đây là chặng nên đi sớm để tránh nắng gắt và mây mù che khuất tầm nhìn từ đỉnh cột cờ vào giữa trưa.</p>
+          <span class="tag ride">Chạy xe là chính</span>
+        </div>
+        <div class="tstop">
+          <div class="time">08:30 – 09:45</div>
+          <h4>Cột cờ Lũng Cú — điểm cực Bắc</h4>
+          <p>Vé 30.000đ/người, leo 283 bậc thang lên đỉnh cột cờ. Đây là điểm nên dành nhiều thời gian nhất để chụp ảnh trong ngày — trời quang buổi sáng cho tầm nhìn xa nhất tới biên giới.</p>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span>
+        </div>
+        <div class="tstop">
+          <div class="time">10:00 – 10:45</div>
+          <h4>Dinh thự Họ Vương (Dinh Vua Mèo, Sà Phìn)</h4>
+          <p>Ghé trên đường quay lại, vé 30.000đ/người. Kiến trúc đá độc đáo giữa cao nguyên, khoảng 30–40 phút tham quan là đủ.</p>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span>
+        </div>
+        <div class="tstop">
+          <div class="time">11:00 – 12:30</div>
+          <h4>Về hướng đèo Mã Pí Lèng, ăn trưa dọc đường</h4>
+          <p>Quán ven đường khu vực trước đèo, ăn nhẹ để dành sức cho đoạn đèo và bến thuyền phía sau.</p>
+          <span class="tag eat">Ăn uống</span>
+        </div>
+        <div class="tstop">
+          <div class="time">13:00 – 13:45</div>
+          <h4>Đèo Mã Pí Lèng — "Tứ đại đỉnh đèo"</h4>
+          <p>Dừng tại điểm Panorama ngắm toàn cảnh hẻm vực sông Nho Quế. Buổi chiều nắng là thời điểm ánh sáng đẹp nhất cho đoạn này — dành 30–40 phút, đi bộ ra mỏm đá ngắm cảnh (cẩn thận, không trèo qua lan can).</p>
+          <span class="tag photo">Điểm chụp ảnh đẹp nhất ngày</span>
+        </div>
+        <div class="tstop">
+          <div class="time">14:00 – 15:15</div>
+          <h4>Bến thuyền Nho Quế — hẻm Tu Sản</h4>
+          <p>Gửi xe tại bến, đi thuyền/cano khoảng 150.000–250.000đ/người ngắm hẻm vực sâu nhất Đông Nam Á từ dưới sông. Nên mặc áo phao đầy đủ, tránh giờ trưa nắng gắt trên nước.</p>
+          <span class="tag photo">Trải nghiệm chính trong ngày</span>
+        </div>
+        <div class="tstop">
+          <div class="time">15:30 – 17:00</div>
+          <h4>Xuống Mèo Vạc (~22km), nhận phòng</h4>
+          <p>Đoạn đèo xuống dốc dài — với xe số, về số thấp khi xuống dốc để hãm tốc thay vì bóp phanh liên tục (tránh cháy má phanh). Tối ăn thắng cố hoặc lẩu gà đen, đặc sản vùng cao.</p>
+          <span class="tag stay">Nghỉ đêm</span>
+        </div>
+      </div>
+      <div>
+        <div class="side-card">
+          <h5>Nghỉ đêm — Mèo Vạc / Làng Pả Vi</h5>
+          <div class="stay-opt">
+            <div class="name">Auberge de Meovac (Chúng Pủa)</div>
+            <div class="price">≈ 500.000 – 900.000đ/phòng</div>
+            <div class="note">Nhà trình tường H'Mông hơn 100 năm, không gian đặc trưng nhất khu vực.</div>
+          </div>
+          <div class="stay-opt">
+            <div class="name">Mèo Vạc Clay House (làng Pả Vi)</div>
+            <div class="price">≈ 400.000 – 600.000đ/phòng</div>
+            <div class="note">Ngay chân đèo Mã Pí Lèng, cách bến thuyền Nho Quế ~7km.</div>
+          </div>
+          <div class="stay-opt">
+            <div class="name">Lo Lo Homestay &amp; Cafe</div>
+            <div class="price">≈ 250.000 – 400.000đ/phòng</div>
+            <div class="note">Trung tâm thị trấn, tiện ăn tối và đi chợ đêm nếu có.</div>
+          </div>
+          <div class="stay-opt">
+            <div class="name">Ong Vàng Mèo Vạc (giá tốt)</div>
+            <div class="price">≈ 230.000đ/đêm</div>
+            <div class="note">Ngay sát sông Lô, theo cập nhật VnExpress 2026 — một trong những lựa chọn giá tốt nhất khu trung tâm Mèo Vạc.</div>
+          </div>
+          <div class="note-box">Nếu đi đúng phiên Chợ tình Khâu Vai (âm lịch 26/3, không rơi vào tháng 11) sẽ không trùng — nhưng khu vực Khâu Vai vẫn đáng ghé cảnh quan vào ngày 3. Lưu ý: chợ phiên Đồng Văn &amp; Mèo Vạc họp vào Chủ Nhật — lịch trình 4–7/11 (Thứ Tư–Thứ Bảy) sẽ không trùng phiên chợ, đây là điều đáng cân nhắc nếu nhóm có thể linh động lùi/dời lịch 1 ngày.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NGÀY 3 ================= -->
+<section class="alt" id="ngay3" style="--dc:var(--moss)">
+  <div class="wrap">
+    <div class="day-hero">
+      <div class="day-num" style="color:var(--moss)">03</div>
+      <div class="day-titlewrap">
+        <h2>Mèo Vạc → Khâu Vai → Du Già</h2>
+        <div class="day-date">Thứ Sáu · 06/11 · chặng đẹp và khó nhất</div>
+      </div>
+    </div>
+    <div class="day-stats">
+      <div><b>~95–110 km</b><span>Quãng đường</span></div>
+      <div><b>~8–9h</b><span>Tổng thời gian</span></div>
+      <div><b>Khó nhất</b><span>Đường xấu hơn, nhiều cua tay áo</span></div>
+      <div><b>07:00</b><span>Giờ xuất phát đề xuất — đi sớm nhất trong 4 ngày</span></div>
+    </div>
+    <div class="day-layout">
+      <div class="tline" style="--dc:var(--moss)">
+        <div class="tstop">
+          <div class="time">07:00 – 07:30</div>
+          <h4>Ăn sáng, xuất phát sớm</h4>
+          <p>Đây là chặng dài và khó nhất của cả chuyến — mặt đường nhiều đoạn xấu hơn, đèo quanh co liên tục. Xuất phát sớm để không phải chạy xe lúc trời tối trên cung này.</p>
+          <span class="tag ride">Ưu tiên đi sớm</span>
+        </div>
+        <div class="tstop">
+          <div class="time">07:30 – 09:00</div>
+          <h4>Ghé Khâu Vai</h4>
+          <p>Nếu không đúng phiên chợ tình (âm lịch 26/3 hằng năm), chỉ dừng 15–20 phút ngắm cảnh thung lũng rồi tiếp tục — không cần nán lại lâu.</p>
+          <span class="tag photo">Điểm dừng ngắn</span>
+        </div>
+        <div class="tstop">
+          <div class="time">09:00 – 11:30</div>
+          <h4>Cung đường Mậu Duệ – Lũng Hồ → hướng Du Già</h4>
+          <p>Đoạn được đánh giá là đẹp nhất toàn hành trình: ít xe, ruộng bậc thang, thung lũng xanh. Cũng là đoạn cần tay lái vững nhất — đi chậm, giữ khoảng cách giữa các xe trong đoàn.</p>
+          <span class="tag ride">Tập trung lái xe</span>
+        </div>
+        <div class="tstop">
+          <div class="time">11:30 – 13:00</div>
+          <h4>Nghỉ trưa tại thị tứ dọc đường</h4>
+          <p>Mậu Duệ hoặc Lũng Phìn — quán ăn nhỏ ven đường, nghỉ ngơi kỹ trước khi vào đoạn đèo dốc phía sau.</p>
+          <span class="tag eat">Ăn uống</span>
+        </div>
+        <div class="tstop">
+          <div class="time">13:00 – 15:30</div>
+          <h4>Vào Du Già — đèo dốc nhiều khúc cua tay áo</h4>
+          <p>Đoạn cuối ngày khó nhất: dốc dài, cua gấp liên tục. Không chạy quá tốc độ, dùng phanh cả hai bánh đều tay, nghỉ giữa chặng nếu tay mỏi. Không cố chạy khi trời sập tối.</p>
+          <span class="tag ride">Chạy xe là chính</span>
+        </div>
+        <div class="tstop">
+          <div class="time">15:30 – 17:30</div>
+          <h4>Tắm suối / thác Du Già</h4>
+          <p>Buổi chiều "chill" đúng nghĩa sau 3 ngày chạy xe liên tục — ngâm mình ở thác Du Già hoặc dạo quanh làng Tày ven suối.</p>
+          <span class="tag photo">Thư giãn cuối ngày</span>
+        </div>
+        <div class="tstop">
+          <div class="time">18:00 –</div>
+          <h4>Ăn tối, nghỉ sớm</h4>
+          <p>Cơm nhà dân/homestay kiểu Tày, ngủ sớm để lấy sức cho chặng cuối về lại TP Hà Giang.</p>
+          <span class="tag stay">Nghỉ đêm</span>
+        </div>
+      </div>
+      <div>
+        <div class="side-card">
+          <h5>Nghỉ đêm — Du Già</h5>
+          <div class="stay-opt">
+            <div class="name">Du Già Village</div>
+            <div class="price">≈ 300.000 – 450.000đ/phòng</div>
+            <div class="note">Nhà sàn nhìn xuống ruộng bậc thang, không gian được nhiều người đi loop khen nhất.</div>
+          </div>
+          <div class="stay-opt">
+            <div class="name">Du Già Homestay (nhà Tày truyền thống)</div>
+            <div class="price">≈ 150.000 – 250.000đ/người (phòng dorm/tập thể)</div>
+            <div class="note">Nhà sàn hơn 50 năm tuổi, gần suối, giá mềm cho nhóm.</div>
+          </div>
+          <div class="note-box">Khu vực ít sóng điện thoại hơn — nên báo trước giờ dự kiến tới cho chủ homestay qua Zalo/điện thoại lúc còn sóng ở Mèo Vạc.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NGÀY 4 ================= -->
+<section id="ngay4" style="--dc:var(--gold)">
+  <div class="wrap">
+    <div class="day-hero">
+      <div class="day-num" style="color:var(--gold)">04</div>
+      <div class="day-titlewrap">
+        <h2>Du Già → TP Hà Giang (trả xe) → xe khách về Hà Nội</h2>
+        <div class="day-date">Thứ Bảy · 07/11</div>
+      </div>
+    </div>
+    <div class="day-stats">
+      <div><b>~95 km</b><span>Quãng đường, dễ hơn 3 ngày trước</span></div>
+      <div><b>~6h chạy xe</b><span>+ nghỉ ngơi buổi chiều</span></div>
+      <div><b>Dễ</b><span>Độ khó</span></div>
+      <div><b>07:00</b><span>Giờ xuất phát đề xuất</span></div>
+    </div>
+    <div class="day-layout">
+      <div class="tline" style="--dc:var(--gold)">
+        <div class="tstop">
+          <div class="time">07:00 – 07:30</div>
+          <h4>Ăn sáng, xuất phát</h4>
+          <p>Cần về kịp buổi chiều để trả xe và bắt xe khách tối, nên xuất phát đúng giờ dù chặng cuối này nhẹ nhàng hơn.</p>
+          <span class="tag ride">Chạy xe là chính</span>
+        </div>
+        <div class="tstop">
+          <div class="time">07:30 – 11:00</div>
+          <h4>Du Già → Minh Ngọc → Ngọc Long → TP Hà Giang (~95km)</h4>
+          <p>Đường dễ đi hơn hẳn 3 ngày trước, phù hợp để thong thả ngắm cảnh lần cuối. Có thể dừng vài điểm ngắn nếu còn thời gian, nhưng ưu tiên tiến độ.</p>
+          <span class="tag ride">Chạy xe là chính</span>
+        </div>
+        <div class="tstop">
+          <div class="time">11:00 – 12:30</div>
+          <h4>Nghỉ trưa dọc đường</h4>
+          <p>Ăn nhẹ tại thị trấn trên đường về, không cần dừng lâu.</p>
+          <span class="tag eat">Ăn uống</span>
+        </div>
+        <div class="tstop">
+          <div class="time">13:00 – 14:00</div>
+          <h4>Về tới TP Hà Giang, trả xe</h4>
+          <p>Hầu hết cửa hàng thuê xe có phòng tắm nóng lạnh miễn phí cho khách trả xe — tranh thủ tắm rửa, thay đồ sạch trước khi lên xe khách đêm.</p>
+          <span class="tag stay">Kết thúc loop</span>
+        </div>
+        <div class="tstop">
+          <div class="time">14:00 – 19:30</div>
+          <h4>Nghỉ ngơi, dạo phố Hà Giang, ăn tối sớm</h4>
+          <p>Cả nhóm đã thấm mệt sau 4 ngày — dành buổi chiều để nghỉ ngơi thật sự, ăn tối sớm trước khi ra bến xe.</p>
+          <span class="tag eat">Ăn uống</span>
+        </div>
+        <div class="tstop">
+          <div class="time">20:00 – 21:00</div>
+          <h4>Lên xe khách Bằng Phấn đi Hà Nội</h4>
+          <p>Nên đặt vé trước 1–2 ngày (nhà xe hay hết chỗ cuối tuần). Xe chạy xuyên đêm khoảng 6,5–7 tiếng, dự kiến tới Hà Nội khoảng 4:00–6:00 sáng 08/11 — có thể ngủ thêm trên xe tới 8h nếu nhà xe cho phép.</p>
+          <span class="tag stay">Về Hà Nội</span>
+        </div>
+      </div>
+      <div>
+        <div class="side-card">
+          <h5>Xe khách về Hà Nội</h5>
+          <div class="stay-opt">
+            <div class="name">Bằng Phấn — giường/cabin cung điện</div>
+            <div class="price">≈ 250.000 – 350.000đ/người</div>
+            <div class="note">22 giường cabin cao cấp, đón trả tận trung tâm TP Hà Giang.</div>
+          </div>
+          <div class="stay-opt">
+            <div class="name">Quang Giang / Quang Nghị (dự phòng)</div>
+            <div class="price">≈ 250.000 – 350.000đ/người</div>
+            <div class="note">Nhiều khung giờ tối, trả khách trung tâm Hà Nội (Mỹ Đình / phố cổ).</div>
+          </div>
+          <div class="note-box">08/11 sáng đến Hà Nội → chơi phố cổ, hồ Gươm cả ngày → ra sân bay Nội Bài kịp chuyến 21:55 về SGN (nên rời trung tâm trước ~19:00 để tránh kẹt xe giờ cao điểm).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BẢN ĐỒ ================= -->
+<section class="alt" id="banddo">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Bản đồ tương tác</div>
+      <h2 class="sec-title">Toàn tuyến, theo từng ngày.</h2>
+      <p class="sec-desc">Bấm chọn từng ngày để xem cung đường và các điểm dừng riêng, hoặc bấm "Cả 4 ngày" để xem toàn tuyến. Bấm vào từng điểm đánh dấu để xem ghi chú nhanh. Vị trí mang tính minh hoạ tương đối — khi đi thực tế nên dùng thêm Google Maps/Maps.me để định vị chính xác.</p>
+    </div>
+    <div class="map-toggle" id="mapToggle">
+      <button class="map-btn active" data-day="all"><span class="sw" style="background:#1F2A1A"></span>Cả 4 ngày</button>
+      <button class="map-btn" data-day="1"><span class="sw" style="background:#24344D"></span>Ngày 1 — Đồng Văn</button>
+      <button class="map-btn" data-day="2"><span class="sw" style="background:#B1502F"></span>Ngày 2 — Mèo Vạc</button>
+      <button class="map-btn" data-day="3"><span class="sw" style="background:#5C6E4E"></span>Ngày 3 — Du Già</button>
+      <button class="map-btn" data-day="4"><span class="sw" style="background:#C89544"></span>Ngày 4 — Về Hà Giang</button>
+    </div>
+    <div id="map"></div>
+  </div>
+</section>
+
+<!-- ================= CHI PHÍ ================= -->
+<section id="chiphi">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Dự trù ngân sách</div>
+      <h2 class="sec-title">Chi phí ước tính — phần Hà Giang Loop</h2>
+      <p class="sec-desc">Tính cho 3 người, chia đều 2 xe số (thay phiên lái/ngồi sau) trong 4 ngày. Không bao gồm vé máy bay SGN–HAN (đã có) và chi tiêu riêng ở Hà Nội.</p>
+    </div>
+    <div class="cost-grid">
+      <div class="cost-card">
+        <div class="big">≈ 3,0 – 3,5tr</div>
+        <div class="lbl">VNĐ / người</div>
+        <p>Tổng chi phí phần Hà Giang Loop 4N3Đ, đã gồm xe khách khứ hồi, thuê xe máy, xăng, ăn ở, vé tham quan.</p>
+      </div>
+      <div class="cost-card">
+        <div class="big">180–200k</div>
+        <div class="lbl">VNĐ / xe / ngày</div>
+        <p>Giá thuê xe số phổ biến tại TP Hà Giang, thường đã gồm mũ bảo hiểm, áo mưa, bộ vá xe cơ bản.</p>
+      </div>
+      <div class="cost-card">
+        <div class="big">250–350k</div>
+        <div class="lbl">VNĐ / người / chiều</div>
+        <p>Vé xe khách giường nằm/limousine Hà Nội ↔ Hà Giang, xuyên đêm khoảng 6,5–7 tiếng.</p>
+      </div>
+    </div>
+    <table class="costtable">
+      <thead>
+        <tr><th>Khoản mục</th><th>Đơn giá</th><th>Tổng (3 người)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Xe khách Hà Nội ↔ Hà Giang (khứ hồi)</td><td class="mono">300.000đ/người × 2 chiều</td><td>1.800.000đ</td></tr>
+        <tr><td>Thuê xe máy số (2 xe × 4 ngày)</td><td class="mono">190.000đ/xe/ngày</td><td>1.520.000đ</td></tr>
+        <tr><td>Xăng cho cả hành trình (~450km, 2 xe)</td><td class="mono">~200.000đ/xe</td><td>400.000đ</td></tr>
+        <tr><td>Ăn uống (sáng/trưa/tối, 4 ngày)</td><td class="mono">200.000đ/người/ngày</td><td>2.400.000đ</td></tr>
+        <tr><td>Nghỉ đêm (3 đêm, chia phòng)</td><td class="mono">200.000đ/người/đêm</td><td>1.800.000đ</td></tr>
+        <tr><td>Vé tham quan (Lũng Cú, Dinh Vua Mèo, Nhà của Pao)</td><td class="mono">80.000đ/người</td><td>240.000đ</td></tr>
+        <tr><td>Thuyền/cano ngắm hẻm Tu Sản</td><td class="mono">200.000đ/người</td><td>600.000đ</td></tr>
+        <tr><td>Dự phòng (vá xe, cà phê, quà, phát sinh)</td><td class="mono">200.000đ/người</td><td>600.000đ</td></tr>
+        <tr class="total"><td>Tổng cộng (3 người)</td><td></td><td>≈ 9.360.000đ</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= THỰC TẾ 2026 ================= -->
+<section id="thucte">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Cập nhật từ cộng đồng — VOZ, các group Facebook, TikTok</div>
+      <h2 class="sec-title">Hà Giang 2026 thật sự thế nào?</h2>
+      <p class="sec-desc">Tổng hợp từ các thớt VOZ, group Facebook review Hà Giang và xu hướng TikTok #hagiangloop gần đây — bức tranh thực tế khác khá nhiều so với ảnh trên mạng xã hội.</p>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card wide">
+        <div class="n">ĐÔNG HƠN NHIỀU SO VỚI VÀI NĂM TRƯỚC</div>
+        <h4>Hà Giang không còn "hoang sơ chưa ai biết" như review cũ</h4>
+        <p>Theo cẩm nang cập nhật tháng 5/2026, Hà Giang đón hơn 3,2 triệu lượt khách/năm, khách nước ngoài tăng hơn gấp đôi từ 2022. Vào cao điểm tháng 10–11, các điểm như Mã Pí Lèng, Lũng Cú có thể có hơn 200 người chờ chụp ảnh lúc hoàng hôn. Các thớt VOZ cũ (2020) mô tả cảnh vắng vẻ, phố cổ đìu hiu — thực tế 2026 đã khác nhiều: nhiều khách sạn bê tông mới mọc lên, đường đông xe hơn hẳn. Vẫn còn những đoạn vắng và nguyên bản (DT176, cung Sủng Là, thung lũng Du Già) nếu biết đi lệch giờ cao điểm.</p>
+      </div>
+      <div class="tip-card">
+        <div class="n">ĐIỂM CÓ THỂ BỎ QUA</div>
+        <h4>Cầu kính Skywalk &amp; điểm ngắm Quản Bạ thu phí</h4>
+        <p>Nhiều review gần đây khuyên bỏ qua cầu kính Skywalk (đắt, đông) và điểm ngắm cảnh có thu phí mới ở Quản Bạ — góc nhìn từ lề đường miễn phí ngay bên cạnh gần như giống hệt.</p>
+      </div>
+      <div class="tip-card">
+        <div class="n">CỘT CỜ LŨNG CÚ: NÊN ĐI HAY BỎ?</div>
+        <h4>Một số reviewer cho là "đi vòng khá xa chỉ để xem cột cờ"</h4>
+        <p>Nếu ưu tiên thời gian, có thể cân nhắc rút ngắn. Nhóm mình đi lần đầu nên vẫn giữ điểm này trong lịch trình vì ý nghĩa "cực Bắc" và view đẹp, nhưng đây là điểm linh hoạt nhất nếu ngày 2 bị trễ giờ.</p>
+      </div>
+      <div class="tip-card wide">
+        <div class="n">AN TOÀN THỰC TẾ — KHÔNG PHÓNG ĐẠI, KHÔNG CHỦ QUAN</div>
+        <h4>Bệnh viện tuyến huyện không có phẫu thuật thần kinh hay chẩn đoán hình ảnh nâng cao</h4>
+        <p>Hà Giang không có dịch vụ cứu hộ trực thăng. Quy trình khi có tai nạn nặng: sơ cứu tại chỗ → chuyển về Bệnh viện Đa khoa Hà Giang (chỉ xử lý chấn thương cơ bản) → nếu nặng phải chuyển tiếp về Hà Nội (Bạch Mai/Vinmec Times City), mất 5–6 giờ đường bộ. Nhân viên y tế địa phương từng chia sẻ với báo chí là mùa cao điểm điều trị 5–15 ca chấn thương liên quan xe máy mỗi tuần, đa phần là gãy xương, trầy xước, chấn động nhẹ. Đây không phải để dọa — mà là lý do nhóm nên tuyệt đối tuân thủ tốc độ, không chạy đêm, và luôn có người tỉnh táo nhất cầm lái ở các đoạn khó (Mèo Vạc – Du Già ngày 3).</p>
+      </div>
+      <div class="tip-card">
+        <div class="n">TỪ TIKTOK #hagiangloop</div>
+        <h4>Tránh tour đoàn quá đông kiểu "cá mòi"</h4>
+        <p>Nhiều video gần đây cảnh báo các tour ghép 15–20 xe chạy cùng lúc, dừng đúng kịch bản tại các điểm chụp ảnh đông đúc. Vì nhóm mình tự lái, tự chủ lịch trình — đây vốn đã là điểm mạnh so với đi tour ghép.</p>
+      </div>
+      <div class="tip-card">
+        <div class="n">CỘNG ĐỒNG ĐỂ HỎI THÊM TRƯỚC KHI ĐI</div>
+        <h4>Group Facebook review theo thời gian thực</h4>
+        <p>"Hà Giang Review Tất Tần Tật", "Review Homestay - Khách Sạn Đồng Văn &amp; Mèo Vạc" là các group được dân phượt trên VOZ giới thiệu để hỏi tình trạng phòng, đường sá, thời tiết sát ngày đi — thông tin cập nhật nhanh hơn các bài blog SEO.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LƯU Ý ================= -->
+<section class="alt" id="luuy">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Trước khi lên đường</div>
+      <h2 class="sec-title">Những điều nên chuẩn bị kỹ</h2>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="n">GIẤY TỜ</div>
+        <h4>Mang đủ CCCD/CMND &amp; bằng lái</h4>
+        <p>Bằng lái xe máy hạng A1 là bắt buộc nếu bị kiểm tra. Giấy tờ tuỳ thân giữ lại tại cửa hàng thuê xe trong suốt thời gian thuê.</p>
+      </div>
+      <div class="tip-card">
+        <div class="n">THỜI TIẾT</div>
+        <h4>Tháng 11 se lạnh, sáng có sương</h4>
+        <p>Nhiệt độ dao động 12–24°C ban ngày, vùng cao như Đồng Văn/Mèo Vạc đêm có thể xuống dưới 10°C. Mang áo khoác gió, khăn ấm, và luôn thủ sẵn áo mưa mỏng.</p>
+      </div>
+      <div class="tip-card">
+        <div class="n">MÙA HOA</div>
+        <h4>Đúng mùa tam giác mạch</h4>
+        <p>Hoa tam giác mạch thường nở rộ từ giữa tháng 10 đến tháng 12, đẹp nhất quanh khu vực Sủng Là – Lũng Cú – Phố Cáo. Lễ hội hoa thường được tổ chức trong tháng 11, nên kiểm tra lịch chính thức gần ngày đi.</p>
+      </div>
+      <div class="tip-card">
+        <div class="n">XE SỐ</div>
+        <h4>Xuống dốc: về số thấp, không rà phanh liên tục</h4>
+        <p>Đường đèo Hà Giang dốc dài — rà phanh liên tục dễ làm mất độ bám hoặc cháy má phanh. Dùng động cơ hãm tốc (về số thấp) là kỹ thuật quan trọng nhất cần nắm trước chuyến đi.</p>
+      </div>
+      <div class="tip-card">
+        <div class="n">XĂNG</div>
+        <h4>Đổ đầy bình trước mỗi chặng</h4>
+        <p>Nhiều đoạn giữa các thị trấn (đặc biệt Mèo Vạc → Du Già) không có cây xăng trong hàng chục km. Đổ đầy mỗi khi có cơ hội, đừng đợi đến khi gần cạn.</p>
+      </div>
+      <div class="tip-card">
+        <div class="n">AN TOÀN</div>
+        <h4>Không chạy đêm, cập nhật vị trí cho người thân</h4>
+        <p>Nhiều đoạn mất sóng điện thoại và sương mù dày có thể làm định vị lệch vài cây số. Mỗi lần dừng nghỉ, nhắn nhanh vị trí qua Zalo cho người ở nhà hoặc chủ homestay.</p>
+      </div>
+      <div class="tip-card">
+        <div class="n">VĂN HOÁ</div>
+        <h4>Xin phép trước khi chụp ảnh người dân</h4>
+        <p>Tôn trọng không gian sinh hoạt của đồng bào H'Mông, Tày, Lô Lô — đặc biệt tại các phiên chợ và trong nhà dân.</p>
+      </div>
+      <div class="tip-card">
+        <div class="n">ĐẶT CHỖ</div>
+        <h4>Đặt xe khách &amp; homestay trước 3–7 ngày</h4>
+        <p>Mùa hoa tam giác mạch (tháng 10–12) là cao điểm khách trong lẫn ngoài nước — phòng ở Đồng Văn, Mèo Vạc và vé xe khách cuối tuần có thể hết sớm.</p>
+      </div>
+      <div class="tip-card wide">
+        <div class="n">CHỤP ẢNH vs. CHẠY XE</div>
+        <h4>Ưu tiên dừng ở các điểm nghỉ ngơi quy hoạch sẵn thay vì dừng giữa đèo</h4>
+        <p>Lịch trình trên đã đánh dấu riêng các điểm "chụp ảnh đẹp" (Cổng Trời Quản Bạ, Cột cờ Lũng Cú, Mã Pí Lèng, Nhà của Pao) — đây là những nơi có bãi dừng an toàn và tầm nhìn đẹp nhất. Những đoạn còn lại nên tập trung lái xe, tránh dừng bất chợt giữa khúc cua hoặc trên đèo hẹp vừa mất an toàn vừa làm chậm tiến độ cả đoàn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRỢ LÝ CHUYẾN ĐI ================= -->
+<section class="alt" id="trolyai">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Dùng trong lúc đi — cần Cài đặt (⚙️ góc trên) trước</div>
+      <h2 class="sec-title">Trợ Lý Chuyến Đi</h2>
+      <p class="sec-desc">Chat đề xuất đổi lịch trình có AI soạn nháp, theo dõi GPS &amp; thời tiết trực tiếp, nhắc check-in chỗ ở, và sổ chi phí chung cho cả 3 người. Dữ liệu đồng bộ qua Firebase bạn tự tạo (miễn phí) — bấm ⚙️ để nhập tên, Firebase config và Anthropic API key trước khi dùng.</p>
+    </div>
+
+    <div class="identity-bar">
+      <span class="conn-dot" id="connDot"></span>
+      <span class="who">Đang đăng nhập là <b id="whoName">—</b></span>
+      <span class="who" id="peopleOnline"></span>
+    </div>
+
+    <div class="app-tabs">
+      <button class="app-tab active" data-panel="panelChat">💬 Chat &amp; Đề xuất</button>
+      <button class="app-tab" data-panel="panelTrack">📍 Theo dõi trực tiếp</button>
+      <button class="app-tab" data-panel="panelStay">🏨 Chỗ ở đã đặt</button>
+      <button class="app-tab" data-panel="panelMoney">💰 Chi phí</button>
+      <button class="app-tab" data-panel="panelAlert">⚠️ Cảnh báo cộng đồng</button>
+    </div>
+
+    <!-- CHAT + AI PROPOSALS -->
+    <div id="panelChat" class="app-panel active">
+      <div class="chat-box">
+        <div class="chat-feed" id="chatFeed"></div>
+        <div class="chat-input-row">
+          <input id="chatInput" type="text" placeholder="Nhắn gì đó — VD: mình thấy nên đổi thứ tự ngày 2, đi Lũng Cú trước...">
+          <button id="chatSend">Gửi</button>
+        </div>
+      </div>
+      <button id="aiDraftBtn" class="ai-draft-btn">🤖 Nhờ AI soạn đề xuất thay đổi từ đoạn chat gần đây</button>
+      <div id="proposalsList"></div>
+    </div>
+
+    <!-- LIVE TRACKING -->
+    <div id="panelTrack" class="app-panel">
+      <button id="trackToggle" class="track-toggle off">📡 Bật theo dõi GPS</button>
+      <div class="track-grid">
+        <div class="track-card">
+          <h5>Thời tiết tại vị trí hiện tại</h5>
+          <div class="weather-num" id="weatherTemp">--°C</div>
+          <div id="weatherDesc" style="font-size:13px; color:#556047; margin-top:4px;">Bật GPS để xem thời tiết thật</div>
+          <div id="weatherWarn" class="note-box" style="display:none; margin-top:12px;"></div>
+        </div>
+        <div class="track-card">
+          <h5>Tiến độ so với lịch trình</h5>
+          <div class="pace-msg" id="paceMsg">Bật GPS để mình tính tiến độ giúp nhé 🙂</div>
+          <div id="paceDetail" style="font-size:12.5px; color:#556047; margin-top:8px;"></div>
+        </div>
+      </div>
+      <div class="track-card">
+        <h5>Khoảng cách tới chỗ ở đêm nay</h5>
+        <div class="geo-list" id="geoList"><div style="font-size:13px; color:#77816a;">Bật GPS để xem khoảng cách tới từng chỗ ở đã lưu.</div></div>
+      </div>
+    </div>
+
+    <!-- ACCOMMODATIONS -->
+    <div id="panelStay" class="app-panel">
+      <form id="stayForm" class="add-form">
+        <input id="stayDay" placeholder="Ngày (VD: Ngày 1 - 04/11)" required>
+        <input id="stayName" placeholder="Tên chỗ ở" required>
+        <input id="stayLat" placeholder="Vĩ độ (lat)" required>
+        <input id="stayLng" placeholder="Kinh độ (lng)" required>
+        <input id="stayNote" placeholder="Ghi chú / mã đặt phòng">
+        <button type="submit">+ Thêm chỗ ở đã đặt</button>
+      </form>
+      <div id="stayList"></div>
+    </div>
+
+    <!-- EXPENSES -->
+    <div id="panelMoney" class="app-panel">
+      <form id="expenseForm" class="add-form">
+        <input id="expPayer" placeholder="Ai trả (tên)" required>
+        <input id="expAmount" type="number" placeholder="Số tiền (VNĐ)" required>
+        <input id="expNote" placeholder="Khoản gì (VD: xăng, ăn trưa...)" required>
+        <button type="submit">+ Thêm khoản chi</button>
+      </form>
+      <div class="expense-summary" id="expenseSummary"></div>
+      <div class="settle-box" id="settleBox"></div>
+      <div id="expenseList" style="margin-top:18px;"></div>
+    </div>
+
+    <!-- ALERTS -->
+    <div id="panelAlert" class="app-panel">
+      <form id="alertForm" class="add-form">
+        <input id="alertMsg" placeholder="Thấy tin gì trên mạng/đường? Đăng lên đây cho cả nhóm" required>
+        <select id="alertSev">
+          <option value="info">Thông tin</option>
+          <option value="warn">Cảnh báo</option>
+          <option value="danger">Nguy hiểm</option>
+        </select>
+        <button type="submit">+ Đăng cảnh báo</button>
+      </form>
+      <div id="alertList"></div>
+    </div>
+  </div>
+</section>
+
+<div id="toast" class="toast"></div>
+
+<footer>
+  <div class="wrap">
+    <div class="sources"><b>Nguồn tham khảo:</b> tổng hợp từ các trang kinh nghiệm cập nhật 2025–2026 (MOTOGO, VnExpress, Vexere, vietnamtourism.com "Cẩm nang trung thực 2026"), các thớt chia sẻ kinh nghiệm và group review trên VOZ.vn ("Review Hà Giang", "Xin kinh nghiệm du lịch Hà Giang", "Ha Giang Loop Family Tour"), các group Facebook "Hà Giang Review Tất Tần Tật" và "Review Homestay - Khách Sạn Đồng Văn & Mèo Vạc", cùng xu hướng nội dung TikTok #hagiangloop, và thông tin hành chính chính thức về việc sáp nhập tỉnh Hà Giang – Tuyên Quang (Nghị quyết 202/2025/QH15). Giá cả, tình trạng phòng và tên nhà xe/homestay thay đổi khá nhanh — nên vào lại các group trên hoặc gọi xác nhận trước 3–5 ngày.</div>
+    <div>Cập nhật lần cuối: 08/2026 · Hành trình 04–07/11</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  const dayColors = {1:'#24344D', 2:'#B1502F', 3:'#5C6E4E', 4:'#C89544'};
+
+  const stops = [
+    // Day 1
+    {day:1, name:'TP Hà Giang', lat:22.8025, lng:104.9784, note:'Xuất phát 06:45, kiểm tra xe kỹ trước khi đi.'},
+    {day:1, name:'Cổng Trời Quản Bạ', lat:23.0287, lng:104.9995, note:'Ngắm Núi Đôi Cô Tiên — điểm chụp ảnh sáng sớm đẹp nhất.'},
+    {day:1, name:'TT Yên Minh', lat:23.1136, lng:105.2467, note:'Nghỉ ăn nhẹ, đổ thêm xăng.'},
+    {day:1, name:'Cán Tỷ (cua chữ M)', lat:23.1706, lng:105.1367, note:'Dừng nhanh 10–15 phút chụp khúc cua từ trên cao.'},
+    {day:1, name:'Sủng Là — Nhà của Pao', lat:23.2394, lng:105.3111, note:'Ăn trưa + tham quan, vé ~20.000đ/người.'},
+    {day:1, name:'Phố cổ Đồng Văn', lat:23.2708, lng:105.3597, note:'Nghỉ đêm, dạo phố cổ buổi tối.'},
+    // Day 2
+    {day:2, name:'Cột cờ Lũng Cú', lat:23.3919, lng:105.3167, note:'Vé 30.000đ/người, leo 283 bậc — điểm chụp ảnh chính buổi sáng.'},
+    {day:2, name:'Dinh thự Họ Vương', lat:23.2931, lng:105.3149, note:'Vé 30.000đ/người, tham quan ~30–40 phút.'},
+    {day:2, name:'Đèo Mã Pí Lèng', lat:23.2299, lng:105.4192, note:'Điểm Panorama — dừng 30–40 phút, ảnh đẹp nhất chuyến đi.'},
+    {day:2, name:'Bến thuyền Nho Quế — hẻm Tu Sản', lat:23.2214, lng:105.4064, note:'Đi thuyền/cano 150–250k/người ngắm hẻm vực.'},
+    {day:2, name:'TT Mèo Vạc', lat:23.1889, lng:105.4147, note:'Nghỉ đêm, ăn thắng cố/lẩu gà đen.'},
+    // Day 3
+    {day:3, name:'Khâu Vai', lat:23.0672, lng:105.4267, note:'Dừng ngắn 15–20 phút ngắm cảnh (không đúng phiên chợ tình).'},
+    {day:3, name:'Mậu Duệ', lat:23.0764, lng:105.2519, note:'Nghỉ trưa dọc đường.'},
+    {day:3, name:'Du Già', lat:22.9358, lng:105.1508, note:'Tắm suối/thác Du Già, nghỉ đêm ở làng Tày.'},
+    // Day 4
+    {day:4, name:'Minh Ngọc', lat:22.9186, lng:105.0625, note:'Điểm trung chuyển trên đường về.'},
+    {day:4, name:'TP Hà Giang (trả xe)', lat:22.8025, lng:104.9784, note:'Trả xe, tắm rửa, ra bến xe khách buổi tối.'},
+  ];
+
+  const routes = {
+    1: [[22.8025,104.9784],[23.0287,104.9995],[23.1136,105.2467],[23.1706,105.1367],[23.2394,105.3111],[23.2708,105.3597]],
+    2: [[23.2708,105.3597],[23.3919,105.3167],[23.2931,105.3149],[23.2299,105.4192],[23.2214,105.4064],[23.1889,105.4147]],
+    3: [[23.1889,105.4147],[23.0672,105.4267],[23.0764,105.2519],[22.9358,105.1508]],
+    4: [[22.9358,105.1508],[22.9186,105.0625],[22.8025,104.9784]],
+  };
+
+  const map = L.map('map', {scrollWheelZoom:false}).setView([23.05, 105.25], 9);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:'&copy; OpenStreetMap contributors',
+    maxZoom: 17,
+  }).addTo(map);
+
+  let layerGroup = L.layerGroup().addTo(map);
+
+  function renderDay(day){
+    layerGroup.clearLayers();
+    const daysToShow = day === 'all' ? [1,2,3,4] : [parseInt(day)];
+    daysToShow.forEach(d=>{
+      L.polyline(routes[d], {color:dayColors[d], weight:4, opacity:0.85, dashArray: d%2===0? null : null}).addTo(layerGroup);
+      stops.filter(s=>s.day===d).forEach(s=>{
+        const marker = L.circleMarker([s.lat,s.lng], {
+          radius:8, color:dayColors[d], weight:2.5, fillColor:'#FBF8F0', fillOpacity:1
+        }).addTo(layerGroup);
+        marker.bindPopup(`<div class="popup-t">${s.name}</div><div class="popup-d">${s.note}</div>`);
+      });
+    });
+    if(daysToShow.length===1){
+      const b = L.latLngBounds(routes[daysToShow[0]]);
+      map.fitBounds(b, {padding:[40,40]});
+    } else {
+      map.setView([23.05,105.25], 9);
+    }
+  }
+
+  renderDay('all');
+
+  document.querySelectorAll('.map-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.map-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      renderDay(btn.dataset.day);
+    });
+  });
+</script>
+
+<!-- ================= TRỢ LÝ CHUYẾN ĐI — APP LOGIC ================= -->
+<script>
+(function(){
+  'use strict';
+
+  const TRIP_ID = 'ha-giang-04-07-11-2026';
+  const LSK = { name:'hgl_name', firebase:'hgl_firebase_cfg', apiKey:'hgl_anthropic_key' };
+
+  // ---------- small utils ----------
+  function $(id){ return document.getElementById(id); }
+  function toast(msg, ms){
+    const t = $('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toast._tm);
+    toast._tm = setTimeout(()=>t.classList.remove('show'), ms || 3200);
+  }
+  function haversine(lat1,lng1,lat2,lng2){
+    const R = 6371000;
+    const toRad = d => d*Math.PI/180;
+    const dLat = toRad(lat2-lat1), dLng = toRad(lng2-lng1);
+    const a = Math.sin(dLat/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLng/2)**2;
+    return 2*R*Math.asin(Math.sqrt(a));
+  }
+  function fmtVND(n){ return Number(n||0).toLocaleString('vi-VN') + 'đ'; }
+  function fmtTime(ts){
+    if(!ts) return '';
+    const d = ts.toDate ? ts.toDate() : new Date(ts);
+    return d.toLocaleString('vi-VN', {day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit'});
+  }
+
+  // ---------- settings / identity ----------
+  function loadCfg(){
+    return {
+      name: localStorage.getItem(LSK.name) || '',
+      firebase: localStorage.getItem(LSK.firebase) || '',
+      apiKey: localStorage.getItem(LSK.apiKey) || '',
+    };
+  }
+  let cfg = loadCfg();
+
+  function refreshIdentityUI(){
+    $('whoName').textContent = cfg.name || '(chưa đặt tên)';
+    $('cfgName').value = cfg.name;
+    $('cfgFirebase').value = cfg.firebase;
+    $('cfgApiKey').value = cfg.apiKey;
+    $('fbStatus').textContent = db ? 'đã kết nối' : 'chưa kết nối';
+    $('fbStatus').className = 'status-pill ' + (db ? 'ok' : 'bad');
+    $('aiStatus').textContent = cfg.apiKey ? 'đã có key' : 'chưa có key';
+    $('aiStatus').className = 'status-pill ' + (cfg.apiKey ? 'ok' : 'bad');
+    $('connDot').className = 'conn-dot' + (db ? ' on' : '');
+  }
+
+  $('settingsBtn').addEventListener('click', ()=>{
+    $('drawer').classList.add('open');
+    $('drawerBackdrop').classList.add('open');
+  });
+  function closeDrawer(){
+    $('drawer').classList.remove('open');
+    $('drawerBackdrop').classList.remove('open');
+  }
+  $('drawerClose').addEventListener('click', closeDrawer);
+  $('drawerBackdrop').addEventListener('click', closeDrawer);
+
+  $('drawerSave').addEventListener('click', ()=>{
+    cfg.name = $('cfgName').value.trim();
+    cfg.firebase = $('cfgFirebase').value.trim();
+    cfg.apiKey = $('cfgApiKey').value.trim();
+    localStorage.setItem(LSK.name, cfg.name);
+    localStorage.setItem(LSK.firebase, cfg.firebase);
+    localStorage.setItem(LSK.apiKey, cfg.apiKey);
+    initFirebase();
+    refreshIdentityUI();
+    closeDrawer();
+    toast('Đã lưu cài đặt ✓');
+  });
+
+  // ---------- Firebase ----------
+  let db = null;
+  function tripCol(name){ return db.collection('trips').doc(TRIP_ID).collection(name); }
+
+  function initFirebase(){
+    if(!cfg.firebase){ db = null; return; }
+    try{
+      const parsed = JSON.parse(cfg.firebase);
+      if(!firebase.apps || !firebase.apps.length) firebase.initializeApp(parsed);
+      db = firebase.firestore();
+      wireRealtimeListeners();
+    }catch(e){
+      console.error('Firebase config lỗi:', e);
+      db = null;
+      toast('Firebase config không hợp lệ — kiểm tra lại JSON trong ⚙️');
+    }
+  }
+
+  // ---------- app tabs ----------
+  document.querySelectorAll('.app-tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('.app-tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.app-panel').forEach(p=>p.classList.remove('active'));
+      tab.classList.add('active');
+      $(tab.dataset.panel).classList.add('active');
+    });
+  });
+
+  // ---------- CHAT ----------
+  function renderMessages(docs){
+    const feed = $('chatFeed');
+    feed.innerHTML = '';
+    docs.forEach(doc=>{
+      const m = doc.data();
+      const el = document.createElement('div');
+      if(m.type === 'system'){
+        el.className = 'msg system';
+        el.textContent = m.text;
+      } else {
+        el.className = 'msg ' + (m.author === cfg.name ? 'mine' : 'other');
+        el.innerHTML = `<div class="who">${m.author}</div>${m.text}`;
+      }
+      feed.appendChild(el);
+    });
+    feed.scrollTop = feed.scrollHeight;
+  }
+
+  function sendMessage(text, author, type){
+    if(!db){ toast('Kết nối Firebase trong ⚙️ trước đã nhé'); return Promise.reject(); }
+    return tripCol('messages').add({
+      text, author: author || cfg.name || 'Ẩn danh', type: type || 'chat',
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+  }
+
+  $('chatSend').addEventListener('click', ()=>{
+    const input = $('chatInput');
+    const text = input.value.trim();
+    if(!text) return;
+    if(!cfg.name){ toast('Đặt tên của bạn trong ⚙️ trước khi chat nhé'); return; }
+    sendMessage(text).then(()=>{ input.value=''; }).catch(()=>{});
+  });
+  $('chatInput').addEventListener('keydown', e=>{ if(e.key==='Enter') $('chatSend').click(); });
+
+  // ---------- AI DRAFT PROPOSAL ----------
+  let lastMessages = [];
+
+  async function callClaude(system, userText){
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': cfg.apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-5',
+        max_tokens: 700,
+        system,
+        messages: [{ role: 'user', content: userText }],
+      }),
+    });
+    if(!res.ok){
+      const t = await res.text();
+      throw new Error('Anthropic API lỗi ' + res.status + ': ' + t.slice(0,200));
+    }
+    const data = await res.json();
+    return (data.content || []).filter(b=>b.type==='text').map(b=>b.text).join('\n');
+  }
+
+  $('aiDraftBtn').addEventListener('click', async ()=>{
+    if(!cfg.apiKey){ toast('Nhập Anthropic API key trong ⚙️ trước nhé'); return; }
+    if(!db){ toast('Kết nối Firebase trong ⚙️ trước đã nhé'); return; }
+    const btn = $('aiDraftBtn');
+    btn.disabled = true;
+    btn.textContent = '🤖 Đang soạn đề xuất...';
+    try{
+      const convo = lastMessages.filter(m=>m.type!=='system').slice(-20)
+        .map(m=>`${m.author}: ${m.text}`).join('\n') || '(chưa có tin nhắn nào, hãy soạn đề xuất chung chung dựa trên lịch trình 4 ngày Hà Giang Loop 4-7/11)';
+      const system = 'Bạn là trợ lý lập kế hoạch cho một nhóm 3 người đi Hà Giang Loop bằng xe máy từ 04-07/11. Dựa vào đoạn hội thoại nhóm, hãy soạn MỘT đề xuất thay đổi lịch trình rõ ràng, thực tế, khả thi về mặt địa lý/thời gian. Trả lời DUY NHẤT một JSON hợp lệ, không thêm chữ nào khác, không dùng markdown fence, đúng format: {"title":"tiêu đề ngắn","day":"Ngày mấy hoặc Chung","summary":"tóm tắt 1 câu","details":"mô tả cụ thể, tối đa 4 câu, tiếng Việt"}';
+      const raw = await callClaude(system, convo);
+      let jsonText = raw.trim().replace(/^```json/i,'').replace(/^```/,'').replace(/```$/,'').trim();
+      let parsed;
+      try{ parsed = JSON.parse(jsonText); }
+      catch(e){ parsed = { title:'Đề xuất từ AI', day:'Chung', summary: raw.slice(0,120), details: raw }; }
+
+      await tripCol('proposals').add({
+        title: parsed.title || 'Đề xuất thay đổi',
+        day: parsed.day || 'Chung',
+        summary: parsed.summary || '',
+        details: parsed.details || '',
+        status: 'pending',
+        votes: {},
+        createdBy: cfg.name || 'AI',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+      await sendMessage(`🤖 AI vừa soạn đề xuất "${parsed.title}" — xem ở phần Đề xuất bên dưới để duyệt nhé!`, 'AI', 'system');
+      toast('AI đã soạn xong đề xuất ✓');
+    }catch(err){
+      console.error(err);
+      toast('Lỗi gọi AI: ' + err.message);
+    }finally{
+      btn.disabled = false;
+      btn.textContent = '🤖 Nhờ AI soạn đề xuất thay đổi từ đoạn chat gần đây';
+    }
+  });
+
+  function renderProposals(docs){
+    const wrap = $('proposalsList');
+    wrap.innerHTML = '';
+    docs.forEach(doc=>{
+      const p = doc.data();
+      const votes = p.votes || {};
+      const yes = Object.values(votes).filter(v=>v==='yes').length;
+      const no = Object.values(votes).filter(v=>v==='no').length;
+      const myVote = votes[cfg.name];
+      const card = document.createElement('div');
+      card.className = 'proposal-card' + (p.status==='approved' ? ' approved' : p.status==='rejected' ? ' rejected' : '');
+      card.innerHTML = `
+        <span class="day-tag">${p.day || 'Chung'}</span>
+        <h4>${p.title || ''} ${p.status==='approved' ? '✅' : ''}</h4>
+        <p><b>${p.summary || ''}</b></p>
+        <p>${p.details || ''}</p>
+        <div class="proposal-actions">
+          <button class="vote-btn yes ${myVote==='yes'?'picked':''}" data-id="${doc.id}" data-v="yes">👍 Đồng ý</button>
+          <button class="vote-btn no ${myVote==='no'?'picked':''}" data-id="${doc.id}" data-v="no">👎 Không</button>
+          <span class="vote-count">${yes} đồng ý · ${no} không · đề xuất bởi ${p.createdBy||'?'}</span>
+        </div>`;
+      wrap.appendChild(card);
+    });
+    wrap.querySelectorAll('.vote-btn').forEach(btn=>{
+      btn.addEventListener('click', async ()=>{
+        if(!cfg.name){ toast('Đặt tên trong ⚙️ trước khi vote nhé'); return; }
+        const id = btn.dataset.id, v = btn.dataset.v;
+        const ref = tripCol('proposals').doc(id);
+        const snap = await ref.get();
+        const p = snap.data();
+        const votes = p.votes || {};
+        votes[cfg.name] = v;
+        const yesCount = Object.values(votes).filter(x=>x==='yes').length;
+        const newStatus = yesCount >= 2 ? 'approved' : p.status;
+        await ref.update({ votes, status: newStatus });
+        if(newStatus === 'approved' && p.status !== 'approved'){
+          await sendMessage(`✅ Đề xuất "${p.title}" đã được duyệt (${yesCount}/3 đồng ý)! Lịch trình cập nhật theo phần chi tiết ở trên.`, 'Hệ thống', 'system');
+          notifyEveryone('Đề xuất đã được duyệt ✅', p.title);
+        }
+      });
+    });
+  }
+
+  // ---------- LIVE TRACKING: GPS + WEATHER + PACE ----------
+  let watchId = null;
+  let currentPos = null;
+  let lastWeatherFetch = 0;
+  const notifiedStays = new Set();
+
+  const WAYPOINTS = [
+    {day:'2026-11-04', name:'Cổng Trời Quản Bạ', lat:23.0287, lng:104.9995, time:'2026-11-04T07:30:00'},
+    {day:'2026-11-04', name:'TT Yên Minh', lat:23.1136, lng:105.2467, time:'2026-11-04T09:30:00'},
+    {day:'2026-11-04', name:'Sủng Là', lat:23.2394, lng:105.3111, time:'2026-11-04T12:00:00'},
+    {day:'2026-11-04', name:'Đồng Văn', lat:23.2708, lng:105.3597, time:'2026-11-04T15:30:00'},
+    {day:'2026-11-05', name:'Cột cờ Lũng Cú', lat:23.3919, lng:105.3167, time:'2026-11-05T08:30:00'},
+    {day:'2026-11-05', name:'Dinh Vua Mèo', lat:23.2931, lng:105.3149, time:'2026-11-05T10:00:00'},
+    {day:'2026-11-05', name:'Mã Pí Lèng', lat:23.2299, lng:105.4192, time:'2026-11-05T13:00:00'},
+    {day:'2026-11-05', name:'Mèo Vạc', lat:23.1889, lng:105.4147, time:'2026-11-05T15:30:00'},
+    {day:'2026-11-06', name:'Khâu Vai', lat:23.0672, lng:105.4267, time:'2026-11-06T07:30:00'},
+    {day:'2026-11-06', name:'Mậu Duệ', lat:23.0764, lng:105.2519, time:'2026-11-06T11:30:00'},
+    {day:'2026-11-06', name:'Du Già', lat:22.9358, lng:105.1508, time:'2026-11-06T15:30:00'},
+    {day:'2026-11-07', name:'Minh Ngọc', lat:22.9186, lng:105.0625, time:'2026-11-07T09:30:00'},
+    {day:'2026-11-07', name:'TP Hà Giang', lat:22.8025, lng:104.9784, time:'2026-11-07T13:00:00'},
+  ];
+
+  function localNotify(title, body){
+    if(Notification.permission !== 'granted') return;
+    if(navigator.serviceWorker && navigator.serviceWorker.controller){
+      navigator.serviceWorker.controller.postMessage({type:'notify', title, body});
+    } else {
+      try{ new Notification(title, {body}); }catch(e){}
+    }
+  }
+  function notifyEveryone(title, body){ localNotify(title, body); toast(title + ' — ' + body, 5000); }
+
+  async function fetchWeather(lat, lng){
+    try{
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,precipitation,wind_speed_10m,weather_code&hourly=precipitation_probability&forecast_days=1&timezone=Asia%2FBangkok`;
+      const res = await fetch(url);
+      const data = await res.json();
+      const c = data.current || {};
+      $('weatherTemp').textContent = (c.temperature_2m!=null ? Math.round(c.temperature_2m) : '--') + '°C';
+      const codeMap = {0:'Trời quang',1:'Ít mây',2:'Có mây',3:'Nhiều mây',45:'Sương mù',48:'Sương mù đóng băng',51:'Mưa phùn nhẹ',61:'Mưa nhỏ',63:'Mưa vừa',65:'Mưa to',80:'Mưa rào',95:'Dông'};
+      const desc = codeMap[c.weather_code] || 'Đang cập nhật';
+      $('weatherDesc').textContent = `${desc} · gió ${Math.round(c.wind_speed_10m||0)} km/h · mưa ${c.precipitation||0}mm/h`;
+
+      const warnBox = $('weatherWarn');
+      const hourlyProb = (data.hourly && data.hourly.precipitation_probability) ? Math.max(...data.hourly.precipitation_probability.slice(0,3)) : 0;
+      if((c.precipitation||0) > 2 || (c.wind_speed_10m||0) > 35 || hourlyProb > 70){
+        warnBox.style.display = 'block';
+        warnBox.innerHTML = `⚠️ <b>Cảnh báo thời tiết:</b> ${ (c.wind_speed_10m||0) > 35 ? 'gió khá mạnh, ' : ''}${hourlyProb>70 ? `khả năng mưa lớn ${hourlyProb}% trong 3h tới, ` : ''}${(c.precipitation||0)>2 ? 'đang mưa, ' : ''}cân nhắc dừng nghỉ ở nơi an toàn nếu đang trên đèo.`;
+        notifyEveryone('⚠️ Cảnh báo thời tiết', warnBox.textContent);
+      } else {
+        warnBox.style.display = 'none';
+      }
+    }catch(e){ console.error('weather fetch lỗi', e); }
+  }
+
+  function checkPace(){
+    if(!currentPos) return;
+    const now = new Date();
+    const todayStr = now.toISOString().slice(0,10);
+    const todayWps = WAYPOINTS.filter(w=>w.day===todayStr);
+    if(!todayWps.length){
+      $('paceMsg').textContent = 'Hôm nay không phải ngày chạy loop trong lịch trình 🙂';
+      $('paceDetail').textContent = '';
+      return;
+    }
+    let nearest = todayWps[0], best = Infinity;
+    todayWps.forEach(w=>{
+      const d = haversine(currentPos.lat, currentPos.lng, w.lat, w.lng);
+      if(d < best){ best = d; nearest = w; }
+    });
+    const planned = new Date(nearest.time);
+    const diffMin = Math.round((now - planned) / 60000);
+    let msg, detail;
+    if(diffMin > 30 && best > 2000){
+      msg = `🐢💨 Tụi mình đang trễ lịch trình khoảng ${diffMin} phút rồi nè — tranh thủ lên đường thôi cả nhà ơi!`;
+      detail = `Điểm gần nhất: ${nearest.name}, cách ${(best/1000).toFixed(1)}km, dự kiến tới lúc ${planned.toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'})}.`;
+    } else if(diffMin < -30 && best < 3000){
+      msg = `✨ Đang đi nhanh hơn dự kiến đó — tha hồ dừng chụp ảnh thêm nha!`;
+      detail = `Gần tới ${nearest.name} sớm hơn dự kiến ~${Math.abs(diffMin)} phút.`;
+    } else {
+      msg = `😌 Đúng nhịp lịch trình rồi, cứ thế mà đi nha.`;
+      detail = `Điểm gần nhất: ${nearest.name} (cách ${(best/1000).toFixed(1)}km).`;
+    }
+    $('paceMsg').textContent = msg;
+    $('paceDetail').textContent = detail + ' (Ước lượng gần đúng dựa trên điểm mốc gần nhất, không phải định vị tuyến đường chính xác.)';
+  }
+
+  function checkStayGeofence(){
+    if(!currentPos || !db) return;
+    tripCol('accommodations').get().then(snap=>{
+      const list = $('geoList');
+      if(snap.empty){ list.innerHTML = '<div style="font-size:13px;color:#77816a;">Chưa có chỗ ở nào được lưu — thêm ở tab "Chỗ ở đã đặt".</div>'; return; }
+      list.innerHTML = '';
+      snap.forEach(doc=>{
+        const s = doc.data();
+        const d = haversine(currentPos.lat, currentPos.lng, s.lat, s.lng);
+        const item = document.createElement('div');
+        item.className = 'geo-item';
+        item.innerHTML = `<span>${s.day} — ${s.name}</span><span class="dist">${d<1000 ? Math.round(d)+'m' : (d/1000).toFixed(1)+'km'}</span>`;
+        list.appendChild(item);
+        if(d < 700 && !notifiedStays.has(doc.id)){
+          notifiedStays.add(doc.id);
+          notifyEveryone('🏨 Đã tới gần chỗ ở!', `${s.name} chỉ còn cách ${Math.round(d)}m — check-in nghỉ ngơi thôi!`);
+        }
+      });
+    });
+  }
+
+  $('trackToggle').addEventListener('click', async ()=>{
+    if(watchId){
+      navigator.geolocation.clearWatch(watchId);
+      watchId = null;
+      $('trackToggle').textContent = '📡 Bật theo dõi GPS';
+      $('trackToggle').classList.add('off');
+      toast('Đã tắt theo dõi GPS');
+      return;
+    }
+    if(!('geolocation' in navigator)){ toast('Trình duyệt không hỗ trợ GPS'); return; }
+    if('Notification' in window && Notification.permission === 'default'){
+      try{ await Notification.requestPermission(); }catch(e){}
+    }
+    watchId = navigator.geolocation.watchPosition(pos=>{
+      currentPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      checkPace();
+      checkStayGeofence();
+      const nowTs = Date.now();
+      if(nowTs - lastWeatherFetch > 10*60*1000){
+        lastWeatherFetch = nowTs;
+        fetchWeather(currentPos.lat, currentPos.lng);
+      }
+    }, err=>{
+      console.error(err);
+      toast('Không lấy được GPS: ' + err.message);
+    }, { enableHighAccuracy:true, maximumAge:60000, timeout:20000 });
+    $('trackToggle').textContent = '📡 Đang theo dõi GPS — bấm để tắt';
+    $('trackToggle').classList.remove('off');
+    toast('Đã bật theo dõi GPS ✓ — thời tiết & tiến độ sẽ tự cập nhật');
+  });
+
+  // ---------- ACCOMMODATIONS ----------
+  function renderStays(docs){
+    const list = $('stayList');
+    list.innerHTML = '';
+    docs.forEach(doc=>{
+      const s = doc.data();
+      let dist = null;
+      if(currentPos) dist = haversine(currentPos.lat, currentPos.lng, s.lat, s.lng);
+      const card = document.createElement('div');
+      card.className = 'stay-track-card';
+      card.innerHTML = `
+        <div class="info">
+          <h4>${s.name}</h4>
+          <p>${s.day}${s.note ? ' · ' + s.note : ''}</p>
+        </div>
+        <span class="badge ${dist!=null && dist<700 ? 'here':''}">${dist!=null ? (dist<1000?Math.round(dist)+'m':(dist/1000).toFixed(1)+'km') : 'chưa có GPS'}</span>`;
+      list.appendChild(card);
+    });
+    checkStayGeofence();
+  }
+
+  $('stayForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    if(!db){ toast('Kết nối Firebase trong ⚙️ trước đã nhé'); return; }
+    tripCol('accommodations').add({
+      day: $('stayDay').value.trim(),
+      name: $('stayName').value.trim(),
+      lat: parseFloat($('stayLat').value),
+      lng: parseFloat($('stayLng').value),
+      note: $('stayNote').value.trim(),
+      addedBy: cfg.name || 'Ẩn danh',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    }).then(()=>{ e.target.reset(); toast('Đã lưu chỗ ở ✓'); });
+  });
+
+  // ---------- EXPENSES ----------
+  function renderExpenses(docs){
+    const list = $('expenseList');
+    list.innerHTML = '';
+    const paid = {};
+    let total = 0;
+    docs.forEach(doc=>{
+      const ex = doc.data();
+      total += Number(ex.amount||0);
+      paid[ex.payer] = (paid[ex.payer]||0) + Number(ex.amount||0);
+      const row = document.createElement('div');
+      row.className = 'expense-row';
+      row.innerHTML = `<span>${ex.note} <span class="meta">— ${ex.payer} · ${fmtTime(ex.createdAt)}</span></span><b>${fmtVND(ex.amount)}</b>`;
+      list.appendChild(row);
+    });
+
+    const names = Object.keys(paid);
+    const n = names.length || 1;
+    const share = total / n;
+
+    const summary = $('expenseSummary');
+    summary.innerHTML = `<div class="expense-person"><div class="amt">${fmtVND(total)}</div><div class="lbl">Tổng chi phí</div></div>` +
+      names.map(nm=>`<div class="expense-person"><div class="amt">${fmtVND(paid[nm])}</div><div class="lbl">${nm} đã trả</div></div>`).join('');
+
+    if(names.length >= 2){
+      const balances = names.map(nm=>({ name: nm, bal: paid[nm] - share }));
+      const owe = balances.filter(b=>b.bal < -1).sort((a,b)=>a.bal-b.bal);
+      const owed = balances.filter(b=>b.bal > 1).sort((a,b)=>b.bal-a.bal);
+      const lines = [];
+      let i=0, j=0;
+      while(i<owe.length && j<owed.length){
+        const amt = Math.min(-owe[i].bal, owed[j].bal);
+        lines.push(`${owe[i].name} cần chuyển <b>${fmtVND(amt)}</b> cho ${owed[j].name}`);
+        owe[i].bal += amt; owed[j].bal -= amt;
+        if(Math.abs(owe[i].bal) < 1) i++;
+        if(owed[j].bal < 1) j++;
+      }
+      $('settleBox').innerHTML = `<b>Chia đều mỗi người ${fmtVND(share)}.</b><br>` + (lines.length ? lines.join('<br>') : 'Mọi người đã chi đều nhau rồi 🎉');
+    } else {
+      $('settleBox').innerHTML = 'Cần ít nhất 2 người ghi chi phí để mình tính chia tiền nhé.';
+    }
+  }
+
+  $('expenseForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    if(!db){ toast('Kết nối Firebase trong ⚙️ trước đã nhé'); return; }
+    tripCol('expenses').add({
+      payer: $('expPayer').value.trim(),
+      amount: parseFloat($('expAmount').value),
+      note: $('expNote').value.trim(),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    }).then(()=>{ e.target.reset(); toast('Đã ghi chi phí ✓'); });
+  });
+
+  // ---------- ALERTS ----------
+  function renderAlerts(docs){
+    const list = $('alertList');
+    list.innerHTML = '';
+    docs.forEach(doc=>{
+      const a = doc.data();
+      const card = document.createElement('div');
+      card.className = 'alert-card';
+      card.innerHTML = `<div class="alert-sev ${a.sev||'info'}"></div>
+        <div><div>${a.text}</div><div class="meta">${a.author||'Ẩn danh'} · ${fmtTime(a.createdAt)}</div></div>`;
+      list.appendChild(card);
+    });
+  }
+  $('alertForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    if(!db){ toast('Kết nối Firebase trong ⚙️ trước đã nhé'); return; }
+    tripCol('alerts').add({
+      text: $('alertMsg').value.trim(),
+      sev: $('alertSev').value,
+      author: cfg.name || 'Ẩn danh',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    }).then(()=>{
+      e.target.reset();
+      toast('Đã đăng cảnh báo ✓');
+      notifyEveryone('⚠️ Cảnh báo mới từ nhóm', $('alertMsg').value);
+    });
+  });
+
+  // ---------- REALTIME LISTENERS ----------
+  let unsub = [];
+  function wireRealtimeListeners(){
+    unsub.forEach(u=>u());
+    unsub = [];
+    unsub.push(tripCol('messages').orderBy('timestamp').limitToLast ? tripCol('messages').orderBy('timestamp').onSnapshot(snap=>{
+      lastMessages = snap.docs.map(d=>d.data());
+      renderMessages(snap.docs);
+    }) : ()=>{});
+    unsub.push(tripCol('proposals').orderBy('createdAt','desc').onSnapshot(snap=>renderProposals(snap.docs)));
+    unsub.push(tripCol('accommodations').orderBy('createdAt').onSnapshot(snap=>renderStays(snap.docs)));
+    unsub.push(tripCol('expenses').orderBy('createdAt').onSnapshot(snap=>renderExpenses(snap.docs)));
+    unsub.push(tripCol('alerts').orderBy('createdAt','desc').onSnapshot(snap=>renderAlerts(snap.docs)));
+    refreshIdentityUI();
+  }
+
+  // ---------- INIT ----------
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', ()=>{
+      navigator.serviceWorker.register('./service-worker.js').catch(e=>console.warn('SW lỗi', e));
+    });
+  }
+  initFirebase();
+  refreshIdentityUI();
+})();
+</script>
+</body>
+</html>
