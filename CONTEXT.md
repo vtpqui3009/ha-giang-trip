@@ -212,7 +212,7 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   thay bảng cảnh báo tự đăng bằng tin tức tự động kéo từ Google News RSS
   qua Netlify Function + link nguồn chính thức KTTV; thêm `netlify.toml` +
   `netlify/functions/community-news.js`.
-- **v7** (hiện tại) — Đổi Anthropic API key sang biến môi trường Netlify
+- **v7** — Đổi Anthropic API key sang biến môi trường Netlify
   dùng chung cho cả nhóm (không bake vào code như Firebase, vì đây là bí
   mật thật sự) qua Netlify Function mới `netlify/functions/ai-draft.js`; bỏ
   hẳn ô nhập API key trong drawer cài đặt — giờ chỉ còn "Tên của bạn". Tin
@@ -222,6 +222,14 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   Nội) — từ ≈3,0–3,5tr/người (chỉ phần loop) lên ≈4,7–5,5tr/người (trọn
   chuyến 6 ngày), có ghi chú phương án tiết kiệm hơn (chia 2 xe) trong box
   riêng.
+- **v8** (hiện tại) — Thêm side-card "Quán ăn & điểm dừng chân" cho cả 4
+  ngày, với tên quán/địa chỉ/món cụ thể (Bánh cuốn Bà Hà, Quán Bà Tú Lan,
+  Nhà Hàng Thắng Cố A Páo, Hạ Thành Quán, Cafe A Páo, Heaven Gate Coffee,
+  Café Núi Cấm, Cá Sông Lô, Nhà hàng Phúc Cái...) tổng hợp từ nhiều nguồn
+  review 2025–2026. Ghi chú đặc biệt về Mã Pí Lèng Panorama đang bị yêu cầu
+  tháo dỡ phần ban công nhô ra sông (vi phạm xây dựng cũ) — vẫn mở cửa như
+  điểm ngắm cảnh nhưng diện mạo khác ảnh cũ, không còn dịch vụ lưu trú.
+  Thêm tip-card tổng hợp 7 đặc sản nên thử trong mục Lưu ý.
 
 ## Deploy
 
