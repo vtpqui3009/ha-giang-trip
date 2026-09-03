@@ -290,6 +290,20 @@
   }
   .admin-banner b{color:var(--gold);}
 
+  /* ---------- CỨU HỘ XE MÁY ---------- */
+  .rescue-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  @media (max-width:900px){.rescue-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:640px){.rescue-grid{grid-template-columns:1fr;}}
+  .rescue-card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px;}
+  .rescue-card h5{font-family:'JetBrains Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--terracotta); margin-bottom:12px; font-weight:700;}
+  .rescue-row{display:flex; justify-content:space-between; align-items:center; gap:8px; padding:8px 0; border-top:1px solid var(--line); font-size:12.8px;}
+  .rescue-row:first-of-type{border-top:none; padding-top:0;}
+  .rescue-row a{
+    font-family:'JetBrains Mono',monospace; font-weight:700; font-size:12px; color:var(--indigo);
+    text-decoration:none; white-space:nowrap; background:rgba(36,52,77,0.08); padding:4px 9px; border-radius:100px;
+  }
+  .rescue-row a:hover{background:var(--indigo); color:var(--stone);}
+
   /* ---------- TRỢ LÝ CHUYẾN ĐI (APP) ---------- */
   .app-tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; border-bottom:1px solid var(--line); padding-bottom:14px;}
   .app-tab{
@@ -1116,6 +1130,56 @@
         <h4>7 món đừng bỏ lỡ, xuất hiện trong hộp "Quán ăn & điểm dừng chân" của từng ngày</h4>
         <p><b>Cháo ấu tẩu</b> — ăn tối trời lạnh (Ngân Hà, TP Hà Giang). <b>Thắng cố</b> — Bà Tú Lan (Đồng Văn) hoặc A Páo (Mèo Vạc). <b>Bánh cuốn</b> — Bà Hà, phố cổ Đồng Văn, nên ăn sáng sớm trước 7h30 để đỡ chờ. <b>Thắng dền</b> — món chè nếp ăn đêm ở phố cổ Đồng Văn. <b>Mèn mén</b> — cơm ngô truyền thống người Mông. <b>Thịt trâu gác bếp / lợn cắp nách</b> — mua làm quà ở chợ phiên hoặc quán dọc đường. <b>Rượu ngô men lá ("happy water")</b> — uống nhẹ nhàng vào buổi tối ở homestay Du Già, tránh uống nhiều trước khi còn phải chạy xe hôm sau.</p>
       </div>
+    </div>
+
+    <div class="sec-head" style="margin-top:56px;">
+      <div class="sec-eyebrow">Lưu vào điện thoại trước khi đi</div>
+      <h2 class="sec-title">Cứu hộ xe máy dọc đường</h2>
+      <p class="sec-desc">Danh sách tổng hợp từ một bài đăng trên Facebook (không phải trang mình tự xác minh từng số) — nên lưu hết vào điện thoại trước chuyến đi và ưu tiên gọi tiệm gần vị trí gặp sự cố nhất theo huyện đang đi qua. Nếu gọi không được máy nào, liên hệ chủ homestay/khách sạn gần nhất nhờ hỗ trợ, hoặc gọi <b>113</b> (công an) / <b>115</b> (cấp cứu) nếu là tình huống khẩn cấp về người.</p>
+    </div>
+    <div class="rescue-grid">
+      <div class="rescue-card">
+        <h5>Quản Bạ</h5>
+        <div class="rescue-row"><span>Ma De Motor Ba Tiến</span><a href="tel:0868289988">0868 289 988</a></div>
+        <div class="rescue-row"><span>Sửa xe Thế Lợi</span><a href="tel:0987222392">0987 222 392</a></div>
+        <div class="rescue-row"><span>Sửa xe Vĩnh Lý</span><a href="tel:0374400975">0374 400 975</a></div>
+        <div class="rescue-row"><span>Sửa xe Vàng Seo Lành</span><a href="tel:0972702630">0972 702 630</a></div>
+        <div class="rescue-row"><span>Sửa xe Quảng Hà</span><a href="tel:0986669545">0986 669 545</a></div>
+      </div>
+      <div class="rescue-card">
+        <h5>Yên Minh</h5>
+        <div class="rescue-row"><span>Sửa xe Dũng Loan</span><a href="tel:0963815689">0963 815 689</a></div>
+        <div class="rescue-row"><span>Sửa xe ô tô Kiên Thảo</span><a href="tel:0976899078">0976 899 078</a></div>
+        <div class="rescue-row"><span>Sửa xe Linh Giang</span><a href="tel:0383405387">0383 405 387</a></div>
+        <div class="rescue-row"><span>Sửa xe Sùng Mí Vả</span><a href="tel:0378877493">0378 877 493</a></div>
+      </div>
+      <div class="rescue-card">
+        <h5>Đồng Văn</h5>
+        <div class="rescue-row"><span>A Páo (Phố Cáo)</span><a href="tel:0367124650">0367 124 650</a></div>
+        <div class="rescue-row"><span>Tùng Hoa (Sủng Trái)</span><a href="tel:0396660990">0396 660 990</a></div>
+        <div class="rescue-row"><span>Linh Quỳnh (Sủng Là)</span><a href="tel:0971275192">0971 275 192</a></div>
+        <div class="rescue-row"><span>An Thanh (TT Đồng Văn)</span><a href="tel:0366971676">0366 971 676</a></div>
+        <div class="rescue-row"><span>Lầu Mí Nhù (Ngã ba ĐV)</span><a href="tel:0369900952">0369 900 952</a></div>
+      </div>
+      <div class="rescue-card">
+        <h5>Lũng Cú</h5>
+        <div class="rescue-row"><span>Sửa xe Thảo Yến</span><a href="tel:0989130624">0989 130 624</a></div>
+        <div class="rescue-row"><span>Sửa xe Hoàng Kiên</span><a href="tel:0375552628">0375 552 628</a></div>
+        <div class="rescue-row"><span>Cực Bắc Hiếu (thôn bản Pá)</span><a href="tel:0368049943">0368 049 943</a></div>
+        <div class="rescue-row"><span>Cứu hộ xã Ma Lé</span><a href="tel:0368049943">0368 049 943</a></div>
+        <div class="rescue-row"><span>Sửa xe Tiến Thiều</span><a href="tel:0971009822">0971 009 822</a></div>
+      </div>
+      <div class="rescue-card">
+        <h5>Mèo Vạc</h5>
+        <div class="rescue-row"><span>Quỳnh Tươi (gần Pả Vi)</span><a href="tel:0817132123">0817 132 123</a></div>
+        <div class="rescue-row"><span>A Pin (dốc xuống Nho Quế)</span><a href="tel:0359800988">0359 800 988</a></div>
+        <div class="rescue-row"><span>Sửa xe Tuấn Lân</span><a href="tel:0366904531">0366 904 531</a></div>
+        <div class="rescue-row"><span>Thào Mí Tề (TT Mèo Vạc)</span><a href="tel:0946003492">0946 003 492</a></div>
+        <div class="rescue-row"><span>Quốc Vương (Mậu Duệ)</span><a href="tel:0369285855">0369 285 855</a></div>
+      </div>
+    </div>
+    <div class="note-box" style="margin-top:20px;">
+      💡 <b>3 lưu ý đi kèm danh sách gốc:</b> kiểm tra kỹ xe và mang theo bộ dụng cụ sửa chữa cơ bản trước khi xuất phát mỗi ngày · không chạy xe vào ban đêm · luôn đổ đầy xăng trước khi vào các cung đường hẻo lánh (đặc biệt đoạn Mèo Vạc → Du Già ngày 3, ít cây xăng nhất tuyến).
     </div>
   </div>
 </section>

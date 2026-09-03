@@ -174,6 +174,12 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
 - Netlify Function `community-news.js` phụ thuộc Google News RSS còn hoạt
   động đúng cấu trúc XML hiện tại — nếu Google đổi format, parser regex
   thuần có thể cần cập nhật (không có test tự động cho việc này).
+- Danh sách "Cứu hộ xe máy dọc đường" (24 số điện thoại) lấy từ một bài
+  đăng Facebook do người dùng cung cấp, **chưa được xác minh độc lập** —
+  không có cách nào kiểm tra hàng loạt số điện thoại còn hoạt động hay
+  đúng hay không. Nếu về sau phát hiện số nào sai/đã đổi chủ, nên sửa/xoá
+  trực tiếp trong `index.html` (tìm section `id="luuy"`, khối
+  `.rescue-grid`).
 - Chưa test thực tế trên iOS Safari (đặc biệt phần Notification — iOS chỉ hỗ
   trợ push khi đã cài PWA qua "Thêm vào Màn hình chính", iOS ≥16.4).
 
@@ -222,7 +228,7 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   Nội) — từ ≈3,0–3,5tr/người (chỉ phần loop) lên ≈4,7–5,5tr/người (trọn
   chuyến 6 ngày), có ghi chú phương án tiết kiệm hơn (chia 2 xe) trong box
   riêng.
-- **v8** (hiện tại) — Thêm side-card "Quán ăn & điểm dừng chân" cho cả 4
+- **v8** — Thêm side-card "Quán ăn & điểm dừng chân" cho cả 4
   ngày, với tên quán/địa chỉ/món cụ thể (Bánh cuốn Bà Hà, Quán Bà Tú Lan,
   Nhà Hàng Thắng Cố A Páo, Hạ Thành Quán, Cafe A Páo, Heaven Gate Coffee,
   Café Núi Cấm, Cá Sông Lô, Nhà hàng Phúc Cái...) tổng hợp từ nhiều nguồn
@@ -230,6 +236,12 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   tháo dỡ phần ban công nhô ra sông (vi phạm xây dựng cũ) — vẫn mở cửa như
   điểm ngắm cảnh nhưng diện mạo khác ảnh cũ, không còn dịch vụ lưu trú.
   Thêm tip-card tổng hợp 7 đặc sản nên thử trong mục Lưu ý.
+- **v9** (hiện tại) — Thêm section "Cứu hộ xe máy dọc đường": 24 số điện
+  thoại tiệm sửa xe theo 5 huyện (Quản Bạ, Yên Minh, Đồng Văn, Lũng Cú, Mèo
+  Vạc), dùng link `tel:` để bấm gọi trực tiếp trên điện thoại. Nguồn: người
+  dùng cung cấp từ một bài đăng Facebook — **chưa được trang tự xác minh
+  từng số còn hoạt động hay chính xác**, có ghi chú rõ trong UI và khuyến
+  nghị phương án dự phòng (gọi homestay gần nhất, 113/115).
 
 ## Deploy
 
