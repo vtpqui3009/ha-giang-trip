@@ -158,6 +158,13 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   mục Roadmap).
 - **Tin tức cộng đồng là pull, không phải push từ nhóm** — đây là thay đổi
   có chủ đích theo yêu cầu người dùng, khác với thiết kế v5 ban đầu.
+- **Link bản đồ dùng "universal link" của Google Maps
+  (`https://www.google.com/maps/...?api=1&...`), không dùng URL scheme riêng
+  (`comgooglemaps://`, `geo:`)** — có chủ đích: universal link tự mở app
+  Google Maps trên Android/iOS nếu đã cài, và fallback sang web nếu chưa,
+  trong khi scheme riêng sẽ báo lỗi trắng trang khi máy không có app. Link
+  "Chỉ đường" cố tình **bỏ trống tham số `origin`** để Google Maps lấy vị trí
+  hiện tại của điện thoại làm điểm xuất phát.
 - **Pace-tracking (đang nhanh/chậm lịch trình) là heuristic ước lượng** — so
   khoảng cách Haversine tới waypoint gần nhất trong ngày + giờ kế hoạch
   hardcode sẵn, KHÔNG phải định tuyến đường bộ chính xác.
@@ -167,7 +174,16 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
 ## Giới hạn đã biết
 
 - Toạ độ waypoint/địa điểm trong `WAYPOINTS` (JS) và các điểm trên bản đồ
-  Leaflet là ước lượng gần đúng, không phải đo GPS thực tế tại chỗ.
+  Leaflet là ước lượng gần đúng, không phải đo GPS thực tế tại chỗ. **Từ v10,
+  các link Google Maps KHÔNG dùng toạ độ này** mà dùng trường `q` (tên địa
+  danh) trong mảng `stops`, để Google tự resolve đúng POI thật — toạ độ chỉ
+  còn dùng để vẽ marker/polyline trên Leaflet và tính geofence.
+- Thời gian di chuyển từng chặng trong lịch trình v10 được ước lượng theo tốc
+  độ trung bình 25–32 km/h (xe số, đường đèo, có chở đồ) chứ không phải lấy từ
+  API định tuyến — nên coi là ước lượng thận trọng, không phải con số đo được.
+- Giờ mặt trời mọc/lặn 04–07/11/2026 hiển thị trong khung `.daylight` là **giá
+  trị tính sẵn và hardcode vào HTML** (thuật toán NOAA, theo toạ độ từng điểm
+  nghỉ), không gọi API. Nếu đổi ngày đi thì phải tính lại thủ công.
 - Icon PWA trong `manifest.json` là SVG placeholder đơn giản (dãy núi cách
   điệu), chưa có icon thiết kế riêng.
 - Chưa có chức năng sửa/xoá tin nhắn, đề xuất, chi phí đã đăng.
@@ -242,6 +258,32 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   dùng cung cấp từ một bài đăng Facebook — **chưa được trang tự xác minh
   từng số còn hoạt động hay chính xác**, có ghi chú rõ trong UI và khuyến
   nghị phương án dự phòng (gọi homestay gần nhất, 113/115).
+
+- **v10** (hiện tại) — **Rà soát lại toàn bộ giờ giấc lịch trình theo yêu cầu
+  "đảm bảo hợp lý, có thời gian chụp ảnh/ăn/nghỉ, nhận phòng trước trời tối".**
+  Sửa 5 lỗi thực địa của v9: (1) chặng TP Hà Giang → Cổng Trời Quản Bạ ghi 45
+  phút cho 43km đường đèo → sửa thành 1h30; (2) Cán Tỷ bị xếp sau Yên Minh
+  trong khi nằm ở Quản Bạ, trước Yên Minh trên QL4C → đảo lại thứ tự (cả
+  timeline, `stops`, `routes`, `WAYPOINTS`); (3) ngày 2 chỉ chừa 15 phút cho
+  đoạn Panorama → bến thuyền Tà Làng (thực tế 30 phút dốc bê tông hẹp), khiến
+  nhận phòng Mèo Vạc rơi vào 17:00 = đúng giờ mặt trời lặn → dời ăn trưa lên
+  10:55 tại Đồng Văn và nhận phòng 15:50; (4) ngày 3 xếp Khâu Vai rồi nối
+  thẳng sang cung Mậu Duệ, nhưng từ Mèo Vạc đó là hai hướng ngược nhau, phải
+  quay đầu 22km → bỏ Khâu Vai khỏi lịch chính, chuyển thành side-card "tuỳ
+  chọn" có ghi rõ cái giá (+45km, +2h15); (5) ngày 4 ghi 95km/3h30 trong khi
+  cung Du Già – Minh Ngọc – TP Hà Giang chỉ ~73km → về tới nơi 11:00 thay vì
+  13:00. Bổ sung dốc Thẩm Mã (điểm nổi tiếng nằm ngay trên đường mà v9 bỏ
+  sót). Mỗi mốc dừng nay ghi rõ **dừng bao lâu và làm gì trong khoảng đó**.
+  Thêm khung `.daylight` đầu mỗi ngày (giờ mặt trời lặn, giờ tối hẳn, giờ
+  nhận phòng theo kế hoạch, quỹ dự phòng còn lại) và tip-card "Quy tắc giờ
+  giấc" với 3 mốc cứng 15:00 / 16:30 / 17:00.
+  **Deep link Google Maps:** popup Leaflet có 2 nút "Mở Google Maps" / "Chỉ
+  đường", mỗi mốc lịch trình có nút "📍 Mở Google Maps", và mỗi ngày có nút
+  "🧭 Chỉ đường cả ngày" (multi-waypoint) — tất cả mở thẳng app trên điện
+  thoại. Cập nhật giá vé thuyền sông Nho Quế 2026 (≈120.000đ/người trọn gói,
+  không phải 150–250k) → tổng chi phí giảm còn ≈13,8tr/3 người. Thêm 3 tip-card
+  "Thực tế 2026": rà soát giờ giấc, mùa sương mù tháng 11–2, tin sạt lở QL4C
+  8/2026 + siết quản lý tour xe máy 4/2026.
 
 ## Deploy
 
