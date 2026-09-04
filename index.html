@@ -242,6 +242,37 @@
   .stay-opt .note{font-size:12.5px; color:#665f50; margin-top:3px;}
   .note-box{font-size:13px; background:rgba(177,80,47,0.08); border-left:3px solid var(--terracotta); padding:12px 14px; border-radius:6px; margin-top:6px;}
 
+  /* ---------- GIỜ GIẤC & DẪN ĐƯỜNG ---------- */
+  .tag.warn{background:rgba(163,57,44,0.14); color:#A3392C;}
+  .tag.buffer{background:rgba(74,103,65,0.16); color:var(--moss-deep);}
+  .gmap{
+    display:inline-flex; align-items:center; gap:5px; margin-top:8px; margin-left:8px;
+    font-size:11px; font-weight:700; font-family:'JetBrains Mono',monospace;
+    padding:3px 10px; border-radius:100px; text-decoration:none;
+    background:rgba(36,52,77,0.07); color:var(--indigo); border:1px solid rgba(36,52,77,0.18);
+  }
+  .gmap:hover{background:rgba(36,52,77,0.14);}
+  .daylight{
+    display:flex; flex-wrap:wrap; gap:14px 24px; align-items:center; justify-content:space-between;
+    background:rgba(200,149,68,0.13); border:1px solid rgba(200,149,68,0.4); border-left:4px solid var(--gold);
+    border-radius:10px; padding:14px 18px; margin:0 0 30px; font-size:13px;
+  }
+  .dl-items{display:flex; flex-wrap:wrap; gap:6px 22px;}
+  .dl-items span{display:inline-flex; gap:6px; align-items:baseline;}
+  .dl-items b{font-family:'JetBrains Mono',monospace; font-size:14px;}
+  .btn-nav{
+    display:inline-flex; align-items:center; gap:7px; font-family:'JetBrains Mono',monospace;
+    font-size:12px; font-weight:700; padding:10px 16px; border-radius:100px;
+    background:var(--ink); color:var(--stone); text-decoration:none; white-space:nowrap;
+  }
+  .btn-nav:hover{opacity:.87;}
+  .popup-links{display:flex; gap:6px; margin-top:8px;}
+  .popup-links a{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; font-weight:700; text-decoration:none;
+    padding:4px 9px; border-radius:100px; background:rgba(36,52,77,0.08); color:var(--indigo);
+    border:1px solid rgba(36,52,77,0.18);
+  }
+
   /* ---------- MAP ---------- */
   #map{width:100%; height:560px; border-radius:14px; border:1px solid var(--line); overflow:hidden;}
   .map-toggle{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;}
@@ -539,8 +570,8 @@
       <div class="flow-card"><div class="fd">T3 — 03/11</div><h4>Hạ cánh Hà Nội</h4><p>07:10 đến Nội Bài → bus vào trung tâm chơi cả ngày → tối lên xe khách Bằng Phấn đi Hà Giang.</p></div>
       <div class="flow-card hl"><div class="fd">T4 — 04/11</div><h4>Ngày 1: Loop</h4><p>Rạng sáng đến Hà Giang, nhận xe → Quản Bạ → Yên Minh → Đồng Văn.</p></div>
       <div class="flow-card hl"><div class="fd">T5 — 05/11</div><h4>Ngày 2: Loop</h4><p>Lũng Cú → Dinh Vua Mèo → Mã Pí Lèng → Nho Quế → Mèo Vạc.</p></div>
-      <div class="flow-card hl"><div class="fd">T6 — 06/11</div><h4>Ngày 3: Loop</h4><p>Khâu Vai → cung đường Mậu Duệ → Du Già, tắm suối.</p></div>
-      <div class="flow-card hl"><div class="fd">T7 — 07/11</div><h4>Ngày 4: Loop</h4><p>Du Già → trả xe tại TP Hà Giang → tối lên xe khách về Hà Nội.</p></div>
+      <div class="flow-card hl"><div class="fd">T6 — 06/11</div><h4>Ngày 3: Loop</h4><p>Cung Mậu Duệ – Lũng Hồ → Du Già, thác Du Già buổi chiều.</p></div>
+      <div class="flow-card hl"><div class="fd">T7 — 07/11</div><h4>Ngày 4: Loop</h4><p>Du Già → trả xe TP Hà Giang trước trưa → tối lên xe khách về Hà Nội.</p></div>
       <div class="flow-card"><div class="fd">CN — 08/11</div><h4>Hà Nội → Sài Gòn</h4><p>Sáng đến Hà Nội, chơi thêm 1 ngày → 21:55 bay về SGN.</p></div>
     </div>
   </div>
@@ -553,64 +584,104 @@
       <div class="day-num" style="color:var(--indigo)">01</div>
       <div class="day-titlewrap">
         <h2>Hà Giang → Quản Bạ → Yên Minh → Đồng Văn</h2>
-        <div class="day-date">Thứ Tư · 04/11 · rạng sáng đến chiều tối</div>
+        <div class="day-date">Thứ Tư · 04/11 · ngày dài nhất chuyến — 150km</div>
       </div>
     </div>
     <div class="day-stats">
-      <div><b>~154 km</b><span>Quãng đường</span></div>
-      <div><b>~9–10h</b><span>Tổng thời gian (kể cả dừng)</span></div>
-      <div><b>Dễ → Trung bình</b><span>Độ khó</span></div>
-      <div><b>06:00</b><span>Giờ xuất phát đề xuất</span></div>
+      <div><b>~150 km</b><span>Quãng đường</span></div>
+      <div><b>~4h45 chạy</b><span>Chưa tính dừng nghỉ</span></div>
+      <div><b>~8h40</b><span>Tổng cả ngày (đã tính dừng)</span></div>
+      <div><b>06:30</b><span>Giờ xuất phát đề xuất</span></div>
+    </div>
+    <div class="daylight">
+      <div class="dl-items"><span>Mặt trời lặn <b>17:21</b></span><span>Tối hẳn <b>17:44</b></span><span>Kế hoạch tới Đồng Văn <b>15:10</b></span><span>Dự phòng còn lại <b>≈2h10</b></span></div>
+      <a class="btn-nav" href="https://www.google.com/maps/dir/?api=1&amp;origin=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang&amp;waypoints=C%E1%BB%95ng%20Tr%E1%BB%9Di%20Qu%E1%BA%A3n%20B%E1%BA%A1%7CC%C3%A1n%20T%E1%BB%B7%20Qu%E1%BA%A3n%20B%E1%BA%A1%7CTh%E1%BB%8B%20tr%E1%BA%A5n%20Y%C3%AAn%20Minh%7CD%E1%BB%91c%20Th%E1%BA%A9m%20M%C3%A3%7CNh%C3%A0%20c%E1%BB%A7a%20Pao%20S%E1%BB%A7ng%20L%C3%A0&amp;destination=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n&amp;travelmode=driving" target="_blank" rel="noopener">🧭 Chỉ đường cả ngày 1</a>
     </div>
     <div class="day-layout">
       <div class="tline" style="--dc:var(--indigo)">
         <div class="tstop">
-          <div class="time">04:30 – 06:00</div>
-          <h4>Xe đêm cập bến, nhận xe máy</h4>
-          <p>Xe Bằng Phấn ghé thẳng cửa hàng thuê xe — rửa mặt, vệ sinh cá nhân, ăn sáng nhẹ (phở/cháo ấu tẩu quanh trung tâm). Kiểm tra kỹ xe: phanh trước/sau, còi, đèn, đổ đầy bình xăng, thử ga trước khi rời cửa hàng.</p>
-          <span class="tag stay">Chuẩn bị</span>
+          <div class="time">04:30 – 06:30</div>
+          <h4>Xe đêm cập bến, nhận xe máy (2 tiếng, đừng rút ngắn)</h4>
+          <p>Xe Bằng Phấn ghé thẳng cửa hàng thuê xe. Cần đủ 2 tiếng chứ không phải 1: rửa mặt/vệ sinh, ăn sáng nóng (cháo ấu tẩu hoặc phở), <b>và quan trọng nhất là nghỉ tỉnh táo 20–30 phút sau một đêm ngồi xe</b> — cả ngày hôm nay là 150km đường đèo. Kiểm tra xe: phanh trước/sau, còi, đèn, lốp, xích, đổ đầy bình, chạy thử 1 vòng quanh phố trước khi rời cửa hàng. Chụp ảnh xe 4 mặt trước khi nhận để tránh tranh cãi lúc trả.</p>
+          <span class="tag stay">Chuẩn bị</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">06:45 – 07:30</div>
-          <h4>Xuất phát → Cổng Trời Quản Bạ (43km)</h4>
-          <p>Đường bằng dễ đi lúc sáng sớm, ít xe. Tới cổng trời, dừng 20–30 phút ngắm Núi Đôi Cô Tiên và thung lũng Quản Bạ trong sương sớm — đây là khung giờ ánh sáng đẹp nhất trong ngày cho điểm này.</p>
-          <span class="tag photo">Điểm chụp ảnh đẹp</span>
+          <div class="time">06:30 – 08:00</div>
+          <h4>Xuất phát → Cổng Trời Quản Bạ (~43 km · 1h30 chạy)</h4>
+          <p>⚠️ <b>Đã sửa so với bản trước:</b> bản cũ ghi chặng này chỉ 45 phút — không khả thi. QL4C là đường đèo, tốc độ trung bình thực tế của xe số chở đồ chỉ khoảng <b>28–32 km/h</b>, nên 43km mất tròn 1h30. Sáng sớm đường vắng và mát nhưng <b>tháng 11 là mùa sương mù dày ở Quản Bạ</b> — nếu tầm nhìn dưới 20m thì bật đèn, bám vạch phải, giảm còn 20 km/h và cộng thêm 20–30 phút vào lịch.</p>
+          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=C%E1%BB%95ng%20Tr%E1%BB%9Di%20Qu%E1%BA%A3n%20B%E1%BA%A1" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">08:00 – 09:30</div>
-          <h4>Quản Bạ → Yên Minh (~65km)</h4>
-          <p>Bắt đầu vào đường đèo nhẹ, nhiều khúc cua. Ghé rừng thông Yên Minh (cách trung tâm ~2km) nếu còn thời gian — chỉ dừng nhanh 15 phút, ưu tiên giữ sức cho chặng dài phía sau thay vì nán lại quá lâu.</p>
+          <div class="time">08:00 – 08:40</div>
+          <h4>Cổng Trời Quản Bạ &amp; Núi Đôi Cô Tiên — dừng 40 phút</h4>
+          <p>Khung giờ ánh sáng đẹp nhất trong ngày cho điểm này, sương còn vắt ngang thung lũng. 40 phút gồm: ~10 phút gửi xe và đi bộ lên đài quan sát, ~20 phút chụp ảnh, ~10 phút cà phê ở Heaven Gate Coffee ngay quốc lộ. Điểm ngắm có thu phí ở đây không đáng tiền — góc từ lề đường miễn phí gần như giống hệt.</p>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=C%E1%BB%95ng%20Tr%E1%BB%9Di%20Qu%E1%BA%A3n%20B%E1%BA%A1" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">08:40 – 09:15</div>
+          <h4>Cổng Trời → Cán Tỷ (~16 km · 35 phút)</h4>
+          <p>Đường đèo thoáng, ít xe. Đây cũng là đoạn đầu tiên tay lái làm quen với cua liên tục — đi chậm, giữ khoảng cách 3 giây giữa các xe trong nhóm.</p>
           <span class="tag ride">Chạy xe là chính</span>
         </div>
         <div class="tstop">
-          <div class="time">09:30 – 10:30</div>
-          <h4>Nghỉ trưa sớm / ăn nhẹ tại Yên Minh</h4>
-          <p>Nạp năng lượng, đổ thêm xăng nếu cần vì trạm xăng thưa dần từ đây. Cà phê hoặc mì gói ven đường đều ổn.</p>
-          <span class="tag eat">Ăn uống</span>
+          <div class="time">09:15 – 09:35</div>
+          <h4>Cán Tỷ — cua chữ M · dừng 20 phút</h4>
+          <p>⚠️ <b>Đã sửa thứ tự:</b> bản trước đặt Cán Tỷ <i>sau</i> Yên Minh (11:00) trong khi Cán Tỷ nằm ở huyện Quản Bạ, <b>trước</b> Yên Minh trên QL4C — đi theo thứ tự cũ là chạy ngược lại hơn 30km vô ích. 20 phút là đủ để chụp khúc cua tay áo nhìn từ trên cao, không cần đi bộ xuống sâu.</p>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=C%C3%A1n%20T%E1%BB%B7%20Qu%E1%BA%A3n%20B%E1%BA%A1" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">11:00 – 12:00</div>
-          <h4>Cán Tỷ — cua chữ M</h4>
-          <p>Điểm dừng nhanh chụp khúc cua tay áo nổi tiếng nhìn từ trên cao, khoảng 10–15 phút là đủ, không cần đi bộ xuống sâu.</p>
-          <span class="tag photo">Điểm chụp ảnh đẹp</span>
+          <div class="time">09:35 – 10:50</div>
+          <h4>Cán Tỷ → Thị trấn Yên Minh (~34 km · 1h15)</h4>
+          <p>Đèo nhẹ, nhiều khúc cua, mặt đường tốt. Rừng thông Yên Minh nằm ngay trước thị trấn — chỉ dừng chụp nhanh <b>tối đa 10 phút</b> nếu đúng lịch, bỏ qua nếu đang trễ hơn 30 phút so với kế hoạch.</p>
+          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Th%E1%BB%8B%20tr%E1%BA%A5n%20Y%C3%AAn%20Minh" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">12:00 – 14:00</div>
-          <h4>Sủng Là — ăn trưa &amp; Nhà của Pao</h4>
-          <p>Ăn trưa tại thung lũng hoa (nếu đúng mùa tam giác mạch, đây là một trong những cánh đồng đẹp nhất tuyến). Ghé Nhà của Pao (vé ~20.000đ/người) — kiến trúc trình tường H'Mông nguyên bản, bối cảnh phim "Chuyện của Pao". Dành khoảng 45 phút cho cả ăn và tham quan.</p>
-          <span class="tag photo">Điểm chụp ảnh đẹp</span>
+          <div class="time">10:50 – 11:25</div>
+          <h4>Yên Minh — nghỉ giữa chặng 35 phút &amp; ĐỔ XĂNG BẮT BUỘC</h4>
+          <p>Đây là <b>lần đổ xăng quan trọng nhất ngày</b>: từ Yên Minh tới Đồng Văn trạm thưa dần và cao điểm tháng 10–11 có nơi phải chờ 30 phút mới tới lượt. Đổ đầy bình cả 3 xe. Ăn nhẹ (không ăn no — chiều còn đèo dốc), cà phê, duỗi chân, tháo găng cho tay đỡ mỏi. Quán quen: Nhà hàng Phúc Cái ngay lối vào chợ trung tâm.</p>
+          <span class="tag eat">Ăn uống · Đổ xăng</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Th%E1%BB%8B%20tr%E1%BA%A5n%20Y%C3%AAn%20Minh" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">14:00 – 15:30</div>
-          <h4>Sủng Là → Đồng Văn (~25km, đèo dốc)</h4>
-          <p>Đoạn đèo quanh co nhiều khúc cua liên tiếp — đi số thấp, không vượt ẩu. Đây là đoạn cần tập trung lái xe nhất trong ngày, hạn chế dừng chụp ảnh giữa đèo.</p>
+          <div class="time">11:25 – 12:10</div>
+          <h4>Yên Minh → Dốc Thẩm Mã (~20 km · 45 phút)</h4>
+          <p>Chặng ngắn nhưng dốc đứng và cua gấp liên tục — đoạn đầu tiên thật sự cần tay lái vững. Về số 2–3, không vượt trong cua.</p>
           <span class="tag ride">Chạy xe là chính</span>
         </div>
         <div class="tstop">
-          <div class="time">15:30 – 19:00</div>
-          <h4>Nhận phòng, dạo phố cổ Đồng Văn</h4>
-          <p>Nghỉ ngơi, tắm rửa. Chiều tối dạo quanh phố cổ, cà phê phố cổ dưới ánh đèn vàng, ăn tối. Nếu trùng cuối tuần sẽ có chợ đêm Đồng Văn.</p>
-          <span class="tag stay">Nghỉ đêm</span>
+          <div class="time">12:10 – 12:35</div>
+          <h4>Dốc Thẩm Mã — dừng 25 phút (điểm mới bổ sung)</h4>
+          <p>Con dốc 9 tầng nổi tiếng nhất Hà Giang, nằm giữa Yên Minh và Phố Cáo — <b>bản lịch trình trước bỏ sót điểm này dù nó nằm ngay trên đường</b>. Có bãi đỗ và đài quan sát trên đỉnh dốc, nhìn xuống toàn bộ 9 tầng cua. Ở đây thường có các em nhỏ đội gùi hoa mời chụp ảnh — nên gửi các em ít tiền/bánh nếu chụp.</p>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=D%E1%BB%91c%20Th%E1%BA%A9m%20M%C3%A3" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">12:35 – 13:00</div>
+          <h4>Thẩm Mã → Sủng Là (~12 km · 25 phút)</h4>
+          <p>Xuống dốc vào thung lũng Sủng Là — nếu đúng mùa tam giác mạch (giữa 10 đến 12) thì đây là một trong những cánh đồng đẹp nhất tuyến.</p>
+          <span class="tag ride">Chạy xe là chính</span>
+        </div>
+        <div class="tstop">
+          <div class="time">13:00 – 14:20</div>
+          <h4>Sủng Là — ăn trưa &amp; Nhà của Pao · 1h20</h4>
+          <p>Chia rõ: <b>45 phút ăn trưa</b> tại quán trong thung lũng hoa + <b>35 phút</b> tham quan Nhà của Pao (vé ~20.000đ/người) — kiến trúc trình tường H'Mông nguyên bản, bối cảnh phim "Chuyện của Pao". Đây là bữa trưa duy nhất trong ngày nên ăn đủ no, nhưng tránh rượu ngô vì buổi chiều còn đèo.</p>
+          <span class="tag photo">Ăn uống · Chụp ảnh</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Nh%C3%A0%20c%E1%BB%A7a%20Pao%20S%E1%BB%A7ng%20L%C3%A0" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">14:20 – 15:10</div>
+          <h4>Sủng Là → Đồng Văn (~25 km · 50 phút)</h4>
+          <p>Đoạn đèo quanh co nhiều khúc cua liên tiếp, đi số thấp, không vượt ẩu. <b>Đây là đoạn tập trung lái xe nhất trong ngày — không dừng chụp ảnh giữa đèo.</b> Nếu tới đây mà đồng hồ đã quá 15:30 thì bỏ mọi điểm dừng còn lại và chạy thẳng về Đồng Văn.</p>
+          <span class="tag ride">Chạy xe là chính</span>
+        </div>
+        <div class="tstop">
+          <div class="time">15:10 – 16:00</div>
+          <h4>Nhận phòng Đồng Văn — hạn chót an toàn 16:30</h4>
+          <p>Về tới nơi khi trời còn sáng rõ (mặt trời lặn 17:21). Tắm nước nóng, nghỉ lưng 30–40 phút — cả nhóm đã thức từ 4h sáng và chạy 150km. Buổi tối chỉ đi bộ trong phố cổ, <b>không lái xe ra khỏi thị trấn sau khi trời tối</b>.</p>
+          <span class="tag stay">Nghỉ đêm · Đúng giờ</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">17:00 – 21:00</div>
+          <h4>Dạo phố cổ Đồng Văn, ăn tối</h4>
+          <p>Cà phê Phố Cổ dưới ánh đèn lồng vàng, ăn tối thắng cố ngựa ở Quán Bà Tú Lan (số 125 tổ 3), tráng miệng thắng dền. <b>Lưu ý:</b> 04/11/2026 là <b>Thứ Tư</b> — chợ phiên Đồng Văn chỉ họp Chủ Nhật, và chợ đêm phố cổ chỉ mở cuối tuần, nên tối nay sẽ yên tĩnh chứ không đông như ảnh trên mạng.</p>
+          <span class="tag eat">Ăn uống</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
       </div>
       <div>
@@ -656,7 +727,7 @@
             <div class="name">🍲 Quán Bà Tú Lan — phố cổ Đồng Văn</div>
             <div class="note">Số 125 tổ 3, món đặc trưng là thắng cố ngựa — quán dân dã, giá phải chăng, hợp ăn tối sau khi nhận phòng.</div>
           </div>
-          <div class="note-box">💡 Ngày này khá dài (~154km, 9–10 tiếng), nên các điểm ăn/dừng chân trên đều đã nằm sẵn trên lộ trình, không cần vòng thêm — ăn trưa ở Sủng Là (mục lịch trình phía trên) và ăn tối ở Đồng Văn là đủ, không cần ăn no ở Yên Minh nếu không muốn nặng bụng khi vào đèo buổi chiều.</div>
+          <div class="note-box">💡 Ngày này dài nhất chuyến (~150km, 8h40 kể cả dừng nghỉ) và bắt đầu ngay sau một đêm ngồi xe khách. Tất cả điểm ăn/dừng chân trên đều nằm sẵn trên lộ trình, không phải vòng thêm km nào. <b>Ăn no đúng một bữa ở Sủng Là (13:00–14:20)</b>, chỉ ăn nhẹ ở Yên Minh — buổi chiều còn đoạn đèo Sủng Là → Đồng Văn cần tỉnh táo.</div>
         </div>
       </div>
     </div>
@@ -674,60 +745,100 @@
       </div>
     </div>
     <div class="day-stats">
-      <div><b>~100 km</b><span>+ đi thuyền</span></div>
-      <div><b>~9h</b><span>Tổng thời gian</span></div>
-      <div><b>Trung bình</b><span>Độ khó</span></div>
-      <div><b>07:30</b><span>Giờ xuất phát đề xuất</span></div>
+      <div><b>~101 km</b><span>+ 1 chuyến thuyền</span></div>
+      <div><b>~3h45 chạy</b><span>Chưa tính dừng nghỉ</span></div>
+      <div><b>~9h15</b><span>Tổng cả ngày (đã tính dừng)</span></div>
+      <div><b>07:00</b><span>Giờ xuất phát đề xuất</span></div>
+    </div>
+    <div class="daylight">
+      <div class="dl-items"><span>Mặt trời lặn <b>17:18</b></span><span>Tối hẳn <b>17:42</b></span><span>Kế hoạch tới Mèo Vạc <b>15:50</b></span><span>Dự phòng còn lại <b>≈1h30</b></span></div>
+      <a class="btn-nav" href="https://www.google.com/maps/dir/?api=1&amp;origin=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n&amp;waypoints=C%E1%BB%99t%20c%E1%BB%9D%20L%C5%A9ng%20C%C3%BA%7CDinh%20th%E1%BB%B1%20h%E1%BB%8D%20V%C6%B0%C6%A1ng%20S%C3%A0%20Ph%C3%ACn%7CM%C3%A3%20P%C3%AC%20L%C3%A8ng%20Panorama%7CB%E1%BA%BFn%20thuy%E1%BB%81n%20T%C3%A0%20L%C3%A0ng%20s%C3%B4ng%20Nho%20Qu%E1%BA%BF&amp;destination=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c&amp;travelmode=driving" target="_blank" rel="noopener">🧭 Chỉ đường cả ngày 2</a>
     </div>
     <div class="day-layout">
       <div class="tline" style="--dc:var(--terracotta)">
         <div class="tstop">
-          <div class="time">06:30 – 07:30</div>
-          <h4>Ngắm bình minh phố cổ, ăn sáng</h4>
-          <p>Bánh cuốn Đồng Văn hoặc phở là lựa chọn phổ biến buổi sáng. Trời se lạnh, nên mặc thêm áo khoác mỏng lúc khởi hành.</p>
-          <span class="tag eat">Ăn uống</span>
+          <div class="time">06:15 – 07:00</div>
+          <h4>Bình minh phố cổ, ăn sáng bánh cuốn Bà Hà</h4>
+          <p>Quán 3 đời, bánh cuốn nóng chan nước xương hầm — <b>phải tới trước 7h15</b>, sau đó phải xếp hàng khá lâu. Trời sáng sớm Đồng Văn tháng 11 có thể xuống 8–10°C, mặc đủ áo khoác gió + găng tay trước khi nổ máy.</p>
+          <span class="tag eat">Ăn uống</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=B%C3%A1nh%20cu%E1%BB%91n%20B%C3%A0%20H%C3%A0%20%C4%90%E1%BB%93ng%20V%C4%83n" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">07:30 – 08:30</div>
-          <h4>Đồng Văn → Cột cờ Lũng Cú (~25km)</h4>
-          <p>Đường đẹp, khá dễ đi so với hôm qua. Đây là chặng nên đi sớm để tránh nắng gắt và mây mù che khuất tầm nhìn từ đỉnh cột cờ vào giữa trưa.</p>
+          <div class="time">07:00 – 07:50</div>
+          <h4>Đồng Văn → Cột cờ Lũng Cú (~26 km · 50 phút)</h4>
+          <p>Đường đẹp và dễ hơn hôm qua nhiều. Đi sớm là có lý do thật: giữa trưa mây mù thường dâng lên che hết tầm nhìn từ đỉnh cột cờ, và bãi xe bắt đầu đông từ 9h.</p>
+          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=C%E1%BB%99t%20c%E1%BB%9D%20L%C5%A9ng%20C%C3%BA" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">07:50 – 09:05</div>
+          <h4>Cột cờ Lũng Cú — điểm cực Bắc · dừng 1h15</h4>
+          <p>Vé 30.000đ/người. 1h15 gồm: ~15 phút gửi xe + mua vé, ~25 phút leo 283 bậc thang lên đỉnh (đi chậm, không vội), ~25 phút chụp ảnh trên đài quan sát, ~10 phút xuống. Trời quang buổi sáng cho tầm nhìn xa nhất tới đường biên. <b>Đây là điểm linh hoạt nhất trong cả chuyến:</b> nếu sáng nay sương mù dày đặc thì bỏ hẳn Lũng Cú, tiết kiệm được 2 tiếng cho phần sau của ngày.</p>
+          <span class="tag photo">Điểm chụp ảnh chính buổi sáng</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=C%E1%BB%99t%20c%E1%BB%9D%20L%C5%A9ng%20C%C3%BA" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">09:05 – 09:35</div>
+          <h4>Lũng Cú → Dinh thự Họ Vương, Sà Phìn (~14 km · 30 phút)</h4>
+          <p>Ghé trên đường quay ngược lại, không phải đi vòng thêm.</p>
           <span class="tag ride">Chạy xe là chính</span>
         </div>
         <div class="tstop">
-          <div class="time">08:30 – 09:45</div>
-          <h4>Cột cờ Lũng Cú — điểm cực Bắc</h4>
-          <p>Vé 30.000đ/người, leo 283 bậc thang lên đỉnh cột cờ. Đây là điểm nên dành nhiều thời gian nhất để chụp ảnh trong ngày — trời quang buổi sáng cho tầm nhìn xa nhất tới biên giới.</p>
-          <span class="tag photo">Điểm chụp ảnh đẹp</span>
+          <div class="time">09:35 – 10:20</div>
+          <h4>Dinh Vua Mèo (Sà Phìn) — dừng 45 phút</h4>
+          <p>Vé 30.000đ/người. Nhà đá 2 tầng của dòng họ Vương, gỗ nghiến và đá xanh nguyên khối, có thuyết minh viên tại chỗ — 45 phút là vừa đủ đi hết 4 dãy nhà và chụp ảnh sân trong, không cần hơn.</p>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Dinh%20th%E1%BB%B1%20h%E1%BB%8D%20V%C6%B0%C6%A1ng%20S%C3%A0%20Ph%C3%ACn" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">10:00 – 10:45</div>
-          <h4>Dinh thự Họ Vương (Dinh Vua Mèo, Sà Phìn)</h4>
-          <p>Ghé trên đường quay lại, vé 30.000đ/người. Kiến trúc đá độc đáo giữa cao nguyên, khoảng 30–40 phút tham quan là đủ.</p>
-          <span class="tag photo">Điểm chụp ảnh đẹp</span>
+          <div class="time">10:20 – 10:55</div>
+          <h4>Sà Phìn → Đồng Văn (~15 km · 35 phút)</h4>
+          <p>Quay lại Đồng Văn — cũng chính là đường vào đèo Mã Pí Lèng, không phải đường vòng.</p>
+          <span class="tag ride">Chạy xe là chính</span>
         </div>
         <div class="tstop">
-          <div class="time">11:00 – 12:30</div>
-          <h4>Về hướng đèo Mã Pí Lèng, ăn trưa dọc đường</h4>
-          <p>Quán ven đường khu vực trước đèo, ăn nhẹ để dành sức cho đoạn đèo và bến thuyền phía sau.</p>
-          <span class="tag eat">Ăn uống</span>
+          <div class="time">10:55 – 11:45</div>
+          <h4>Ăn trưa SỚM tại Đồng Văn (50 phút) + đổ xăng</h4>
+          <p>⚠️ <b>Đã đổi so với bản trước:</b> bản cũ ăn trưa "dọc đường trước đèo" lúc 11:00–12:30, khiến toàn bộ buổi chiều bị đẩy lùi và về tới Mèo Vạc lúc 17:00 — tức <b>đúng lúc mặt trời lặn</b>. Ăn sớm ở Đồng Văn (nhiều lựa chọn, nhanh hơn) rồi đổ đầy xăng ở đây, vì trạm ở Mèo Vạc hay đông vào chiều tối.</p>
+          <span class="tag eat">Ăn uống · Đổ xăng</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">13:00 – 13:45</div>
-          <h4>Đèo Mã Pí Lèng — "Tứ đại đỉnh đèo"</h4>
-          <p>Dừng tại điểm Panorama ngắm toàn cảnh hẻm vực sông Nho Quế. Buổi chiều nắng là thời điểm ánh sáng đẹp nhất cho đoạn này — dành 30–40 phút, đi bộ ra mỏm đá ngắm cảnh (cẩn thận, không trèo qua lan can).</p>
-          <span class="tag photo">Điểm chụp ảnh đẹp nhất ngày</span>
+          <div class="time">11:45 – 12:25</div>
+          <h4>Đồng Văn → Mã Pí Lèng Panorama (~20 km · 40 phút)</h4>
+          <p>Con đường Hạnh Phúc men vách đá. <b>Sương mù ở Mã Pí Lèng có thể ập xuống dưới 10m tầm nhìn trong vài phút, đặc biệt tháng 11–2</b> — nếu gặp, tấp vào điểm dừng gần nhất chờ tan, tuyệt đối không mò tiếp trên đèo hẹp.</p>
+          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=M%C3%A3%20P%C3%AC%20L%C3%A8ng%20Panorama" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">14:00 – 15:15</div>
-          <h4>Bến thuyền Nho Quế — hẻm Tu Sản</h4>
-          <p>Gửi xe tại bến, đi thuyền/cano khoảng 150.000–250.000đ/người ngắm hẻm vực sâu nhất Đông Nam Á từ dưới sông. Nên mặc áo phao đầy đủ, tránh giờ trưa nắng gắt trên nước.</p>
-          <span class="tag photo">Trải nghiệm chính trong ngày</span>
+          <div class="time">12:25 – 13:10</div>
+          <h4>Đèo Mã Pí Lèng — "Tứ đại đỉnh đèo" · dừng 45 phút</h4>
+          <p>Dừng tại điểm Panorama ngắm toàn cảnh hẻm vực Tu Sản từ trên cao, đi bộ ra mỏm đá ngắm cảnh (không trèo qua lan can). ⚠️ Công trình Panorama đang bị yêu cầu tháo dỡ phần ban công nhô ra sông và cải tạo — vẫn mở như quán cà phê/điểm ngắm cảnh, không còn lưu trú, và diện mạo khác ảnh cũ trên mạng. Vé chụp ảnh 30.000đ, nước từ 40.000đ.</p>
+          <span class="tag photo">Điểm chụp ảnh đẹp nhất ngày</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=M%C3%A3%20P%C3%AC%20L%C3%A8ng%20Panorama" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">15:30 – 17:00</div>
-          <h4>Xuống Mèo Vạc (~22km), nhận phòng</h4>
-          <p>Đoạn đèo xuống dốc dài — với xe số, về số thấp khi xuống dốc để hãm tốc thay vì bóp phanh liên tục (tránh cháy má phanh). Tối ăn thắng cố hoặc lẩu gà đen, đặc sản vùng cao.</p>
-          <span class="tag stay">Nghỉ đêm</span>
+          <div class="time">13:10 – 13:40</div>
+          <h4>Xuống bến thuyền Tà Làng (~9 km · 30 phút · dốc đứng)</h4>
+          <p>⚠️ <b>Bản trước chỉ chừa 15 phút cho đoạn này — không đủ.</b> Đường xuống bến từ ngã ba Pải Lủng là dốc bê tông hẹp, gấp khúc, nhiều đoạn một làn, xe số phải về số 1–2 và <b>tuyệt đối không rà phanh liên tục</b>. Ai tay lái yếu có thể gửi xe trên ngã ba và đi xe ôm/xe trung chuyển xuống bến (~20–30k).</p>
+          <span class="tag warn">Đoạn khó — tập trung lái</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=B%E1%BA%BFn%20thuy%E1%BB%81n%20T%C3%A0%20L%C3%A0ng%20s%C3%B4ng%20Nho%20Qu%E1%BA%BF" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">13:40 – 15:10</div>
+          <h4>Bến Tà Làng — thuyền vào hẻm Tu Sản · 1h30 (đã tính thời gian chờ)</h4>
+          <p>Giá 2026 đã đổi: <b>khoảng 120.000đ/người</b> trọn gói (vé tham quan + thuyền + xe trung chuyển xuống bến), gửi xe máy 10.000đ — <b>rẻ hơn nhiều so với mức 150–250k ghi ở bản trước</b>. Bến mở 07:00–18:30, chuyến đi–về khoảng 30–40 phút, nhưng cao điểm phải chờ 30–50 phút mới đủ khách/tới lượt, nên phải chừa đủ 1h30. Mặc áo phao đầy đủ. Lưu ý: đập thuỷ điện hạ lưu đã tích nước nên mực nước cao hơn ảnh chụp trước 2024, vách hẻm nhìn thấp hơn.</p>
+          <span class="tag photo">Trải nghiệm chính trong ngày</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=B%E1%BA%BFn%20thuy%E1%BB%81n%20T%C3%A0%20L%C3%A0ng%20s%C3%B4ng%20Nho%20Qu%E1%BA%BF" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">15:10 – 15:50</div>
+          <h4>Leo ngược lên → Mèo Vạc (~17 km · 40 phút)</h4>
+          <p>Leo lại dốc bến thuyền rồi qua làng văn hoá Pả Vi về thị trấn. Xuống dốc dài về số thấp để động cơ hãm tốc thay vì bóp phanh liên tục (tránh cháy má phanh).</p>
+          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">15:50 – 16:20</div>
+          <h4>Nhận phòng Mèo Vạc — hạn chót an toàn 16:30</h4>
+          <p>⚠️ <b>Đây là thay đổi quan trọng nhất của bản rà soát này.</b> Lịch cũ nhận phòng 17:00, tức chạy đoạn cuối đúng lúc mặt trời lặn (17:18) trên đèo — nay dời lên 15:50, dư ra <b>1h30 dự phòng</b> cho việc chờ thuyền, sương mù hoặc thủng lốp. <b>Đổ đầy xăng tối nay</b>, vì sáng mai đi Mậu Duệ – Du Già là cung ít cây xăng nhất tuyến.</p>
+          <span class="tag stay">Nghỉ đêm · Đúng giờ</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">17:30 – 20:30</div>
+          <h4>Ăn tối Mèo Vạc, ngủ sớm</h4>
+          <p>Thắng cố, thịt trâu gác bếp, lẩu dê ở Nhà Hàng Thắng Cố A Páo (~100.000đ/người). Ngủ sớm — ngày mai là chặng đường xấu nhất chuyến.</p>
+          <span class="tag eat">Ăn uống</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
       </div>
       <div>
@@ -753,7 +864,7 @@
             <div class="price">≈ 230.000đ/đêm</div>
             <div class="note">Ngay sát sông Lô, theo cập nhật VnExpress 2026 — một trong những lựa chọn giá tốt nhất khu trung tâm Mèo Vạc.</div>
           </div>
-          <div class="note-box">Nếu đi đúng phiên Chợ tình Khâu Vai (âm lịch 26/3, không rơi vào tháng 11) sẽ không trùng — nhưng khu vực Khâu Vai vẫn đáng ghé cảnh quan vào ngày 3. Lưu ý: chợ phiên Đồng Văn &amp; Mèo Vạc họp vào Chủ Nhật — lịch trình 4–7/11 (Thứ Tư–Thứ Bảy) sẽ không trùng phiên chợ, đây là điều đáng cân nhắc nếu nhóm có thể linh động lùi/dời lịch 1 ngày.</div>
+          <div class="note-box"><b>Chợ phiên:</b> chợ Đồng Văn và chợ Mèo Vạc <b>chỉ họp sáng Chủ Nhật</b> (5h–11h). Lịch 04–07/11/2026 rơi vào Thứ Tư → Thứ Bảy nên <b>không trùng phiên chợ nào</b>, và tối ở Đồng Văn cũng không có chợ đêm (chỉ mở cuối tuần). Nếu nhóm linh động lùi lịch 1 ngày để đêm cuối rơi vào Chủ Nhật thì sẽ xem được chợ phiên Mèo Vạc — đây là thứ đáng đánh đổi nhất trong cả lịch trình. Chợ tình Khâu Vai họp 26/3 âm lịch, chắc chắn không trùng tháng 11.</div>
         </div>
         <div class="side-card">
           <h5>Quán ăn &amp; điểm dừng chân — Ngày 2</h5>
@@ -785,59 +896,87 @@
     <div class="day-hero">
       <div class="day-num" style="color:var(--moss)">03</div>
       <div class="day-titlewrap">
-        <h2>Mèo Vạc → Khâu Vai → Du Già</h2>
-        <div class="day-date">Thứ Sáu · 06/11 · chặng đẹp và khó nhất</div>
+        <h2>Mèo Vạc → Mậu Duệ → Lũng Hồ → Du Già</h2>
+        <div class="day-date">Thứ Sáu · 06/11 · đường xấu nhất, nhưng ngắn nhất</div>
       </div>
     </div>
     <div class="day-stats">
-      <div><b>~95–110 km</b><span>Quãng đường</span></div>
-      <div><b>~8–9h</b><span>Tổng thời gian</span></div>
-      <div><b>Khó nhất</b><span>Đường xấu hơn, nhiều cua tay áo</span></div>
-      <div><b>07:00</b><span>Giờ xuất phát đề xuất — đi sớm nhất trong 4 ngày</span></div>
+      <div><b>~80 km</b><span>Quãng đường (đã bỏ vòng Khâu Vai)</span></div>
+      <div><b>~3h35 chạy</b><span>Chưa tính dừng nghỉ</span></div>
+      <div><b>~7h15</b><span>Tổng cả ngày (đã tính dừng)</span></div>
+      <div><b>07:45</b><span>Giờ xuất phát đề xuất</span></div>
+    </div>
+    <div class="daylight">
+      <div class="dl-items"><span>Mặt trời lặn <b>17:19</b></span><span>Tối hẳn <b>17:42</b></span><span>Kế hoạch tới Du Già <b>14:15</b></span><span>Dự phòng còn lại <b>≈3h</b></span></div>
+      <a class="btn-nav" href="https://www.google.com/maps/dir/?api=1&amp;origin=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c&amp;waypoints=M%E1%BA%ADu%20Du%E1%BB%87%20Y%C3%AAn%20Minh%7CL%C5%A9ng%20H%E1%BB%93%20Y%C3%AAn%20Minh&amp;destination=Du%20Gi%C3%A0%20Y%C3%AAn%20Minh&amp;travelmode=driving" target="_blank" rel="noopener">🧭 Chỉ đường cả ngày 3</a>
     </div>
     <div class="day-layout">
       <div class="tline" style="--dc:var(--moss)">
         <div class="tstop">
-          <div class="time">07:00 – 07:30</div>
-          <h4>Ăn sáng, xuất phát sớm</h4>
-          <p>Đây là chặng dài và khó nhất của cả chuyến — mặt đường nhiều đoạn xấu hơn, đèo quanh co liên tục. Xuất phát sớm để không phải chạy xe lúc trời tối trên cung này.</p>
-          <span class="tag ride">Ưu tiên đi sớm</span>
+          <div class="time">07:00 – 07:45</div>
+          <h4>Ăn sáng, kiểm tra xe kỹ, ĐỔ ĐẦY XĂNG</h4>
+          <p>Hôm nay là chặng đường xấu nhất và <b>ít cây xăng nhất cả tuyến</b> — Du Già gần như không có trạm đúng nghĩa, chỉ có xăng chai bán lẻ đắt hơn. Đổ đầy cả 3 xe ở Mèo Vạc, kiểm tra lốp và phanh trước khi đi. Báo trước cho homestay Du Già giờ dự kiến tới khi còn sóng ở Mèo Vạc.</p>
+          <span class="tag warn">Chuẩn bị · Đổ xăng</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">07:30 – 09:00</div>
-          <h4>Ghé Khâu Vai</h4>
-          <p>Nếu không đúng phiên chợ tình (âm lịch 26/3 hằng năm), chỉ dừng 15–20 phút ngắm cảnh thung lũng rồi tiếp tục — không cần nán lại lâu.</p>
-          <span class="tag photo">Điểm dừng ngắn</span>
-        </div>
-        <div class="tstop">
-          <div class="time">09:00 – 11:30</div>
-          <h4>Cung đường Mậu Duệ – Lũng Hồ → hướng Du Già</h4>
-          <p>Đoạn được đánh giá là đẹp nhất toàn hành trình: ít xe, ruộng bậc thang, thung lũng xanh. Cũng là đoạn cần tay lái vững nhất — đi chậm, giữ khoảng cách giữa các xe trong đoàn.</p>
-          <span class="tag ride">Tập trung lái xe</span>
-        </div>
-        <div class="tstop">
-          <div class="time">11:30 – 13:00</div>
-          <h4>Nghỉ trưa tại thị tứ dọc đường</h4>
-          <p>Mậu Duệ hoặc Lũng Phìn — quán ăn nhỏ ven đường, nghỉ ngơi kỹ trước khi vào đoạn đèo dốc phía sau.</p>
-          <span class="tag eat">Ăn uống</span>
-        </div>
-        <div class="tstop">
-          <div class="time">13:00 – 15:30</div>
-          <h4>Vào Du Già — đèo dốc nhiều khúc cua tay áo</h4>
-          <p>Đoạn cuối ngày khó nhất: dốc dài, cua gấp liên tục. Không chạy quá tốc độ, dùng phanh cả hai bánh đều tay, nghỉ giữa chặng nếu tay mỏi. Không cố chạy khi trời sập tối.</p>
+          <div class="time">07:45 – 09:00</div>
+          <h4>Mèo Vạc → dốc chữ M (~22 km · 1h15)</h4>
+          <p>Đèo dài đổ dốc ra khỏi Mèo Vạc theo hướng Mậu Duệ. Mặt đường hẹp hơn QL4C, nhiều đoạn không có hộ lan. Đi hàng một, xe khoẻ nhất đi đầu giữ nhịp, xe yếu nhất đi giữa, người tỉnh táo nhất chốt đoàn.</p>
           <span class="tag ride">Chạy xe là chính</span>
         </div>
         <div class="tstop">
-          <div class="time">15:30 – 17:30</div>
-          <h4>Tắm suối / thác Du Già</h4>
-          <p>Buổi chiều "chill" đúng nghĩa sau 3 ngày chạy xe liên tục — ngâm mình ở thác Du Già hoặc dạo quanh làng Tày ven suối.</p>
-          <span class="tag photo">Thư giãn cuối ngày</span>
+          <div class="time">09:00 – 09:20</div>
+          <h4>Dốc chữ M — dừng 20 phút</h4>
+          <p>Con dốc uốn hình chữ M nhìn từ trên xuống, một trong những khúc cua được chụp nhiều nhất đoạn này. Có chỗ tấp xe an toàn ở đỉnh dốc.</p>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span>
         </div>
         <div class="tstop">
-          <div class="time">18:00 –</div>
-          <h4>Ăn tối, nghỉ sớm</h4>
-          <p>Cơm nhà dân/homestay kiểu Tày, ngủ sớm để lấy sức cho chặng cuối về lại TP Hà Giang.</p>
-          <span class="tag stay">Nghỉ đêm</span>
+          <div class="time">09:20 – 09:50</div>
+          <h4>→ Mậu Duệ (~13 km · 30 phút)</h4>
+          <p>Xuống thung lũng Mậu Duệ, ruộng bậc thang hai bên đường.</p>
+          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=M%E1%BA%ADu%20Du%E1%BB%87%20Y%C3%AAn%20Minh" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">09:50 – 10:15</div>
+          <h4>Mậu Duệ — nghỉ 25 phút, cà phê, cây xăng cuối</h4>
+          <p>Thị tứ cuối cùng còn có cây xăng và sóng điện thoại ổn định trước khi vào cung Lũng Hồ – Du Già. Tranh thủ nhắn vị trí về nhà, tải sẵn bản đồ offline khu vực Du Già.</p>
+          <span class="tag eat">Nghỉ chân</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=M%E1%BA%ADu%20Du%E1%BB%87%20Y%C3%AAn%20Minh" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">10:15 – 11:45</div>
+          <h4>Mậu Duệ → Lũng Hồ (~30 km · 1h30) — đoạn đẹp nhất, cũng xấu nhất</h4>
+          <p>Cung được dân phượt đánh giá đẹp nhất toàn hành trình: gần như không có xe, ruộng bậc thang, thung lũng xanh mướt. Đổi lại mặt đường nhiều đoạn vá víu, sỏi rời, và có điểm sạt lở cũ. <b>Tốc độ thực tế chỉ khoảng 20 km/h</b> — đừng cố nhanh, cả ngày hôm nay đã chừa dư 3 tiếng.</p>
+          <span class="tag warn">Tập trung lái xe</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=L%C5%A9ng%20H%E1%BB%93%20Y%C3%AAn%20Minh" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">11:45 – 12:45</div>
+          <h4>Ăn trưa tại Lũng Hồ (1 tiếng)</h4>
+          <p>Quán ăn nhỏ ven đường, không có chuỗi nổi tiếng — chọn quán đông khách địa phương ăn cùng giờ trưa. <b>Ăn vừa phải, không ăn no</b>: đoạn đèo dốc vào Du Già ngay sau đó cần đầu óc tỉnh táo. Đây cũng là bữa trưa cuối trước khi vào vùng ít quán.</p>
+          <span class="tag eat">Ăn uống</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=L%C5%A9ng%20H%E1%BB%93%20Y%C3%AAn%20Minh" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">12:45 – 14:15</div>
+          <h4>Lũng Hồ → Du Già (~25 km · 1h30) — cua tay áo liên tục</h4>
+          <p>Đoạn khó nhất của cả 4 ngày: dốc dài, cua gấp nối nhau, vài khúc mặt đường trơn vì nước suối chảy tràn. Về số thấp, phanh cả hai bánh đều tay, dừng nghỉ 5 phút giữa chặng nếu tay mỏi. <b>Không bao giờ để đoạn này rơi vào sau 16:00.</b></p>
+          <span class="tag warn">Đoạn khó nhất chuyến</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Du%20Gi%C3%A0%20Y%C3%AAn%20Minh" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">14:15 – 14:45</div>
+          <h4>Tới Du Già, nhận phòng — sớm hơn bản cũ 1h15</h4>
+          <p>⚠️ <b>Đã sửa:</b> bản trước để 15:30 mới tới Du Già rồi mới đi tắm suối tới 17:30 — tức lội suối lúc mặt trời đã lặn, trong tháng 11 nước suối vùng cao rất lạnh và thung lũng tối sớm hơn đồng bằng. Nay nhận phòng trước, cất đồ, rồi mới đi thác khi trời còn nắng.</p>
+          <span class="tag stay">Nghỉ đêm · Đúng giờ</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Du%20Gi%C3%A0%20Y%C3%AAn%20Minh" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">14:45 – 16:30</div>
+          <h4>Thác Du Già / dạo làng Tày ven suối</h4>
+          <p>Buổi chiều "chill" đúng nghĩa sau 3 ngày chạy xe. Thác cách trung tâm bản vài km, gửi xe rồi đi bộ ~15 phút. <b>Tháng 11 nước rất lạnh</b> — xuống ngâm chân/chụp ảnh thì được, bơi lâu thì nên cân nhắc, và mang sẵn khăn + đồ khô. <b>Quay về bản trước 16:30</b>, đường mòn ra thác không có đèn.</p>
+          <span class="tag photo">Thư giãn cuối ngày</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Th%C3%A1c%20Du%20Gi%C3%A0" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">17:30 – 20:30</div>
+          <h4>Cơm tối homestay, ngủ sớm</h4>
+          <p>Hầu hết homestay Du Già nấu cơm tối tại chỗ: gà bản, măng rừng, rau dớn, rượu ngô men lá — nhớ báo trước số người ăn. Uống nhẹ thôi, mai còn 73km về thành phố. Khu vực sóng yếu, sạc đầy điện thoại và pin dự phòng tối nay.</p>
+          <span class="tag stay">Nghỉ đêm</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Du%20Gi%C3%A0%20Y%C3%AAn%20Minh" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
       </div>
       <div>
@@ -853,7 +992,20 @@
             <div class="price">≈ 150.000 – 250.000đ/người (phòng dorm/tập thể)</div>
             <div class="note">Nhà sàn hơn 50 năm tuổi, gần suối, giá mềm cho nhóm.</div>
           </div>
-          <div class="note-box">Khu vực ít sóng điện thoại hơn — nên báo trước giờ dự kiến tới cho chủ homestay qua Zalo/điện thoại lúc còn sóng ở Mèo Vạc.</div>
+          <div class="note-box">Khu vực ít sóng điện thoại hơn — nên báo trước giờ dự kiến tới cho chủ homestay qua Zalo/điện thoại lúc còn sóng ở Mèo Vạc, và tải bản đồ offline vùng Du Già trước khi rời Mậu Duệ.</div>
+        </div>
+        <div class="side-card" style="border-color:rgba(163,57,44,0.4)">
+          <h5>⚠️ Tuỳ chọn: vòng Khâu Vai — đã bỏ khỏi lịch chính</h5>
+          <div class="stay-opt">
+            <div class="name">Vì sao bỏ?</div>
+            <div class="note">Từ Mèo Vạc, <b>Khâu Vai và Mậu Duệ là hai hướng ngược nhau</b> — không có đường nối thẳng Khâu Vai sang Mậu Duệ để đi tiếp. Muốn ghé Khâu Vai thì phải chạy ~22km đường xấu vào, rồi <b>quay ngược đúng 22km đó về Mèo Vạc</b> mới đi tiếp được. Bản lịch trình trước xếp Khâu Vai 07:30–09:00 rồi nối thẳng sang cung Mậu Duệ như thể đi liền một mạch — trên thực địa là không đi được như vậy.</div>
+          </div>
+          <div class="stay-opt">
+            <div class="name">Cái giá nếu vẫn muốn ghé</div>
+            <div class="price">+45 km · +2h15 · xuất phát 06:30</div>
+            <div class="note">Ngoài phiên Chợ tình (26/3 âm lịch) thì Khâu Vai chỉ là thung lũng đá và vườn đá — đẹp nhưng không khác biệt nhiều so với cảnh gặp suốt dọc đường. Đổi lại, 2h15 đó chính là toàn bộ quỹ dự phòng của ngày khó nhất chuyến.</div>
+          </div>
+          <div class="note-box">💡 <b>Khuyến nghị:</b> bỏ Khâu Vai, dùng thời gian tiết kiệm được để đi chậm hơn trên cung Mậu Duệ – Lũng Hồ (đoạn đường xấu nhất) và tới Du Già lúc trời còn nắng. Nếu cả nhóm vẫn muốn ghé, phải xuất phát 06:30 thay vì 07:45 và bỏ hẳn thác Du Già buổi chiều.</div>
         </div>
         <div class="side-card">
           <h5>Quán ăn &amp; điểm dừng chân — Ngày 3</h5>
@@ -883,47 +1035,75 @@
       </div>
     </div>
     <div class="day-stats">
-      <div><b>~95 km</b><span>Quãng đường, dễ hơn 3 ngày trước</span></div>
-      <div><b>~6h chạy xe</b><span>+ nghỉ ngơi buổi chiều</span></div>
-      <div><b>Dễ</b><span>Độ khó</span></div>
-      <div><b>07:00</b><span>Giờ xuất phát đề xuất</span></div>
+      <div><b>~73 km</b><span>Quãng đường (dễ nhất chuyến)</span></div>
+      <div><b>~2h55 chạy</b><span>Chưa tính dừng nghỉ</span></div>
+      <div><b>~3h15</b><span>Xong loop trước trưa</span></div>
+      <div><b>07:45</b><span>Giờ xuất phát đề xuất</span></div>
+    </div>
+    <div class="daylight">
+      <div class="dl-items"><span>Mặt trời lặn <b>17:19</b></span><span>Trả xe xong <b>11:00</b></span><span>Xe khách về HN <b>20:00</b></span><span>Dự phòng còn lại <b>≈9h</b></span></div>
+      <a class="btn-nav" href="https://www.google.com/maps/dir/?api=1&amp;origin=Du%20Gi%C3%A0%20Y%C3%AAn%20Minh&amp;waypoints=Minh%20Ng%E1%BB%8Dc%20B%E1%BA%AFc%20M%C3%AA&amp;destination=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang&amp;travelmode=driving" target="_blank" rel="noopener">🧭 Chỉ đường cả ngày 4</a>
     </div>
     <div class="day-layout">
       <div class="tline" style="--dc:var(--gold)">
         <div class="tstop">
-          <div class="time">07:00 – 07:30</div>
-          <h4>Ăn sáng, xuất phát</h4>
-          <p>Cần về kịp buổi chiều để trả xe và bắt xe khách tối, nên xuất phát đúng giờ dù chặng cuối này nhẹ nhàng hơn.</p>
-          <span class="tag ride">Chạy xe là chính</span>
+          <div class="time">07:00 – 07:45</div>
+          <h4>Ăn sáng tại homestay, xuất phát</h4>
+          <p>Chặng cuối nhẹ nhàng nhất nhưng vẫn nên đi đúng giờ — về sớm nghĩa là có cả buổi chiều nghỉ ngơi thật sự trước 7 tiếng ngồi xe khách đêm.</p>
+          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Du%20Gi%C3%A0%20Y%C3%AAn%20Minh" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">07:30 – 11:00</div>
-          <h4>Du Già → Minh Ngọc → Ngọc Long → TP Hà Giang (~95km)</h4>
-          <p>Đường dễ đi hơn hẳn 3 ngày trước, phù hợp để thong thả ngắm cảnh lần cuối. Có thể dừng vài điểm ngắn nếu còn thời gian, nhưng ưu tiên tiến độ.</p>
-          <span class="tag ride">Chạy xe là chính</span>
+          <div class="time">07:45 – 09:15</div>
+          <h4>Du Già → Minh Ngọc (~35 km · 1h30)</h4>
+          <p>Đèo núi nhưng mặt đường đã tốt hơn hẳn hôm qua. Đoạn 15km đầu ra khỏi Du Già vẫn còn cua gấp, sau đó dễ dần.</p>
+          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Minh%20Ng%E1%BB%8Dc%20B%E1%BA%AFc%20M%C3%AA" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">11:00 – 12:30</div>
-          <h4>Nghỉ trưa dọc đường</h4>
-          <p>Ăn nhẹ tại thị trấn trên đường về, không cần dừng lâu.</p>
-          <span class="tag eat">Ăn uống</span>
+          <div class="time">09:15 – 09:35</div>
+          <h4>Minh Ngọc — nghỉ 20 phút</h4>
+          <p>Cà phê, đổ xăng nếu bình dưới nửa. Từ đây trở đi có sóng ổn định, tiện gọi xác nhận lại vé xe khách tối và giờ đón.</p>
+          <span class="tag eat">Nghỉ chân</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Minh%20Ng%E1%BB%8Dc%20B%E1%BA%AFc%20M%C3%AA" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">13:00 – 14:00</div>
-          <h4>Về tới TP Hà Giang, trả xe</h4>
-          <p>Hầu hết cửa hàng thuê xe có phòng tắm nóng lạnh miễn phí cho khách trả xe — tranh thủ tắm rửa, thay đồ sạch trước khi lên xe khách đêm.</p>
-          <span class="tag stay">Kết thúc loop</span>
+          <div class="time">09:35 – 11:00</div>
+          <h4>Minh Ngọc → TP Hà Giang (~38 km QL34 · 1h25)</h4>
+          <p>⚠️ <b>Đã sửa quãng đường:</b> bản trước ghi 95km/3h30; thực tế cung Du Già – Minh Ngọc – TP Hà Giang chỉ khoảng <b>70–73km</b> và về tới nơi trước 11h, không phải 13h. Đoạn QL34 này là đường đẹp nhất cả chuyến — thong thả ngắm cảnh lần cuối, nhưng đông xe tải hơn nên giữ khoảng cách.</p>
+          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">14:00 – 19:30</div>
-          <h4>Nghỉ ngơi, dạo phố Hà Giang, ăn tối sớm</h4>
-          <p>Cả nhóm đã thấm mệt sau 4 ngày — dành buổi chiều để nghỉ ngơi thật sự, ăn tối sớm trước khi ra bến xe.</p>
-          <span class="tag eat">Ăn uống</span>
+          <div class="time">11:00 – 12:00</div>
+          <h4>Trả xe, tắm nước nóng, gửi hành lý</h4>
+          <p>Hầu hết cửa hàng thuê xe có phòng tắm nóng lạnh miễn phí cho khách trả xe và <b>cho gửi ba lô đến tối</b> — hỏi trước lúc nhận xe ngày 1. Kiểm tra xe cùng nhân viên, đối chiếu ảnh chụp hôm nhận, lấy lại CCCD.</p>
+          <span class="tag stay">Kết thúc loop</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">12:00 – 13:30</div>
+          <h4>Ăn trưa mừng hoàn thành chuyến</h4>
+          <p>Hạ Thành Quán (78 Trường Chinh) — cá bỗng, gà đen, lợn cắp nách, đối tác chính thức của Công viên địa chất UNESCO. Hoặc nhà nổi Cá Sông Lô nhìn ra cầu Yên Biên 1.</p>
+          <span class="tag eat">Ăn uống</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=H%E1%BA%A1%20Th%C3%A0nh%20Qu%C3%A1n%20H%C3%A0%20Giang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">13:30 – 16:30</div>
+          <h4>Nghỉ ngơi thật sự (đừng bỏ qua mục này)</h4>
+          <p>Cả nhóm vừa chạy hơn 400km đường đèo trong 4 ngày và tối nay còn 7 tiếng xe khách. Thuê phòng nghỉ theo giờ hoặc ngồi quán cà phê ngả lưng — <b>ngủ được 1–2 tiếng ở đây tốt hơn nhiều so với cố chơi tiếp rồi mệt lả trên xe</b>.</p>
+          <span class="tag buffer">Nghỉ ngơi</span>
+        </div>
+        <div class="tstop">
+          <div class="time">16:30 – 17:30</div>
+          <h4>Hoàng hôn ở Café Núi Cấm</h4>
+          <p>Nhìn toàn cảnh thành phố Hà Giang, đẹp nhất khi trời chuyển từ hồng sang ánh đèn (mặt trời lặn 17:19). Đường lên là dốc ngắn, đi taxi/xe ôm vì lúc này đã trả xe máy.</p>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Caf%C3%A9%20N%C3%BAi%20C%E1%BA%A5m%20H%C3%A0%20Giang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+        </div>
+        <div class="tstop">
+          <div class="time">17:30 – 19:30</div>
+          <h4>Ăn tối sớm, ra điểm đón</h4>
+          <p>Cháo ấu tẩu là món nên để dành cho bữa tối cuối — ăn nóng trong tiết trời lạnh. Có mặt tại điểm đón trước giờ xe chạy 20–30 phút.</p>
+          <span class="tag eat">Ăn uống</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">20:00 – 21:00</div>
           <h4>Lên xe khách Bằng Phấn đi Hà Nội</h4>
-          <p>Nên đặt vé trước 1–2 ngày (nhà xe hay hết chỗ cuối tuần). Xe chạy xuyên đêm khoảng 6,5–7 tiếng, dự kiến tới Hà Nội khoảng 4:00–6:00 sáng 08/11 — có thể ngủ thêm trên xe tới 8h nếu nhà xe cho phép.</p>
+          <p>Đặt vé trước 3–7 ngày, <b>07/11 là Thứ Bảy nên xe cuối tuần rất dễ hết chỗ</b>. Xe chạy xuyên đêm ~6,5–7 tiếng, dự kiến tới Hà Nội 04:00–06:00 sáng 08/11 — nhiều nhà xe cho ngủ lại trên xe tới 7–8h, hỏi trước khi đặt.</p>
           <span class="tag stay">Về Hà Nội</span>
         </div>
       </div>
@@ -968,7 +1148,7 @@
     <div class="sec-head">
       <div class="sec-eyebrow">Bản đồ tương tác</div>
       <h2 class="sec-title">Toàn tuyến, theo từng ngày.</h2>
-      <p class="sec-desc">Bấm chọn từng ngày để xem cung đường và các điểm dừng riêng, hoặc bấm "Cả 4 ngày" để xem toàn tuyến. Bấm vào từng điểm đánh dấu để xem ghi chú nhanh. Vị trí mang tính minh hoạ tương đối — khi đi thực tế nên dùng thêm Google Maps/Maps.me để định vị chính xác.</p>
+      <p class="sec-desc">Bấm chọn từng ngày để xem cung đường và các điểm dừng riêng, hoặc bấm "Cả 4 ngày" để xem toàn tuyến. Bấm vào từng điểm đánh dấu để xem ghi chú nhanh và <b>mở thẳng điểm đó trong app Google Maps trên điện thoại</b>. Toạ độ vẽ trên bản đồ này chỉ là ước lượng để minh hoạ cung đường — các link Google Maps dẫn đường theo <b>tên địa danh</b> nên vẫn đưa đúng vị trí thật. Nhớ tải bản đồ offline khu vực Hà Giang trong Google Maps trước khi đi, vì nhiều đoạn (nhất là Mậu Duệ – Du Già) mất sóng.</p>
     </div>
     <div class="map-toggle" id="mapToggle">
       <button class="map-btn active" data-day="all"><span class="sw" style="background:#1F2A1A"></span>Cả 4 ngày</button>
@@ -976,6 +1156,10 @@
       <button class="map-btn" data-day="2"><span class="sw" style="background:#B1502F"></span>Ngày 2 — Mèo Vạc</button>
       <button class="map-btn" data-day="3"><span class="sw" style="background:#5C6E4E"></span>Ngày 3 — Du Già</button>
       <button class="map-btn" data-day="4"><span class="sw" style="background:#C89544"></span>Ngày 4 — Về Hà Giang</button>
+    </div>
+    <div class="daylight" style="margin-bottom:20px;">
+      <div class="dl-items"><span>📱 Bấm vào điểm bất kỳ trên bản đồ để mở thẳng <b>app Google Maps</b> trên điện thoại, hoặc dùng nút bên cạnh để mở nguyên cung đường của một ngày.</span></div>
+      <a class="btn-nav" id="mapNav" href="#" target="_blank" rel="noopener" style="display:none">🧭 Mở cung đường ngày này</a>
     </div>
     <div id="map"></div>
   </div>
@@ -985,13 +1169,13 @@
 <section id="chiphi">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-eyebrow">Dự trù ngân sách · đã review lại 21/08</div>
+      <div class="sec-eyebrow">Dự trù ngân sách · đã review lại 04/09</div>
       <h2 class="sec-title">Chi phí ước tính — trọn chuyến 6 ngày</h2>
       <p class="sec-desc">Tính cho 3 người, <b>mỗi người 1 xe riêng</b> (chủ động hơn, không phải thay phiên lái/ngồi sau), gồm cả 2 ngày ở Hà Nội đầu/cuối chuyến. Không bao gồm vé máy bay SGN–HAN (đã có). Mức giá đã tính theo xu hướng tăng 40–60% từ 2023 do lượng khách tăng mạnh (xem mục "Thực tế 2026" bên dưới) — đây là mức chi tiêu <b>thoải mái</b>, không phải mức tiết kiệm tối đa.</p>
     </div>
     <div class="cost-grid">
       <div class="cost-card">
-        <div class="big">≈ 4,7 – 5,5tr</div>
+        <div class="big">≈ 4,6 – 5,4tr</div>
         <div class="lbl">VNĐ / người</div>
         <p>Tổng chi phí trọn chuyến 6 ngày (Hà Nội + Hà Giang Loop 4N3Đ), đã gồm xe khách khứ hồi, thuê xe máy riêng, xăng, ăn ở, vé tham quan, dự phòng.</p>
       </div>
@@ -1013,18 +1197,18 @@
       <tbody>
         <tr><td>Xe khách Hà Nội ↔ Hà Giang (khứ hồi)</td><td class="mono">300.000đ/người × 2 chiều</td><td>1.800.000đ</td></tr>
         <tr><td>Thuê xe máy số — mỗi người 1 xe (3 xe × 4 ngày)</td><td class="mono">220.000đ/xe/ngày</td><td>2.640.000đ</td></tr>
-        <tr><td>Xăng cho cả hành trình (~450km, 3 xe)</td><td class="mono">~220.000đ/xe</td><td>660.000đ</td></tr>
+        <tr><td>Xăng cho cả hành trình (~404km thực tế, 3 xe)</td><td class="mono">~220.000đ/xe</td><td>660.000đ</td></tr>
         <tr><td>Ăn uống trên loop (sáng/trưa/tối, 4 ngày)</td><td class="mono">280.000đ/người/ngày</td><td>3.360.000đ</td></tr>
         <tr><td>Nghỉ đêm trên loop (3 đêm)</td><td class="mono">300.000đ/người/đêm</td><td>2.700.000đ</td></tr>
         <tr><td>Vé tham quan (Lũng Cú, Dinh Vua Mèo, Nhà của Pao)</td><td class="mono">80.000đ/người</td><td>240.000đ</td></tr>
-        <tr><td>Thuyền/cano ngắm hẻm Tu Sản</td><td class="mono">250.000đ/người</td><td>750.000đ</td></tr>
+        <tr><td>Thuyền ngắm hẻm Tu Sản (giá 2026 đã giảm)</td><td class="mono">150.000đ/người</td><td>450.000đ</td></tr>
         <tr><td>Ăn uống + di chuyển nội thành 2 ngày Hà Nội</td><td class="mono">300.000đ/người</td><td>900.000đ</td></tr>
         <tr><td>Dự phòng (vá xe, cà phê, quà, phát sinh)</td><td class="mono">350.000đ/người</td><td>1.050.000đ</td></tr>
-        <tr class="total"><td>Tổng cộng (3 người)</td><td></td><td>≈ 14.100.000đ</td></tr>
+        <tr class="total"><td>Tổng cộng (3 người)</td><td></td><td>≈ 13.800.000đ</td></tr>
       </tbody>
     </table>
     <div class="note-box" style="margin-top:18px;">
-      💡 <b>Muốn tiết kiệm hơn?</b> Nếu chia 2 xe thay vì mỗi người 1 xe riêng (thay phiên lái/ngồi sau), tiết kiệm được khoảng <b>750.000đ/người</b> — đưa tổng về gần mức <b>≈ 4,5tr/người</b>. Đây là lựa chọn ở bảng chi phí bản trước; bảng hiện tại ưu tiên sự chủ động (ai cũng tự lái xe mình) hơn là tiết kiệm tối đa.
+      📉 <b>Đã cập nhật 04/09:</b> vé thuyền sông Nho Quế năm 2026 là <b>khoảng 120.000đ/người trọn gói</b> (vé tham quan + thuyền + xe trung chuyển xuống bến), rẻ hơn nhiều mức 150–250k ghi ở bản trước — bảng trên để 150.000đ/người cho dư phí gửi xe và phát sinh. Tổng chuyến vì vậy giảm khoảng 300.000đ so với bản v9.<br><br>💡 <b>Muốn tiết kiệm hơn?</b> Nếu chia 2 xe thay vì mỗi người 1 xe riêng (thay phiên lái/ngồi sau), tiết kiệm được khoảng <b>750.000đ/người</b> — đưa tổng về gần mức <b>≈ 3,8tr/người</b>. Đây là lựa chọn ở bảng chi phí bản trước; bảng hiện tại ưu tiên sự chủ động (ai cũng tự lái xe mình) hơn là tiết kiệm tối đa.
     </div>
   </div>
 </section>
@@ -1057,6 +1241,21 @@
         <div class="n">AN TOÀN THỰC TẾ — KHÔNG PHÓNG ĐẠI, KHÔNG CHỦ QUAN</div>
         <h4>Bệnh viện tuyến huyện không có phẫu thuật thần kinh hay chẩn đoán hình ảnh nâng cao</h4>
         <p>Hà Giang không có dịch vụ cứu hộ trực thăng. Quy trình khi có tai nạn nặng: sơ cứu tại chỗ → chuyển về Bệnh viện Đa khoa Hà Giang (chỉ xử lý chấn thương cơ bản) → nếu nặng phải chuyển tiếp về Hà Nội (Bạch Mai/Vinmec Times City), mất 5–6 giờ đường bộ. Nhân viên y tế địa phương từng chia sẻ với báo chí là mùa cao điểm điều trị 5–15 ca chấn thương liên quan xe máy mỗi tuần, đa phần là gãy xương, trầy xước, chấn động nhẹ. Đây không phải để dọa — mà là lý do nhóm nên tuyệt đối tuân thủ tốc độ, không chạy đêm, và luôn có người tỉnh táo nhất cầm lái ở các đoạn khó (Mèo Vạc – Du Già ngày 3).</p>
+      </div>
+      <div class="tip-card wide">
+        <div class="n">RÀ SOÁT GIỜ GIẤC 04/09 — VÌ SAO LỊCH TRÌNH ĐÃ ĐỔI</div>
+        <h4>Bản v9 có 5 chỗ không chạy được ngoài thực địa</h4>
+        <p><b>(1)</b> Chặng TP Hà Giang → Cổng Trời Quản Bạ ghi 45 phút cho 43km đường đèo — thực tế 1h30. <b>(2)</b> Cán Tỷ bị xếp <i>sau</i> Yên Minh, trong khi nó nằm ở Quản Bạ, <i>trước</i> Yên Minh trên QL4C — đi theo thứ tự cũ là chạy ngược hơn 30km. <b>(3)</b> Ngày 2 chỉ chừa 15 phút để đi từ đỉnh Mã Pí Lèng xuống bến thuyền Tà Làng — đoạn dốc bê tông hẹp đó mất 30 phút, khiến giờ nhận phòng Mèo Vạc bị đẩy tới 17:00, <b>đúng lúc mặt trời lặn (17:18)</b>. <b>(4)</b> Ngày 3 xếp Khâu Vai rồi nối thẳng sang cung Mậu Duệ, nhưng từ Mèo Vạc đó là hai hướng ngược nhau, phải quay đầu 22km. <b>(5)</b> Ngày 4 ghi 95km/3h30 trong khi cung Du Già – Minh Ngọc – TP Hà Giang chỉ ~73km. Toàn bộ đã được tính lại theo tốc độ thực tế <b>25–32 km/h</b> của xe số trên đường đèo, cộng thêm thời gian dừng cụ thể cho từng điểm.</p>
+      </div>
+      <div class="tip-card">
+        <div class="n">THỜI ĐIỂM ĐI — ĐÚNG MÙA SƯƠNG MÙ</div>
+        <h4>Tháng 11–2 là mùa mù dày nhất ở Quản Bạ và Mã Pí Lèng</h4>
+        <p>Các hướng dẫn an toàn cập nhật cho mùa đông 2025–2026 đều nhấn mạnh: mây mù có thể ập xuống Mã Pí Lèng và Quản Bạ khiến tầm nhìn <b>còn dưới 10m chỉ trong vài phút</b>, và sau 18h thì tầm nhìn giảm mạnh, sương dày hơn, xe tải địa phương chạy nhiều hơn. Cách xử lý duy nhất là đi sớm, chạy chậm, và <b>dừng hẳn chờ tan mù chứ không mò tiếp trên đèo hẹp</b> — đó là lý do lịch trình mới ngày nào cũng chừa dư 1,5–3 tiếng trước giờ mặt trời lặn.</p>
+      </div>
+      <div class="tip-card">
+        <div class="n">TIN 2026 — ĐƯỜNG SÁ &amp; QUẢN LÝ TOUR</div>
+        <h4>QL4C vừa được xử lý sạt lở, tour xe ôm đang bị siết lại</h4>
+        <p>Mưa lớn giữa 2026 gây nhiều điểm sạt lở trên QL4C vào khu du lịch cao nguyên đá; các điểm này đã được huy động người và máy khắc phục từ khoảng tháng 8/2026, và tuyến nằm trong kế hoạch nâng cấp mở rộng giai đoạn 2026–2030 — nghĩa là <b>rất có thể gặp công trường thi công</b>, nên vẫn phải hỏi lại tình hình đường sát ngày đi. Song song, sau một vụ tai nạn nghiêm trọng với khách nước ngoài hồi cuối tháng 3/2026, cơ quan du lịch địa phương đã siết quy định an toàn với dịch vụ chở khách bằng xe máy trên cung Hà Giang Loop.</p>
       </div>
       <div class="tip-card">
         <div class="n">TỪ TIKTOK #hagiangloop</div>
@@ -1103,7 +1302,7 @@
       <div class="tip-card">
         <div class="n">XĂNG</div>
         <h4>Đổ đầy bình trước mỗi chặng</h4>
-        <p>Nhiều đoạn giữa các thị trấn (đặc biệt Mèo Vạc → Du Già) không có cây xăng trong hàng chục km. Đổ đầy mỗi khi có cơ hội, đừng đợi đến khi gần cạn.</p>
+        <p>4 lần đổ xăng bắt buộc đã ghi thẳng vào lịch trình: <b>TP Hà Giang (sáng ngày 1)</b> → <b>Yên Minh (10:50 ngày 1)</b> → <b>Đồng Văn (10:55 ngày 2) và Mèo Vạc (tối ngày 2)</b> → <b>Mậu Duệ (09:50 ngày 3)</b> là trạm cuối cùng trước Du Già. Du Già gần như không có trạm đúng nghĩa, chỉ có xăng chai bán lẻ giá cao. Cao điểm tháng 10–11 có nơi phải chờ tới 30 phút mới đến lượt — lịch trình đã cộng sẵn thời gian này.</p>
       </div>
       <div class="tip-card">
         <div class="n">AN TOÀN</div>
@@ -1119,6 +1318,15 @@
         <div class="n">ĐẶT CHỖ</div>
         <h4>Đặt xe khách &amp; homestay trước 3–7 ngày</h4>
         <p>Mùa hoa tam giác mạch (tháng 10–12) là cao điểm khách trong lẫn ngoài nước — phòng ở Đồng Văn, Mèo Vạc và vé xe khách cuối tuần có thể hết sớm.</p>
+      </div>
+      <div class="tip-card wide">
+        <div class="n">QUY TẮC GIỜ GIẤC — ĐIỀU QUAN TRỌNG NHẤT CỦA CẢ CHUYẾN</div>
+        <h4>Đầu tháng 11 mặt trời lặn 17:18–17:21, tối hẳn 17:41–17:44</h4>
+        <p>Nhưng <b>trong thung lũng và dưới chân đèo thì trời tối sớm hơn giờ đó khoảng 30–45 phút</b>, vì mặt trời khuất sau núi trước khi thật sự lặn. Vì vậy nhóm nên chốt 3 mốc cứng, áp dụng cho cả 4 ngày:</p>
+        <p style="margin-top:10px"><b>· 16:30 — hạn chót nhận phòng.</b> Đã đến nơi nghỉ, cất xe, không đi đâu bằng xe máy nữa.<br>
+        <b>· 15:00 — mốc quyết định.</b> Nếu 15:00 mà chưa tới điểm áp chót của ngày, <b>bỏ hết các điểm chụp ảnh còn lại</b> và chạy thẳng về chỗ nghỉ. Lịch trình mới đã sắp xếp sao cho mốc này gần như không bao giờ bị chạm.<br>
+        <b>· 17:00 — tuyệt đối không còn bánh xe nào lăn trên đèo.</b> Nếu vì lý do gì đó vẫn đang đi, dừng lại ở bản/thị tứ gần nhất tìm chỗ ngủ, đừng cố về cho bằng được.</p>
+        <p style="margin-top:10px">Giờ trong lịch trình đã <b>tính sẵn thời gian chụp ảnh, ăn uống và nghỉ chân cụ thể cho từng điểm</b> (ví dụ: Cổng Trời 40 phút, Lũng Cú 1h15, thuyền Nho Quế 1h30 gồm cả chờ), chứ không phải chỉ giờ chạy xe thuần. Quỹ dự phòng còn lại mỗi ngày được ghi ngay trong khung vàng đầu mỗi ngày: <b>ngày 1 ≈2h10, ngày 2 ≈1h30, ngày 3 ≈3h, ngày 4 ≈9h</b>. Đó là phần để tiêu cho sương mù, thủng lốp, chờ thuyền hoặc đơn giản là chụp ảnh lâu hơn dự tính — tiêu hết quỹ đó thì phải cắt điểm, không được cắt vào thời gian còn sáng.</p>
       </div>
       <div class="tip-card wide">
         <div class="n">CHỤP ẢNH vs. CHẠY XE</div>
@@ -1302,8 +1510,8 @@
 
 <footer>
   <div class="wrap">
-    <div class="sources"><b>Nguồn tham khảo:</b> tổng hợp từ các trang kinh nghiệm cập nhật 2025–2026 (MOTOGO, VnExpress, Vexere, vietnamtourism.com "Cẩm nang trung thực 2026"), các thớt chia sẻ kinh nghiệm và group review trên VOZ.vn ("Review Hà Giang", "Xin kinh nghiệm du lịch Hà Giang", "Ha Giang Loop Family Tour"), các group Facebook "Hà Giang Review Tất Tần Tật" và "Review Homestay - Khách Sạn Đồng Văn & Mèo Vạc", cùng xu hướng nội dung TikTok #hagiangloop, và thông tin hành chính chính thức về việc sáp nhập tỉnh Hà Giang – Tuyên Quang (Nghị quyết 202/2025/QH15). Giá cả, tình trạng phòng và tên nhà xe/homestay thay đổi khá nhanh — nên vào lại các group trên hoặc gọi xác nhận trước 3–5 ngày.</div>
-    <div>Cập nhật lần cuối: 08/2026 · Hành trình 04–07/11</div>
+    <div class="sources"><b>Nguồn tham khảo:</b> tổng hợp từ các trang kinh nghiệm cập nhật 2025–2026 (MOTOGO, VnExpress, Vexere, vietnamtourism.com "Cẩm nang trung thực 2026"), các thớt chia sẻ kinh nghiệm và group review trên VOZ.vn ("Review Hà Giang", "Xin kinh nghiệm du lịch Hà Giang", "Ha Giang Loop Family Tour"), các group Facebook "Hà Giang Review Tất Tần Tật" và "Review Homestay - Khách Sạn Đồng Văn & Mèo Vạc", cùng xu hướng nội dung TikTok #hagiangloop, và thông tin hành chính chính thức về việc sáp nhập tỉnh Hà Giang – Tuyên Quang (Nghị quyết 202/2025/QH15). Bản rà soát 04/09/2026 bổ sung: giá vé thuyền sông Nho Quế 2026 (cungphuot.info, giavethamquan.com, cinvestratravel.vn), hướng dẫn an toàn mùa đông 2025–2026 và cảnh báo sương mù Mã Pí Lèng/Quản Bạ (vietnamtourism.com, hagiangloop.media, bongbackpackerhostel.com), tin khắc phục sạt lở QL4C 8/2026 (Báo Văn Hoá) và chấn chỉnh tour xe máy Hà Giang Loop 4/2026 (Tuổi Trẻ), vị trí dốc Thẩm Mã / Cán Tỷ trên QL4C và hướng đi Khâu Vai vs. Mậu Duệ từ Mèo Vạc. Giờ mặt trời mọc/lặn 04–07/11/2026 được tính theo toạ độ từng điểm nghỉ. Giá cả, tình trạng phòng và tên nhà xe/homestay thay đổi khá nhanh — nên vào lại các group trên hoặc gọi xác nhận trước 3–5 ngày.</div>
+    <div>Cập nhật lần cuối: 04/09/2026 (v10 — rà soát giờ giấc &amp; dẫn đường) · Hành trình 04–07/11</div>
   </div>
 </footer>
 
@@ -1311,35 +1519,61 @@
 <script>
   const dayColors = {1:'#24344D', 2:'#B1502F', 3:'#5C6E4E', 4:'#C89544'};
 
+  // Mỗi điểm có thêm `q` = chuỗi tìm kiếm dùng cho link Google Maps.
+  // Dùng tên địa danh thay vì toạ độ vì toạ độ ở đây chỉ là ước lượng để vẽ bản đồ,
+  // còn Google Maps tự tìm đúng POI thực tế khi dẫn đường trên điện thoại.
   const stops = [
     // Day 1
-    {day:1, name:'TP Hà Giang', lat:22.8025, lng:104.9784, note:'Xuất phát 06:45, kiểm tra xe kỹ trước khi đi.'},
-    {day:1, name:'Cổng Trời Quản Bạ', lat:23.0287, lng:104.9995, note:'Ngắm Núi Đôi Cô Tiên — điểm chụp ảnh sáng sớm đẹp nhất.'},
-    {day:1, name:'TT Yên Minh', lat:23.1136, lng:105.2467, note:'Nghỉ ăn nhẹ, đổ thêm xăng.'},
-    {day:1, name:'Cán Tỷ (cua chữ M)', lat:23.1706, lng:105.1367, note:'Dừng nhanh 10–15 phút chụp khúc cua từ trên cao.'},
-    {day:1, name:'Sủng Là — Nhà của Pao', lat:23.2394, lng:105.3111, note:'Ăn trưa + tham quan, vé ~20.000đ/người.'},
-    {day:1, name:'Phố cổ Đồng Văn', lat:23.2708, lng:105.3597, note:'Nghỉ đêm, dạo phố cổ buổi tối.'},
+    {day:1, name:'TP Hà Giang', lat:22.8025, lng:104.9784, q:'Thành phố Hà Giang', note:'Nhận xe 04:30–06:30, xuất phát 06:30. Kiểm tra phanh/đèn/lốp, chụp ảnh xe 4 mặt.'},
+    {day:1, name:'Cổng Trời Quản Bạ', lat:23.0287, lng:104.9995, q:'Cổng Trời Quản Bạ', note:'08:00–08:40 · Núi Đôi Cô Tiên, ánh sáng đẹp nhất trong ngày. Dừng 40 phút.'},
+    {day:1, name:'Cán Tỷ (cua chữ M)', lat:23.1706, lng:105.1367, q:'Cán Tỷ Quản Bạ', note:'09:15–09:35 · Nằm TRƯỚC Yên Minh trên QL4C. Dừng 20 phút chụp khúc cua.'},
+    {day:1, name:'TT Yên Minh', lat:23.1136, lng:105.2467, q:'Thị trấn Yên Minh', note:'10:50–11:25 · Nghỉ giữa chặng + ĐỔ XĂNG bắt buộc. Cao điểm có thể chờ 30 phút.'},
+    {day:1, name:'Dốc Thẩm Mã', lat:23.1897, lng:105.2872, q:'Dốc Thẩm Mã', note:'12:10–12:35 · Con dốc 9 tầng nổi tiếng nhất Hà Giang, có đài quan sát trên đỉnh.'},
+    {day:1, name:'Sủng Là — Nhà của Pao', lat:23.2394, lng:105.3111, q:'Nhà của Pao Sủng Là', note:'13:00–14:20 · Ăn trưa 45 phút + tham quan 35 phút, vé ~20.000đ/người.'},
+    {day:1, name:'Phố cổ Đồng Văn', lat:23.2708, lng:105.3597, q:'Phố cổ Đồng Văn', note:'15:10 nhận phòng (hạn chót 16:30). Mặt trời lặn 17:21 — dư ~2h dự phòng.'},
     // Day 2
-    {day:2, name:'Cột cờ Lũng Cú', lat:23.3919, lng:105.3167, note:'Vé 30.000đ/người, leo 283 bậc — điểm chụp ảnh chính buổi sáng.'},
-    {day:2, name:'Dinh thự Họ Vương', lat:23.2931, lng:105.3149, note:'Vé 30.000đ/người, tham quan ~30–40 phút.'},
-    {day:2, name:'Đèo Mã Pí Lèng', lat:23.2299, lng:105.4192, note:'Điểm Panorama — dừng 30–40 phút, ảnh đẹp nhất chuyến đi.'},
-    {day:2, name:'Bến thuyền Nho Quế — hẻm Tu Sản', lat:23.2214, lng:105.4064, note:'Đi thuyền/cano 150–250k/người ngắm hẻm vực.'},
-    {day:2, name:'TT Mèo Vạc', lat:23.1889, lng:105.4147, note:'Nghỉ đêm, ăn thắng cố/lẩu gà đen.'},
+    {day:2, name:'Cột cờ Lũng Cú', lat:23.3919, lng:105.3167, q:'Cột cờ Lũng Cú', note:'07:50–09:05 · Vé 30.000đ, leo 283 bậc. Điểm linh hoạt nhất — bỏ được nếu sương mù.'},
+    {day:2, name:'Dinh thự Họ Vương', lat:23.2931, lng:105.3149, q:'Dinh thự họ Vương Sà Phìn', note:'09:35–10:20 · Vé 30.000đ, tham quan 45 phút.'},
+    {day:2, name:'Đèo Mã Pí Lèng', lat:23.2299, lng:105.4192, q:'Mã Pì Lèng Panorama', note:'12:25–13:10 · Panorama đang cải tạo, vẫn mở làm điểm ngắm cảnh. Vé ảnh 30.000đ.'},
+    {day:2, name:'Bến thuyền Tà Làng — hẻm Tu Sản', lat:23.2214, lng:105.4064, q:'Bến thuyền Tà Làng sông Nho Quế', note:'13:40–15:10 · ~120.000đ/người trọn gói. Bến mở 07:00–18:30. Đường xuống dốc đứng, 30 phút.'},
+    {day:2, name:'TT Mèo Vạc', lat:23.1889, lng:105.4147, q:'Thị trấn Mèo Vạc', note:'15:50 nhận phòng (bản cũ 17:00 — quá sát giờ lặn 17:18). Đổ đầy xăng tối nay.'},
     // Day 3
-    {day:3, name:'Khâu Vai', lat:23.0672, lng:105.4267, note:'Dừng ngắn 15–20 phút ngắm cảnh (không đúng phiên chợ tình).'},
-    {day:3, name:'Mậu Duệ', lat:23.0764, lng:105.2519, note:'Nghỉ trưa dọc đường.'},
-    {day:3, name:'Du Già', lat:22.9358, lng:105.1508, note:'Tắm suối/thác Du Già, nghỉ đêm ở làng Tày.'},
+    {day:3, name:'Dốc chữ M (Mèo Vạc)', lat:23.1301, lng:105.3358, q:'Dốc chữ M Mèo Vạc', note:'09:00–09:20 · Khúc cua hình chữ M, có chỗ tấp xe an toàn trên đỉnh dốc.'},
+    {day:3, name:'Mậu Duệ', lat:23.0764, lng:105.2519, q:'Mậu Duệ Yên Minh', note:'09:50–10:15 · Cây xăng và sóng ổn định CUỐI CÙNG trước khi vào Du Già.'},
+    {day:3, name:'Lũng Hồ', lat:23.0031, lng:105.1969, q:'Lũng Hồ Yên Minh', note:'11:45–12:45 · Ăn trưa. Đoạn Mậu Duệ–Lũng Hồ đẹp nhất nhưng đường xấu nhất, ~20 km/h.'},
+    {day:3, name:'Du Già', lat:22.9358, lng:105.1508, q:'Du Già Yên Minh', note:'14:15 nhận phòng, 14:45–16:30 thác Du Già. Tháng 11 nước rất lạnh.'},
     // Day 4
-    {day:4, name:'Minh Ngọc', lat:22.9186, lng:105.0625, note:'Điểm trung chuyển trên đường về.'},
-    {day:4, name:'TP Hà Giang (trả xe)', lat:22.8025, lng:104.9784, note:'Trả xe, tắm rửa, ra bến xe khách buổi tối.'},
+    {day:4, name:'Minh Ngọc', lat:22.9186, lng:105.0625, q:'Minh Ngọc Bắc Mê', note:'09:15–09:35 · Nghỉ 20 phút, có sóng ổn định để xác nhận vé xe khách tối.'},
+    {day:4, name:'TP Hà Giang (trả xe)', lat:22.8025, lng:104.9784, q:'Thành phố Hà Giang', note:'11:00 trả xe (không phải 13:00 — cung này chỉ ~73km). Tắm nóng + gửi đồ tại cửa hàng.'},
   ];
 
   const routes = {
-    1: [[22.8025,104.9784],[23.0287,104.9995],[23.1136,105.2467],[23.1706,105.1367],[23.2394,105.3111],[23.2708,105.3597]],
-    2: [[23.2708,105.3597],[23.3919,105.3167],[23.2931,105.3149],[23.2299,105.4192],[23.2214,105.4064],[23.1889,105.4147]],
-    3: [[23.1889,105.4147],[23.0672,105.4267],[23.0764,105.2519],[22.9358,105.1508]],
+    1: [[22.8025,104.9784],[23.0287,104.9995],[23.1706,105.1367],[23.1136,105.2467],[23.1897,105.2872],[23.2394,105.3111],[23.2708,105.3597]],
+    2: [[23.2708,105.3597],[23.3919,105.3167],[23.2931,105.3149],[23.2708,105.3597],[23.2299,105.4192],[23.2214,105.4064],[23.1889,105.4147]],
+    3: [[23.1889,105.4147],[23.1301,105.3358],[23.0764,105.2519],[23.0031,105.1969],[22.9358,105.1508]],
     4: [[22.9358,105.1508],[22.9186,105.0625],[22.8025,104.9784]],
   };
+
+  // Link dẫn đường cả ngày, mở thẳng app Google Maps trên điện thoại
+  const dayRoutes = {
+    1: {from:'Thành phố Hà Giang', via:['Cổng Trời Quản Bạ','Cán Tỷ Quản Bạ','Thị trấn Yên Minh','Dốc Thẩm Mã','Nhà của Pao Sủng Là'], to:'Phố cổ Đồng Văn'},
+    2: {from:'Phố cổ Đồng Văn', via:['Cột cờ Lũng Cú','Dinh thự họ Vương Sà Phìn','Mã Pì Lèng Panorama','Bến thuyền Tà Làng sông Nho Quế'], to:'Thị trấn Mèo Vạc'},
+    3: {from:'Thị trấn Mèo Vạc', via:['Mậu Duệ Yên Minh','Lũng Hồ Yên Minh'], to:'Du Già Yên Minh'},
+    4: {from:'Du Già Yên Minh', via:['Minh Ngọc Bắc Mê'], to:'Thành phố Hà Giang'},
+  };
+
+  // https://www.google.com/maps/... là "universal link": trên Android/iOS có cài
+  // Google Maps thì bấm vào sẽ mở thẳng trong app, trên máy tính thì mở web.
+  function gmapSearch(q){
+    return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
+  }
+  // Bỏ trống `from` => Google Maps tự lấy vị trí hiện tại của điện thoại làm điểm xuất phát.
+  function gmapDir(from, via, to){
+    let u = 'https://www.google.com/maps/dir/?api=1';
+    if(from) u += '&origin=' + encodeURIComponent(from);
+    if(via && via.length) u += '&waypoints=' + via.map(encodeURIComponent).join('%7C');
+    return u + '&destination=' + encodeURIComponent(to) + '&travelmode=driving';
+  }
 
   const map = L.map('map', {scrollWheelZoom:false}).setView([23.05, 105.25], 9);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -1351,6 +1585,15 @@
 
   function renderDay(day){
     layerGroup.clearLayers();
+    const navBtn = document.getElementById('mapNav');
+    if(day === 'all'){
+      navBtn.style.display = 'none';
+    } else {
+      const r = dayRoutes[parseInt(day)];
+      navBtn.href = gmapDir(r.from, r.via, r.to);
+      navBtn.textContent = '🧭 Mở cung đường ngày ' + day;
+      navBtn.style.display = 'inline-flex';
+    }
     const daysToShow = day === 'all' ? [1,2,3,4] : [parseInt(day)];
     daysToShow.forEach(d=>{
       L.polyline(routes[d], {color:dayColors[d], weight:4, opacity:0.85, dashArray: d%2===0? null : null}).addTo(layerGroup);
@@ -1358,7 +1601,15 @@
         const marker = L.circleMarker([s.lat,s.lng], {
           radius:8, color:dayColors[d], weight:2.5, fillColor:'#FBF8F0', fillOpacity:1
         }).addTo(layerGroup);
-        marker.bindPopup(`<div class="popup-t">${s.name}</div><div class="popup-d">${s.note}</div>`);
+        const q = s.q || `${s.lat},${s.lng}`;
+        marker.bindPopup(
+          `<div class="popup-t">${s.name}</div>` +
+          `<div class="popup-d">${s.note}</div>` +
+          `<div class="popup-links">` +
+            `<a href="${gmapSearch(q)}" target="_blank" rel="noopener">📍 Mở Google Maps</a>` +
+            `<a href="${gmapDir('', [], q)}" target="_blank" rel="noopener">🧭 Chỉ đường</a>` +
+          `</div>`
+        );
       });
     });
     if(daysToShow.length===1){
@@ -1643,19 +1894,23 @@
   const notifiedStays = new Set();
 
   const WAYPOINTS = [
-    {day:'2026-11-04', name:'Cổng Trời Quản Bạ', lat:23.0287, lng:104.9995, time:'2026-11-04T07:30:00'},
-    {day:'2026-11-04', name:'TT Yên Minh', lat:23.1136, lng:105.2467, time:'2026-11-04T09:30:00'},
-    {day:'2026-11-04', name:'Sủng Là', lat:23.2394, lng:105.3111, time:'2026-11-04T12:00:00'},
-    {day:'2026-11-04', name:'Đồng Văn', lat:23.2708, lng:105.3597, time:'2026-11-04T15:30:00'},
-    {day:'2026-11-05', name:'Cột cờ Lũng Cú', lat:23.3919, lng:105.3167, time:'2026-11-05T08:30:00'},
-    {day:'2026-11-05', name:'Dinh Vua Mèo', lat:23.2931, lng:105.3149, time:'2026-11-05T10:00:00'},
-    {day:'2026-11-05', name:'Mã Pí Lèng', lat:23.2299, lng:105.4192, time:'2026-11-05T13:00:00'},
-    {day:'2026-11-05', name:'Mèo Vạc', lat:23.1889, lng:105.4147, time:'2026-11-05T15:30:00'},
-    {day:'2026-11-06', name:'Khâu Vai', lat:23.0672, lng:105.4267, time:'2026-11-06T07:30:00'},
-    {day:'2026-11-06', name:'Mậu Duệ', lat:23.0764, lng:105.2519, time:'2026-11-06T11:30:00'},
-    {day:'2026-11-06', name:'Du Già', lat:22.9358, lng:105.1508, time:'2026-11-06T15:30:00'},
-    {day:'2026-11-07', name:'Minh Ngọc', lat:22.9186, lng:105.0625, time:'2026-11-07T09:30:00'},
-    {day:'2026-11-07', name:'TP Hà Giang', lat:22.8025, lng:104.9784, time:'2026-11-07T13:00:00'},
+    {day:'2026-11-04', name:'Cổng Trời Quản Bạ', lat:23.0287, lng:104.9995, time:'2026-11-04T08:00:00'},
+    {day:'2026-11-04', name:'Cán Tỷ', lat:23.1706, lng:105.1367, time:'2026-11-04T09:15:00'},
+    {day:'2026-11-04', name:'TT Yên Minh', lat:23.1136, lng:105.2467, time:'2026-11-04T10:50:00'},
+    {day:'2026-11-04', name:'Dốc Thẩm Mã', lat:23.1897, lng:105.2872, time:'2026-11-04T12:10:00'},
+    {day:'2026-11-04', name:'Sủng Là', lat:23.2394, lng:105.3111, time:'2026-11-04T13:00:00'},
+    {day:'2026-11-04', name:'Đồng Văn', lat:23.2708, lng:105.3597, time:'2026-11-04T15:10:00'},
+    {day:'2026-11-05', name:'Cột cờ Lũng Cú', lat:23.3919, lng:105.3167, time:'2026-11-05T07:50:00'},
+    {day:'2026-11-05', name:'Dinh Vua Mèo', lat:23.2931, lng:105.3149, time:'2026-11-05T09:35:00'},
+    {day:'2026-11-05', name:'Mã Pí Lèng', lat:23.2299, lng:105.4192, time:'2026-11-05T12:25:00'},
+    {day:'2026-11-05', name:'Bến thuyền Tà Làng', lat:23.2214, lng:105.4064, time:'2026-11-05T13:40:00'},
+    {day:'2026-11-05', name:'Mèo Vạc', lat:23.1889, lng:105.4147, time:'2026-11-05T15:50:00'},
+    {day:'2026-11-06', name:'Dốc chữ M', lat:23.1301, lng:105.3358, time:'2026-11-06T09:00:00'},
+    {day:'2026-11-06', name:'Mậu Duệ', lat:23.0764, lng:105.2519, time:'2026-11-06T09:50:00'},
+    {day:'2026-11-06', name:'Lũng Hồ', lat:23.0031, lng:105.1969, time:'2026-11-06T11:45:00'},
+    {day:'2026-11-06', name:'Du Già', lat:22.9358, lng:105.1508, time:'2026-11-06T14:15:00'},
+    {day:'2026-11-07', name:'Minh Ngọc', lat:22.9186, lng:105.0625, time:'2026-11-07T09:15:00'},
+    {day:'2026-11-07', name:'TP Hà Giang', lat:22.8025, lng:104.9784, time:'2026-11-07T11:00:00'},
   ];
 
   function localNotify(title, body){
