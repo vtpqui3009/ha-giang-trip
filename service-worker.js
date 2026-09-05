@@ -1,4 +1,6 @@
-const CACHE_NAME = 'hgloop-v1';
+// Đổi số version mỗi lần sửa nội dung index.html, nếu không máy đã cài PWA
+// sẽ vẫn hiển thị bản cũ lấy từ cache.
+const CACHE_NAME = 'hgloop-v11';
 const SHELL_FILES = ['./index.html', './manifest.json'];
 
 self.addEventListener('install', (event) => {
