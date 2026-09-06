@@ -168,6 +168,11 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   mục Roadmap).
 - **Tin tức cộng đồng là pull, không phải push từ nhóm** — đây là thay đổi
   có chủ đích theo yêu cầu người dùng, khác với thiết kế v5 ban đầu.
+- **Link bản đồ ưu tiên TOẠ ĐỘ hơn tên địa danh** (từ v12) — có chủ đích, đổi
+  ngược lại quyết định của v10. Tên đẹp hơn khi hiển thị nhưng có thể khớp nhầm
+  sang tỉnh khác (xem v12 trong lịch sử thay đổi); toạ độ sai lệch tối đa 1–2km
+  trên đúng con đường đó, tức hỏng nhẹ thay vì hỏng nặng. Đừng "sửa lại cho
+  đẹp" bằng cách đổi ngược về tên.
 - **Link bản đồ dùng "universal link" của Google Maps
   (`https://www.google.com/maps/...?api=1&...`), không dùng URL scheme riêng
   (`comgooglemaps://`, `geo:`)** — có chủ đích: universal link tự mở app
@@ -345,6 +350,31 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   +900k thêm 1 đêm phòng, +450k bữa trưa camping, +420k thêm nửa ngày ăn ở Hà
   Giang, +300k cà phê Mí Pó/Lô Lô Chải, +270k vé và dự phòng. Bảng chi phí có
   ghi rõ từng khoản chênh lệch.
+
+- **v12** (hiện tại) — **Sửa lỗi dẫn đường Google Maps nghiêm trọng.** Waypoint
+  `'Làng cổ Ma Lé'` của ngày 2 bị Google geocoder khớp nhầm sang **"Khu di tích
+  Láng Le Bàu Cò", Bình Chánh, TP.HCM** → tuyến ngày 2 vẽ vòng về Sài Gòn, 66
+  giờ lái. Nguyên nhân: địa danh nhỏ không có POI khớp gần tuyến nên Google
+  fallback sang khớp mờ toàn quốc. **Quy tắc mới (bắt buộc giữ khi sửa sau
+  này):** chỉ dùng TÊN cho địa danh lớn Google chắc chắn resolve đúng (thị
+  trấn, cột cờ, dinh thự, đèo nổi tiếng) và **luôn kèm ", Tuyên Quang"**; mọi
+  điểm nhỏ/mơ hồ (bến thuyền, quán cà phê, làng, dốc, camping) dùng **TOẠ ĐỘ**
+  vì toạ độ không bao giờ khớp nhầm sang tỉnh khác. Các hằng số tên nằm trong
+  object `GEO` đầu khối script bản đồ. Thêm hàm `checkCoords()` chạy lúc tải
+  trang, cảnh báo console nếu có toạ độ rơi ngoài khung bao Hà Giang
+  (22.6–23.5N, 104.7–105.7E) để lỗi kiểu này không tái diễn âm thầm.
+  **Header:** `.navrow` trước đây `justify-content:space-between` mà
+  `.brandmark` không `nowrap`, nên với 11 mục nav thì brandmark xuống 2 dòng và
+  nút ⚙️ đè lên nav ở ~1365px. Sửa: brandmark `white-space:nowrap; flex:0 0
+  auto`, nav `flex:1 1 auto; min-width:0` + tự cuộn ngang có mask mờ, thêm
+  breakpoint 1180px/1024px, rút nhãn "Thực tế 2026"→"Thực tế" và "Trợ Lý Chuyến
+  Đi"→"Trợ lý".
+  **Nội dung:** ngày 3 quỹ dự phòng từ 50 phút → 1h20 (cắt Panorama 30→15 phút,
+  dồn cả chuỗi sớm 30 phút, giữ nguyên 1h40 ở Mí Pó); thêm số nhà thuyền bến Tà
+  Làng (nút thắt thật sự của ngày 3, bản trước thiếu); cảnh báo giờ xe chiều VỀ
+  của Bằng Phấn (11:30/14:00/22:00 — không có chuyến 10:00 như lịch giả định);
+  thêm side-card vé phổ thông/check-in online/hành lý cho ngày 5; Lô Lô Chải
+  được UN Tourism vinh danh 17/10/2025.
 
 ## Deploy
 
