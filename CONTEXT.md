@@ -1,16 +1,26 @@
 # Hà Giang Loop — Trip Companion App
 
-Web app kế hoạch + trợ lý cho chuyến Hà Giang Loop 4 ngày 3 đêm (04–07/11/2026),
-3 người, xe số tự lái. Ban đầu là trang kế hoạch tĩnh, sau bổ sung một lớp app
-tương tác dùng chung cho cả nhóm trong lúc đi.
+Web app kế hoạch + trợ lý cho chuyến Hà Giang **04–08/11/2026** (4 ngày chạy xe
++ 4 đêm ở Hà Giang, ngày thứ 5 là ngày ngồi xe khách về sân bay), 3 người, xe
+số tự lái. Ban đầu là trang kế hoạch tĩnh, sau bổ sung một lớp app tương tác
+dùng chung cho cả nhóm trong lúc đi.
+
+**Khung chuyến (v11):** 03/11 hạ cánh Hà Nội, chơi 1 ngày, tối lên xe khách →
+04/11 Hà Giang → Quản Bạ → Yên Minh → **Đồng Văn** → 05/11 vòng quanh Đồng Văn
+(Sà Phìn – Lũng Cú – Lô Lô Chải – Ma Lé – Đồn Cao), **ngủ Đồng Văn đêm thứ 2**
+→ 06/11 Mã Pí Lèng – thuyền hẻm Tu Sản – ăn trưa Anh Quân Camping – Cafe Mí
+Pó, **ngủ Mèo Vạc** → 07/11 Mèo Vạc → Mậu Duệ → Yên Minh → Quản Bạ → **TP Hà
+Giang** (trả xe, ngủ lại) → 08/11 sáng ở TP Hà Giang, ~10:00 lên xe khách chạy
+thẳng ra **sảnh sân bay Nội Bài**, bay HAN–SGN 21:55.
 
 Dùng file này làm ngữ cảnh khi nhờ Claude sửa/thêm tính năng — dán kèm câu hỏi
 mới hoặc upload file này trong lần chat sau.
 
 ## Mục đích ban đầu của người dùng (giữ nguyên để không lạc hướng)
 
-- Lịch trình 4N3Đ Hà Giang Loop chi tiết theo giờ/địa điểm, tách rõ "đoạn nên
-  dừng chụp ảnh" và "đoạn nên tập trung chạy xe".
+- Lịch trình Hà Giang Loop chi tiết theo giờ/địa điểm, tách rõ "đoạn nên
+  dừng chụp ảnh" và "đoạn nên tập trung chạy xe". (Ban đầu là 4N3Đ; từ v11
+  đổi thành 4 ngày chạy xe / 4 đêm + 1 ngày về sân bay — xem Lịch sử thay đổi.)
 - Gợi ý chỗ ở, chi phí dự trù, bản đồ tương tác theo từng ngày.
 - Nội dung được chắt lọc từ nguồn tiếng Việt cập nhật (VOZ, Facebook group,
   TikTok, các cẩm nang du lịch 2025–2026), không chỉ dịch nguồn tiếng Anh.
@@ -181,9 +191,20 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
 - Thời gian di chuyển từng chặng trong lịch trình v10 được ước lượng theo tốc
   độ trung bình 25–32 km/h (xe số, đường đèo, có chở đồ) chứ không phải lấy từ
   API định tuyến — nên coi là ước lượng thận trọng, không phải con số đo được.
-- Giờ mặt trời mọc/lặn 04–07/11/2026 hiển thị trong khung `.daylight` là **giá
+- Giờ mặt trời mọc/lặn 04–08/11/2026 hiển thị trong khung `.daylight` là **giá
   trị tính sẵn và hardcode vào HTML** (thuật toán NOAA, theo toạ độ từng điểm
   nghỉ), không gọi API. Nếu đổi ngày đi thì phải tính lại thủ công.
+- **Hai thông tin trong v11 chưa xác minh được, đã ghi cảnh báo ngay trong UI:**
+  (1) *thời gian đi bộ lên Cafe Mí Pó* — không nguồn nào ghi rõ, trang đang để
+  ước lượng 30 phút/chiều và yêu cầu nhóm gọi hotline quán (0961 152 555) hỏi
+  trước; (2) *khung giờ chiều Hà Giang → Hà Nội của nhà xe Bằng Phấn* — mỗi
+  trang tổng hợp vé ghi một bảng giờ khác nhau (09:00/09:30/11:30/13:30/16:00
+  ở nguồn này, 11:30/14:00/22:00 ở nguồn kia), nên trang chỉ khẳng định phần
+  chắc chắn (toàn tuyến Hà Giang → Nội Bài chạy 06:30–22:30, có trả khách tận
+  sảnh sân bay) và yêu cầu gọi hotline xác nhận.
+- Toạ độ Anh Quân Camping, Coffee Mí Pó, Lô Lô Chải, Ma Lé, Đồn Cao trong
+  `stops`/`WAYPOINTS` là **ước lượng để vẽ marker**, không phải toạ độ đo
+  thật — link Google Maps của các điểm này dùng trường `q` (tên địa danh).
 - Icon PWA trong `manifest.json` là SVG placeholder đơn giản (dãy núi cách
   điệu), chưa có icon thiết kế riêng.
 - Chưa có chức năng sửa/xoá tin nhắn, đề xuất, chi phí đã đăng.
@@ -259,7 +280,7 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   từng số còn hoạt động hay chính xác**, có ghi chú rõ trong UI và khuyến
   nghị phương án dự phòng (gọi homestay gần nhất, 113/115).
 
-- **v10** (hiện tại) — **Rà soát lại toàn bộ giờ giấc lịch trình theo yêu cầu
+- **v10** — **Rà soát lại toàn bộ giờ giấc lịch trình theo yêu cầu
   "đảm bảo hợp lý, có thời gian chụp ảnh/ăn/nghỉ, nhận phòng trước trời tối".**
   Sửa 5 lỗi thực địa của v9: (1) chặng TP Hà Giang → Cổng Trời Quản Bạ ghi 45
   phút cho 43km đường đèo → sửa thành 1h30; (2) Cán Tỷ bị xếp sau Yên Minh
@@ -284,6 +305,46 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   không phải 150–250k) → tổng chi phí giảm còn ≈13,8tr/3 người. Thêm 3 tip-card
   "Thực tế 2026": rà soát giờ giấc, mùa sương mù tháng 11–2, tin sạt lở QL4C
   8/2026 + siết quản lý tour xe máy 4/2026.
+
+- **v11** (hiện tại) — **Đổi cấu trúc chuyến theo yêu cầu của nhóm** (tin nhắn
+  của bạn cùng đi): (a) ở **Đồng Văn 2 đêm** để có nguyên một ngày đi các điểm
+  quanh Đồng Văn; (b) tách riêng một ngày cho **Mã Pí Lèng – thuyền hẻm Tu Sản
+  – ăn trưa Anh Quân Camping – Cafe Mí Pó** (quán trên đỉnh núi phải đi bộ lên,
+  bạn trong nhóm chỉ đích danh muốn đi); (c) **ngày cuối không quay về Hà Nội
+  chơi nữa** — ngủ lại TP Hà Giang đêm 07/11, sáng 08/11 mới bắt xe khách về
+  thẳng sảnh sân bay Nội Bài.
+
+  **Ràng buộc buộc phải cắt gì đó:** Hà Giang chỉ có 4 đêm (04→07/11), thêm 2
+  chỗ nghỉ mới thì phải bỏ 1 → **bỏ hẳn Du Già** (cả đêm nghỉ lẫn thác Du Già).
+  Ngày 4 vì vậy đi **DT176 + QL4C** (Mèo Vạc → Mậu Duệ → Yên Minh → Quản Bạ →
+  TP Hà Giang, 156km, ~6h05 chạy, đường tốt) thay cho cung Du Già – Minh Ngọc
+  (153km nhưng ~7h chạy vì 55km đường xấu). Phương án đi xuyên Du Già vẫn được
+  giữ lại dưới dạng side-card "tuỳ chọn" có ghi rõ cái giá, giống cách v10 xử
+  lý Khâu Vai. (Ghi chú: "đi xuyên Du Già trong một ngày" khác hẳn "ngủ lại Du
+  Già một đêm + đi thác buổi chiều" của v10 — nên khuyến nghị là bỏ hẳn.)
+
+  **Thay đổi kỹ thuật:** thêm hẳn `section#ngay5` (ngày ngồi xe khách) + mục
+  nav thứ 5, dùng màu `--pink` cho ngày 5; viết lại toàn bộ `stops`, `routes`,
+  `dayRoutes`, `WAYPOINTS` (ngày 2 giờ là **vòng tròn khép kín** Đồng Văn →
+  Sà Phìn → Lũng Cú → Lô Lô Chải → Ma Lé → Đồng Văn, ngày 3 có nhánh đi–về
+  bằng thuyền tới Anh Quân Camping); thêm điểm mới **Lô Lô Chải, Ma Lé, Đồn
+  Cao, Anh Quân Camping, Coffee Mí Pó**; bản đồ vẫn chỉ vẽ 4 ngày chạy xe
+  (ngày 5 không có cung đường xe máy). `CACHE_NAME` trong `service-worker.js`
+  nâng lên `hgloop-v11` để máy đã cài PWA không kẹt bản cũ. Prompt hệ thống
+  trong `netlify/functions/ai-draft.js` được cập nhật để AI biết lịch trình mới.
+
+  **Trả lời câu hỏi "kiểm tra vị trí mấy nhà trọ so với điểm tham quan":** đã
+  thêm note-box đo khoảng cách trong side-card chỗ ở của cả 3 nơi — Đồng Văn
+  (4 lựa chọn đều trong phố cổ, chênh nhau vài trăm mét, nên chọn theo giá chứ
+  không theo vị trí), Mèo Vạc (Pả Vi cách trung tâm ~4km về phía Mã Pí Lèng —
+  tới sớm hơn ~10 phút nhưng tối phải chạy xe ra thị trấn ăn; khuyến nghị ở
+  trung tâm vì ngày 3 về khá sát giờ) và TP Hà Giang (ưu tiên khu Nguyễn Trãi
+  / Trần Phú / Quang Trung vì đó là các phố nhà xe đi Nội Bài đón tận nơi).
+
+  **Chi phí:** tăng từ ≈13,8tr lên **≈16,1tr/3 người** (≈5,2–6,0tr/người) —
+  +900k thêm 1 đêm phòng, +450k bữa trưa camping, +420k thêm nửa ngày ăn ở Hà
+  Giang, +300k cà phê Mí Pó/Lô Lô Chải, +270k vé và dự phòng. Bảng chi phí có
+  ghi rõ từng khoản chênh lệch.
 
 ## Deploy
 

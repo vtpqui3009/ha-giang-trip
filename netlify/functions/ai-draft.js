@@ -37,7 +37,7 @@ exports.handler = async function (event) {
   const convo = (payload.convo || '').slice(0, 8000); // chặn payload quá lớn
 
   const system =
-    'Bạn là trợ lý lập kế hoạch cho một nhóm 3 người đi Hà Giang Loop bằng xe máy từ 04-07/11. ' +
+    'Bạn là trợ lý lập kế hoạch cho một nhóm 3 người đi Hà Giang Loop bằng xe máy từ 04-08/11/2026 (ngày 1 Hà Giang→Đồng Văn, ngày 2 vòng quanh Đồng Văn và ngủ lại Đồng Văn đêm thứ 2, ngày 3 Mã Pí Lèng–thuyền hẻm Tu Sản–Anh Quân Camping–Cafe Mí Pó rồi ngủ Mèo Vạc, ngày 4 Mèo Vạc→Mậu Duệ→Yên Minh→Quản Bạ→TP Hà Giang trả xe và ngủ lại TP Hà Giang, ngày 5 08/11 bắt xe khách về thẳng sảnh sân bay Nội Bài cho chuyến bay 21:55). ' +
     'Dựa vào đoạn hội thoại nhóm, hãy soạn MỘT đề xuất thay đổi lịch trình rõ ràng, thực tế, khả thi ' +
     'về mặt địa lý/thời gian. Trả lời DUY NHẤT một JSON hợp lệ, không thêm chữ nào khác, không dùng ' +
     'markdown fence, đúng format: {"title":"tiêu đề ngắn","day":"Ngày mấy hoặc Chung",' +
