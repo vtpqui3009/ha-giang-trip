@@ -376,6 +376,29 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   thêm side-card vé phổ thông/check-in online/hành lý cho ngày 5; Lô Lô Chải
   được UN Tourism vinh danh 17/10/2025.
 
+- **v14** (hiện tại) — **Đo lại quãng đường bằng Google Maps: các bản trước ghi
+  thiếu 15–35%.** Người dùng phát hiện tuyến Google vẽ dài hơn lịch trình nhiều.
+  Kiểm chứng cho thấy **hai lỗi cùng tồn tại**, không phải một:
+  1. *Toạ độ sai*: Cán Tỷ lệch **13,3 km**, Yên Minh **11,2 km**, Sủng Là
+     **8,4 km** so với vị trí thật (người dùng lấy bằng chuột phải trên Google
+     Maps). Toạ độ lệch khỏi QL4C khiến Google vẽ vòng, phồng thêm quãng đường.
+  2. *Quãng đường trong lịch trình vốn đã ghi thiếu*: sau khi loại hết waypoint
+     hỏng, số thật vẫn là ngày 1 **~180 km** (ghi 150), ngày 2 **~80 km** (ghi
+     58), ngày 4 **~175 km** (ghi 156). Nguyên nhân gốc: **hệ số ngoằn ngoèo
+     của QL4C là 2,17×** (đường bộ / đường chim bay), cao hơn hẳn mức 1,4–1,8×
+     của đường đèo thông thường — mọi ước tính theo cảm quan đều thấp.
+     *Bài học: đừng dùng 1,4–1,8× cho vùng này.*
+  Ngày 1 đã dựng lại giờ giấc theo 180 km: chạy 6h15 (cũ 4h45), tới Đồng Văn
+  15:35 thay vì 15:10, dự phòng còn 1h45. Ngày 4 giữ nguyên giờ vì quỹ thời
+  gian cũ (6h05) vốn đã rộng hơn số Google đo (4h54).
+  **Dẫn đường:** dùng toạ độ ĐÃ XÁC MINH cho 3 điểm hay hỏng, tên cho các địa
+  danh đã chứng minh resolve đúng, và **bỏ hẳn waypoint không cần thiết** —
+  ngày 3 trước đó thêm "Pải Lủng" làm Google snap sang "Mã Lủ" và phồng lên
+  98,5 km, trong khi Đồng Văn → Mèo Vạc chỉ có độc nhất QL4C qua Mã Pí Lèng
+  nên không cần waypoint nào.
+  **Toạ độ còn nghi ngờ, chưa đo:** Dốc Thẩm Mã (đang nằm phía đông Sủng Là —
+  sai thứ tự trên tuyến), Cổng Trời Quản Bạ, Mèo Vạc, Đồng Văn.
+
 ## Deploy
 
 **Từ v6, bắt buộc deploy qua Netlify "Import from an existing project" →
