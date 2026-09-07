@@ -376,6 +376,64 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   thêm side-card vé phổ thông/check-in online/hành lý cho ngày 5; Lô Lô Chải
   được UN Tourism vinh danh 17/10/2025.
 
+- **v14** (hiện tại) — **Đo lại quãng đường bằng Google Maps: các bản trước ghi
+  thiếu 15–35%.** Người dùng phát hiện tuyến Google vẽ dài hơn lịch trình nhiều.
+  Kiểm chứng cho thấy **hai lỗi cùng tồn tại**, không phải một:
+  1. *Toạ độ sai*: Cán Tỷ lệch **13,3 km**, Yên Minh **11,2 km**, Sủng Là
+     **8,4 km** so với vị trí thật (người dùng lấy bằng chuột phải trên Google
+     Maps). Toạ độ lệch khỏi QL4C khiến Google vẽ vòng, phồng thêm quãng đường.
+  2. *Quãng đường trong lịch trình vốn đã ghi thiếu*: sau khi loại hết waypoint
+     hỏng, số thật vẫn là ngày 1 **~180 km** (ghi 150), ngày 2 **~80 km** (ghi
+     58), ngày 4 **~175 km** (ghi 156). Nguyên nhân gốc: **hệ số ngoằn ngoèo
+     của QL4C là 2,17×** (đường bộ / đường chim bay), cao hơn hẳn mức 1,4–1,8×
+     của đường đèo thông thường — mọi ước tính theo cảm quan đều thấp.
+     *Bài học: đừng dùng 1,4–1,8× cho vùng này.*
+  Ngày 1 đã dựng lại giờ giấc theo 180 km: chạy 6h15 (cũ 4h45), tới Đồng Văn
+  15:35 thay vì 15:10, dự phòng còn 1h45. Ngày 4 giữ nguyên giờ vì quỹ thời
+  gian cũ (6h05) vốn đã rộng hơn số Google đo (4h54).
+  **Dẫn đường:** dùng toạ độ ĐÃ XÁC MINH cho 3 điểm hay hỏng, tên cho các địa
+  danh đã chứng minh resolve đúng, và **bỏ hẳn waypoint không cần thiết** —
+  ngày 3 trước đó thêm "Pải Lủng" làm Google snap sang "Mã Lủ" và phồng lên
+  98,5 km, trong khi Đồng Văn → Mèo Vạc chỉ có độc nhất QL4C qua Mã Pí Lèng
+  nên không cần waypoint nào.
+- **v15** (hiện tại) — Người dùng đo thêm 3 toạ độ: Cổng Trời Quản Bạ
+  `23.049602,104.992615`, Phố cổ Đồng Văn `23.280154,105.359912`, chợ TT Mèo
+  Vạc `23.163830,105.408983`. **Tổng cộng 6 điểm mốc nay đã đo thật.** Dốc
+  Thẩm Mã được **nội suy** ở 55% đoạn Yên Minh → Sủng Là (`23.187570,105.188652`)
+  vì giá trị cũ `23.1897,105.2872` nằm phía đông Sủng Là, tức sai thứ tự trên
+  tuyến — gần như chắc chắn là lỗi kinh độ; đã ghi rõ đây là số nội suy, chưa đo.
+  **Kiểm chéo quan trọng:** tính quãng đường ngày 1 từ 6 toạ độ thật cho ra
+  **178 km**, Google đo thẳng được **180 km** — lệch dưới 1%, xác nhận con số
+  180 km dùng để lập kế hoạch là đúng, và hệ số ngoằn ngoèo QL4C là **2,22×**.
+  Kinh độ dọc tuyến giờ tăng đơn điệu từ Hà Giang (104,9784) tới Đồng Văn
+  (105,3599) — thứ tự địa lý đã nhất quán, trước đây thì không.
+  **Toạ độ vẫn chưa đo:** TP Hà Giang, Mậu Duệ, Sà Phìn, Lũng Cú, Lô Lô Chải,
+  Ma Lé, Đồn Cao, Mã Pí Lèng, bến thuyền Tà Làng, Anh Quân Camping, Mí Pó, dốc
+  chữ M, Minh Ngọc — nguồn gốc từng toạ độ đã ghi thành comment ngay trên mảng
+  `stops` trong `index.html`.
+
+- **v16** (hiện tại) — **Tách bạch hai việc trước đây bị lẫn: ghim điểm đến và
+  waypoint dẫn đường.** Hai việc này cần dữ liệu khác nhau:
+  - *Waypoint dẫn đường* chỉ cần ghim đúng **con đường** → toạ độ đã đo là tốt nhất.
+  - *Ghim điểm đến* phải rơi đúng **địa điểm** → tên POI của Google là tốt nhất,
+    vì toạ độ đo được thường chỉ là một điểm trên mặt đường gần đó.
+  Sửa 5 ghim từng dẫn sai chỗ: **Nhà của Pao** (toạ độ cũ rơi vào "Trụ sở thôn
+  Sủng Là dưới", nay trỏ "Làng văn hóa du lịch Lũng Cẩm"); **Mã Pì Lèng
+  Panorama** (trước trỏ vào cả con đèo dài 20km); **bến thuyền Nho Quế** (nay
+  dùng đúng tên POI "Lối xuống bến thuyền đi sông Nho Quế"); **Hẻm Tu Sản**
+  (nằm giữa sông, không chạy xe tới được → trỏ về bến); **Dốc Thẩm Mã** (bỏ
+  huyện vì POI nằm giáp ranh Yên Minh/Đồng Văn).
+  Thêm section `#kiemtra`: danh sách **25 điểm đến** kèm link Maps, nhãn độ tin
+  cậy (đã thấy là POI trên ảnh Maps của người dùng / toạ độ đã đo / cần kiểm),
+  checkbox lưu `localStorage` key `hgl_verified` và thanh tiến độ. Lý do tồn
+  tại: **trang này không tự kiểm chứng được link bản đồ** — mọi geocoder
+  (Nominatim, Photon, Overpass, Wikidata, GeoNames) đều bị chặn bởi network
+  policy, nên cách duy nhất để chắc chắn là người dùng bấm thử một lượt trên
+  điện thoại sẽ mang đi.
+  *Lưu ý cho lần sửa sau:* Dốc Thẩm Mã trong `stops` vẫn là toạ độ **nội suy**
+  dùng để vẽ đường; ghim điểm đến của nó đã chuyển sang tên POI nên không ảnh
+  hưởng việc dẫn đường.
+
 ## Deploy
 
 **Từ v6, bắt buộc deploy qua Netlify "Import from an existing project" →

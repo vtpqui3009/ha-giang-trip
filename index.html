@@ -293,6 +293,33 @@
     border:1px solid rgba(36,52,77,0.18);
   }
 
+
+  /* ---------- KIEM TRA DIEM DEN ---------- */
+  .vf-head{display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; margin-bottom:18px;}
+  .vf-prog{font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:700;}
+  .vf-bar{height:8px; border-radius:99px; background:rgba(31,42,26,0.12); overflow:hidden; margin-top:6px; width:220px;}
+  .vf-bar i{display:block; height:100%; width:0; background:var(--moss); transition:width .25s;}
+  .vf-day{font-family:'JetBrains Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+          color:#6b6455; font-weight:700; margin:22px 0 10px;}
+  .vf-row{display:flex; align-items:center; gap:12px; padding:11px 14px; border:1px solid var(--line);
+          border-radius:10px; background:var(--card); margin-bottom:8px;}
+  .vf-row.done{background:rgba(74,103,65,0.1); border-color:rgba(74,103,65,0.35);}
+  .vf-row input{width:19px; height:19px; flex:0 0 auto; cursor:pointer; accent-color:var(--moss);}
+  .vf-txt{flex:1 1 auto; min-width:0;}
+  .vf-name{display:block; font-weight:700; font-size:14.5px; line-height:1.35;}
+  .vf-q{display:block; margin-top:3px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#6b6455; word-break:break-word; line-height:1.45;}
+  .vf-badge{font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700; padding:3px 8px;
+            border-radius:99px; white-space:nowrap; flex:0 0 auto;}
+  .vf-ok{background:rgba(74,103,65,0.18); color:var(--moss-deep);}
+  .vf-gps{background:rgba(36,52,77,0.1); color:var(--indigo);}
+  .vf-chk{background:rgba(200,149,68,0.22); color:#8a6323;}
+  .vf-open{font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:700; text-decoration:none;
+           padding:7px 13px; border-radius:99px; background:var(--ink); color:var(--stone); flex:0 0 auto;}
+  @media (max-width:640px){
+    .vf-row{flex-wrap:wrap;}
+    .vf-txt{flex:1 1 100%; order:2;}
+  }
+
   /* ---------- MAP ---------- */
   #map{width:100%; height:560px; border-radius:14px; border:1px solid var(--line); overflow:hidden;}
   .map-toggle{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;}
@@ -498,6 +525,7 @@
       <a href="#ngay4">Ngày 4</a>
       <a href="#ngay5">Ngày 5</a>
       <a href="#banddo">Bản đồ</a>
+      <a href="#kiemtra">Kiểm tra</a>
       <a href="#chiphi">Chi phí</a>
       <a href="#thucte">Thực tế</a>
       <a href="#luuy">Lưu ý</a>
@@ -612,14 +640,14 @@
       </div>
     </div>
     <div class="day-stats">
-      <div><b>~150 km</b><span>Quãng đường</span></div>
-      <div><b>~4h45 chạy</b><span>Chưa tính dừng nghỉ</span></div>
-      <div><b>~8h40</b><span>Tổng cả ngày (đã tính dừng)</span></div>
+      <div><b>~180 km</b><span>Quãng đường (đã đo lại)</span></div>
+      <div><b>~6h15 chạy</b><span>Chưa tính dừng nghỉ</span></div>
+      <div><b>~9h05</b><span>Tổng cả ngày (đã tính dừng)</span></div>
       <div><b>06:30</b><span>Giờ xuất phát đề xuất</span></div>
     </div>
     <div class="daylight">
-      <div class="dl-items"><span>Mặt trời lặn <b>17:21</b></span><span>Tối hẳn <b>17:44</b></span><span>Kế hoạch tới Đồng Văn <b>15:10</b></span><span>Dự phòng còn lại <b>≈2h10</b></span></div>
-      <a class="btn-nav" href="https://www.google.com/maps/dir/?api=1&amp;origin=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang&amp;waypoints=Tam%20S%C6%A1n%2C%20Qu%E1%BA%A3n%20B%E1%BA%A1%2C%20Tuy%C3%AAn%20Quang%7C23.1706%2C105.1367%7CTh%E1%BB%8B%20tr%E1%BA%A5n%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang%7C23.1897%2C105.2872%7C23.2394%2C105.3111&amp;destination=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving" target="_blank" rel="noopener">🧭 Chỉ đường cả ngày 1</a>
+      <div class="dl-items"><span>Mặt trời lặn <b>17:21</b></span><span>Tối hẳn <b>17:44</b></span><span>Kế hoạch tới Đồng Văn <b>15:35</b></span><span>Dự phòng còn lại <b>≈1h45</b></span></div>
+      <a class="btn-nav" href="https://www.google.com/maps/dir/?api=1&amp;origin=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang&amp;waypoints=Tam%20S%C6%A1n%2C%20Qu%E1%BA%A3n%20B%E1%BA%A1%2C%20Tuy%C3%AAn%20Quang%7C23.117930%2C105.019623%7C23.107345%2C105.137749%7C23.253208%2C105.230299&amp;destination=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving" target="_blank" rel="noopener">🧭 Chỉ đường cả ngày 1</a>
     </div>
     <div class="day-layout">
       <div class="tline" style="--dc:var(--indigo)">
@@ -630,73 +658,73 @@
           <span class="tag stay">Chuẩn bị</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">06:30 – 08:00</div>
-          <h4>Xuất phát → Cổng Trời Quản Bạ (~43 km · 1h30 chạy)</h4>
-          <p>⚠️ <b>Đã sửa so với bản trước:</b> bản cũ ghi chặng này chỉ 45 phút — không khả thi. QL4C là đường đèo, tốc độ trung bình thực tế của xe số chở đồ chỉ khoảng <b>28–32 km/h</b>, nên 43km mất tròn 1h30. Sáng sớm đường vắng và mát nhưng <b>tháng 11 là mùa sương mù dày ở Quản Bạ</b> — nếu tầm nhìn dưới 20m thì bật đèn, bám vạch phải, giảm còn 20 km/h và cộng thêm 20–30 phút vào lịch.</p>
+          <div class="time">06:30 – 08:15</div>
+          <h4>Xuất phát → Cổng Trời Quản Bạ (~50 km · 1h45 chạy)</h4>
+          <p>⚠️ <b>Đã đo lại 06/09:</b> quãng đường ngày 1 thực tế là <b>~180 km</b> chứ không phải 150 km như các bản trước ghi. Google đo cung này hết <b>5h29 lái ô tô</b>; xe số chở đồ đi theo đoàn thì nên tính <b>6h15</b>. QL4C ngoằn ngoèo tới mức đường bộ dài gấp <b>2,17 lần</b> đường chim bay — đó là lý do mọi ước tính trước đó đều thấp. Sáng sớm đường vắng và mát, nhưng <b>tháng 11 là mùa sương mù dày ở Quản Bạ</b>: tầm nhìn dưới 20m thì bật đèn, bám vạch phải, giảm còn 20 km/h và cộng thêm 20–30 phút vào lịch.</p>
           <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=C%E1%BB%95ng%20Tr%E1%BB%9Di%20Qu%E1%BA%A3n%20B%E1%BA%A1%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">08:00 – 08:40</div>
+          <div class="time">08:15 – 08:50</div>
           <h4>Cổng Trời Quản Bạ &amp; Núi Đôi Cô Tiên — dừng 40 phút</h4>
           <p>Khung giờ ánh sáng đẹp nhất trong ngày cho điểm này, sương còn vắt ngang thung lũng. 40 phút gồm: ~10 phút gửi xe và đi bộ lên đài quan sát, ~20 phút chụp ảnh, ~10 phút cà phê ở Heaven Gate Coffee ngay quốc lộ. Điểm ngắm có thu phí ở đây không đáng tiền — góc từ lề đường miễn phí gần như giống hệt.</p>
           <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=C%E1%BB%95ng%20Tr%E1%BB%9Di%20Qu%E1%BA%A3n%20B%E1%BA%A1%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">08:40 – 09:15</div>
-          <h4>Cổng Trời → Cán Tỷ (~16 km · 35 phút)</h4>
+          <div class="time">08:50 – 09:35</div>
+          <h4>Cổng Trời → Cán Tỷ (~20 km · 45 phút)</h4>
           <p>Đường đèo thoáng, ít xe. Đây cũng là đoạn đầu tiên tay lái làm quen với cua liên tục — đi chậm, giữ khoảng cách 3 giây giữa các xe trong nhóm.</p>
           <span class="tag ride">Chạy xe là chính</span>
         </div>
         <div class="tstop">
-          <div class="time">09:15 – 09:35</div>
-          <h4>Cán Tỷ — cua chữ M · dừng 20 phút</h4>
+          <div class="time">09:35 – 09:50</div>
+          <h4>Cán Tỷ — cua chữ M · dừng 15 phút</h4>
           <p>⚠️ <b>Đã sửa thứ tự:</b> bản trước đặt Cán Tỷ <i>sau</i> Yên Minh (11:00) trong khi Cán Tỷ nằm ở huyện Quản Bạ, <b>trước</b> Yên Minh trên QL4C — đi theo thứ tự cũ là chạy ngược lại hơn 30km vô ích. 20 phút là đủ để chụp khúc cua tay áo nhìn từ trên cao, không cần đi bộ xuống sâu.</p>
-          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.1706%2C105.1367" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.117930%2C105.019623" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">09:35 – 10:50</div>
-          <h4>Cán Tỷ → Thị trấn Yên Minh (~34 km · 1h15)</h4>
+          <div class="time">09:50 – 11:05</div>
+          <h4>Cán Tỷ → Thị trấn Yên Minh (~35 km · 1h15)</h4>
           <p>Đèo nhẹ, nhiều khúc cua, mặt đường tốt. Rừng thông Yên Minh nằm ngay trước thị trấn — chỉ dừng chụp nhanh <b>tối đa 10 phút</b> nếu đúng lịch, bỏ qua nếu đang trễ hơn 30 phút so với kế hoạch.</p>
-          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Th%E1%BB%8B%20tr%E1%BA%A5n%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.107345%2C105.137749" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">10:50 – 11:25</div>
-          <h4>Yên Minh — nghỉ giữa chặng 35 phút &amp; ĐỔ XĂNG BẮT BUỘC</h4>
+          <div class="time">11:05 – 11:35</div>
+          <h4>Yên Minh — nghỉ giữa chặng 30 phút &amp; ĐỔ XĂNG BẮT BUỘC</h4>
           <p>Đây là <b>lần đổ xăng quan trọng nhất ngày</b>: từ Yên Minh tới Đồng Văn trạm thưa dần và cao điểm tháng 10–11 có nơi phải chờ 30 phút mới tới lượt. Đổ đầy bình cả 3 xe. Ăn nhẹ (không ăn no — chiều còn đèo dốc), cà phê, duỗi chân, tháo găng cho tay đỡ mỏi. Quán quen: Nhà hàng Phúc Cái ngay lối vào chợ trung tâm.</p>
-          <span class="tag eat">Ăn uống · Đổ xăng</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Th%E1%BB%8B%20tr%E1%BA%A5n%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag eat">Ăn uống · Đổ xăng</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.107345%2C105.137749" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">11:25 – 12:10</div>
-          <h4>Yên Minh → Dốc Thẩm Mã (~20 km · 45 phút)</h4>
+          <div class="time">11:35 – 12:35</div>
+          <h4>Yên Minh → Dốc Thẩm Mã (~28 km · 1 tiếng)</h4>
           <p>Chặng ngắn nhưng dốc đứng và cua gấp liên tục — đoạn đầu tiên thật sự cần tay lái vững. Về số 2–3, không vượt trong cua.</p>
           <span class="tag ride">Chạy xe là chính</span>
         </div>
         <div class="tstop">
-          <div class="time">12:10 – 12:35</div>
-          <h4>Dốc Thẩm Mã — dừng 25 phút (điểm mới bổ sung)</h4>
+          <div class="time">12:35 – 12:55</div>
+          <h4>Dốc Thẩm Mã — dừng 20 phút</h4>
           <p>Con dốc 9 tầng nổi tiếng nhất Hà Giang, nằm giữa Yên Minh và Phố Cáo — <b>bản lịch trình trước bỏ sót điểm này dù nó nằm ngay trên đường</b>. Có bãi đỗ và đài quan sát trên đỉnh dốc, nhìn xuống toàn bộ 9 tầng cua. Ở đây thường có các em nhỏ đội gùi hoa mời chụp ảnh — nên gửi các em ít tiền/bánh nếu chụp.</p>
-          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.1897%2C105.2872" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=D%E1%BB%91c%20Th%E1%BA%A9m%20M%C3%A3%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">12:35 – 13:00</div>
-          <h4>Thẩm Mã → Sủng Là (~12 km · 25 phút)</h4>
+          <div class="time">12:55 – 13:20</div>
+          <h4>Thẩm Mã → Sủng Là (~12 km · 25 phút, giữ nguyên)</h4>
           <p>Xuống dốc vào thung lũng Sủng Là — nếu đúng mùa tam giác mạch (giữa 10 đến 12) thì đây là một trong những cánh đồng đẹp nhất tuyến.</p>
           <span class="tag ride">Chạy xe là chính</span>
         </div>
         <div class="tstop">
-          <div class="time">13:00 – 14:20</div>
-          <h4>Sủng Là — ăn trưa &amp; Nhà của Pao · 1h20</h4>
+          <div class="time">13:20 – 14:30</div>
+          <h4>Sủng Là — ăn trưa &amp; Nhà của Pao · 1h10</h4>
           <p>Chia rõ: <b>45 phút ăn trưa</b> tại quán trong thung lũng hoa + <b>35 phút</b> tham quan Nhà của Pao (vé ~20.000đ/người) — kiến trúc trình tường H'Mông nguyên bản, bối cảnh phim "Chuyện của Pao". Đây là bữa trưa duy nhất trong ngày nên ăn đủ no, nhưng tránh rượu ngô vì buổi chiều còn đèo.</p>
-          <span class="tag photo">Ăn uống · Chụp ảnh</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.2394%2C105.3111" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag photo">Ăn uống · Chụp ảnh</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=L%C3%A0ng%20v%C4%83n%20h%C3%B3a%20du%20l%E1%BB%8Bch%20L%C5%A9ng%20C%E1%BA%A9m%2C%20S%E1%BB%A7ng%20L%C3%A0%2C%20%C4%90%E1%BB%93ng%20V%C4%83n" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
-          <div class="time">14:20 – 15:10</div>
-          <h4>Sủng Là → Đồng Văn (~25 km · 50 phút)</h4>
+          <div class="time">14:30 – 15:35</div>
+          <h4>Sủng Là → Đồng Văn (~35 km · 1h05)</h4>
           <p>Đoạn đèo quanh co nhiều khúc cua liên tiếp, đi số thấp, không vượt ẩu. <b>Đây là đoạn tập trung lái xe nhất trong ngày — không dừng chụp ảnh giữa đèo.</b> Nếu tới đây mà đồng hồ đã quá 15:30 thì bỏ mọi điểm dừng còn lại và chạy thẳng về Đồng Văn.</p>
           <span class="tag ride">Chạy xe là chính</span>
         </div>
         <div class="tstop">
-          <div class="time">15:10 – 16:00</div>
+          <div class="time">15:35 – 16:15</div>
           <h4>Nhận phòng Đồng Văn — hạn chót an toàn 16:30 · <b>đặt 2 đêm</b></h4>
           <p>Về tới nơi khi trời còn sáng rõ (mặt trời lặn 17:21). Tắm nước nóng, nghỉ lưng 30–40 phút — cả nhóm đã thức từ 4h sáng và chạy 150km. Buổi tối chỉ đi bộ trong phố cổ, <b>không lái xe ra khỏi thị trấn sau khi trời tối</b>. 💡 <b>Đặt phòng này 2 đêm liền (04 và 05/11)</b> — cả ngày mai vẫn ở Đồng Văn nên không phải đóng gói/dọn đồ, đây chính là cái lợi lớn nhất của bản lịch trình mới.</p>
           <span class="tag stay">Nghỉ đêm · Đúng giờ</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
@@ -777,14 +805,14 @@
       </div>
     </div>
     <div class="day-stats">
-      <div><b>~58 km</b><span>Ngày ít km nhất chuyến</span></div>
+      <div><b>~80 km</b><span>Đã đo lại (bản cũ ghi 58)</span></div>
       <div><b>~2h30 chạy</b><span>Chưa tính dừng nghỉ</span></div>
       <div><b>~10h</b><span>Tổng cả ngày (rất nhiều thời gian dừng)</span></div>
       <div><b>07:15</b><span>Giờ xuất phát đề xuất</span></div>
     </div>
     <div class="daylight">
       <div class="dl-items"><span>Mặt trời lặn <b>17:20</b></span><span>Tối hẳn <b>17:43</b></span><span>Về tới Đồng Văn <b>13:35</b></span><span>Dự phòng còn lại <b>≈3h45</b></span></div>
-      <a class="btn-nav" href="https://www.google.com/maps/dir/?api=1&amp;origin=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang&amp;waypoints=Dinh%20th%E1%BB%B1%20h%E1%BB%8D%20V%C6%B0%C6%A1ng%2C%20S%C3%A0%20Ph%C3%ACn%2C%20Tuy%C3%AAn%20Quang%7CC%E1%BB%99t%20c%E1%BB%9D%20L%C5%A9ng%20C%C3%BA%2C%20Tuy%C3%AAn%20Quang%7CL%C3%B4%20L%C3%B4%20Ch%E1%BA%A3i%2C%20L%C5%A9ng%20C%C3%BA%2C%20Tuy%C3%AAn%20Quang%7C23.3450%2C105.3486&amp;destination=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving" target="_blank" rel="noopener">🧭 Chỉ đường cả ngày 2</a>
+      <a class="btn-nav" href="https://www.google.com/maps/dir/?api=1&amp;origin=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang&amp;waypoints=S%C3%A0%20Ph%C3%ACn%2C%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang%7CC%E1%BB%99t%20c%E1%BB%9D%20L%C5%A9ng%20C%C3%BA%2C%20Tuy%C3%AAn%20Quang%7CL%C3%B4%20L%C3%B4%20Ch%E1%BA%A3i%2C%20L%C5%A9ng%20C%C3%BA%2C%20Tuy%C3%AAn%20Quang&amp;destination=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving" target="_blank" rel="noopener">🧭 Chỉ đường cả ngày 2</a>
     </div>
     <div class="day-layout">
       <div class="tline" style="--dc:var(--terracotta)">
@@ -840,7 +868,7 @@
           <div class="time">12:30 – 12:50</div>
           <h4>Làng cổ Ma Lé — dừng 20 phút</h4>
           <p>Làng người Giáy nằm trong thung lũng đá, nhà trình tường và ruộng bậc thang nhỏ. Đây là kiểu điểm dừng "không cần vé, không cần vội" — dừng xe ở lề, đi bộ vào vài trăm mét, chụp ảnh rồi đi tiếp.</p>
-          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.3450%2C105.3486" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Ma%20L%C3%A9%2C%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">12:50 – 13:35</div>
@@ -858,7 +886,7 @@
           <div class="time">15:00 – 16:45</div>
           <h4>Leo bộ lên Đồn Cao — pháo đài đá 1925, view toàn thị trấn</h4>
           <p>Không cần xe máy: từ phố cổ đi bộ tới chân dốc rồi leo <b>97 bậc đá</b>, mất 15–30 phút tuỳ sức. Đồn Cao xây năm 1925 trên đỉnh núi đá ~1.200m, tường đá vôi cao 6–10m có lỗ châu mai — từ trên nhìn xuống là toàn cảnh thị trấn Đồng Văn nằm gọn giữa vòng núi. <b>Đây là góc đẹp nhất Đồng Văn mà bản lịch trình cũ không hề có</b>, chỉ vì ngày 2 cũ phải chạy đi Mèo Vạc.</p>
-          <span class="tag photo">Điểm chụp ảnh đẹp nhất ngày</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.2760%2C105.3625" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag photo">Điểm chụp ảnh đẹp nhất ngày</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=%C4%90%E1%BB%93n%20Cao%2C%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">16:45 – 17:15</div>
@@ -936,7 +964,7 @@
     </div>
     <div class="daylight">
       <div class="dl-items"><span>Mặt trời lặn <b>17:17</b></span><span>Tối hẳn <b>17:41</b></span><span>Kế hoạch tới Mèo Vạc <b>15:55</b></span><span>Dự phòng còn lại <b>≈1h20</b></span></div>
-      <a class="btn-nav" href="https://www.google.com/maps/dir/?api=1&amp;origin=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang&amp;waypoints=%C4%90%C3%A8o%20M%C3%A3%20P%C3%AC%20L%C3%A8ng%2C%20Tuy%C3%AAn%20Quang%7C23.2214%2C105.4064%7C23.2330%2C105.4230&amp;destination=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving" target="_blank" rel="noopener">🧭 Chỉ đường cả ngày 3</a>
+      <a class="btn-nav" href="https://www.google.com/maps/dir/?api=1&amp;origin=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang&amp;destination=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving" target="_blank" rel="noopener">🧭 Chỉ đường cả ngày 3</a>
     </div>
     <div class="note-box" style="margin-bottom:22px;">
       ⚠️ <b>Ngày duy nhất trong chuyến có quỹ dự phòng mỏng (~50 phút).</b> Lý do: nhồi 4 hoạt động lớn (Panorama + thuyền Tu Sản + ăn trưa camping bên sông + leo bộ lên Mí Pó) vào một ngày. Nếu <b>13:30 mà chưa lên khỏi bến thuyền</b> thì <b>bỏ Cafe Mí Pó</b> và chạy thẳng về Mèo Vạc — đó là điểm duy nhất trong ngày có thể cắt mà không mất gì quá lớn, vì view của Mí Pó và của Panorama là cùng một hẻm Tu Sản.
@@ -953,19 +981,19 @@
           <div class="time">06:55 – 07:35</div>
           <h4>Đồng Văn → Mã Pí Lèng Panorama (~20 km · 40 phút)</h4>
           <p>Con đường Hạnh Phúc men vách đá. <b>Sương mù ở Mã Pí Lèng có thể ập xuống dưới 10m tầm nhìn trong vài phút, đặc biệt tháng 11–2</b> — nếu gặp, tấp vào điểm dừng gần nhất chờ tan, tuyệt đối không mò tiếp trên đèo hẹp. Đi giờ này thì đèo còn vắng, chưa có đoàn tour.</p>
-          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.2299%2C105.4192" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=M%C3%A3%20P%C3%AC%20L%C3%A8ng%20Panorama%2C%20P%E1%BA%A3i%20L%E1%BB%A7ng%2C%20M%C3%A8o%20V%E1%BA%A1c" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">07:35 – 07:50</div>
           <h4>Mã Pí Lèng Panorama — chỉ dừng 15 phút</h4>
           <p>Ngắm toàn cảnh hẻm Tu Sản từ trên cao. ⚠️ Công trình Panorama đang bị yêu cầu tháo dỡ phần ban công nhô ra sông và cải tạo — vẫn mở như quán cà phê/điểm ngắm cảnh, không còn lưu trú, diện mạo khác ảnh cũ trên mạng. Vé chụp ảnh 30.000đ, nước từ 40.000đ. <b>Chỉ dừng 30 phút thay vì 45 như bản cũ</b>, vì chiều nay còn lên Mí Pó — cũng là ngắm đúng hẻm Tu Sản đó, từ trên cao hơn.</p>
-          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.2299%2C105.4192" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=M%C3%A3%20P%C3%AC%20L%C3%A8ng%20Panorama%2C%20P%E1%BA%A3i%20L%E1%BB%A7ng%2C%20M%C3%A8o%20V%E1%BA%A1c" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">07:50 – 08:20</div>
           <h4>Xuống bến thuyền Tà Làng (~9 km · 30 phút · dốc đứng)</h4>
           <p>Đường xuống bến từ ngã ba Pải Lủng là dốc bê tông hẹp, gấp khúc, nhiều đoạn một làn. Xe số phải về số 1–2 và <b>tuyệt đối không rà phanh liên tục</b> (dễ cháy má phanh). Ai tay lái yếu có thể gửi xe trên ngã ba và đi xe trung chuyển xuống bến (~20–30k, đã gồm trong vé trọn gói).</p>
-          <span class="tag warn">Đoạn khó — tập trung lái</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.2214%2C105.4064" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag warn">Đoạn khó — tập trung lái</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=L%E1%BB%91i%20xu%E1%BB%91ng%20b%E1%BA%BFn%20thuy%E1%BB%81n%20%C4%91i%20s%C3%B4ng%20Nho%20Qu%E1%BA%BF" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">08:20 – 08:45</div>
@@ -977,13 +1005,13 @@
           <div class="time">08:45 – 11:00</div>
           <h4>Thuyền vào hẻm Tu Sản → thả tại Anh Quân Camping · 2h15</h4>
           <p>Chuyến vào hẻm Tu Sản và quay ra khoảng 30–40 phút, phần còn lại là thời gian dừng chụp ảnh trong hẻm và chạy tiếp tới bến của khu camping. <b>Hẻm Tu Sản là hẻm vực sâu nhất Đông Nam Á</b>, vách đá dựng đứng gần 800m hai bên. Mặc áo phao đầy đủ. Lưu ý: đập thuỷ điện hạ lưu đã tích nước nên mực nước cao hơn ảnh chụp trước 2024, vách hẻm nhìn thấp hơn.</p>
-          <span class="tag photo">Trải nghiệm chính trong ngày</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=H%E1%BA%BBm%20Tu%20S%E1%BA%A3n%2C%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag photo">Trải nghiệm chính trong ngày</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=L%E1%BB%91i%20xu%E1%BB%91ng%20b%E1%BA%BFn%20thuy%E1%BB%81n%20%C4%91i%20s%C3%B4ng%20Nho%20Qu%E1%BA%BF" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">11:00 – 12:30</div>
           <h4>Ăn trưa tại Anh Quân Camping — bên bờ Nho Quế, ngay trước hẻm Tu Sản · 1h30</h4>
           <p>Khu cắm trại nằm sát mép nước, nhìn thẳng ra hẻm Tu Sản và vách Mã Pí Lèng — chỉ tới được bằng thuyền, không có đường xe máy. ⚠️ <b>BẮT BUỘC ĐẶT TRƯỚC</b>: chủ khu chỉ nhận khách <b>đã đặt suất ăn</b> (cơm canh kiểu gia đình hoặc đồ nướng, khoảng 150.000đ/người), <b>không nhận khách ghé vào uống nước</b>. Gọi đặt trước 1–2 ngày và hẹn giờ thuyền đón/trả, vì thuyền phải quay lại đón đúng giờ.</p>
-          <span class="tag eat">Ăn uống · Phải đặt trước</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.2160%2C105.3960" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag eat">Ăn uống · Phải đặt trước</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Anh%20Qu%C3%A2n%20Camping%2C%20Gi%C3%A0ng%20Chu%20Ph%C3%ACn%2C%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">12:30 – 13:00</div>
@@ -1001,7 +1029,7 @@
           <div class="time">13:40 – 15:20</div>
           <h4>Cafe Mí Pó — quán cà phê trên đỉnh núi, phải đi bộ lên · 1h40</h4>
           <p>Quán nằm <b>trên đỉnh núi phía trên đèo Mã Pí Lèng</b>, không đi xe máy lên tận nơi được — gửi xe dưới chân rồi <b>leo bộ theo đường mòn</b>. 1h40 chia ra: ~30 phút leo lên, ~40 phút ngồi cà phê ngắm trọn đèo Mã Pí Lèng + hẻm Tu Sản + sông Nho Quế từ trên cao, ~30 phút xuống. <b>Đây là điểm nhóm chỉ đích danh muốn đi</b> — cũng là lý do cả ngày hôm nay được tách riêng ra khỏi ngày Đồng Văn.<br><br>⚠️ <b>Chưa xác minh được thời gian leo chính xác</b> (không có nguồn chính thức nào ghi rõ) — 30 phút mỗi chiều là ước lượng thận trọng. <b>Gọi hỏi quán trước qua hotline 0961 152 555</b> để biết đường lên hiện tại đi bao lâu, có thu phí gửi xe không, và quán đóng cửa mấy giờ. Mang giày bám tốt, đường mòn đất/đá không có tay vịn.</p>
-          <span class="tag photo">Điểm nhóm muốn đi nhất</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.2330%2C105.4230" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag photo">Điểm nhóm muốn đi nhất</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Coffee%20M%C3%AD%20P%C3%B3%2C%20P%E1%BA%A3i%20L%E1%BB%A7ng%2C%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">15:20 – 15:55</div>
@@ -1099,14 +1127,14 @@
       </div>
     </div>
     <div class="day-stats">
-      <div><b>~156 km</b><span>Quãng đường</span></div>
+      <div><b>~175 km</b><span>Quãng đường (đã đo lại)</span></div>
       <div><b>~6h05 chạy</b><span>Chưa tính dừng nghỉ</span></div>
       <div><b>~8h05</b><span>Tổng cả ngày (đã tính dừng)</span></div>
       <div><b>07:45</b><span>Giờ xuất phát đề xuất</span></div>
     </div>
     <div class="daylight">
       <div class="dl-items"><span>Mặt trời lặn <b>17:19</b></span><span>Tối hẳn <b>17:42</b></span><span>Trả xe xong <b>16:00</b></span><span>Dự phòng còn lại <b>≈1h20</b></span></div>
-      <a class="btn-nav" href="https://www.google.com/maps/dir/?api=1&amp;origin=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang&amp;waypoints=M%E1%BA%ADu%20Du%E1%BB%87%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang%7CTh%E1%BB%8B%20tr%E1%BA%A5n%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang%7C23.1706%2C105.1367%7CTam%20S%C6%A1n%2C%20Qu%E1%BA%A3n%20B%E1%BA%A1%2C%20Tuy%C3%AAn%20Quang&amp;destination=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving" target="_blank" rel="noopener">🧭 Chỉ đường cả ngày 4</a>
+      <a class="btn-nav" href="https://www.google.com/maps/dir/?api=1&amp;origin=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang&amp;waypoints=M%E1%BA%ADu%20Du%E1%BB%87%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang%7C23.107345%2C105.137749%7C23.117930%2C105.019623%7CTam%20S%C6%A1n%2C%20Qu%E1%BA%A3n%20B%E1%BA%A1%2C%20Tuy%C3%AAn%20Quang&amp;destination=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving" target="_blank" rel="noopener">🧭 Chỉ đường cả ngày 4</a>
     </div>
     <div class="day-layout">
       <div class="tline" style="--dc:var(--gold)">
@@ -1144,7 +1172,7 @@
           <div class="time">10:10 – 11:10</div>
           <h4>Mậu Duệ → Thị trấn Yên Minh (~28 km · 1h)</h4>
           <p>Nhập lại QL4C ở Yên Minh. Từ đây trở đi là <b>cung đường ngày 1 đi ngược lại</b> — cùng con đường nhưng ánh sáng buổi trưa/chiều và hướng nhìn khác hẳn, nên vẫn đáng đi chậm.</p>
-          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=Th%E1%BB%8B%20tr%E1%BA%A5n%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.107345%2C105.137749" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">11:10 – 12:10</div>
@@ -1162,7 +1190,7 @@
           <div class="time">13:25 – 14:00</div>
           <h4>Cán Tỷ → Cổng Trời Quản Bạ (~16 km · 35 phút)</h4>
           <p>Đoạn cua liên tục quen thuộc từ ngày 1, giờ đã quen tay lái hơn nhiều.</p>
-          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.1706%2C105.1367" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.117930%2C105.019623" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">14:00 – 14:20</div>
@@ -1405,7 +1433,7 @@
     <div class="sec-head">
       <div class="sec-eyebrow">Bản đồ tương tác</div>
       <h2 class="sec-title">Toàn tuyến, theo từng ngày.</h2>
-      <p class="sec-desc">Bấm chọn từng ngày để xem cung đường và các điểm dừng riêng, hoặc bấm "Cả 4 ngày chạy xe" để xem toàn tuyến. Bấm vào từng điểm đánh dấu để xem ghi chú nhanh và <b>mở thẳng điểm đó trong app Google Maps trên điện thoại</b>. ⚠️ <b>Đã sửa 09/2026:</b> trước đây các link dẫn đường dùng <b>tên địa danh</b>, và waypoint "Làng cổ Ma Lé" của ngày 2 từng bị Google khớp nhầm sang <b>"Khu di tích Láng Le Bàu Cò" ở Bình Chánh, TP.HCM</b> — tuyến đường vẽ vòng về Sài Gòn, 66 giờ lái. Nay mọi điểm nhỏ (bến thuyền, quán cà phê, làng, dốc) đều dẫn bằng <b>toạ độ</b>, chỉ những địa danh lớn Google chắc chắn nhận đúng (thị trấn, cột cờ, dinh thự, đèo) mới dùng tên và luôn kèm tỉnh. Toạ độ không bao giờ khớp nhầm sang tỉnh khác. Dù vậy toạ độ vẫn là ước lượng ±1–2km — đủ để dẫn đúng con đường, nhưng khi tới gần vẫn nên nhìn biển chỉ dẫn thực tế. Nhớ tải bản đồ offline khu vực Hà Giang trong Google Maps trước khi đi, vì nhiều đoạn (nhất là DT176 Mèo Vạc – Mậu Duệ và khu Lũng Cú – Ma Lé) mất sóng. Ngày 5 (08/11) là ngày ngồi xe khách về Nội Bài nên không vẽ trên bản đồ này.</p>
+      <p class="sec-desc">Bấm chọn từng ngày để xem cung đường và các điểm dừng riêng, hoặc bấm "Cả 4 ngày chạy xe" để xem toàn tuyến. Bấm vào từng điểm đánh dấu để xem ghi chú nhanh và <b>mở thẳng điểm đó trong app Google Maps trên điện thoại</b>. ⚠️ <b>Đã sửa 2 lần, đọc kỹ:</b> lần đầu các link dẫn đường dùng <b>tên điểm du lịch</b> — waypoint "Làng cổ Ma Lé" bị Google khớp nhầm sang <b>"Khu di tích Láng Le Bàu Cò" ở Bình Chánh, TP.HCM</b>, tuyến ngày 2 vòng về Sài Gòn 66 giờ. Lần hai đổi sang <b>toạ độ</b> thì hết teleport, nhưng toạ độ trong file là ước lượng và <b>nhiều điểm sai thật</b>: đối chiếu ngày 06/09 cho thấy "Cổng Trời Quản Bạ → Cán Tỷ" có đường bộ 16km <b>ngắn hơn cả đường chim bay 21,1km</b> (bất khả thi), và "Mậu Duệ → TT Yên Minh" lệch tới 6,7 lần. Google bám vào toạ độ rơi ra ngoài QL4C nên quãng đường ngày 1 phồng lên 184km, và waypoint Cán Tỷ hiện thành "Trường Mầm Non Thôn Há Lìa". <b>Nay dùng tên đơn vị hành chính (xã / thị trấn) kèm tỉnh</b> — đây là dữ liệu gốc của mọi bản đồ nên không khớp nhầm như tên điểm du lịch, cũng không sai vị trí như toạ độ tự ước lượng, và vì các xã đều nằm trên QL4C nên Google tự bám đúng đường.<br><br>📏 <b>Quãng đường đã đo lại — các bản trước ghi thiếu:</b> ngày 1 thực tế <b>~180 km</b> (ghi 150), ngày 2 <b>~80 km</b> (ghi 58), ngày 4 <b>~175 km</b> (ghi 156). Nguyên nhân gốc: QL4C ngoằn ngoèo tới mức <b>đường bộ dài gấp 2,22 lần đường chim bay</b>, cao hơn hẳn mức 1,4–1,8× của đường đèo thông thường — mọi ước tính theo cảm quan đều thấp. Con số này đã được kiểm chéo: tính từ 6 toạ độ đo thật, ngày 1 ra <b>178 km</b>, còn Google đo thẳng được <b>180 km</b> — lệch dưới 1%, nên 180 km là số đáng tin để lập kế hoạch. Giờ giấc ngày 1 đã dựng lại theo số đó.<br><br>📍 <b>6 điểm mốc đã được đo lại bằng Google Maps</b> (Cổng Trời Quản Bạ, Cán Tỷ, Yên Minh, Sủng Là, Phố cổ Đồng Văn, Mèo Vạc) nên đường vẽ đã sát thực tế hơn nhiều — sai lệch trước đó lên tới 13,3 km ở Cán Tỷ. Dốc Thẩm Mã là <b>điểm nội suy</b>, chưa đo; các điểm nhỏ còn lại (bến thuyền, camping, quán cà phê, Đồn Cao) vẫn là ước lượng. Số km chính xác luôn lấy từ nút "Chỉ đường cả ngày", đừng đo trên hình vẽ.</p>
     </div>
     <div class="map-toggle" id="mapToggle">
       <button class="map-btn active" data-day="all"><span class="sw" style="background:#1F2A1A"></span>Cả 4 ngày chạy xe</button>
@@ -1419,6 +1447,183 @@
       <a class="btn-nav" id="mapNav" href="#" target="_blank" rel="noopener" style="display:none">🧭 Mở cung đường ngày này</a>
     </div>
     <div id="map"></div>
+  </div>
+</section>
+
+
+<!-- ================= KIEM TRA DIEM DEN ================= -->
+<section id="kiemtra">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Làm một lần ở nhà · khoảng 5 phút</div>
+      <h2 class="sec-title">Kiểm tra 25 điểm đến trước khi đi.</h2>
+      <p class="sec-desc">Trang này không tự kiểm chứng được các link bản đồ — mọi nguồn dữ liệu bản đồ đều nằm ngoài tầm với của nó. Cách duy nhất để chắc chắn <b>"cứ đi theo bản đồ là tới đúng nơi"</b> là bạn bấm thử một lượt trên chính điện thoại sẽ mang đi. Bấm "Mở Maps", nhìn xem ghim có rơi đúng chỗ trong vùng Hà Giang không, rồi tích vào ô. Ô tích được lưu trên máy bạn, đóng trang mở lại vẫn còn.</p>
+    </div>
+    <div class="vf-head">
+      <div>
+        <div class="vf-prog" id="vfProg">Đã kiểm 0/25</div>
+        <div class="vf-bar"><i id="vfBar"></i></div>
+      </div>
+      <button class="btn-nav" id="vfReset" style="border:none;cursor:pointer">Bỏ tích tất cả</button>
+    </div>
+      <div class="vf-day">NGÀY 1 — LÊN ĐỒNG VĂN</div>
+      <label class="vf-row" data-vf="Thành phố Hà Giang, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Cửa hàng thuê xe / TP Hà Giang</span><span class="vf-q">Thành phố Hà Giang, Tuyên Quang · Thay bằng địa chỉ thật của cửa hàng khi đã đặt xe</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Cổng Trời Quản Bạ, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Cổng Trời Quản Bạ</span><span class="vf-q">Cổng Trời Quản Bạ, Tuyên Quang · Đã thấy là POI có tên trên ảnh Maps của bạn</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=C%E1%BB%95ng%20Tr%E1%BB%9Di%20Qu%E1%BA%A3n%20B%E1%BA%A1%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="23.117930,105.019623">
+        <input type="checkbox">
+        <span class="vf-badge vf-gps">TOẠ ĐỘ ĐÃ ĐO</span>
+        <span class="vf-txt"><span class="vf-name">Cán Tỷ — cua chữ M</span><span class="vf-q">23.117930,105.019623 · Toạ độ bạn đo, nằm trên QL4C</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=23.117930%2C105.019623" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="23.107345,105.137749">
+        <input type="checkbox">
+        <span class="vf-badge vf-gps">TOẠ ĐỘ ĐÃ ĐO</span>
+        <span class="vf-txt"><span class="vf-name">TT Yên Minh (nghỉ + đổ xăng)</span><span class="vf-q">23.107345,105.137749 · Toạ độ bạn đo</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=23.107345%2C105.137749" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Nhà hàng Phúc Cái, Thị trấn Yên Minh, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Nhà hàng Phúc Cái — Yên Minh</span><span class="vf-q">Nhà hàng Phúc Cái, Thị trấn Yên Minh, Tuyên Quang · Quán nhỏ, dễ khớp nhầm</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Nh%C3%A0%20h%C3%A0ng%20Ph%C3%BAc%20C%C3%A1i%2C%20Th%E1%BB%8B%20tr%E1%BA%A5n%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Dốc Thẩm Mã, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Dốc Thẩm Mã</span><span class="vf-q">Dốc Thẩm Mã, Tuyên Quang · Đã thấy là POI có tên trên ảnh Maps của bạn</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=D%E1%BB%91c%20Th%E1%BA%A9m%20M%C3%A3%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Làng văn hóa du lịch Lũng Cẩm, Sủng Là, Đồng Văn">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Nhà của Pao (trong Làng VH Lũng Cẩm)</span><span class="vf-q">Làng văn hóa du lịch Lũng Cẩm, Sủng Là, Đồng Văn · Đã sửa: toạ độ cũ dẫn tới trụ sở thôn, không phải Nhà của Pao</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=L%C3%A0ng%20v%C4%83n%20h%C3%B3a%20du%20l%E1%BB%8Bch%20L%C5%A9ng%20C%E1%BA%A9m%2C%20S%E1%BB%A7ng%20L%C3%A0%2C%20%C4%90%E1%BB%93ng%20V%C4%83n" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Phố cổ Đồng Văn, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Phố cổ Đồng Văn</span><span class="vf-q">Phố cổ Đồng Văn, Tuyên Quang · Toạ độ bạn đo trùng khớp POI</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <div class="vf-day">NGÀY 2 — QUANH ĐỒNG VĂN</div>
+      <label class="vf-row" data-vf="Bánh cuốn Bà Hà, Phố cổ Đồng Văn, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Bánh cuốn Bà Hà</span><span class="vf-q">Bánh cuốn Bà Hà, Phố cổ Đồng Văn, Tuyên Quang · Quán nhỏ, dễ khớp nhầm</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=B%C3%A1nh%20cu%E1%BB%91n%20B%C3%A0%20H%C3%A0%2C%20Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Dinh thự họ Vương, Sà Phìn, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Dinh thự họ Vương (Sà Phìn)</span><span class="vf-q">Dinh thự họ Vương, Sà Phìn, Tuyên Quang · Đã thấy là POI trên ảnh Maps của bạn — lưu ý có cả "Dinh thự họ Vừ" khác gần đó</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Dinh%20th%E1%BB%B1%20h%E1%BB%8D%20V%C6%B0%C6%A1ng%2C%20S%C3%A0%20Ph%C3%ACn%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Cột cờ Lũng Cú, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Cột cờ Lũng Cú</span><span class="vf-q">Cột cờ Lũng Cú, Tuyên Quang · Đã thấy là POI trên ảnh Maps của bạn</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=C%E1%BB%99t%20c%E1%BB%9D%20L%C5%A9ng%20C%C3%BA%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Lô Lô Chải, Lũng Cú, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Lô Lô Chải</span><span class="vf-q">Lô Lô Chải, Lũng Cú, Tuyên Quang · Đã thấy là POI trên ảnh Maps của bạn</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=L%C3%B4%20L%C3%B4%20Ch%E1%BA%A3i%2C%20L%C5%A9ng%20C%C3%BA%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Ma Lé, Đồng Văn, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Làng cổ Ma Lé</span><span class="vf-q">Ma Lé, Đồng Văn, Tuyên Quang · ⚠️ Chính điểm này từng teleport về Bình Chánh TP.HCM — kiểm kỹ nhất</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Ma%20L%C3%A9%2C%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Đồn Cao, Đồng Văn, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Đồn Cao Đồng Văn</span><span class="vf-q">Đồn Cao, Đồng Văn, Tuyên Quang · Đã thấy là POI trên ảnh Maps của bạn</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=%C4%90%E1%BB%93n%20Cao%2C%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <div class="vf-day">NGÀY 3 — NHO QUẾ &amp; MÈO VẠC</div>
+      <label class="vf-row" data-vf="Mã Pì Lèng Panorama, Pải Lủng, Mèo Vạc">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Mã Pì Lèng Panorama</span><span class="vf-q">Mã Pì Lèng Panorama, Pải Lủng, Mèo Vạc · Đã sửa: trước đó trỏ vào cả con đèo dài 20km</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=M%C3%A3%20P%C3%AC%20L%C3%A8ng%20Panorama%2C%20P%E1%BA%A3i%20L%E1%BB%A7ng%2C%20M%C3%A8o%20V%E1%BA%A1c" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Lối xuống bến thuyền đi sông Nho Quế">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Lối xuống bến thuyền Nho Quế</span><span class="vf-q">Lối xuống bến thuyền đi sông Nho Quế · Tên POI theo hướng dẫn của dân phượt — kiểm để chắc</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=L%E1%BB%91i%20xu%E1%BB%91ng%20b%E1%BA%BFn%20thuy%E1%BB%81n%20%C4%91i%20s%C3%B4ng%20Nho%20Qu%E1%BA%BF" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Anh Quân Camping, Giàng Chu Phìn, Mèo Vạc, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Anh Quân Camping</span><span class="vf-q">Anh Quân Camping, Giàng Chu Phìn, Mèo Vạc, Tuyên Quang · Chỉ tới được bằng thuyền — pin chỉ để định vị, không chạy xe tới</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Anh%20Qu%C3%A2n%20Camping%2C%20Gi%C3%A0ng%20Chu%20Ph%C3%ACn%2C%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Coffee Mí Pó, Pải Lủng, Mèo Vạc, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Coffee Mí Pó</span><span class="vf-q">Coffee Mí Pó, Pải Lủng, Mèo Vạc, Tuyên Quang · Gửi xe dưới chân rồi leo bộ</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Coffee%20M%C3%AD%20P%C3%B3%2C%20P%E1%BA%A3i%20L%E1%BB%A7ng%2C%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Thị trấn Mèo Vạc, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Thị trấn Mèo Vạc</span><span class="vf-q">Thị trấn Mèo Vạc, Tuyên Quang · Toạ độ bạn đo trùng khớp</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <div class="vf-day">NGÀY 4 — VỀ TP HÀ GIANG</div>
+      <label class="vf-row" data-vf="Mậu Duệ, Yên Minh, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Mậu Duệ</span><span class="vf-q">Mậu Duệ, Yên Minh, Tuyên Quang · Nằm trong link chỉ đường ngày 4 — đáng kiểm</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=M%E1%BA%ADu%20Du%E1%BB%87%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Café Núi Cấm, Thành phố Hà Giang, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Café Núi Cấm</span><span class="vf-q">Café Núi Cấm, Thành phố Hà Giang, Tuyên Quang · Quán nhỏ</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Caf%C3%A9%20N%C3%BAi%20C%E1%BA%A5m%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Hạ Thành Quán, Thành phố Hà Giang, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Hạ Thành Quán</span><span class="vf-q">Hạ Thành Quán, Thành phố Hà Giang, Tuyên Quang · Quán nhỏ</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=H%E1%BA%A1%20Th%C3%A0nh%20Qu%C3%A1n%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <div class="vf-day">NGÀY 5 — VỀ SÀI GÒN</div>
+      <label class="vf-row" data-vf="Cháo ấu tẩu Ngân Hà, Thành phố Hà Giang, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Cháo ấu tẩu Ngân Hà</span><span class="vf-q">Cháo ấu tẩu Ngân Hà, Thành phố Hà Giang, Tuyên Quang · Quán nhỏ</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Ch%C3%A1o%20%E1%BA%A5u%20t%E1%BA%A9u%20Ng%C3%A2n%20H%C3%A0%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Cột mốc số 0, Thành phố Hà Giang, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Cột mốc số 0</span><span class="vf-q">Cột mốc số 0, Thành phố Hà Giang, Tuyên Quang</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=C%E1%BB%99t%20m%E1%BB%91c%20s%E1%BB%91%200%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Sân bay quốc tế Nội Bài">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Sân bay Nội Bài (ga T1 nội địa)</span><span class="vf-q">Sân bay quốc tế Nội Bài · Không thể nhầm</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=S%C3%A2n%20bay%20qu%E1%BB%91c%20t%E1%BA%BF%20N%E1%BB%99i%20B%C3%A0i" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+    <div class="note-box" style="margin-top:18px;">
+      🚩 <b>Nếu một ghim rơi sai chỗ:</b> mở Google Maps, tự tìm đúng địa điểm, chuột phải (hoặc giữ lâu trên điện thoại) → copy toạ độ, rồi gửi lại cho mình để thay vào. Đó đúng là cách 6 điểm mốc trong lịch trình này đã được sửa — Cán Tỷ từng lệch tới <b>13,3 km</b>.
+    </div>
   </div>
 </section>
 
@@ -1802,47 +2007,101 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
+
+  // ---- Kiem tra diem den: luu tich vao localStorage cua tung may ----
+  (function(){
+    const rows = document.querySelectorAll('.vf-row');
+    if(!rows.length) return;
+    const KEY = 'hgl_verified';
+    let saved = {};
+    try{ saved = JSON.parse(localStorage.getItem(KEY) || '{}'); }catch(e){ saved = {}; }
+
+    function paint(){
+      let done = 0;
+      rows.forEach(r=>{
+        const on = r.querySelector('input').checked;
+        r.classList.toggle('done', on);
+        if(on) done++;
+      });
+      const pct = Math.round(done / rows.length * 100);
+      const prog = document.getElementById('vfProg');
+      prog.textContent = 'Đã kiểm ' + done + '/' + rows.length + (done === rows.length ? ' — xong hết ✅' : '');
+      document.getElementById('vfBar').style.width = pct + '%';
+    }
+    function save(){
+      try{ localStorage.setItem(KEY, JSON.stringify(saved)); }catch(e){}
+    }
+    rows.forEach(r=>{
+      const box = r.querySelector('input');
+      const id = r.dataset.vf;
+      box.checked = !!saved[id];
+      box.addEventListener('change', ()=>{
+        if(box.checked) saved[id] = 1; else delete saved[id];
+        save(); paint();
+      });
+      // bam nut "Mo Maps" khong duoc lam toggle checkbox cua <label>
+      r.querySelector('.vf-open').addEventListener('click', e=>e.stopPropagation());
+    });
+    document.getElementById('vfReset').addEventListener('click', ()=>{
+      saved = {}; save();
+      rows.forEach(r=>{ r.querySelector('input').checked = false; });
+      paint();
+    });
+    paint();
+  })();
+
   const dayColors = {1:'#24344D', 2:'#B1502F', 3:'#5C6E4E', 4:'#C89544'};
 
   // Mỗi điểm có thêm `q` = chuỗi tìm kiếm dùng cho link Google Maps.
   // Dùng tên địa danh thay vì toạ độ vì toạ độ ở đây chỉ là ước lượng để vẽ bản đồ,
   // còn Google Maps tự tìm đúng POI thực tế khi dẫn đường trên điện thoại.
+  // NGUON TOA DO (cap nhat 06/09/2026):
+  //   DA XAC MINH bang chuot phai tren Google Maps — dung duoc de dan duong:
+  //     Cong Troi Quan Ba 23.049602,104.992615 | Can Ty 23.117930,105.019623
+  //     TT Yen Minh 23.107345,105.137749       | Sung La 23.253208,105.230299
+  //     Pho co Dong Van 23.280154,105.359912   | TT Meo Vac 23.163830,105.408983
+  //   NOI SUY (chua do): Doc Tham Ma — dat o 55% doan Yen Minh -> Sung La.
+  //     Gia tri cu 23.1897,105.2872 nam PHIA DONG Sung La tuc sai thu tu tuyen,
+  //     nhieu kha nang loi kinh do. Da bo khoi link chi duong.
+  //   CHUA XAC MINH: TP Ha Giang, Mau Due, Sa Phin, Lung Cu, Lo Lo Chai, Ma Le,
+  //     Don Cao, Ma Pi Leng, ben thuyen Ta Lang, Anh Quan Camping, Mi Po,
+  //     doc chu M, Minh Ngoc.
   const stops = [
     // Day 1
     {day:1, name:'TP Hà Giang', lat:22.8025, lng:104.9784, q:'22.8025,104.9784', note:'Nhận xe 04:30–06:30, xuất phát 06:30. Kiểm tra phanh/đèn/lốp, chụp ảnh xe 4 mặt.'},
-    {day:1, name:'Cổng Trời Quản Bạ', lat:23.0287, lng:104.9995, q:'23.0287,104.9995', note:'08:00–08:40 · Núi Đôi Cô Tiên, ánh sáng đẹp nhất trong ngày. Dừng 40 phút.'},
-    {day:1, name:'Cán Tỷ (cua chữ M)', lat:23.1706, lng:105.1367, q:'23.1706,105.1367', note:'09:15–09:35 · Nằm TRƯỚC Yên Minh trên QL4C. Dừng 20 phút chụp khúc cua.'},
-    {day:1, name:'TT Yên Minh', lat:23.1136, lng:105.2467, q:'23.1136,105.2467', note:'10:50–11:25 · Nghỉ giữa chặng + ĐỔ XĂNG bắt buộc. Cao điểm có thể chờ 30 phút.'},
-    {day:1, name:'Dốc Thẩm Mã', lat:23.1897, lng:105.2872, q:'23.1897,105.2872', note:'12:10–12:35 · Con dốc 9 tầng nổi tiếng nhất Hà Giang, có đài quan sát trên đỉnh.'},
-    {day:1, name:'Sủng Là — Nhà của Pao', lat:23.2394, lng:105.3111, q:'23.2394,105.3111', note:'13:00–14:20 · Ăn trưa 45 phút + tham quan 35 phút, vé ~20.000đ/người.'},
-    {day:1, name:'Phố cổ Đồng Văn', lat:23.2708, lng:105.3597, q:'23.2708,105.3597', note:'15:10 nhận phòng (hạn chót 16:30). Mặt trời lặn 17:21 — dư ~2h dự phòng.'},
+    {day:1, name:'Cổng Trời Quản Bạ', lat:23.049602, lng:104.992615, q:'23.049602,104.992615', note:'08:00–08:40 · Núi Đôi Cô Tiên, ánh sáng đẹp nhất trong ngày. Dừng 40 phút.'},
+    {day:1, name:'Cán Tỷ (cua chữ M)', lat:23.117930, lng:105.019623, q:'Cán Tỷ, Quản Bạ, Tuyên Quang', note:'09:15–09:35 · Nằm TRƯỚC Yên Minh trên QL4C. Dừng 20 phút chụp khúc cua.'},
+    {day:1, name:'TT Yên Minh', lat:23.107345, lng:105.137749, q:'23.1136,105.2467', note:'10:50–11:25 · Nghỉ giữa chặng + ĐỔ XĂNG bắt buộc. Cao điểm có thể chờ 30 phút.'},
+    {day:1, name:'Dốc Thẩm Mã', lat:23.187570, lng:105.188652, q:'Dốc Thẩm Mã, Yên Minh, Tuyên Quang', note:'12:10–12:35 · Con dốc 9 tầng nổi tiếng nhất Hà Giang, có đài quan sát trên đỉnh.'},
+    {day:1, name:'Sủng Là — Nhà của Pao', lat:23.253208, lng:105.230299, q:'Sủng Là, Đồng Văn, Tuyên Quang', note:'13:00–14:20 · Ăn trưa 45 phút + tham quan 35 phút, vé ~20.000đ/người.'},
+    {day:1, name:'Phố cổ Đồng Văn', lat:23.280154, lng:105.359912, q:'23.280154,105.359912', note:'15:10 nhận phòng (hạn chót 16:30). Mặt trời lặn 17:21 — dư ~2h dự phòng.'},
     // Day 2 — vòng tròn quanh Đồng Văn, ngủ lại Đồng Văn đêm thứ 2
     {day:2, name:'Dinh thự Họ Vương (Sà Phìn)', lat:23.2931, lng:105.3149, q:'23.2931,105.3149', note:'07:50–08:35 · Vé 30.000đ, tham quan 45 phút. Đi sớm nên sân còn vắng.'},
     {day:2, name:'Cột cờ Lũng Cú', lat:23.3919, lng:105.3167, q:'23.3919,105.3167', note:'09:05–10:20 · Vé 30.000đ, leo 283 bậc. Hôm nay dư 3h45 nên sương mù thì chờ tan, không phải bỏ điểm.'},
     {day:2, name:'Làng Lô Lô Chải', lat:23.3872, lng:105.3244, q:'23.3872,105.3244', note:'10:30–12:00 · Cực Bắc Coffee + đi bộ trong làng + ăn trưa nhẹ. Khoảng "chill" chính của ngày.'},
-    {day:2, name:'Làng cổ Ma Lé', lat:23.3450, lng:105.3486, q:'23.3450,105.3486', note:'12:30–12:50 · Làng người Giáy trong thung lũng đá, nằm trên đường Lũng Cú về Đồng Văn.'},
-    {day:2, name:'Đồn Cao Đồng Văn', lat:23.2760, lng:105.3625, q:'23.2760,105.3625', note:'15:00–16:45 · ĐI BỘ 97 bậc đá (15–30 phút). Pháo đài 1925, view toàn thị trấn. Xuống trước 17:15.'},
-    {day:2, name:'Phố cổ Đồng Văn (đêm 2)', lat:23.2708, lng:105.3597, q:'23.2708,105.3597', note:'Về 13:35 · nghỉ trưa thật sự tới 15:00. Ngủ lại đúng phòng cũ — đặt liền 2 đêm khi book.'},
+    {day:2, name:'Làng cổ Ma Lé', lat:23.3450, lng:105.3486, q:'Ma Lé, Đồng Văn, Tuyên Quang', note:'12:30–12:50 · Làng người Giáy trong thung lũng đá, nằm trên đường Lũng Cú về Đồng Văn.'},
+    {day:2, name:'Đồn Cao Đồng Văn', lat:23.2760, lng:105.3625, q:'Đồn Cao, Đồng Văn, Tuyên Quang', note:'15:00–16:45 · ĐI BỘ 97 bậc đá (15–30 phút). Pháo đài 1925, view toàn thị trấn. Xuống trước 17:15.'},
+    {day:2, name:'Phố cổ Đồng Văn (đêm 2)', lat:23.280154, lng:105.359912, q:'23.280154,105.359912', note:'Về 13:35 · nghỉ trưa thật sự tới 15:00. Ngủ lại đúng phòng cũ — đặt liền 2 đêm khi book.'},
     // Day 3 — Mã Pí Lèng, thuyền Tu Sản, camping, Mí Pó
-    {day:3, name:'Mã Pí Lèng Panorama', lat:23.2299, lng:105.4192, q:'23.2299,105.4192', note:'07:35–08:05 · Chỉ dừng 30 phút (rút ngắn có chủ đích, chiều còn lên Mí Pó). Vé ảnh 30.000đ.'},
-    {day:3, name:'Bến thuyền Tà Làng — hẻm Tu Sản', lat:23.2214, lng:105.4064, q:'23.2214,105.4064', note:'08:35 mua vé, 09:00 lên thuyền · ~120.000đ/người trọn gói. Đường xuống dốc bê tông hẹp, 30 phút.'},
-    {day:3, name:'Anh Quân Camping (bên sông Nho Quế)', lat:23.2160, lng:105.3960, q:'23.2160,105.3960', note:'11:30–13:00 ăn trưa · CHỈ TỚI ĐƯỢC BẰNG THUYỀN, PHẢI ĐẶT TRƯỚC (~150k/suất, ĐT 0396 226 225).'},
-    {day:3, name:'Coffee Mí Pó (trên đỉnh Mã Pí Lèng)', lat:23.2330, lng:105.4230, q:'23.2330,105.4230', note:'14:10–15:50 · Gửi xe rồi ĐI BỘ lên (~30 phút/chiều, chưa xác minh). ĐT 0961 152 555. Trễ 13:45 thì bỏ điểm này.'},
-    {day:3, name:'TT Mèo Vạc', lat:23.1889, lng:105.4147, q:'23.1889,105.4147', note:'16:25 nhận phòng — sát hạn chót 16:30, mặt trời lặn 17:17. Đổ đầy xăng tối nay.'},
+    {day:3, name:'Mã Pí Lèng Panorama', lat:23.2299, lng:105.4192, q:'Đèo Mã Pì Lèng, Tuyên Quang', note:'07:35–08:05 · Chỉ dừng 30 phút (rút ngắn có chủ đích, chiều còn lên Mí Pó). Vé ảnh 30.000đ.'},
+    {day:3, name:'Bến thuyền Tà Làng — hẻm Tu Sản', lat:23.2214, lng:105.4064, q:'Bến thuyền Tà Làng, Pải Lủng, Mèo Vạc, Tuyên Quang', note:'08:35 mua vé, 09:00 lên thuyền · ~120.000đ/người trọn gói. Đường xuống dốc bê tông hẹp, 30 phút.'},
+    {day:3, name:'Anh Quân Camping (bên sông Nho Quế)', lat:23.2160, lng:105.3960, q:'Anh Quân Camping, Giàng Chu Phìn, Mèo Vạc, Tuyên Quang', note:'11:30–13:00 ăn trưa · CHỈ TỚI ĐƯỢC BẰNG THUYỀN, PHẢI ĐẶT TRƯỚC (~150k/suất, ĐT 0396 226 225).'},
+    {day:3, name:'Coffee Mí Pó (trên đỉnh Mã Pí Lèng)', lat:23.2330, lng:105.4230, q:'Coffee Mí Pó, Pải Lủng, Mèo Vạc, Tuyên Quang', note:'14:10–15:50 · Gửi xe rồi ĐI BỘ lên (~30 phút/chiều, chưa xác minh). ĐT 0961 152 555. Trễ 13:45 thì bỏ điểm này.'},
+    {day:3, name:'TT Mèo Vạc', lat:23.163830, lng:105.408983, q:'23.163830,105.408983', note:'16:25 nhận phòng — sát hạn chót 16:30, mặt trời lặn 17:17. Đổ đầy xăng tối nay.'},
     // Day 4 — khép vòng về TP Hà Giang theo DT176 + QL4C
     {day:4, name:'Dốc chữ M (Mèo Vạc)', lat:23.1301, lng:105.3358, q:'23.1301,105.3358', note:'09:00–09:20 · Khúc cua hình chữ M, có chỗ tấp xe an toàn trên đỉnh dốc.'},
     {day:4, name:'Mậu Duệ', lat:23.0764, lng:105.2519, q:'23.0764,105.2519', note:'09:50–10:10 · Nghỉ 20 phút, có cây xăng và sóng ổn định.'},
-    {day:4, name:'TT Yên Minh', lat:23.1136, lng:105.2467, q:'23.1136,105.2467', note:'11:10–12:10 · Ăn trưa Nhà hàng Phúc Cái + ĐỔ XĂNG lần cuối (93km nữa mới tới TP Hà Giang).'},
-    {day:4, name:'Cán Tỷ (cua chữ M)', lat:23.1706, lng:105.1367, q:'23.1706,105.1367', note:'13:25 đi qua · nằm giữa Yên Minh và Cổng Trời trên QL4C.'},
-    {day:4, name:'Cổng Trời Quản Bạ', lat:23.0287, lng:104.9995, q:'23.0287,104.9995', note:'14:00–14:20 · Điểm dừng cuối trên cao nguyên đá, ánh chiều. Mua quà ở đây hoặc Quản Bạ.'},
+    {day:4, name:'TT Yên Minh', lat:23.107345, lng:105.137749, q:'23.1136,105.2467', note:'11:10–12:10 · Ăn trưa Nhà hàng Phúc Cái + ĐỔ XĂNG lần cuối (93km nữa mới tới TP Hà Giang).'},
+    {day:4, name:'Cán Tỷ (cua chữ M)', lat:23.117930, lng:105.019623, q:'Cán Tỷ, Quản Bạ, Tuyên Quang', note:'13:25 đi qua · nằm giữa Yên Minh và Cổng Trời trên QL4C.'},
+    {day:4, name:'Cổng Trời Quản Bạ', lat:23.049602, lng:104.992615, q:'23.049602,104.992615', note:'14:00–14:20 · Điểm dừng cuối trên cao nguyên đá, ánh chiều. Mua quà ở đây hoặc Quản Bạ.'},
     {day:4, name:'TP Hà Giang (trả xe + ngủ)', lat:22.8025, lng:104.9784, q:'22.8025,104.9784', note:'15:50 trả xe, nhận phòng khách sạn. Tối nay NGỦ LẠI Hà Giang, không lên xe khách đêm nữa.'},
   ];
 
   const routes = {
-    1: [[22.8025,104.9784],[23.0287,104.9995],[23.1706,105.1367],[23.1136,105.2467],[23.1897,105.2872],[23.2394,105.3111],[23.2708,105.3597]],
-    2: [[23.2708,105.3597],[23.2931,105.3149],[23.3919,105.3167],[23.3872,105.3244],[23.3450,105.3486],[23.2708,105.3597],[23.2760,105.3625]],
-    3: [[23.2708,105.3597],[23.2299,105.4192],[23.2214,105.4064],[23.2160,105.3960],[23.2214,105.4064],[23.2330,105.4230],[23.1889,105.4147]],
-    4: [[23.1889,105.4147],[23.1301,105.3358],[23.0764,105.2519],[23.1136,105.2467],[23.1706,105.1367],[23.0287,104.9995],[22.8025,104.9784]],
+    1: [[22.8025,104.9784],[23.049602,104.992615],[23.117930,105.019623],[23.107345,105.137749],[23.187570,105.188652],[23.253208,105.230299],[23.280154,105.359912]],
+    2: [[23.280154,105.359912],[23.2931,105.3149],[23.3919,105.3167],[23.3872,105.3244],[23.3450,105.3486],[23.280154,105.359912],[23.2760,105.3625]],
+    3: [[23.280154,105.359912],[23.2299,105.4192],[23.2214,105.4064],[23.2160,105.3960],[23.2214,105.4064],[23.2330,105.4230],[23.163830,105.408983]],
+    4: [[23.163830,105.408983],[23.1301,105.3358],[23.0764,105.2519],[23.107345,105.137749],[23.117930,105.019623],[23.049602,104.992615],[22.8025,104.9784]],
   };
 
   // Link dẫn đường cả ngày, mở thẳng app Google Maps trên điện thoại
@@ -1857,31 +2116,63 @@
   // Mọi điểm nhỏ/mơ hồ (bến thuyền, quán cà phê, làng, dốc) dùng TOẠ ĐỘ —
   // toạ độ không bao giờ khớp nhầm sang tỉnh khác.
   // ---------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+  // LICH SU 2 LAN SUA (doc ky truoc khi doi lai):
+  //
+  // v10 dung TEN dia danh du lich -> "Lang co Ma Le" bi Google khop nham sang
+  //     "Khu di tich Lang Le Bau Co" (Binh Chanh, TP.HCM), tuyen ngay 2 vong
+  //     ve Sai Gon 66 gio.
+  // v12 doi sang TOA DO -> het teleport, NHUNG toa do trong file la uoc luong
+  //     va nhieu diem sai that: kiem chung 06/09 cho thay
+  //       "Cong Troi Quan Ba -> Can Ty": duong bo 16km < chim bay 21.1km (bat kha thi)
+  //       "Mau Due -> TT Yen Minh": ti le 6.71x (toa do Yen Minh nam sat Mau Due)
+  //     Google bam vao toa do lech khoi QL4C -> ngay 1 phong len 184km thay vi
+  //     ~150km, va waypoint Can Ty hien thanh "Truong Mam Non Thon Ha Lia".
+  //
+  // v13 (hien tai): dung TEN DON VI HANH CHINH (xa / thi tran / thanh pho) kem
+  //     ", Tuyen Quang". Day la lua chon dung vi:
+  //       - Don vi hanh chinh la du lieu goc cua moi geocoder -> khong teleport
+  //         nhu ten diem du lich, va khong sai vi tri nhu toa do tu uoc luong.
+  //       - Cac xa nay deu nam TREN QL4C nen Google tu bam dung duong, cho ra
+  //         quang duong that thay vi bi keo lech.
+  //     KHONG doi nguoc ve toa do tru khi da do lai bang GPS thuc te.
+  // ---------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+  // LICH SU 3 LAN SUA — doc het truoc khi doi lai:
+  //  v10 TEN dia danh du lich -> "Lang co Ma Le" teleport ve Binh Chanh TP.HCM
+  //  v12 TOA DO uoc luong     -> het teleport nhung toa do sai that:
+  //                              Can Ty lech 13.3km, Yen Minh 11.2km, Sung La 8.4km
+  //  v13 TEN don vi hanh chinh-> van lech: "Can Ty" ra "Quan Ba",
+  //                              "Sung La" ra "Tru so thon sung la duoi",
+  //                              "Pai Lung" ra "Ma Lu" (ngay 3 phong len 98.5km),
+  //                              "Ma Le" ra "Ma Lung, Ma Le, Lung Cu"
+  //  v14 (hien tai) TOA DO DA XAC MINH bang chuot phai tren Google Maps cho 3
+  //      diem hay hong nhat, TEN cho cac dia danh da chung minh resolve dung
+  //      (Tam Son, Dong Van, Cot co Lung Cu, Sa Phin, Lo Lo Chai, Meo Vac,
+  //      Mau Due). Waypoint nao khong can de ghim duong thi BO HAN — moi
+  //      waypoint thua la mot co hoi Google snap nham.
+  // ---------------------------------------------------------------------------
   const GEO = {
-    hagiang:   'Thành phố Hà Giang, Tuyên Quang',
-    tamson:    'Tam Sơn, Quản Bạ, Tuyên Quang',
-    yenminh:   'Thị trấn Yên Minh, Tuyên Quang',
-    dongvan:   'Phố cổ Đồng Văn, Tuyên Quang',
-    lungcu:    'Cột cờ Lũng Cú, Tuyên Quang',
-    savuong:   'Dinh thự họ Vương, Sà Phìn, Tuyên Quang',
-    lolochai:  'Lô Lô Chải, Lũng Cú, Tuyên Quang',
-    mapileng:  'Đèo Mã Pì Lèng, Tuyên Quang',
-    meovac:    'Thị trấn Mèo Vạc, Tuyên Quang',
-    maudue:    'Mậu Duệ, Yên Minh, Tuyên Quang',
-    // toạ độ cho các điểm nhỏ
-    cauty:     '23.1706,105.1367',
-    thamma:    '23.1897,105.2872',
-    sungla:    '23.2394,105.3111',
-    male:      '23.3450,105.3486',
-    benthuyen: '23.2214,105.4064',
-    mipo:      '23.2330,105.4230',
+    hagiang:  'Thành phố Hà Giang, Tuyên Quang',
+    tamson:   'Tam Sơn, Quản Bạ, Tuyên Quang',
+    canty:    '23.117930,105.019623',   // da xac minh 06/09
+    yenminh:  '23.107345,105.137749',   // da xac minh 06/09
+    sungla:   '23.253208,105.230299',   // da xac minh 06/09
+    dongvan:  'Phố cổ Đồng Văn, Tuyên Quang',
+    saphin:   'Sà Phìn, Đồng Văn, Tuyên Quang',
+    lungcu:   'Cột cờ Lũng Cú, Tuyên Quang',
+    lolochai: 'Lô Lô Chải, Lũng Cú, Tuyên Quang',
+    meovac:   'Thị trấn Mèo Vạc, Tuyên Quang',
+    maudue:   'Mậu Duệ, Yên Minh, Tuyên Quang',
   };
 
+  // Ngay 3 KHONG co waypoint: Dong Van -> Meo Vac chi co doc nhat QL4C qua deo
+  // Ma Pi Leng. Them "Pai Lung" lam Google snap sang "Ma Lu" va vong len 98.5km.
   const dayRoutes = {
-    1: {from:GEO.hagiang, via:[GEO.tamson, GEO.cauty, GEO.yenminh, GEO.thamma, GEO.sungla], to:GEO.dongvan},
-    2: {from:GEO.dongvan, via:[GEO.savuong, GEO.lungcu, GEO.lolochai, GEO.male], to:GEO.dongvan},
-    3: {from:GEO.dongvan, via:[GEO.mapileng, GEO.benthuyen, GEO.mipo], to:GEO.meovac},
-    4: {from:GEO.meovac, via:[GEO.maudue, GEO.yenminh, GEO.cauty, GEO.tamson], to:GEO.hagiang},
+    1: {from:GEO.hagiang, via:[GEO.tamson, GEO.canty, GEO.yenminh, GEO.sungla], to:GEO.dongvan},
+    2: {from:GEO.dongvan, via:[GEO.saphin, GEO.lungcu, GEO.lolochai], to:GEO.dongvan},
+    3: {from:GEO.dongvan, via:[], to:GEO.meovac},
+    4: {from:GEO.meovac, via:[GEO.maudue, GEO.yenminh, GEO.canty, GEO.tamson], to:GEO.hagiang},
   };
 
   // https://www.google.com/maps/... là "universal link": trên Android/iOS có cài
@@ -2229,28 +2520,28 @@
   const notifiedStays = new Set();
 
   const WAYPOINTS = [
-    {day:'2026-11-04', name:'Cổng Trời Quản Bạ', lat:23.0287, lng:104.9995, time:'2026-11-04T08:00:00'},
-    {day:'2026-11-04', name:'Cán Tỷ', lat:23.1706, lng:105.1367, time:'2026-11-04T09:15:00'},
-    {day:'2026-11-04', name:'TT Yên Minh', lat:23.1136, lng:105.2467, time:'2026-11-04T10:50:00'},
-    {day:'2026-11-04', name:'Dốc Thẩm Mã', lat:23.1897, lng:105.2872, time:'2026-11-04T12:10:00'},
-    {day:'2026-11-04', name:'Sủng Là', lat:23.2394, lng:105.3111, time:'2026-11-04T13:00:00'},
-    {day:'2026-11-04', name:'Đồng Văn', lat:23.2708, lng:105.3597, time:'2026-11-04T15:10:00'},
+    {day:'2026-11-04', name:'Cổng Trời Quản Bạ', lat:23.049602, lng:104.992615, time:'2026-11-04T08:00:00'},
+    {day:'2026-11-04', name:'Cán Tỷ', lat:23.117930, lng:105.019623, time:'2026-11-04T09:15:00'},
+    {day:'2026-11-04', name:'TT Yên Minh', lat:23.107345, lng:105.137749, time:'2026-11-04T10:50:00'},
+    {day:'2026-11-04', name:'Dốc Thẩm Mã', lat:23.187570, lng:105.188652, time:'2026-11-04T12:10:00'},
+    {day:'2026-11-04', name:'Sủng Là', lat:23.253208, lng:105.230299, time:'2026-11-04T13:00:00'},
+    {day:'2026-11-04', name:'Đồng Văn', lat:23.280154, lng:105.359912, time:'2026-11-04T15:10:00'},
     {day:'2026-11-05', name:'Dinh Vua Mèo', lat:23.2931, lng:105.3149, time:'2026-11-05T07:50:00'},
     {day:'2026-11-05', name:'Cột cờ Lũng Cú', lat:23.3919, lng:105.3167, time:'2026-11-05T09:05:00'},
     {day:'2026-11-05', name:'Lô Lô Chải', lat:23.3872, lng:105.3244, time:'2026-11-05T10:30:00'},
     {day:'2026-11-05', name:'Làng cổ Ma Lé', lat:23.3450, lng:105.3486, time:'2026-11-05T12:30:00'},
-    {day:'2026-11-05', name:'Đồng Văn (về nghỉ trưa)', lat:23.2708, lng:105.3597, time:'2026-11-05T13:35:00'},
+    {day:'2026-11-05', name:'Đồng Văn (về nghỉ trưa)', lat:23.280154, lng:105.359912, time:'2026-11-05T13:35:00'},
     {day:'2026-11-05', name:'Đồn Cao Đồng Văn', lat:23.2760, lng:105.3625, time:'2026-11-05T15:00:00'},
     {day:'2026-11-06', name:'Mã Pí Lèng Panorama', lat:23.2299, lng:105.4192, time:'2026-11-06T07:35:00'},
     {day:'2026-11-06', name:'Bến thuyền Tà Làng', lat:23.2214, lng:105.4064, time:'2026-11-06T08:35:00'},
     {day:'2026-11-06', name:'Anh Quân Camping', lat:23.2160, lng:105.3960, time:'2026-11-06T11:30:00'},
     {day:'2026-11-06', name:'Coffee Mí Pó', lat:23.2330, lng:105.4230, time:'2026-11-06T14:10:00'},
-    {day:'2026-11-06', name:'Mèo Vạc', lat:23.1889, lng:105.4147, time:'2026-11-06T16:25:00'},
+    {day:'2026-11-06', name:'Mèo Vạc', lat:23.163830, lng:105.408983, time:'2026-11-06T16:25:00'},
     {day:'2026-11-07', name:'Dốc chữ M', lat:23.1301, lng:105.3358, time:'2026-11-07T09:00:00'},
     {day:'2026-11-07', name:'Mậu Duệ', lat:23.0764, lng:105.2519, time:'2026-11-07T09:50:00'},
-    {day:'2026-11-07', name:'TT Yên Minh', lat:23.1136, lng:105.2467, time:'2026-11-07T11:10:00'},
-    {day:'2026-11-07', name:'Cán Tỷ', lat:23.1706, lng:105.1367, time:'2026-11-07T13:25:00'},
-    {day:'2026-11-07', name:'Cổng Trời Quản Bạ', lat:23.0287, lng:104.9995, time:'2026-11-07T14:00:00'},
+    {day:'2026-11-07', name:'TT Yên Minh', lat:23.107345, lng:105.137749, time:'2026-11-07T11:10:00'},
+    {day:'2026-11-07', name:'Cán Tỷ', lat:23.117930, lng:105.019623, time:'2026-11-07T13:25:00'},
+    {day:'2026-11-07', name:'Cổng Trời Quản Bạ', lat:23.049602, lng:104.992615, time:'2026-11-07T14:00:00'},
     {day:'2026-11-07', name:'TP Hà Giang (trả xe)', lat:22.8025, lng:104.9784, time:'2026-11-07T15:50:00'},
     {day:'2026-11-08', name:'Lên xe khách về Nội Bài', lat:22.8025, lng:104.9784, time:'2026-11-08T10:00:00'},
   ];
