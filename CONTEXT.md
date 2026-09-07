@@ -434,6 +434,34 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   dùng để vẽ đường; ghim điểm đến của nó đã chuyển sang tên POI nên không ảnh
   hưởng việc dẫn đường.
 
+- **v17** (hiện tại) — **Ba phương án A/B/C cho nhóm chọn, trên cùng một trang.**
+  | | Tên | Bốn đêm | Đặc trưng |
+  |---|---|---|---|
+  | A | Thong thả | Đồng Văn ×2 · Mèo Vạc · TP Hà Giang | Bản cũ. Có ngày nghỉ, thuyền + camping + Mí Pó. Bỏ Du Già |
+  | B | Trọn vòng | Đồng Văn · Mèo Vạc · Du Già · TP Hà Giang | Có Du Già. Ngày 2 dồn Lũng Cú + Mã Pí Lèng + thuyền |
+  | C | Trọn vòng + Hà Nội | Đồng Văn · Mèo Vạc · Du Già · xe khách đêm | Cung y hệt B, tối T7 lên xe, CN chơi Hà Nội |
+
+  **Cơ chế `data-plan` — đọc kỹ trước khi sửa:** thuộc tính `data-plan="A B C"`
+  (danh sách, cách nhau bởi dấu cách) gắn được lên **bất kỳ phần tử nào**, không
+  riêng `<section>`. Hàm `applyPlan()` ẩn/hiện bằng thuộc tính `hidden`. Chính nhờ
+  vậy mà ngày 4 của B và C **dùng chung** toàn bộ phần chạy xe, chỉ tách 4 mốc
+  buổi tối — không nhân bản nội dung. Tương tự: `#ngay1` dùng chung cho cả 3
+  phương án, `#ngay5` dùng chung cho A và B, nhãn trong SVG hero cũng đổi theo
+  plan. **Đừng tách thành nhiều file HTML** — đó là phương án đã cân nhắc và loại
+  vì phải copy Lưu ý / Cứu hộ / Thực tế 2026 ra 3 nơi.
+  Lựa chọn lưu ở `localStorage` key `hgl_plan`, đồng bộ với tham số `?plan=` trên
+  URL (ưu tiên URL → localStorage → mặc định A) nên gửi link là người khác mở
+  đúng phương án. Sự kiện `planchange` được phát ra để bản đồ và danh sách kiểm
+  tra tự nạp lại.
+  Bản đồ: `PLAN_A` / `PLAN_B` với `PLANS.C = PLAN_B` (cùng cung). Nút `.map-btn`
+  sinh động từ `PLANS[currentPlan].labels`. Danh sách kiểm tra lọc theo plan,
+  tổng số đếm theo hàng đang hiện (`#vfTotal`), tiêu đề nhóm ngày tự ẩn khi
+  không còn hàng nào.
+  **CẢNH BÁO:** quãng đường ngày 2–3–4 của B/C **chưa được đo**, đang gắn nhãn
+  `.unmeasured` trên giao diện. Hệ số 2,22× của QL4C **không dùng được** cho cung
+  Mậu Duệ – Du Già vì khác loại đường. Phải bấm nút "Chỉ đường cả ngày" đo lại
+  rồi mới bỏ nhãn.
+
 ## Deploy
 
 **Từ v6, bắt buộc deploy qua Netlify "Import from an existing project" →
