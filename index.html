@@ -293,6 +293,33 @@
     border:1px solid rgba(36,52,77,0.18);
   }
 
+
+  /* ---------- KIEM TRA DIEM DEN ---------- */
+  .vf-head{display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; margin-bottom:18px;}
+  .vf-prog{font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:700;}
+  .vf-bar{height:8px; border-radius:99px; background:rgba(31,42,26,0.12); overflow:hidden; margin-top:6px; width:220px;}
+  .vf-bar i{display:block; height:100%; width:0; background:var(--moss); transition:width .25s;}
+  .vf-day{font-family:'JetBrains Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+          color:#6b6455; font-weight:700; margin:22px 0 10px;}
+  .vf-row{display:flex; align-items:center; gap:12px; padding:11px 14px; border:1px solid var(--line);
+          border-radius:10px; background:var(--card); margin-bottom:8px;}
+  .vf-row.done{background:rgba(74,103,65,0.1); border-color:rgba(74,103,65,0.35);}
+  .vf-row input{width:19px; height:19px; flex:0 0 auto; cursor:pointer; accent-color:var(--moss);}
+  .vf-txt{flex:1 1 auto; min-width:0;}
+  .vf-name{display:block; font-weight:700; font-size:14.5px; line-height:1.35;}
+  .vf-q{display:block; margin-top:3px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#6b6455; word-break:break-word; line-height:1.45;}
+  .vf-badge{font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700; padding:3px 8px;
+            border-radius:99px; white-space:nowrap; flex:0 0 auto;}
+  .vf-ok{background:rgba(74,103,65,0.18); color:var(--moss-deep);}
+  .vf-gps{background:rgba(36,52,77,0.1); color:var(--indigo);}
+  .vf-chk{background:rgba(200,149,68,0.22); color:#8a6323;}
+  .vf-open{font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:700; text-decoration:none;
+           padding:7px 13px; border-radius:99px; background:var(--ink); color:var(--stone); flex:0 0 auto;}
+  @media (max-width:640px){
+    .vf-row{flex-wrap:wrap;}
+    .vf-txt{flex:1 1 100%; order:2;}
+  }
+
   /* ---------- MAP ---------- */
   #map{width:100%; height:560px; border-radius:14px; border:1px solid var(--line); overflow:hidden;}
   .map-toggle{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;}
@@ -498,6 +525,7 @@
       <a href="#ngay4">Ngày 4</a>
       <a href="#ngay5">Ngày 5</a>
       <a href="#banddo">Bản đồ</a>
+      <a href="#kiemtra">Kiểm tra</a>
       <a href="#chiphi">Chi phí</a>
       <a href="#thucte">Thực tế</a>
       <a href="#luuy">Lưu ý</a>
@@ -675,7 +703,7 @@
           <div class="time">12:35 – 12:55</div>
           <h4>Dốc Thẩm Mã — dừng 20 phút</h4>
           <p>Con dốc 9 tầng nổi tiếng nhất Hà Giang, nằm giữa Yên Minh và Phố Cáo — <b>bản lịch trình trước bỏ sót điểm này dù nó nằm ngay trên đường</b>. Có bãi đỗ và đài quan sát trên đỉnh dốc, nhìn xuống toàn bộ 9 tầng cua. Ở đây thường có các em nhỏ đội gùi hoa mời chụp ảnh — nên gửi các em ít tiền/bánh nếu chụp.</p>
-          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=D%E1%BB%91c%20Th%E1%BA%A9m%20M%C3%A3%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=D%E1%BB%91c%20Th%E1%BA%A9m%20M%C3%A3%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">12:55 – 13:20</div>
@@ -687,7 +715,7 @@
           <div class="time">13:20 – 14:30</div>
           <h4>Sủng Là — ăn trưa &amp; Nhà của Pao · 1h10</h4>
           <p>Chia rõ: <b>45 phút ăn trưa</b> tại quán trong thung lũng hoa + <b>35 phút</b> tham quan Nhà của Pao (vé ~20.000đ/người) — kiến trúc trình tường H'Mông nguyên bản, bối cảnh phim "Chuyện của Pao". Đây là bữa trưa duy nhất trong ngày nên ăn đủ no, nhưng tránh rượu ngô vì buổi chiều còn đèo.</p>
-          <span class="tag photo">Ăn uống · Chụp ảnh</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=23.253208%2C105.230299" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag photo">Ăn uống · Chụp ảnh</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=L%C3%A0ng%20v%C4%83n%20h%C3%B3a%20du%20l%E1%BB%8Bch%20L%C5%A9ng%20C%E1%BA%A9m%2C%20S%E1%BB%A7ng%20L%C3%A0%2C%20%C4%90%E1%BB%93ng%20V%C4%83n" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">14:30 – 15:35</div>
@@ -953,19 +981,19 @@
           <div class="time">06:55 – 07:35</div>
           <h4>Đồng Văn → Mã Pí Lèng Panorama (~20 km · 40 phút)</h4>
           <p>Con đường Hạnh Phúc men vách đá. <b>Sương mù ở Mã Pí Lèng có thể ập xuống dưới 10m tầm nhìn trong vài phút, đặc biệt tháng 11–2</b> — nếu gặp, tấp vào điểm dừng gần nhất chờ tan, tuyệt đối không mò tiếp trên đèo hẹp. Đi giờ này thì đèo còn vắng, chưa có đoàn tour.</p>
-          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=%C4%90%C3%A8o%20M%C3%A3%20P%C3%AC%20L%C3%A8ng%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag ride">Chạy xe là chính</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=M%C3%A3%20P%C3%AC%20L%C3%A8ng%20Panorama%2C%20P%E1%BA%A3i%20L%E1%BB%A7ng%2C%20M%C3%A8o%20V%E1%BA%A1c" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">07:35 – 07:50</div>
           <h4>Mã Pí Lèng Panorama — chỉ dừng 15 phút</h4>
           <p>Ngắm toàn cảnh hẻm Tu Sản từ trên cao. ⚠️ Công trình Panorama đang bị yêu cầu tháo dỡ phần ban công nhô ra sông và cải tạo — vẫn mở như quán cà phê/điểm ngắm cảnh, không còn lưu trú, diện mạo khác ảnh cũ trên mạng. Vé chụp ảnh 30.000đ, nước từ 40.000đ. <b>Chỉ dừng 30 phút thay vì 45 như bản cũ</b>, vì chiều nay còn lên Mí Pó — cũng là ngắm đúng hẻm Tu Sản đó, từ trên cao hơn.</p>
-          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=%C4%90%C3%A8o%20M%C3%A3%20P%C3%AC%20L%C3%A8ng%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag photo">Điểm chụp ảnh đẹp</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=M%C3%A3%20P%C3%AC%20L%C3%A8ng%20Panorama%2C%20P%E1%BA%A3i%20L%E1%BB%A7ng%2C%20M%C3%A8o%20V%E1%BA%A1c" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">07:50 – 08:20</div>
           <h4>Xuống bến thuyền Tà Làng (~9 km · 30 phút · dốc đứng)</h4>
           <p>Đường xuống bến từ ngã ba Pải Lủng là dốc bê tông hẹp, gấp khúc, nhiều đoạn một làn. Xe số phải về số 1–2 và <b>tuyệt đối không rà phanh liên tục</b> (dễ cháy má phanh). Ai tay lái yếu có thể gửi xe trên ngã ba và đi xe trung chuyển xuống bến (~20–30k, đã gồm trong vé trọn gói).</p>
-          <span class="tag warn">Đoạn khó — tập trung lái</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=B%E1%BA%BFn%20thuy%E1%BB%81n%20T%C3%A0%20L%C3%A0ng%2C%20P%E1%BA%A3i%20L%E1%BB%A7ng%2C%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag warn">Đoạn khó — tập trung lái</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=L%E1%BB%91i%20xu%E1%BB%91ng%20b%E1%BA%BFn%20thuy%E1%BB%81n%20%C4%91i%20s%C3%B4ng%20Nho%20Qu%E1%BA%BF" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">08:20 – 08:45</div>
@@ -977,7 +1005,7 @@
           <div class="time">08:45 – 11:00</div>
           <h4>Thuyền vào hẻm Tu Sản → thả tại Anh Quân Camping · 2h15</h4>
           <p>Chuyến vào hẻm Tu Sản và quay ra khoảng 30–40 phút, phần còn lại là thời gian dừng chụp ảnh trong hẻm và chạy tiếp tới bến của khu camping. <b>Hẻm Tu Sản là hẻm vực sâu nhất Đông Nam Á</b>, vách đá dựng đứng gần 800m hai bên. Mặc áo phao đầy đủ. Lưu ý: đập thuỷ điện hạ lưu đã tích nước nên mực nước cao hơn ảnh chụp trước 2024, vách hẻm nhìn thấp hơn.</p>
-          <span class="tag photo">Trải nghiệm chính trong ngày</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=H%E1%BA%BBm%20Tu%20S%E1%BA%A3n%2C%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">📍 Mở Google Maps</a>
+          <span class="tag photo">Trải nghiệm chính trong ngày</span><a class="gmap" href="https://www.google.com/maps/search/?api=1&amp;query=L%E1%BB%91i%20xu%E1%BB%91ng%20b%E1%BA%BFn%20thuy%E1%BB%81n%20%C4%91i%20s%C3%B4ng%20Nho%20Qu%E1%BA%BF" target="_blank" rel="noopener">📍 Mở Google Maps</a>
         </div>
         <div class="tstop">
           <div class="time">11:00 – 12:30</div>
@@ -1422,6 +1450,183 @@
   </div>
 </section>
 
+
+<!-- ================= KIEM TRA DIEM DEN ================= -->
+<section id="kiemtra">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Làm một lần ở nhà · khoảng 5 phút</div>
+      <h2 class="sec-title">Kiểm tra 25 điểm đến trước khi đi.</h2>
+      <p class="sec-desc">Trang này không tự kiểm chứng được các link bản đồ — mọi nguồn dữ liệu bản đồ đều nằm ngoài tầm với của nó. Cách duy nhất để chắc chắn <b>"cứ đi theo bản đồ là tới đúng nơi"</b> là bạn bấm thử một lượt trên chính điện thoại sẽ mang đi. Bấm "Mở Maps", nhìn xem ghim có rơi đúng chỗ trong vùng Hà Giang không, rồi tích vào ô. Ô tích được lưu trên máy bạn, đóng trang mở lại vẫn còn.</p>
+    </div>
+    <div class="vf-head">
+      <div>
+        <div class="vf-prog" id="vfProg">Đã kiểm 0/25</div>
+        <div class="vf-bar"><i id="vfBar"></i></div>
+      </div>
+      <button class="btn-nav" id="vfReset" style="border:none;cursor:pointer">Bỏ tích tất cả</button>
+    </div>
+      <div class="vf-day">NGÀY 1 — LÊN ĐỒNG VĂN</div>
+      <label class="vf-row" data-vf="Thành phố Hà Giang, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Cửa hàng thuê xe / TP Hà Giang</span><span class="vf-q">Thành phố Hà Giang, Tuyên Quang · Thay bằng địa chỉ thật của cửa hàng khi đã đặt xe</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Cổng Trời Quản Bạ, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Cổng Trời Quản Bạ</span><span class="vf-q">Cổng Trời Quản Bạ, Tuyên Quang · Đã thấy là POI có tên trên ảnh Maps của bạn</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=C%E1%BB%95ng%20Tr%E1%BB%9Di%20Qu%E1%BA%A3n%20B%E1%BA%A1%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="23.117930,105.019623">
+        <input type="checkbox">
+        <span class="vf-badge vf-gps">TOẠ ĐỘ ĐÃ ĐO</span>
+        <span class="vf-txt"><span class="vf-name">Cán Tỷ — cua chữ M</span><span class="vf-q">23.117930,105.019623 · Toạ độ bạn đo, nằm trên QL4C</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=23.117930%2C105.019623" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="23.107345,105.137749">
+        <input type="checkbox">
+        <span class="vf-badge vf-gps">TOẠ ĐỘ ĐÃ ĐO</span>
+        <span class="vf-txt"><span class="vf-name">TT Yên Minh (nghỉ + đổ xăng)</span><span class="vf-q">23.107345,105.137749 · Toạ độ bạn đo</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=23.107345%2C105.137749" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Nhà hàng Phúc Cái, Thị trấn Yên Minh, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Nhà hàng Phúc Cái — Yên Minh</span><span class="vf-q">Nhà hàng Phúc Cái, Thị trấn Yên Minh, Tuyên Quang · Quán nhỏ, dễ khớp nhầm</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Nh%C3%A0%20h%C3%A0ng%20Ph%C3%BAc%20C%C3%A1i%2C%20Th%E1%BB%8B%20tr%E1%BA%A5n%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Dốc Thẩm Mã, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Dốc Thẩm Mã</span><span class="vf-q">Dốc Thẩm Mã, Tuyên Quang · Đã thấy là POI có tên trên ảnh Maps của bạn</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=D%E1%BB%91c%20Th%E1%BA%A9m%20M%C3%A3%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Làng văn hóa du lịch Lũng Cẩm, Sủng Là, Đồng Văn">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Nhà của Pao (trong Làng VH Lũng Cẩm)</span><span class="vf-q">Làng văn hóa du lịch Lũng Cẩm, Sủng Là, Đồng Văn · Đã sửa: toạ độ cũ dẫn tới trụ sở thôn, không phải Nhà của Pao</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=L%C3%A0ng%20v%C4%83n%20h%C3%B3a%20du%20l%E1%BB%8Bch%20L%C5%A9ng%20C%E1%BA%A9m%2C%20S%E1%BB%A7ng%20L%C3%A0%2C%20%C4%90%E1%BB%93ng%20V%C4%83n" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Phố cổ Đồng Văn, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Phố cổ Đồng Văn</span><span class="vf-q">Phố cổ Đồng Văn, Tuyên Quang · Toạ độ bạn đo trùng khớp POI</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <div class="vf-day">NGÀY 2 — QUANH ĐỒNG VĂN</div>
+      <label class="vf-row" data-vf="Bánh cuốn Bà Hà, Phố cổ Đồng Văn, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Bánh cuốn Bà Hà</span><span class="vf-q">Bánh cuốn Bà Hà, Phố cổ Đồng Văn, Tuyên Quang · Quán nhỏ, dễ khớp nhầm</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=B%C3%A1nh%20cu%E1%BB%91n%20B%C3%A0%20H%C3%A0%2C%20Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Dinh thự họ Vương, Sà Phìn, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Dinh thự họ Vương (Sà Phìn)</span><span class="vf-q">Dinh thự họ Vương, Sà Phìn, Tuyên Quang · Đã thấy là POI trên ảnh Maps của bạn — lưu ý có cả "Dinh thự họ Vừ" khác gần đó</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Dinh%20th%E1%BB%B1%20h%E1%BB%8D%20V%C6%B0%C6%A1ng%2C%20S%C3%A0%20Ph%C3%ACn%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Cột cờ Lũng Cú, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Cột cờ Lũng Cú</span><span class="vf-q">Cột cờ Lũng Cú, Tuyên Quang · Đã thấy là POI trên ảnh Maps của bạn</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=C%E1%BB%99t%20c%E1%BB%9D%20L%C5%A9ng%20C%C3%BA%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Lô Lô Chải, Lũng Cú, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Lô Lô Chải</span><span class="vf-q">Lô Lô Chải, Lũng Cú, Tuyên Quang · Đã thấy là POI trên ảnh Maps của bạn</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=L%C3%B4%20L%C3%B4%20Ch%E1%BA%A3i%2C%20L%C5%A9ng%20C%C3%BA%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Ma Lé, Đồng Văn, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Làng cổ Ma Lé</span><span class="vf-q">Ma Lé, Đồng Văn, Tuyên Quang · ⚠️ Chính điểm này từng teleport về Bình Chánh TP.HCM — kiểm kỹ nhất</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Ma%20L%C3%A9%2C%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Đồn Cao, Đồng Văn, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Đồn Cao Đồng Văn</span><span class="vf-q">Đồn Cao, Đồng Văn, Tuyên Quang · Đã thấy là POI trên ảnh Maps của bạn</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=%C4%90%E1%BB%93n%20Cao%2C%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <div class="vf-day">NGÀY 3 — NHO QUẾ &amp; MÈO VẠC</div>
+      <label class="vf-row" data-vf="Mã Pì Lèng Panorama, Pải Lủng, Mèo Vạc">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Mã Pì Lèng Panorama</span><span class="vf-q">Mã Pì Lèng Panorama, Pải Lủng, Mèo Vạc · Đã sửa: trước đó trỏ vào cả con đèo dài 20km</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=M%C3%A3%20P%C3%AC%20L%C3%A8ng%20Panorama%2C%20P%E1%BA%A3i%20L%E1%BB%A7ng%2C%20M%C3%A8o%20V%E1%BA%A1c" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Lối xuống bến thuyền đi sông Nho Quế">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Lối xuống bến thuyền Nho Quế</span><span class="vf-q">Lối xuống bến thuyền đi sông Nho Quế · Tên POI theo hướng dẫn của dân phượt — kiểm để chắc</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=L%E1%BB%91i%20xu%E1%BB%91ng%20b%E1%BA%BFn%20thuy%E1%BB%81n%20%C4%91i%20s%C3%B4ng%20Nho%20Qu%E1%BA%BF" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Anh Quân Camping, Giàng Chu Phìn, Mèo Vạc, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Anh Quân Camping</span><span class="vf-q">Anh Quân Camping, Giàng Chu Phìn, Mèo Vạc, Tuyên Quang · Chỉ tới được bằng thuyền — pin chỉ để định vị, không chạy xe tới</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Anh%20Qu%C3%A2n%20Camping%2C%20Gi%C3%A0ng%20Chu%20Ph%C3%ACn%2C%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Coffee Mí Pó, Pải Lủng, Mèo Vạc, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Coffee Mí Pó</span><span class="vf-q">Coffee Mí Pó, Pải Lủng, Mèo Vạc, Tuyên Quang · Gửi xe dưới chân rồi leo bộ</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Coffee%20M%C3%AD%20P%C3%B3%2C%20P%E1%BA%A3i%20L%E1%BB%A7ng%2C%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Thị trấn Mèo Vạc, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Thị trấn Mèo Vạc</span><span class="vf-q">Thị trấn Mèo Vạc, Tuyên Quang · Toạ độ bạn đo trùng khớp</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <div class="vf-day">NGÀY 4 — VỀ TP HÀ GIANG</div>
+      <label class="vf-row" data-vf="Mậu Duệ, Yên Minh, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Mậu Duệ</span><span class="vf-q">Mậu Duệ, Yên Minh, Tuyên Quang · Nằm trong link chỉ đường ngày 4 — đáng kiểm</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=M%E1%BA%ADu%20Du%E1%BB%87%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Café Núi Cấm, Thành phố Hà Giang, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Café Núi Cấm</span><span class="vf-q">Café Núi Cấm, Thành phố Hà Giang, Tuyên Quang · Quán nhỏ</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Caf%C3%A9%20N%C3%BAi%20C%E1%BA%A5m%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Hạ Thành Quán, Thành phố Hà Giang, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Hạ Thành Quán</span><span class="vf-q">Hạ Thành Quán, Thành phố Hà Giang, Tuyên Quang · Quán nhỏ</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=H%E1%BA%A1%20Th%C3%A0nh%20Qu%C3%A1n%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <div class="vf-day">NGÀY 5 — VỀ SÀI GÒN</div>
+      <label class="vf-row" data-vf="Cháo ấu tẩu Ngân Hà, Thành phố Hà Giang, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Cháo ấu tẩu Ngân Hà</span><span class="vf-q">Cháo ấu tẩu Ngân Hà, Thành phố Hà Giang, Tuyên Quang · Quán nhỏ</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Ch%C3%A1o%20%E1%BA%A5u%20t%E1%BA%A9u%20Ng%C3%A2n%20H%C3%A0%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Cột mốc số 0, Thành phố Hà Giang, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Cột mốc số 0</span><span class="vf-q">Cột mốc số 0, Thành phố Hà Giang, Tuyên Quang</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=C%E1%BB%99t%20m%E1%BB%91c%20s%E1%BB%91%200%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-vf="Sân bay quốc tế Nội Bài">
+        <input type="checkbox">
+        <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
+        <span class="vf-txt"><span class="vf-name">Sân bay Nội Bài (ga T1 nội địa)</span><span class="vf-q">Sân bay quốc tế Nội Bài · Không thể nhầm</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=S%C3%A2n%20bay%20qu%E1%BB%91c%20t%E1%BA%BF%20N%E1%BB%99i%20B%C3%A0i" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+    <div class="note-box" style="margin-top:18px;">
+      🚩 <b>Nếu một ghim rơi sai chỗ:</b> mở Google Maps, tự tìm đúng địa điểm, chuột phải (hoặc giữ lâu trên điện thoại) → copy toạ độ, rồi gửi lại cho mình để thay vào. Đó đúng là cách 6 điểm mốc trong lịch trình này đã được sửa — Cán Tỷ từng lệch tới <b>13,3 km</b>.
+    </div>
+  </div>
+</section>
+
 <!-- ================= CHI PHÍ ================= -->
 <section id="chiphi">
   <div class="wrap">
@@ -1802,6 +2007,49 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
+
+  // ---- Kiem tra diem den: luu tich vao localStorage cua tung may ----
+  (function(){
+    const rows = document.querySelectorAll('.vf-row');
+    if(!rows.length) return;
+    const KEY = 'hgl_verified';
+    let saved = {};
+    try{ saved = JSON.parse(localStorage.getItem(KEY) || '{}'); }catch(e){ saved = {}; }
+
+    function paint(){
+      let done = 0;
+      rows.forEach(r=>{
+        const on = r.querySelector('input').checked;
+        r.classList.toggle('done', on);
+        if(on) done++;
+      });
+      const pct = Math.round(done / rows.length * 100);
+      const prog = document.getElementById('vfProg');
+      prog.textContent = 'Đã kiểm ' + done + '/' + rows.length + (done === rows.length ? ' — xong hết ✅' : '');
+      document.getElementById('vfBar').style.width = pct + '%';
+    }
+    function save(){
+      try{ localStorage.setItem(KEY, JSON.stringify(saved)); }catch(e){}
+    }
+    rows.forEach(r=>{
+      const box = r.querySelector('input');
+      const id = r.dataset.vf;
+      box.checked = !!saved[id];
+      box.addEventListener('change', ()=>{
+        if(box.checked) saved[id] = 1; else delete saved[id];
+        save(); paint();
+      });
+      // bam nut "Mo Maps" khong duoc lam toggle checkbox cua <label>
+      r.querySelector('.vf-open').addEventListener('click', e=>e.stopPropagation());
+    });
+    document.getElementById('vfReset').addEventListener('click', ()=>{
+      saved = {}; save();
+      rows.forEach(r=>{ r.querySelector('input').checked = false; });
+      paint();
+    });
+    paint();
+  })();
+
   const dayColors = {1:'#24344D', 2:'#B1502F', 3:'#5C6E4E', 4:'#C89544'};
 
   // Mỗi điểm có thêm `q` = chuỗi tìm kiếm dùng cho link Google Maps.

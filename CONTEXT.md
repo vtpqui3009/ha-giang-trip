@@ -412,6 +412,28 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   chữ M, Minh Ngọc — nguồn gốc từng toạ độ đã ghi thành comment ngay trên mảng
   `stops` trong `index.html`.
 
+- **v16** (hiện tại) — **Tách bạch hai việc trước đây bị lẫn: ghim điểm đến và
+  waypoint dẫn đường.** Hai việc này cần dữ liệu khác nhau:
+  - *Waypoint dẫn đường* chỉ cần ghim đúng **con đường** → toạ độ đã đo là tốt nhất.
+  - *Ghim điểm đến* phải rơi đúng **địa điểm** → tên POI của Google là tốt nhất,
+    vì toạ độ đo được thường chỉ là một điểm trên mặt đường gần đó.
+  Sửa 5 ghim từng dẫn sai chỗ: **Nhà của Pao** (toạ độ cũ rơi vào "Trụ sở thôn
+  Sủng Là dưới", nay trỏ "Làng văn hóa du lịch Lũng Cẩm"); **Mã Pì Lèng
+  Panorama** (trước trỏ vào cả con đèo dài 20km); **bến thuyền Nho Quế** (nay
+  dùng đúng tên POI "Lối xuống bến thuyền đi sông Nho Quế"); **Hẻm Tu Sản**
+  (nằm giữa sông, không chạy xe tới được → trỏ về bến); **Dốc Thẩm Mã** (bỏ
+  huyện vì POI nằm giáp ranh Yên Minh/Đồng Văn).
+  Thêm section `#kiemtra`: danh sách **25 điểm đến** kèm link Maps, nhãn độ tin
+  cậy (đã thấy là POI trên ảnh Maps của người dùng / toạ độ đã đo / cần kiểm),
+  checkbox lưu `localStorage` key `hgl_verified` và thanh tiến độ. Lý do tồn
+  tại: **trang này không tự kiểm chứng được link bản đồ** — mọi geocoder
+  (Nominatim, Photon, Overpass, Wikidata, GeoNames) đều bị chặn bởi network
+  policy, nên cách duy nhất để chắc chắn là người dùng bấm thử một lượt trên
+  điện thoại sẽ mang đi.
+  *Lưu ý cho lần sửa sau:* Dốc Thẩm Mã trong `stops` vẫn là toạ độ **nội suy**
+  dùng để vẽ đường; ghim điểm đến của nó đã chuyển sang tên POI nên không ảnh
+  hưởng việc dẫn đường.
+
 ## Deploy
 
 **Từ v6, bắt buộc deploy qua Netlify "Import from an existing project" →
