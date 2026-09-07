@@ -504,6 +504,44 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   - Khi test điều hướng có cuộn mượt, phải chờ **~2,5s**; chờ 500ms cho báo động
     giả.
 
+- **v19** (hiện tại) — **Sửa lỗi đè chữ ở hero + rà soát UI toàn trang.**
+
+  *Lỗi gốc — cơ chế ẩn/hiện không chạy với SVG:* `hidden` là IDL attribute của
+  `HTMLElement`, **`SVGElement` không có nó**. `applyPlan()` gán `el.hidden =
+  true` cho thẻ `<text>` trong SVG chỉ tạo một biến rác trên object, **không
+  sinh attribute nào**, nên CSS `[data-plan][hidden]` không bao giờ khớp → cả 3
+  nhãn của 3 phương án cùng vẽ chồng lên nhau. Sửa: dùng
+  `setAttribute('hidden','')` / `removeAttribute('hidden')` — ăn với **mọi** loại
+  phần tử. **Đừng đổi ngược về `el.hidden`.**
+
+  *Lỗi kèm theo, phát hiện khi quét toàn trang (3 phương án × 3 độ rộng):*
+  - `paint()` của `#kiemtra` tự tính lại `hidden` cho `.vf-day` nên **ghi đè**
+    `applyPlan`, làm lộ tiêu đề "chỉ phương án A" sang B và C. Sửa bằng hàm dùng
+    chung `planHas()`, và **gom nhóm theo CHẶNG thay vì số ngày** — cùng một địa
+    điểm rơi vào ngày khác nhau tuỳ phương án nên đặt tên theo số ngày luôn mâu
+    thuẫn.
+  - `.costtable` tràn khỏi viewport **81px** ở 390px (đúng bằng toàn bộ độ tràn
+    ngang của trang). Bọc `.table-wrap{overflow-x:auto}`, dùng chung selector với
+    `.cmp-wrap` vốn đã có.
+  - Nhãn `Mèo Vạc → Du Già` tràn **69 đơn vị** khỏi `viewBox` của SVG hero nên bị
+    cắt. Nới `viewBox` từ `0 0 480 420` sang `0 0 570 420` — không đổi chỗ nhãn
+    vì đổi chỗ sẽ đâm vào đường vẽ hoặc vòng tròn điểm dừng.
+  - **Thứ tự khai báo trong `<script>`:** khối bộ chọn phương án **phải nằm
+    trước** IIFE của danh sách kiểm tra. `paint()` gọi `planHas()` đọc
+    `currentPlan`; nếu đặt sau sẽ ném TDZ *"Cannot access 'currentPlan' before
+    initialization"* và **phá luôn phần còn lại của script** — khi đó không gì
+    được ẩn cả.
+
+  **Bài học quan trọng nhất — test tự xác nhận:** `hero.js` và `regress.js` cũ
+  lọc phần tử theo `el.hidden`, tức **đọc lại chính thứ mình vừa gán**, nên báo
+  đạt trong khi trình duyệt vẫn vẽ chữ chồng nhau. Bộ test mới
+  (`scratchpad/ui.js`) chỉ đo **trạng thái render thật**:
+  `getClientRects().length > 0 && getComputedStyle(el).display !== 'none'`, chạy
+  3 phương án × 3 độ rộng, khẳng định 0 rò rỉ / 0 thiếu / 0 tràn ngang. Nó bắt
+  được ngay lỗi TDZ mà tôi vừa tạo ra ở chính lần sửa này.
+  *Mẹo chạy:* chặn request ra ngoài (`pg.route`) vì font/CDN bị egress proxy
+  chặn, không chặn thì bộ test chậm gấp nhiều lần.
+
 ## Deploy
 
 **Từ v6, bắt buộc deploy qua Netlify "Import from an existing project" →
