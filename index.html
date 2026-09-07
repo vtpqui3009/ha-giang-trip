@@ -345,7 +345,7 @@
     letter-spacing:.05em; opacity:.65; font-weight:700;}
   .cmp td:first-child{font-weight:700; white-space:nowrap;}
   .cmp tr.on td{background:rgba(74,103,65,0.1);}
-  .cmp-wrap{overflow-x:auto;}
+  .cmp-wrap, .table-wrap{overflow-x:auto;}
   .unmeasured{
     display:inline-block; font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700;
     padding:2px 7px; border-radius:99px; background:rgba(200,149,68,0.25); color:#8a6323;
@@ -609,7 +609,7 @@
       </div>
     </div>
     <div class="ribbon-wrap">
-      <svg viewBox="0 0 480 420" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 570 420" xmlns="http://www.w3.org/2000/svg">
         <path class="ribbon-path" d="M60,60 C140,40 180,90 150,140 C110,200 60,190 90,250 C120,310 220,260 260,220 C310,170 380,180 400,230 C420,280 360,320 300,340 C240,360 190,330 150,360" />
         <g class="ribbon-node" style="--c:var(--indigo)">
           <circle cx="60" cy="60" r="13" stroke="var(--indigo)"/><text x="53" y="65">1</text>
@@ -1980,7 +1980,7 @@
       </div>
       <button class="btn-nav" id="vfReset" style="border:none;cursor:pointer">Bỏ tích tất cả</button>
     </div>
-      <div class="vf-day">NGÀY 1 — LÊN ĐỒNG VĂN</div>
+      <div class="vf-day">CHẶNG LÊN ĐỒNG VĂN · cả 3 phương án</div>
       <label class="vf-row" data-plan="A B C" data-vf="Thành phố Hà Giang, Tuyên Quang">
         <input type="checkbox">
         <span class="vf-badge vf-chk">CẦN KIỂM</span>
@@ -2029,7 +2029,7 @@
         <span class="vf-txt"><span class="vf-name">Phố cổ Đồng Văn</span><span class="vf-q">Phố cổ Đồng Văn, Tuyên Quang · Toạ độ bạn đo trùng khớp POI</span></span>
         <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Ph%E1%BB%91%20c%E1%BB%95%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
       </label>
-      <div class="vf-day">NGÀY 2 — QUANH ĐỒNG VĂN / LŨNG CÚ</div>
+      <div class="vf-day">SÀ PHÌN · LŨNG CÚ · QUANH ĐỒNG VĂN</div>
       <label class="vf-row" data-plan="A B C" data-vf="Bánh cuốn Bà Hà, Phố cổ Đồng Văn, Tuyên Quang">
         <input type="checkbox">
         <span class="vf-badge vf-chk">CẦN KIỂM</span>
@@ -2066,7 +2066,7 @@
         <span class="vf-txt"><span class="vf-name">Đồn Cao Đồng Văn</span><span class="vf-q">Đồn Cao, Đồng Văn, Tuyên Quang · Đã thấy là POI trên ảnh Maps của bạn</span></span>
         <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=%C4%90%E1%BB%93n%20Cao%2C%20%C4%90%E1%BB%93ng%20V%C4%83n%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
       </label>
-      <div class="vf-day" data-plan="A">NGÀY 3 — NHO QUẾ &amp; MÈO VẠC (chỉ phương án A)</div>
+      <div class="vf-day">MÃ PÍ LÈNG · NHO QUẾ · MÈO VẠC</div>
       <label class="vf-row" data-plan="A B C" data-vf="Mã Pì Lèng Panorama, Pải Lủng, Mèo Vạc">
         <input type="checkbox">
         <span class="vf-badge vf-chk">CẦN KIỂM</span>
@@ -2097,26 +2097,7 @@
         <span class="vf-txt"><span class="vf-name">Thị trấn Mèo Vạc</span><span class="vf-q">Thị trấn Mèo Vạc, Tuyên Quang · Toạ độ bạn đo trùng khớp</span></span>
         <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
       </label>
-      <div class="vf-day" data-plan="A">NGÀY 4 — VỀ TP HÀ GIANG (phương án A)</div>
-      <label class="vf-row" data-plan="A B C" data-vf="Mậu Duệ, Yên Minh, Tuyên Quang">
-        <input type="checkbox">
-        <span class="vf-badge vf-chk">CẦN KIỂM</span>
-        <span class="vf-txt"><span class="vf-name">Mậu Duệ</span><span class="vf-q">Mậu Duệ, Yên Minh, Tuyên Quang · Nằm trong link chỉ đường ngày 4 — đáng kiểm</span></span>
-        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=M%E1%BA%ADu%20Du%E1%BB%87%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
-      </label>
-      <label class="vf-row" data-plan="A B C" data-vf="Café Núi Cấm, Thành phố Hà Giang, Tuyên Quang">
-        <input type="checkbox">
-        <span class="vf-badge vf-chk">CẦN KIỂM</span>
-        <span class="vf-txt"><span class="vf-name">Café Núi Cấm</span><span class="vf-q">Café Núi Cấm, Thành phố Hà Giang, Tuyên Quang · Quán nhỏ</span></span>
-        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Caf%C3%A9%20N%C3%BAi%20C%E1%BA%A5m%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
-      </label>
-      <label class="vf-row" data-plan="A B C" data-vf="Hạ Thành Quán, Thành phố Hà Giang, Tuyên Quang">
-        <input type="checkbox">
-        <span class="vf-badge vf-chk">CẦN KIỂM</span>
-        <span class="vf-txt"><span class="vf-name">Hạ Thành Quán</span><span class="vf-q">Hạ Thành Quán, Thành phố Hà Giang, Tuyên Quang · Quán nhỏ</span></span>
-        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=H%E1%BA%A1%20Th%C3%A0nh%20Qu%C3%A1n%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
-      </label>
-      <div class="vf-day" data-plan="B C">NGÀY 3 — VÀO DU GIÀ (chỉ phương án B và C)</div>
+      <div class="vf-day" data-plan="B C">VÀO DU GIÀ · chỉ phương án B và C</div>
       <label class="vf-row" data-plan="B C" data-vf="Lũng Hồ, Yên Minh, Tuyên Quang">
         <input type="checkbox">
         <span class="vf-badge vf-chk">CẦN KIỂM</span>
@@ -2135,14 +2116,32 @@
         <span class="vf-txt"><span class="vf-name">Thác Du Già</span><span class="vf-q">Thác Du Già, Tuyên Quang · Gửi xe rồi đi bộ ~15 phút</span></span>
         <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Th%C3%A1c%20Du%20Gi%C3%A0%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
       </label>
-      <div class="vf-day" data-plan="B C">NGÀY 4 — VỀ TP HÀ GIANG (B và C)</div>
+      <div class="vf-day">VỀ TP HÀ GIANG</div>
+      <label class="vf-row" data-plan="A B C" data-vf="Mậu Duệ, Yên Minh, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Mậu Duệ</span><span class="vf-q">Mậu Duệ, Yên Minh, Tuyên Quang · Nằm trong link chỉ đường ngày 4 — đáng kiểm</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=M%E1%BA%ADu%20Du%E1%BB%87%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
       <label class="vf-row" data-plan="B C" data-vf="Minh Ngọc, Bắc Mê, Tuyên Quang">
         <input type="checkbox">
         <span class="vf-badge vf-chk">CẦN KIỂM</span>
         <span class="vf-txt"><span class="vf-name">Minh Ngọc (nghỉ chân)</span><span class="vf-q">Minh Ngọc, Bắc Mê, Tuyên Quang · Nằm trong link chỉ đường ngày 4 — đáng kiểm</span></span>
         <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Minh%20Ng%E1%BB%8Dc%2C%20B%E1%BA%AFc%20M%C3%AA%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
       </label>
-      <div class="vf-day" data-plan="C">NGÀY 5 — NGÀY Ở HÀ NỘI (chỉ phương án C)</div>
+      <label class="vf-row" data-plan="A B C" data-vf="Café Núi Cấm, Thành phố Hà Giang, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Café Núi Cấm</span><span class="vf-q">Café Núi Cấm, Thành phố Hà Giang, Tuyên Quang · Quán nhỏ</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=Caf%C3%A9%20N%C3%BAi%20C%E1%BA%A5m%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <label class="vf-row" data-plan="A B C" data-vf="Hạ Thành Quán, Thành phố Hà Giang, Tuyên Quang">
+        <input type="checkbox">
+        <span class="vf-badge vf-chk">CẦN KIỂM</span>
+        <span class="vf-txt"><span class="vf-name">Hạ Thành Quán</span><span class="vf-q">Hạ Thành Quán, Thành phố Hà Giang, Tuyên Quang · Quán nhỏ</span></span>
+        <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=H%E1%BA%A1%20Th%C3%A0nh%20Qu%C3%A1n%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang" target="_blank" rel="noopener">Mở Maps ↗</a>
+      </label>
+      <div class="vf-day" data-plan="C">NGÀY Ở HÀ NỘI · chỉ phương án C</div>
       <label class="vf-row" data-plan="C" data-vf="Phố cổ Hà Nội, Hoàn Kiếm, Hà Nội">
         <input type="checkbox">
         <span class="vf-badge vf-ok">ĐÃ THẤY TRÊN MAPS</span>
@@ -2155,7 +2154,7 @@
         <span class="vf-txt"><span class="vf-name">Hồ Hoàn Kiếm</span><span class="vf-q">Hồ Hoàn Kiếm, Hà Nội · Chủ Nhật có phố đi bộ quanh hồ</span></span>
         <a class="vf-open" href="https://www.google.com/maps/search/?api=1&amp;query=H%E1%BB%93%20Ho%C3%A0n%20Ki%E1%BA%BFm%2C%20H%C3%A0%20N%E1%BB%99i" target="_blank" rel="noopener">Mở Maps ↗</a>
       </label>
-      <div class="vf-day" data-plan="A B">NGÀY 5 — VỀ SÀI GÒN (A và B)</div>
+      <div class="vf-day">TRƯỚC KHI BAY VỀ</div>
       <label class="vf-row" data-plan="A B C" data-vf="Cháo ấu tẩu Ngân Hà, Thành phố Hà Giang, Tuyên Quang">
         <input type="checkbox">
         <span class="vf-badge vf-chk">CẦN KIỂM</span>
@@ -2205,7 +2204,8 @@
         <p>Vé xe khách giường nằm/limousine Hà Nội ↔ Hà Giang, 5,5–7 tiếng. Chiều lên (03/11) đi xe đêm, <b>chiều về (08/11) đi xe ban ngày và trả khách thẳng sảnh sân bay Nội Bài</b>.</p>
       </div>
     </div>
-    <table class="costtable">
+    <div class="table-wrap">
+      <table class="costtable">
       <thead>
         <tr><th>Khoản mục</th><th>Đơn giá</th><th>Tổng (3 người)</th></tr>
       </thead>
@@ -2224,6 +2224,7 @@
         <tr class="total"><td>Tổng cộng (3 người)</td><td></td><td>≈ 16.100.000đ</td></tr>
       </tbody>
     </table>
+      </div>
     <div class="note-box" style="margin-top:18px;">
       📈 <b>Lịch trình mới đắt hơn bản cũ khoảng 2,3 triệu cho cả nhóm (≈ +770.000đ/người)</b>, và đây là chỗ tiền đi đâu:<br>
       · <b>+900.000đ</b> — thêm 1 đêm phòng (giờ là 4 đêm thay vì 3: Đồng Văn ×2, Mèo Vạc, TP Hà Giang).<br>
@@ -2581,63 +2582,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
 
-  // ---- Kiem tra diem den: luu tich vao localStorage cua tung may ----
-  (function(){
-    const rows = document.querySelectorAll('.vf-row');
-    if(!rows.length) return;
-    const KEY = 'hgl_verified';
-    let saved = {};
-    try{ saved = JSON.parse(localStorage.getItem(KEY) || '{}'); }catch(e){ saved = {}; }
-
-    function paint(){
-      // Chi dem cac hang thuoc phuong an dang chon, va an luon tieu de ngay
-      // khong con hang nao ben duoi.
-      let done = 0, total = 0;
-      rows.forEach(r=>{
-        const on = r.querySelector('input').checked;
-        r.classList.toggle('done', on);
-        if(r.hidden) return;
-        total++;
-        if(on) done++;
-      });
-      document.querySelectorAll('.vf-day').forEach(h=>{
-        let any = false;
-        for(let el = h.nextElementSibling; el && el.classList.contains('vf-row'); el = el.nextElementSibling){
-          if(!el.hidden){ any = true; break; }
-        }
-        h.hidden = !any;
-      });
-      const pct = total ? Math.round(done / total * 100) : 0;
-      document.getElementById('vfProg').textContent =
-        'Đã kiểm ' + done + '/' + total + (total && done === total ? ' — xong hết ✅' : '');
-      document.getElementById('vfBar').style.width = pct + '%';
-      const t = document.getElementById('vfTotal');
-      if(t) t.textContent = total;
-    }
-    document.addEventListener('planchange', ()=>setTimeout(paint, 0));
-    function save(){
-      try{ localStorage.setItem(KEY, JSON.stringify(saved)); }catch(e){}
-    }
-    rows.forEach(r=>{
-      const box = r.querySelector('input');
-      const id = r.dataset.vf;
-      box.checked = !!saved[id];
-      box.addEventListener('change', ()=>{
-        if(box.checked) saved[id] = 1; else delete saved[id];
-        save(); paint();
-      });
-      // bam nut "Mo Maps" khong duoc lam toggle checkbox cua <label>
-      r.querySelector('.vf-open').addEventListener('click', e=>e.stopPropagation());
-    });
-    document.getElementById('vfReset').addEventListener('click', ()=>{
-      saved = {}; save();
-      rows.forEach(r=>{ r.querySelector('input').checked = false; });
-      paint();
-    });
-    paint();
-  })();
-
-
+  // ĐẶT KHỐI NÀY TRƯỚC danh sách kiểm tra: paint() goi planHas() ma
+  // planHas() doc `currentPlan`. Neu khoi nay nam sau, JS nem TDZ
+  // "Cannot access 'currentPlan' before initialization" va pha luon
+  // phan con lai cua script — khi do KHONG GI duoc an ca.
   // ---- Bo chon phuong an -------------------------------------------------
   // Bat ky phan tu nao co data-plan deu duoc an/hien, khong rieng <section>.
   // Nho vay ngay 4 cua B va C dung chung phan chay xe, chi tach khoi buoi toi.
@@ -2655,11 +2603,23 @@
     return 'A';
   }
 
+  // Dung chung cho ca bo chon phuong an lan danh sach kiem tra, de hai noi
+  // khong tu tinh lai roi ghi de len nhau.
+  function planHas(el, p){
+    return (el.dataset.plan || '').split(/\s+/).includes(p || currentPlan);
+  }
+
   function applyPlan(p, opts){
     if(!PLAN_IDS.includes(p)) p = 'A';
     currentPlan = p;
     document.querySelectorAll('[data-plan]').forEach(el=>{
-      el.hidden = !el.dataset.plan.split(/\s+/).includes(p);
+      // PHAI dung attribute, KHONG dung property `el.hidden`.
+      // `hidden` la IDL attribute cua HTMLElement — SVGElement KHONG co no, nen
+      // `el.hidden = true` tren <text> trong SVG chi tao mot bien rac tren object,
+      // khong sinh attribute nao, va CSS [data-plan][hidden] khong bao gio khop.
+      // Da tung gay loi de chu o hinh hero. setAttribute an voi MOI loai phan tu.
+      if(planHas(el, p)) el.removeAttribute('hidden');
+      else               el.setAttribute('hidden', '');
     });
     document.querySelectorAll('[data-setplan]').forEach(b=>{
       b.setAttribute('aria-pressed', String(b.dataset.setplan === p));
@@ -2694,6 +2654,67 @@
   });
 
   applyPlan(readInitialPlan(), {silent:true});
+
+  // ---- Kiem tra diem den: luu tich vao localStorage cua tung may ----
+  (function(){
+    const rows = document.querySelectorAll('.vf-row');
+    if(!rows.length) return;
+    const KEY = 'hgl_verified';
+    let saved = {};
+    try{ saved = JSON.parse(localStorage.getItem(KEY) || '{}'); }catch(e){ saved = {}; }
+
+    function paint(){
+      // Chi dem cac hang thuoc phuong an dang chon, va an luon tieu de ngay
+      // khong con hang nao ben duoi.
+      let done = 0, total = 0;
+      rows.forEach(r=>{
+        const on = r.querySelector('input').checked;
+        r.classList.toggle('done', on);
+        if(r.hasAttribute('hidden')) return;
+        total++;
+        if(on) done++;
+      });
+      // Tieu de nhom: phuong an quyet dinh truoc, roi moi xet nhom co rong khong.
+      // Truoc day paint() tu tinh lai h.hidden nen GHI DE ket qua cua applyPlan,
+      // lam lo tieu de "chi phuong an A" sang phuong an B va C.
+      document.querySelectorAll('.vf-day').forEach(h=>{
+        let any = false;
+        for(let el = h.nextElementSibling; el && el.classList.contains('vf-row'); el = el.nextElementSibling){
+          if(!el.hasAttribute('hidden')){ any = true; break; }
+        }
+        const show = (!h.dataset.plan || planHas(h)) && any;
+        if(show) h.removeAttribute('hidden'); else h.setAttribute('hidden','');
+      });
+      const pct = total ? Math.round(done / total * 100) : 0;
+      document.getElementById('vfProg').textContent =
+        'Đã kiểm ' + done + '/' + total + (total && done === total ? ' — xong hết ✅' : '');
+      document.getElementById('vfBar').style.width = pct + '%';
+      const t = document.getElementById('vfTotal');
+      if(t) t.textContent = total;
+    }
+    document.addEventListener('planchange', ()=>setTimeout(paint, 0));
+    function save(){
+      try{ localStorage.setItem(KEY, JSON.stringify(saved)); }catch(e){}
+    }
+    rows.forEach(r=>{
+      const box = r.querySelector('input');
+      const id = r.dataset.vf;
+      box.checked = !!saved[id];
+      box.addEventListener('change', ()=>{
+        if(box.checked) saved[id] = 1; else delete saved[id];
+        save(); paint();
+      });
+      // bam nut "Mo Maps" khong duoc lam toggle checkbox cua <label>
+      r.querySelector('.vf-open').addEventListener('click', e=>e.stopPropagation());
+    });
+    document.getElementById('vfReset').addEventListener('click', ()=>{
+      saved = {}; save();
+      rows.forEach(r=>{ r.querySelector('input').checked = false; });
+      paint();
+    });
+    paint();
+  })();
+
 
   const dayColors = {1:'#24344D', 2:'#B1502F', 3:'#5C6E4E', 4:'#C89544'};
 
