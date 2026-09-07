@@ -434,6 +434,76 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   dùng để vẽ đường; ghim điểm đến của nó đã chuyển sang tên POI nên không ảnh
   hưởng việc dẫn đường.
 
+- **v17** (hiện tại) — **Ba phương án A/B/C cho nhóm chọn, trên cùng một trang.**
+  | | Tên | Bốn đêm | Đặc trưng |
+  |---|---|---|---|
+  | A | Thong thả | Đồng Văn ×2 · Mèo Vạc · TP Hà Giang | Bản cũ. Có ngày nghỉ, thuyền + camping + Mí Pó. Bỏ Du Già |
+  | B | Trọn vòng | Đồng Văn · Mèo Vạc · Du Già · TP Hà Giang | Có Du Già. Ngày 2 dồn Lũng Cú + Mã Pí Lèng + thuyền |
+  | C | Trọn vòng + Hà Nội | Đồng Văn · Mèo Vạc · Du Già · xe khách đêm | Cung y hệt B, tối T7 lên xe, CN chơi Hà Nội |
+
+  **Cơ chế `data-plan` — đọc kỹ trước khi sửa:** thuộc tính `data-plan="A B C"`
+  (danh sách, cách nhau bởi dấu cách) gắn được lên **bất kỳ phần tử nào**, không
+  riêng `<section>`. Hàm `applyPlan()` ẩn/hiện bằng thuộc tính `hidden`. Chính nhờ
+  vậy mà ngày 4 của B và C **dùng chung** toàn bộ phần chạy xe, chỉ tách 4 mốc
+  buổi tối — không nhân bản nội dung. Tương tự: `#ngay1` dùng chung cho cả 3
+  phương án, `#ngay5` dùng chung cho A và B, nhãn trong SVG hero cũng đổi theo
+  plan. **Đừng tách thành nhiều file HTML** — đó là phương án đã cân nhắc và loại
+  vì phải copy Lưu ý / Cứu hộ / Thực tế 2026 ra 3 nơi.
+  Lựa chọn lưu ở `localStorage` key `hgl_plan`, đồng bộ với tham số `?plan=` trên
+  URL (ưu tiên URL → localStorage → mặc định A) nên gửi link là người khác mở
+  đúng phương án. Sự kiện `planchange` được phát ra để bản đồ và danh sách kiểm
+  tra tự nạp lại.
+  Bản đồ: `PLAN_A` / `PLAN_B` với `PLANS.C = PLAN_B` (cùng cung). Nút `.map-btn`
+  sinh động từ `PLANS[currentPlan].labels`. Danh sách kiểm tra lọc theo plan,
+  tổng số đếm theo hàng đang hiện (`#vfTotal`), tiêu đề nhóm ngày tự ẩn khi
+  không còn hàng nào.
+  **CẢNH BÁO:** quãng đường ngày 2–3–4 của B/C **chưa được đo**, đang gắn nhãn
+  `.unmeasured` trên giao diện. Hệ số 2,22× của QL4C **không dùng được** cho cung
+  Mậu Duệ – Du Già vì khác loại đường. Phải bấm nút "Chỉ đường cả ngày" đo lại
+  rồi mới bỏ nhãn.
+
+- **v18** (hiện tại) — **Sửa 4 lỗi nhất quán của v17, cộng 2 lỗi cấu trúc HTML
+  đã âm thầm tồn tại từ v12.**
+
+  *Lỗi nội dung do dùng chung section:*
+  1. `#ngay1` (`data-plan="A B C"`) khẳng định **"đặt 2 đêm"** ở 4 chỗ, trong khi
+     B/C chỉ ngủ Đồng Văn 1 đêm — ai chọn B/C mà làm theo sẽ đặt thừa một đêm
+     phòng. Cùng loại lỗi còn ở **hero subtitle** và mục **ĐẶT CHỖ** trong
+     `#luuy`. Đã tách bằng `<span data-plan="...">`.
+  2. Phương án C không thấy 2 thẻ **đúng với cả ba** (check-in online, checklist
+     trước khi rời Hà Giang) vì chúng kẹt trong `#ngay5` (`A B`). Đã chuyển
+     thành `tip-card` trong `#luuy`. *Không đặt ở "Ngày 4" như ý ban đầu vì Ngày
+     4 là **hai section tách rời** (`#ngay4` cho A, `#bc-ngay4` cho B/C) nên sẽ
+     phải nhân bản.* Ba thẻ giờ xe sáng Chủ Nhật giữ nguyên ở `#ngay5` vì thật
+     sự chỉ đúng với A/B.
+  3. Hàng "Nhà hàng Phúc Cái" trong `#kiemtra` gắn `A` nhưng quán được nhắc ở
+     `#ngay1` dùng chung → sửa thành `A B C`.
+  4. Các con số lỗi thời: "58km" cho ngày 2 (đã đo lại là ~80km) ở 4 chỗ, và 6
+     chuỗi "v11" vô nghĩa với người đọc.
+
+  *Lỗi cấu trúc HTML (nghiêm trọng hơn, đã ship từ trước):*
+  - `bc-ngay3` sinh ra thẻ `<section alt id=...>` thay vì `class="alt"` — lỗi ở
+    hàm sinh HTML dùng `(cls + ' ')` thay vì `('class="%s" ' % cls)`.
+  - Ở v17, regex thay hộp "bỏ Du Già" khớp nhầm vào thẻ **"Nghỉ đêm — Du Già"**
+    của `bc-ngay3` (vì `<h5>` cũng chứa chữ "Du Già") và **phá hỏng thẻ chỗ ở
+    đó**, để lại một `</div>` thừa. Đã dựng lại.
+  - Từ **v12**, hai thẻ "Kiểm chứng giờ xe" và "Vé phổ thông" bị **lồng bên
+    trong** thẻ Checklist thay vì ngang hàng, do chèn vào ngay sau `<div
+    class="side-card">` mà trước `<h5>`. HTML vẫn cân bằng nên trình phân tích
+    không báo.
+
+  **Bài học, ghi lại để khỏi lặp:**
+  - Mỗi lần gắn `data-plan` dùng chung cho nhiều phương án, phải **đọc lại toàn
+    bộ nội dung bên trong** xem có câu nào chỉ đúng với một phương án không.
+  - **Đừng dùng regex lỏng để thay khối HTML.** Dùng neo chính xác, hoặc đếm cặp
+    thẻ `<div>`/`</div>` để cắt đúng phạm vi.
+  - Thêm 2 phép kiểm thường trực: **cân bằng `<div>` theo từng section** (bắt
+    được cả 2 lỗi trên), và **quét text đang hiện của từng phương án** để chặn
+    câu chỉ đúng với một phương án lọt sang phương án khác
+    (`scratchpad/regress.js`).
+  - Khi test điều hướng có cuộn mượt, phải chờ **~2,5s**; chờ 500ms cho báo động
+    giả.
+
 ## Deploy
 
 **Từ v6, bắt buộc deploy qua Netlify "Import from an existing project" →
