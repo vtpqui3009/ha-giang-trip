@@ -396,8 +396,21 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   ngày 3 trước đó thêm "Pải Lủng" làm Google snap sang "Mã Lủ" và phồng lên
   98,5 km, trong khi Đồng Văn → Mèo Vạc chỉ có độc nhất QL4C qua Mã Pí Lèng
   nên không cần waypoint nào.
-  **Toạ độ còn nghi ngờ, chưa đo:** Dốc Thẩm Mã (đang nằm phía đông Sủng Là —
-  sai thứ tự trên tuyến), Cổng Trời Quản Bạ, Mèo Vạc, Đồng Văn.
+- **v15** (hiện tại) — Người dùng đo thêm 3 toạ độ: Cổng Trời Quản Bạ
+  `23.049602,104.992615`, Phố cổ Đồng Văn `23.280154,105.359912`, chợ TT Mèo
+  Vạc `23.163830,105.408983`. **Tổng cộng 6 điểm mốc nay đã đo thật.** Dốc
+  Thẩm Mã được **nội suy** ở 55% đoạn Yên Minh → Sủng Là (`23.187570,105.188652`)
+  vì giá trị cũ `23.1897,105.2872` nằm phía đông Sủng Là, tức sai thứ tự trên
+  tuyến — gần như chắc chắn là lỗi kinh độ; đã ghi rõ đây là số nội suy, chưa đo.
+  **Kiểm chéo quan trọng:** tính quãng đường ngày 1 từ 6 toạ độ thật cho ra
+  **178 km**, Google đo thẳng được **180 km** — lệch dưới 1%, xác nhận con số
+  180 km dùng để lập kế hoạch là đúng, và hệ số ngoằn ngoèo QL4C là **2,22×**.
+  Kinh độ dọc tuyến giờ tăng đơn điệu từ Hà Giang (104,9784) tới Đồng Văn
+  (105,3599) — thứ tự địa lý đã nhất quán, trước đây thì không.
+  **Toạ độ vẫn chưa đo:** TP Hà Giang, Mậu Duệ, Sà Phìn, Lũng Cú, Lô Lô Chải,
+  Ma Lé, Đồn Cao, Mã Pí Lèng, bến thuyền Tà Làng, Anh Quân Camping, Mí Pó, dốc
+  chữ M, Minh Ngọc — nguồn gốc từng toạ độ đã ghi thành comment ngay trên mảng
+  `stops` trong `index.html`.
 
 ## Deploy
 
