@@ -542,6 +542,63 @@ chấp nhận được vì nhóm nhỏ riêng tư, **không phù hợp nếu pub
   *Mẹo chạy:* chặn request ra ngoài (`pg.route`) vì font/CDN bị egress proxy
   chặn, không chặn thì bộ test chậm gấp nhiều lần.
 
+### v20 — đối chiếu với nguồn cộng đồng Facebook (12/09/2026)
+
+Người dùng gửi 15 ảnh chụp một bài đăng + comment trong group Facebook
+*Review Hà Giang - Du Lịch Hà Giang* (9/2026). **Facebook bị egress proxy
+chặn** (`www/m/mbasic.facebook.com` đều trả `connect_rejected`, gateway 403)
+nên đây là cách duy nhất đưa được nguồn đó vào — người dùng chụp màn hình,
+Claude đọc ảnh.
+
+**Đối chiếu tìm ra 3 lỗi mà bản thân nguồn không nói tới:**
+
+- **Link Maps của TT Yên Minh trong PLAN_A sai 11,16 km.** `lat/lng` đúng
+  (`23.107345,105.137749`) nhưng `q:` vẫn giữ toạ độ ước lượng cũ
+  `23.1136,105.2467` — ở **cả ngày 1 lẫn ngày 4**. Điểm vẽ trên bản đồ thì
+  đúng nên nhìn bản đồ không phát hiện được; chỉ nút "Mở Google Maps" là
+  sai. PLAN_B vốn đã đúng.
+  *Bài học:* `lat/lng` và `q` là **hai nguồn sự thật tách rời** cho cùng một
+  điểm. Có script kiểm tự động trong lịch sử phiên: parse mọi waypoint, với
+  `q` dạng toạ độ thì tính haversine so với `lat/lng`, báo lỗi nếu > 0,5 km.
+  Nên chạy lại mỗi lần đụng vào WAYPOINTS.
+- **Giờ trong popup bản đồ PLAN_A lệch 15–30 phút** so với timeline (Cổng
+  Trời 08:00 vs 08:15, Sủng Là 13:00 vs 13:20, nhận phòng 15:10 vs 15:35) —
+  di tích của một lần chỉnh giờ chỉ sửa phần HTML mà quên mảng `stops`.
+- **Cán Tỷ:** tiêu đề ghi "dừng 15 phút", thân bài ghi "20 phút là đủ".
+
+**Sửa theo nguồn mới:**
+
+- Vé Cột cờ Lũng Cú `30.000đ` → `30.000–40.000đ`; Nhà của Pao `~20.000đ` →
+  `10.000–20.000đ`. Tổng dòng "vé tham quan 110.000đ/người" **không đổi** —
+  đúng theo cả hai cách tính.
+- Bỏ khẳng định vé thuyền Nho Quế "2026 **đã giảm** còn 120.000đ" → ghi
+  `120.000–150.000đ`, vì nguồn 9/2026 ghi thẳng 150k (đúng bằng số bảng chi
+  phí vẫn đang dự trù).
+- **Tách Dốc Thẩm Mã khỏi Dốc Chín Khoanh** — trang cũ gọi Thẩm Mã là "dốc 9
+  tầng", gộp nhầm hai con dốc khác nhau. Thêm mốc Chín Khoanh 10 phút
+  (miễn phí) vào ngày 1, rút Thẩm Mã 20→15 phút; net +5 phút, tới Đồng Văn
+  15:40 thay vì 15:35.
+- Thêm: nhà xe **Giang Sơn** (có chỗ nghỉ + tắm cho khách tới 4–5h sáng),
+  xe ghép **a Sinh / Cường Thọ** làm dự phòng khi không chạy được xe máy,
+  **Vách Đá Trắng** và **Phó Bảng** dưới dạng *thẻ tuỳ chọn* (cố ý KHÔNG
+  đưa vào timeline), cung **ĐT181 Đường Thượng – Thái An – Thuận Hoà** làm
+  đường thứ hai cho ngày 4 của B/C (mặc định vẫn là Minh Ngọc).
+- Khối mới **"Sổ tay cộng đồng"** trong `#luuy`: 9 homestay, 8 quán cà phê,
+  10 món ăn kèm địa điểm — ghi rõ là tham khảo, **chưa gọi xác nhận**.
+
+**Nguyên tắc áp dụng khi nguồn lệch với số đang có:** ghi **cả hai** kèm tên
+nguồn, không âm thầm ghi đè. Một bài post + comment ẩn danh không đủ thẩm
+quyền ghi đè dữ liệu đã kiểm.
+
+**Cố ý không làm:** không thêm điểm nào vào timeline ngày 1 (đã 180 km /
+9h10, ràng buộc gốc là nhận phòng trước khi tối); không lấy giờ của tour
+3N3Đ làm chuẩn (tour đi ô tô và mốc của nó bất khả thi — 43 km đèo trong 40
+phút); không đổi cung Bảo Lạc – Cao Bằng (dành cho chuyến 10–12 ngày).
+
+**Vẫn treo:** quãng đường ngày 2–3–4 của phương án B/C chưa đo, vẫn giữ nhãn
+`.unmeasured`.
+
+
 ## Deploy
 
 **Từ v6, bắt buộc deploy qua Netlify "Import from an existing project" →
