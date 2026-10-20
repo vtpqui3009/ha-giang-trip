@@ -599,6 +599,67 @@ phút); không đổi cung Bảo Lạc – Cao Bằng (dành cho chuyến 10–1
 `.unmeasured`.
 
 
+### v21 — VIẾT LẠI TOÀN BỘ theo combo PAJ Travel đã chốt (20/10/2026)
+
+Người dùng gửi **file xác nhận đặt combo (.docx) của PAJ Travel** + ảnh bản đồ
+nhà xe, nói "đây là lịch trình đã chốt". Lịch đã đặt cọc **khác hẳn cả 3
+phương án A/B/C** đang có trên web, nên toàn trang được viết lại.
+
+**Quyết định của người dùng khi được hỏi:** (1) **bỏ hẳn A/B/C**, chỉ còn một
+lịch trình; (2) ngày 08/11 **về nội thành Hà Nội chơi cả ngày**, không ngồi
+chờ 19 tiếng ở sân bay.
+
+**Lịch đã chốt:** đêm 0 (03/11) xe Sao Việt 22:30 từ 16 Trần Nhật Duật →
+ngày 1 Hà Giang–Quản Bạ–Yên Minh–Sủng Là–**Đồng Văn** → ngày 2 Lũng Cú–Lô Lô
+Chải–Ma Lé–Mã Pì Lèng–thuyền Tu Sản–**Mèo Vạc** → ngày 3 cua chữ M–Mậu Duệ–
+**suối Bản Án (Ngọc Long)**–Lũng Hồ–**Du Già** → ngày 4 cung Bắc Mê về TP Hà
+Giang, 20:30 xe đêm → ngày 5 Hà Nội, bay 21:55.
+**2 xe Honda Future cho 3 người** (một người luôn ngồi sau).
+
+**Ba mâu thuẫn/sai sót tìm ra trong chính file hợp đồng** — đã ghi thẳng lên
+trang để người dùng gọi hỏi:
+
+- **Số tiền còn lại sai.** Tổng 7.800.000đ, cọc 3.900.000đ, file ghi còn lại
+  **2.000.000đ** — nhưng hiệu là **3.900.000đ**. Lệch 1.900.000đ.
+- **Đêm 3 ngủ ở đâu.** Mục "Trong combo bao gồm" ghi *"đêm 3 Lô Lô Chải"*,
+  trong khi dòng tóm tắt và lịch ngày 3 đều ghi **Du Già – Pachidua
+  Ecolodge**. Hai nơi cách nhau gần 100 km.
+- **Ba khung giờ bất khả thi.** ① "13:30–14:30 xuống bến + đi thuyền + ăn
+  trưa camping" — riêng thuyền đi–về đã 30–40 phút; đã giãn thành 14:10–16:15.
+  ② "16:00 lên Mí Pó, 17:00 đã nhận phòng Mèo Vạc" — Mí Pó phải đi bộ lên và
+  còn cách thị trấn 16 km. ③ Ngày 1 ghi "09:00 dốc Bắc Sum" và "09:00–09:40
+  Cổng Trời Quản Bạ" cùng một giờ, trong khi Bắc Sum nằm trước Quản Bạ.
+
+**Hai ngày mỏng nhất** (đã gắn thẻ cảnh báo + thứ tự cắt + mốc tự kiểm):
+ngày 1 tới Đồng Văn 17:00 / lặn 17:21 (**dư 21 phút**), ngày 2 tới Mèo Vạc
+17:00 / lặn 17:20 (**dư 20 phút**).
+
+**Bản đồ minh hoạ SVG mới** (`.hgmap`, viewBox 1222×1288) vẽ lại theo ảnh bản
+đồ nhà xe: nền địa hình, 17 đoạn tuyến xanh dương, nhãn km, icon thị trấn/cây
+xăng/cột cờ/bến thuyền/núi/thông, hộp chú giải, nhãn Trung Quốc & Cao Bằng.
+Đặt trên bản đồ Leaflet trong `#banddo`, bọc `.hgmap-scroll{overflow-x:auto}`
+và `min-width:620px` để không bóp nát trên điện thoại.
+*Lưu ý khi sửa:* mọi nhãn đều `paint-order:stroke` viền trắng để đọc được trên
+nền xanh; đã phải chỉnh toạ độ nhãn 3 lượt để hết đè nhau — kiểm bằng ảnh chụp
+thật, đừng tin mắt thường trên code.
+
+**Đã gỡ sạch cơ chế phương án:** `PLAN_KEY/PLAN_IDS/currentPlan/planHas/
+applyPlan/PLANS/PLAN_A/PLAN_B/loadPlanMap`, sự kiện `planchange`, CSS
+`[data-plan][hidden]`, bộ chọn + bảng so sánh, và 4 section `bc-*`/`c-*`.
+Còn lại **một** `TRIP` duy nhất cho dữ liệu bản đồ. `paint()` của danh sách
+kiểm tra giờ chỉ ẩn nhóm rỗng.
+
+**Bẫy gặp phải khi viết test:** `p.route` chặn request ra ngoài làm console
+sinh 6 lỗi `Failed to load resource`, cộng 1 lỗi CORS do `.netlify/functions/`
+không tồn tại khi mở bằng `file://`. **Cả hai đều có sẵn trên `main`** — đã
+xác minh bằng cách chạy test trên bản chưa sửa trước khi lọc chúng ra, thay vì
+lọc bừa rồi tự huyễn hoặc là xanh.
+
+**Vẫn treo:** 4 điểm mới trong hợp đồng chưa kiểm chứng được link Maps (dốc
+Bắc Sum, nhà cổ Ma Lé, suối Bản Án, quán Gió Lao Và Chải) — đã đưa vào
+`#kiemtra` (34 hàng) để người dùng mở trên điện thoại xác nhận.
+
+
 ## Deploy
 
 **Từ v6, bắt buộc deploy qua Netlify "Import from an existing project" →
