@@ -616,14 +616,16 @@ Chải–Ma Lé–Mã Pì Lèng–thuyền Tu Sản–**Mèo Vạc** → ngày 3
 Giang, 20:30 xe đêm → ngày 5 Hà Nội, bay 21:55.
 **2 xe Honda Future cho 3 người** (một người luôn ngồi sau).
 
-**Ba mâu thuẫn/sai sót tìm ra trong chính file hợp đồng** — đã ghi thẳng lên
-trang để người dùng gọi hỏi:
+**Ba mâu thuẫn/sai sót tìm ra trong chính file hợp đồng:**
 
-- **Số tiền còn lại sai.** Tổng 7.800.000đ, cọc 3.900.000đ, file ghi còn lại
-  **2.000.000đ** — nhưng hiệu là **3.900.000đ**. Lệch 1.900.000đ.
-- **Đêm 3 ngủ ở đâu.** Mục "Trong combo bao gồm" ghi *"đêm 3 Lô Lô Chải"*,
-  trong khi dòng tóm tắt và lịch ngày 3 đều ghi **Du Già – Pachidua
-  Ecolodge**. Hai nơi cách nhau gần 100 km.
+- ~~**Số tiền còn lại sai.**~~ Tổng 7.800.000đ, cọc 3.900.000đ, file ghi còn
+  lại **2.000.000đ** — nhưng hiệu là **3.900.000đ**. ✅ **Đã giải quyết
+  (v22):** người dùng đã note bên tour. Trang giữ lại phép tính để đối chiếu
+  lúc thanh toán, nhưng bỏ cảnh báo đỏ.
+- ~~**Đêm 3 ngủ ở đâu.**~~ Mục "Trong combo bao gồm" ghi *"đêm 3 Lô Lô
+  Chải"*. ✅ **Đã giải quyết (v22):** người dùng xác nhận **đêm 3 là Du Già –
+  Pachidua Ecolodge**, đã có điểm trên Google Maps. Mục "bao gồm" là lỗi sao
+  chép của file. Hàng Pachidua trong `#kiemtra` đổi sang `vf-ok`.
 - **Ba khung giờ bất khả thi.** ① "13:30–14:30 xuống bến + đi thuyền + ăn
   trưa camping" — riêng thuyền đi–về đã 30–40 phút; đã giãn thành 14:10–16:15.
   ② "16:00 lên Mí Pó, 17:00 đã nhận phòng Mèo Vạc" — Mí Pó phải đi bộ lên và
@@ -658,6 +660,49 @@ lọc bừa rồi tự huyễn hoặc là xanh.
 **Vẫn treo:** 4 điểm mới trong hợp đồng chưa kiểm chứng được link Maps (dốc
 Bắc Sum, nhà cổ Ma Lé, suối Bản Án, quán Gió Lao Và Chải) — đã đưa vào
 `#kiemtra` (34 hàng) để người dùng mở trên điện thoại xác nhận.
+
+
+### v22 — 3 sửa theo phản hồi + hạ cấp 2 cảnh báo đã xử lý (20/10/2026)
+
+**1 · "Còn 21 phút trời sáng" là sai về bản chất.** Người dùng chỉ ra: tới
+Đồng Văn 17:00 với mặt trời lặn 17:21 **không phải là còn 21 phút sáng, mà là
+đã tối**. Chính trang này ở mục Lưu ý đã viết *"trong thung lũng và dưới chân
+đèo trời tối sớm hơn giờ lặn 30–45 phút"* — nhưng 6 chỗ khác lại trình bày con
+số 21 phút như một khoảng dự phòng.
+*Bài học:* khi trang đã có một quy tắc (tối sớm hơn 30–45 ph) thì **mọi con số
+giờ ở nơi khác phải được diễn giải qua quy tắc đó**, không được trích thẳng
+hiệu số giờ. Đã sửa cả ngày 1 lẫn ngày 2 — giờ nói thẳng là về tới nơi khi
+trời đã tối, và nêu cách duy nhất để về lúc còn sáng (rút ngắn Dinh Vua Mèo).
+
+**2 · Tên khách: Văn Trần Phú Quý → Văn Trần Phú Quí** (6 chỗ).
+⚠️ **Bẫy:** chuỗi `Quý Bếp` xuất hiện 4 lần là **tên quán ăn** "Nhà Hàng Quý
+Bếp — Thắng Cố Ngựa". Thay toàn cục `Quý`→`Quí` sẽ hỏng tên quán. Luôn thay
+nguyên cụm `Văn Trần Phú Quý`, và assert `Quý Bếp` vẫn đủ 4 sau khi sửa.
+
+**3 · Link "Chỉ đường cả ngày" giờ gồm đủ điểm dừng.** Trước đó ngày 1 có 22
+mốc nhưng link chỉ 4 waypoint (thiếu Bắc Sum, Thẩm Mã, Chín Khoanh, Dinh Vua
+Mèo); ngày 2 thiếu Ma Lé, bến thuyền, Mí Pó. Nay: ngày 1 **8 waypoint**, ngày
+2 **7**, ngày 3 **4**, ngày 4 **1** (giới hạn Google Maps URL API là 9).
+
+**QUY TẮC HAI TẦNG cho định danh điểm** (ghi lại vì đây là chỗ đã gây sự cố
+hai lần):
+- **Waypoint dẫn đường** chỉ được dùng ① toạ độ đã đo thật, hoặc ② tên đơn vị
+  hành chính / POI đã đánh dấu `ĐÃ THẤY TRÊN MAPS` trong `#kiemtra`.
+- **Pin từng mốc** thì dùng tên POI đẹp thoải mái.
+- Lý do: **pin sai chỉ lệch một điểm, waypoint sai lệch cả tuyến.**
+Vì vậy `Panoramic view point of Bac Sum`, `Quán Gió`, `Dốc Chín Khoanh`,
+`Ma-Lé Ancient House`, `Suối Bản Án` **không** được dùng làm waypoint — thay
+bằng toạ độ hoặc tên xã (`Ma Lé, Đồng Văn`, `Ngọc Long, Yên Minh`).
+
+**Script kiểm mới:** `scratchpad/checklinks.py` — với mỗi ngày, đối chiếu link
+`btn-nav` với `TRIP.dayRoutes` (phải **trùng khớp**, nếu không một ngày có hai
+link khác nhau), kiểm waypoint ≤ 9, và kiểm mọi định danh hoặc là toạ độ trong
+khung bao Hà Giang hoặc đã được xác nhận. Chạy lại mỗi khi đụng vào `GEO`,
+`dayRoutes` hay các link ngày.
+
+**Vẫn không tự kiểm được:** Google có resolve đúng từng waypoint hay không —
+mọi geocoder đều bị chặn. Script chỉ đảm bảo không dùng định danh chưa xác
+minh; việc bấm thử vẫn phải do người dùng làm.
 
 
 ## Deploy
