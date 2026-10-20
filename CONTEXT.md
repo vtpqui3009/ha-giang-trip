@@ -705,6 +705,50 @@ mọi geocoder đều bị chặn. Script chỉ đảm bảo không dùng địn
 minh; việc bấm thử vẫn phải do người dùng làm.
 
 
+### v23 — link chỉ đường hỏng: thiếu điều kiện "xe chạy tới được" (20/10/2026)
+
+Người dùng bấm thử **"Chỉ đường cả ngày 2"** và Google trả **"không thể tính
+đường lái xe"**. Hồi quy do chính v22 gây ra.
+
+**Nguyên nhân gốc — không phải chuyện geocode:** tôi nhét vào một tuyến *lái
+xe* hai điểm **xe không tới được**:
+- **Cà phê Mí Pó** — chính trang web đã ghi *"phải đi bộ lên"*.
+- **Bến thuyền Tu Sản** — toạ độ ở **mép nước đáy hẻm**, trang cũng ghi
+  *"gửi xe 10.000đ"*.
+Google không tính được chặng tới chúng nên **bỏ luôn cả tuyến**. Bằng chứng
+trong ảnh người dùng: hai toạ độ đó **không được giải thành POI nào**, giữ
+nguyên dạng số. Cùng link đó, `Ma Lé, Đồng Văn` bị giải thành thôn
+**"Mã Lủng, Má Lé, Lũng Cú"** lệch khỏi đường.
+
+**QUY TẮC BA TẦNG** (thay cho hai tầng ở v22 — tầng (b) và (c) là mới):
+> Waypoint phải đạt **cả ba**: **(a)** giải mã đúng · **(b) nằm trên đường xe
+> chạy được** · **(c)** cần thiết để ép đúng cung đường (điểm nằm sẵn giữa
+> hai điểm khác thì bỏ — xe vẫn chạy qua).
+> Không đủ ba → **chỉ làm pin**. *Pin sai lệch một điểm; waypoint sai hỏng cả
+> tuyến.*
+
+**Bài học về bộ kiểm:** `checklinks.py` bản v22 báo **0 lỗi** trong khi link đã
+hỏng, vì nó chỉ kiểm tầng (a). Một bộ kiểm chỉ chặn được loại lỗi nó biết —
+khi gặp lỗi mới, **việc đầu tiên là vá bộ kiểm**, không phải chỉ sửa dữ liệu.
+
+**Thay bốn link "cả ngày" bằng chín chặng sáng/chiều** trên **cả 6 ngày**
+(trước đây ngày 0 và ngày 5 không có link chỉ đường nào). Mỗi chặng tối đa
+**3 waypoint** thay vì 8 — ít chỗ để hỏng hơn hẳn. Chỗ tách trùng đúng bữa
+trưa từng ngày. `TRIP.dayRoutes` → **`TRIP.legs`** (mảng chặng); `renderDay()`
+render một nút cho mỗi chặng thay vì gán `mapNav.href` một lần.
+
+**Đánh dấu trên bản đồ** (người dùng yêu cầu) — thêm `mode` vào `TRIP.stops`:
+`walk` (Mí Pó, bến thuyền, thác Du Già) vẽ **viền nét đứt**; `view` (Bắc Sum,
+Chín Khoanh, cua chữ M, Ma Lé) vẽ **vòng nhỏ viền mảnh**; popup có badge giải
+thích. Kèm chú giải 3 dòng dưới `#mapToggle`.
+*Không đụng bản đồ SVG* — nó vẽ để khớp ảnh bản đồ nhà xe.
+
+**Mẹo kiểm khi CDN bị chặn:** Leaflet tải từ cdnjs nên môi trường này không
+dựng được bản đồ thật để chụp ảnh. Thay vào đó `scratchpad/markers.js` **stub
+`L.circleMarker` để bắt đúng tham số code truyền vào** rồi assert
+`radius/weight/dashArray/badge` — kiểm được logic chắc hơn cả nhìn ảnh.
+
+
 ## Deploy
 
 **Từ v6, bắt buộc deploy qua Netlify "Import from an existing project" →
