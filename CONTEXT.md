@@ -749,6 +749,49 @@ dựng được bản đồ thật để chụp ảnh. Thay vào đó `scratchpa
 `radius/weight/dashArray/badge` — kiểm được logic chắc hơn cả nhìn ảnh.
 
 
+### v24 — một địa điểm = một query duy nhất (01/11/2026)
+
+Người dùng hỏi *"kiểm tra link trên map có giống với file chưa"*. Hoá ra KML
+khớp `TRIP.stops` **25/25 tuyệt đối**, nhưng `TRIP.stops` lại **lệch với pin
+trong mục ngày ở 6 điểm** — tức bản đồ, mục ngày và KML dẫn tới **ba nơi khác
+nhau cho cùng một địa điểm**. Ví dụ nặng nhất: bấm *"Mèo Vạc — Snow Hotel"*
+trên bản đồ ra một toạ độ giữa thị trấn chứ không phải khách sạn — lúc 17:50
+trời đã tối thì đó là khác biệt đáng kể.
+
+Quét kỹ hơn lộ thêm **4 cặp "cùng nơi, khác chuỗi"**: `Cafe Núi Cấm, Hà Giang`
+vs `…, Thành phố Hà Giang, Tuyên Quang`; `Phố cổ Hà Nội` vs `…, Hoàn Kiếm, Hà
+Nội`; `Sân bay Nội Bài, Hà Nội` vs `…, Ga T1, …`; `Lối xuống bến thuyền…` vs
+`Bến thuyền hẻm Tu Sản`.
+
+**BẤT BIẾN MỚI:** mọi query Maps dùng ở bất kỳ đâu — pin trong mục ngày, `q`
+của `TRIP.stops`, và trong KML — **đều phải có mặt trong `#kiemtra`**.
+`#kiemtra` là danh sách người dùng thật sự bấm thử trên điện thoại, nên nó
+phải là nguồn sự thật duy nhất. Script in ra mọi chuỗi lạc nên không cái nào
+trôi im lặng. Đã thêm 7 dòng cho các điểm còn thiếu → **41 dòng**.
+*Giữ nguyên `lat`/`lng`* (vị trí chấm, dùng toạ độ đã đo); chỉ đổi `q` (đích
+của link). Mô hình dữ liệu đã tách sẵn hai thứ này.
+
+**⚠️ Bẫy khi gộp chuỗi — đã dính và phải sửa ngay:** `Phố cổ Hà Nội` là **tiền
+tố** của `Phố cổ Hà Nội, Hoàn Kiếm, Hà Nội`, nên `str.replace` tạo ra
+`…Hoàn Kiếm, Hà Nội, Hoàn Kiếm, Hà Nội`. Khi gộp chuỗi luôn phải kiểm chuỗi cũ
+có phải tiền tố của chuỗi mới không, rồi quét lại hậu tố nhân đôi.
+
+**Lỗi tiền mới tìm ra:** phần tách khoản của hợp đồng cộng ra **7.900.000đ**
+(6.300.000 + 200.000 + 1.400.000) trong khi dòng "Tổng tiền" ghi
+**7.800.000đ** — lệch **100.000đ**, độc lập với chuyện "số tiền còn lại" đã
+biết. Không tự sửa số; trình bày cả hai để đối chiếu lúc thanh toán.
+
+**Mở lịch trình không cần vào web** (người dùng hỏi): 9 link chỉ đường nay có
+ở **ba nơi giống hệt nhau** — nút trên web, placemark `▶` trong KML (mở My
+Maps bấm là ra), và file `link-chi-duong.txt` để ghim trong nhóm chat.
+`gen_links.py` đọc thẳng `TRIP.legs` nên không bao giờ lệch với web.
+
+**Đã kiểm và ĐÚNG sẵn:** thứ trong tuần 6/6 · km dòng ngày khớp bảng số 6/6 ·
+giờ trong timeline tăng dần ở cả 83 mốc · tổng km 433 khớp "~430 km" · 9 chặng
+≤3 waypoint, 0 điểm cấm · KML 25 điểm + 4 cung đường + 9 chặng, 62/62 cặp toạ
+độ đúng thứ tự kinh-độ-trước.
+
+
 ## Deploy
 
 **Từ v6, bắt buộc deploy qua Netlify "Import from an existing project" →
