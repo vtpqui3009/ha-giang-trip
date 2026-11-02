@@ -792,6 +792,43 @@ giờ trong timeline tăng dần ở cả 83 mốc · tổng km 433 khớp "~430
 độ đúng thứ tự kinh-độ-trước.
 
 
+### v25 — Place ID từ file xác nhận mới + vá mảng WAYPOINTS cũ (02/11/2026)
+
+Người dùng gửi **bản .docx mới** của PAJ Travel. Khác bản cũ ở một điểm quyết
+định: nó chứa **26 hyperlink Google Maps thật, kèm Place ID** (`ChIJ…`).
+
+**Nâng cấp lớn:** gắn `query_place_id` vào **55 link** trên trang + 22 điểm
+trong `TRIP.stops` + KML. Place ID là định danh tuyệt đối của Google — có nó
+thì **không còn chuyện đoán tên**. Toàn bộ lớp lỗi đã gặp ba lần trước đây
+(`Làng cổ Ma Lé → Láng Le Bàu Cò`, `Ma Lé → thôn Mã Lủng`, `Coffee Mí Pó` hai
+chuỗi khác nhau) nay **không thể xảy ra nữa**.
+*Dạng dùng:* `?api=1&query=<tên>&query_place_id=ChIJ…`
+
+**🔴 Lỗi nghiêm trọng tự tìm ra khi đối chiếu:** mảng `WAYPOINTS` của tính
+năng theo dõi GPS/thời tiết **vẫn là lịch trình CŨ** — còn `Anh Quân Camping`,
+`Đồn Cao`, `Đồng Văn (về nghỉ trưa)`, và ngày 07/11 chạy *Yên Minh → Cán Tỷ →
+Cổng Trời* thay vì *Du Già → Bắc Mê*. Tức "điểm kế tiếp" và ETA sẽ **sai suốt
+cả chuyến**. Đây là thứ v21 bỏ sót: tôi thay `TRIP.stops` mà quên mảng thứ hai.
+*Bài học:* khi thay dữ liệu lịch trình, **grep tên các điểm đã bỏ** (`Đồn Cao`,
+`Anh Quân Camping`) trên toàn file — đừng tin là chỉ có một nơi chứa chúng.
+Nay `WAYPOINTS` **dựng lại từ `TRIP.stops`** nên không thể lệch nữa.
+
+**Toạ độ sai 7 km:** file cho toạ độ thật của dốc Bắc Sum
+`22.9962286,104.9390218`; ước lượng cũ của tôi là `22.9480,104.9830` — **lệch
+~7 km**. Đã sửa. Thêm điểm **camping dưới hẻm Tu Sản** (`23.236037,105.418116`)
+— trước đó chỉ có bến thuyền, hai nơi khác nhau.
+
+**Trả lời 3 câu hỏi của người dùng:**
+- *Thứ của từng ngày:* file **không ghi thứ** ở đâu cả, chỉ có ngày. Thứ trên
+  web là tôi tự suy ra — đã kiểm lại **6/6 đúng** với lịch 2026.
+- *Quán ăn có thể đổi:* thêm ghi chú — 4 quán là gợi ý của combo, không trả
+  trước, đổi thoải mái; chỉ **2 bữa không đổi được** (camping phải đặt suất ăn
+  trước, cơm tối Du Già combo đã tặng).
+- *Bản đồ ngoại tuyến:* thêm thẻ hướng dẫn tải Google Maps offline, kèm 3 cảnh
+  báo — **My Maps KHÔNG chạy offline**, offline chỉ dẫn đường xe, và bản đồ
+  offline hết hạn nên phải tải sát ngày.
+
+
 ## Deploy
 
 **Từ v6, bắt buộc deploy qua Netlify "Import from an existing project" →
