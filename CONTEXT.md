@@ -33,7 +33,9 @@ mới hoặc upload file này trong lần chat sau.
 ```
 index.html                          toàn bộ trang: kế hoạch tĩnh + app tương tác (1 file, không build step)
 manifest.json                       PWA manifest (để "Thêm vào Màn hình chính")
-service-worker.js                   cache offline cơ bản + relay hiển thị local notification
+service-worker.js                   cache offline + relay local notification. ⚠️ PHẢI bump CACHE_NAME mỗi lần sửa index.html
+ha-giang-26-diem.kml                26 điểm + 4 cung đường + 9 pin chỉ đường, nhập vào Google My Maps (chỉ nhập được trên MÁY TÍNH)
+link-chi-duong.txt                  9 link chỉ đường sáng/chiều, để ghim vào chat nhóm
 netlify.toml                        cấu hình build Netlify (publish dir + functions dir)
 netlify/functions/community-news.js Netlify Function kéo tin thật (Google News RSS, lọc 7 ngày) cho tab Cảnh báo
 netlify/functions/ai-draft.js       Netlify Function gọi Anthropic API server-side (key dùng chung qua env var)
@@ -827,6 +829,78 @@ Nay `WAYPOINTS` **dựng lại từ `TRIP.stops`** nên không thể lệch nữ
 - *Bản đồ ngoại tuyến:* thêm thẻ hướng dẫn tải Google Maps offline, kèm 3 cảnh
   báo — **My Maps KHÔNG chạy offline**, offline chỉ dẫn đường xe, và bản đồ
   offline hết hạn nên phải tải sát ngày.
+
+
+### v26 — 🔴 bản offline đóng băng từ 05/09, và PWA thay cho My Maps (03/11/2026)
+
+Người dùng **không nhập được KML vào My Maps trên iPhone** ("Vẫn k dc" sau 3
+lần thử). Nguyên nhân là **giới hạn của Google**, không phải lỗi file: My Maps
+không hỗ trợ nhập file trên trình duyệt di động, và trình chọn file iOS làm mờ
+`.kml`. Không có cách lách trên điện thoại — đã ghi thẳng điều đó lên trang
+thay vì để người dùng loay hoay tiếp.
+
+**🔴 Lỗi nghiêm trọng lộ ra khi đi tìm đường thay thế.** Trang **vốn đã là PWA
+chạy offline được** (`service-worker.js` + `manifest.json`, đăng ký trong
+`index.html`) — tốt hơn My Maps, vì My Maps *bắt buộc có mạng*. Nhưng:
+
+| | |
+|---|---|
+| `service-worker.js` sửa lần cuối | **05/09/2026** (`a25dc23`, v11) |
+| `index.html` đã đổi từ đó | **14 lần** (v12 → v25) |
+| `CACHE_NAME` | vẫn `hgloop-v11` |
+
+Trình duyệt chỉ cài lại service worker khi **file SW đổi byte**. File không đổi
+→ `install` không chạy lại. Cộng với handler `fetch` cũ chỉ
+`fetch().catch(() => caches.match(...))` — **đọc cache mà không bao giờ ghi** —
+bản offline trên mỗi máy **đóng băng ở đúng `index.html` lúc máy đó mở trang
+lần đầu**. Có mạng thì network-first vẫn trả bản mới nên **không ai nhận ra**.
+
+Đo thật bản trong cache (`a25dc23:index.html`) so với bản hiện tại:
+
+| chuỗi | trong cache | hiện tại |
+|---|---|---|
+| `Anh Quân Camping` | **14** | 2 |
+| `PAJ Travel` | **0** | 12 |
+| `Pachidua` | **0** | 14 |
+| `Suối Bản Án` | **0** | 7 |
+
+Tức mất sóng đoạn **Mậu Duệ → Lũng Hồ → Du Già** — đúng chỗ trang tự cảnh báo
+sóng yếu nhất — sẽ hiện **lịch trình sai của hai tháng trước**.
+
+**Đã sửa (3 thứ, thứ 2 mới là vá gốc):**
+1. `CACHE_NAME` → `hgloop-v26`; `SHELL_FILES` thêm `.kml` + `.txt`.
+2. `fetch` **network-first CÓ `cache.put()`** → mỗi lần mở trang lúc có mạng là
+   bản offline tự mới. Lớp lỗi "quên bump version" **không thể đóng băng nội
+   dung được nữa**.
+3. `install` cache **từng file riêng** (`allSettled`) thay `cache.addAll()`.
+   `addAll` là *tất-cả-hoặc-không*: một file 404 là reject, `.catch()` nuốt im,
+   **không file nào được cache** — thêm 2 file mới mà sai một chữ là mất luôn
+   `index.html`, lại không báo gì.
+   Handler cũng xử cả `GET` không phải `navigate`, nếu không `.kml`/`.txt` dù
+   nằm trong cache vẫn không tải được offline. Có kiểm `self.location.origin`
+   để **không chặn** Firestore / Leaflet CDN / tile bản đồ / Open-Meteo.
+
+**Trang:** thêm thẻ "Cài trang này vào điện thoại" (ghi rõ cái gì chạy / không
+chạy khi mất sóng) + thẻ 2 nút tải `.txt`/`.kml` kèm sự thật về My Maps. Hai
+file nay nằm trong repo nên có URL cố định trên Netlify.
+
+**Bài học — ba cạm bẫy, cái sau đắt hơn cái trước:**
+- **Đổi nội dung mà quên bump `CACHE_NAME` thì bản offline âm thầm đóng băng.**
+  Không có lỗi, không có cảnh báo, chỉ sai khi mất mạng. `check_sw.py` nay
+  khẳng định `CACHE_NAME` **không cũ hơn** bản `index.html` mới nhất đã commit.
+- **Network-first mà không ghi cache thì cache không bao giờ mới.** Đây mới là
+  gốc; bump version chỉ chữa triệu chứng một lần.
+- **`page.waitForFunction` của Playwright 1.56.1 KHÔNG chờ predicate `async`** —
+  nó coi Promise trả về là truthy và resolve ngay (đo được 72ms thay vì timeout
+  2000ms với predicate luôn trả về `false`). Mọi lệnh chờ viết kiểu đó là **chờ
+  giả**, khiến phép kiểm báo sai cả hai chiều. Dùng vòng lặp poll phía Node với
+  `page.evaluate` (hàm này chờ Promise đúng).
+- **`ctx.setOffline(true)` không chặn được kết nối tới `127.0.0.1`** — server
+  vẫn nhận request, phép kiểm "đạt" giả. Mất sóng thật = **tắt hẳn server và
+  huỷ mọi socket keep-alive**.
+
+**Kiểm chứng:** `offline_test.js` dựng 3 kịch bản thật (chứng minh lỗi / bản vá
+/ chống tái diễn). Chạy với SW cũ: **6 thất bại**. Với SW mới: **đạt cả 3**.
 
 
 ## Deploy

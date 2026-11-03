@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document>
+<name>Hà Giang 04–07/11/2026 — 26 điểm</name>
+<description>Combo PAJ Travel 4N3Đ · 3 người, 2 xe Honda Future. Mỗi ngày một lớp riêng, bật/tắt được. Điểm có 🚶 là phải gửi xe rồi đi bộ.</description>
+<Style id="pin1"><IconStyle><color>ff4d3424</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon></IconStyle></Style>
+<Style id="line1"><LineStyle><color>ff4d3424</color><width>4</width></LineStyle></Style>
+<Style id="pin2"><IconStyle><color>ff2f50b1</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon></IconStyle></Style>
+<Style id="line2"><LineStyle><color>ff2f50b1</color><width>4</width></LineStyle></Style>
+<Style id="pin3"><IconStyle><color>ff4e6e5c</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon></IconStyle></Style>
+<Style id="line3"><LineStyle><color>ff4e6e5c</color><width>4</width></LineStyle></Style>
+<Style id="pin4"><IconStyle><color>ff4495c8</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon></IconStyle></Style>
+<Style id="line4"><LineStyle><color>ff4495c8</color><width>4</width></LineStyle></Style>
+<Folder><name>Ngày 1 · 04/11 — Lên Đồng Văn</name>
+<Placemark>
+<name>N1·01 · TP Hà Giang — nhận xe</name>
+<description>04:00 xe tới · 07:00 nhận 2 xe Future tại HÀ GIANG GO · 08:00 xuất phát.
+
+Tìm trên Maps: Thành phố Hà Giang, Tuyên Quang
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang&amp;query_place_id=ChIJb62lFqZ5zDYRvWB8b5MQfMk</description>
+<styleUrl>#pin1</styleUrl>
+<Point><coordinates>104.978400,22.802500,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N1·02 · Dốc Bắc Sum</name>
+<description>📷 Điểm dừng ven đường — xe chạy ngang qua
+
+09:15–09:40 · Cà phê sáng trên đỉnh dốc. Điểm mới trong lịch chốt.
+
+Tìm trên Maps: Panoramic view point of Bac Sum, Quản Bạ, Tuyên Quang
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=Panoramic%20view%20point%20of%20Bac%20Sum%2C%20Qu%E1%BA%A3n%20B%E1%BA%A1%2C%20Tuy%C3%AAn%20Quang&amp;query_place_id=ChIJ2f0TLwB1zDYR-a9K48Sq-DU</description>
+<styleUrl>#pin1</styleUrl>
+<Point><coordinates>104.939022,22.996229,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N1·03 · Cổng Trời Quản Bạ</name>
+<description>10:10–10:50 · Núi Đôi Cô Tiên. Dừng 40 phút.
+
+Tìm trên Maps: Fairy Bosom Mountain Viewpoint, Quản Bạ, Tuyên Quang
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=Fairy%20Bosom%20Mountain%20Viewpoint%2C%20Qu%E1%BA%A3n%20B%E1%BA%A1%2C%20Tuy%C3%AAn%20Quang&amp;query_place_id=ChIJycKGLRELzDYR7NtDvb62rXM</description>
+<styleUrl>#pin1</styleUrl>
+<Point><coordinates>104.992615,23.049602,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N1·04 · Dốc Cán Tỷ (cua chữ M)</name>
+<description>11:35–11:50 · Điểm dừng chân du lịch H'Mông. Cũng là cây cô đơn Cán Tỷ.
+
+Tìm trên Maps: 23.117930,105.019623
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=23.117930%2C105.019623&amp;query_place_id=ChIJPaOJXlH1yzYREzFinm_IkV0</description>
+<styleUrl>#pin1</styleUrl>
+<Point><coordinates>105.019623,23.117930,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N1·05 · Yên Minh — ăn trưa</name>
+<description>12:35–13:30 · Quán Gió, Lao Và Chải. ĐỔ XĂNG bắt buộc.
+
+Tìm trên Maps: Quán Gió, Lao Và Chải, Yên Minh, Tuyên Quang
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=Qu%C3%A1n%20Gi%C3%B3%2C%20Lao%20V%C3%A0%20Ch%E1%BA%A3i%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&amp;query_place_id=ChIJXTlXChv1yzYRJa9onpUjnJk</description>
+<styleUrl>#pin1</styleUrl>
+<Point><coordinates>105.137749,23.107345,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N1·06 · Dốc Thẩm Mã</name>
+<description>14:00–14:20 · Dừng 20 phút. KHÁC Dốc Chín Khoanh.
+
+Tìm trên Maps: Dốc Thẩm Mã, Yên Minh, Tuyên Quang
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=D%E1%BB%91c%20Th%E1%BA%A9m%20M%C3%A3%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&amp;query_place_id=ChIJkUReYgDxyzYRTKn_xxsRkrA</description>
+<styleUrl>#pin1</styleUrl>
+<Point><coordinates>105.188652,23.187570,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N1·07 · Phố Cáo &amp; Dốc Chín Khoanh</name>
+<description>📷 Điểm dừng ven đường — xe chạy ngang qua
+
+14:20–14:45 · "Thuỵ Sĩ Hà Giang" + dốc 9 khoanh. Miễn phí.
+
+Tìm trên Maps: Dốc Chín Khoanh, Phố Cáo, Đồng Văn
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=D%E1%BB%91c%20Ch%C3%ADn%20Khoanh%2C%20Ph%E1%BB%91%20C%C3%A1o%2C%20%C4%90%E1%BB%93ng%20V%C4%83n&amp;query_place_id=ChIJ03Uabp_6yzYReBKECWdb7iA</description>
+<styleUrl>#pin1</styleUrl>
+<Point><coordinates>105.206200,23.221600,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N1·08 · Sủng Là — Nhà của Pao</name>
+<description>15:00–15:35 · Vé 10.000đ/người theo combo.
+
+Tìm trên Maps: Làng văn hóa du lịch Lũng Cẩm, Sủng Là, Đồng Văn
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=L%C3%A0ng%20v%C4%83n%20h%C3%B3a%20du%20l%E1%BB%8Bch%20L%C5%A9ng%20C%E1%BA%A9m%2C%20S%E1%BB%A7ng%20L%C3%A0%2C%20%C4%90%E1%BB%93ng%20V%C4%83n&amp;query_place_id=ChIJj8D-7Iv7yzYRexZiSTW5Gmw</description>
+<styleUrl>#pin1</styleUrl>
+<Point><coordinates>105.230299,23.253208,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N1·09 · Dinh thự Họ Vương (Sà Phìn)</name>
+<description>15:50–16:25 · Vé 30.000đ/người. Quá 16:10 thì rút ngắn và chạy thẳng về.
+
+Tìm trên Maps: Dinh thự họ Vương, Sà Phìn, Tuyên Quang
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=Dinh%20th%E1%BB%B1%20h%E1%BB%8D%20V%C6%B0%C6%A1ng%2C%20S%C3%A0%20Ph%C3%ACn%2C%20Tuy%C3%AAn%20Quang&amp;query_place_id=ChIJ0RcHfQDlyzYR4DPqsfVRxeY</description>
+<styleUrl>#pin1</styleUrl>
+<Point><coordinates>105.314900,23.293100,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N1·10 · 🛏 Đồng Văn — Nùng Homestay</name>
+<description>17:00 nhận phòng. Lặn 17:21 nhưng thung lũng tối sớm hơn 30–45 ph — tới nơi là đã nhá nhem.
+
+Tìm trên Maps: Nùng Homestay Đồng Văn
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=N%C3%B9ng%20Homestay%20%C4%90%E1%BB%93ng%20V%C4%83n&amp;query_place_id=ChIJ2cdNBcHnyzYRogWS_9kdNwU</description>
+<styleUrl>#pin1</styleUrl>
+<Point><coordinates>105.359912,23.280154,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>▶ Ngày 1 — Chỉ đường Sáng</name>
+<description><![CDATA[<p><a href="https://www.google.com/maps/dir/?api=1&amp;origin=C%E1%BB%99t%20m%E1%BB%91c%20s%E1%BB%91%200%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang&amp;waypoints=23.049602%2C104.992615%7C23.117930%2C105.019623&amp;destination=23.107345%2C105.137749&amp;travelmode=driving">BẤM ĐỂ MỞ CHỈ ĐƯỜNG TRONG GOOGLE MAPS</a></p><p>Cột mốc số 0, Thành phố Hà Giang, Tuyên Quang → 23.049602,104.992615 → 23.117930,105.019623 → 23.107345,105.137749</p><p style="font-size:11px;word-break:break-all">https://www.google.com/maps/dir/?api=1&amp;origin=C%E1%BB%99t%20m%E1%BB%91c%20s%E1%BB%91%200%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang&amp;waypoints=23.049602%2C104.992615%7C23.117930%2C105.019623&amp;destination=23.107345%2C105.137749&amp;travelmode=driving</p>]]></description>
+<styleUrl>#line1</styleUrl>
+<Point><coordinates>104.978400,22.802500,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>▶ Ngày 1 — Chỉ đường Chiều</name>
+<description><![CDATA[<p><a href="https://www.google.com/maps/dir/?api=1&amp;origin=23.107345%2C105.137749&amp;waypoints=D%E1%BB%91c%20Th%E1%BA%A9m%20M%C3%A3%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang%7C23.253208%2C105.230299%7CDinh%20th%E1%BB%B1%20h%E1%BB%8D%20V%C6%B0%C6%A1ng%2C%20S%C3%A0%20Ph%C3%ACn%2C%20Tuy%C3%AAn%20Quang&amp;destination=23.280154%2C105.359912&amp;travelmode=driving">BẤM ĐỂ MỞ CHỈ ĐƯỜNG TRONG GOOGLE MAPS</a></p><p>23.107345,105.137749 → Dốc Thẩm Mã, Yên Minh, Tuyên Quang → 23.253208,105.230299 → Dinh thự họ Vương, Sà Phìn, Tuyên Quang → 23.280154,105.359912</p><p style="font-size:11px;word-break:break-all">https://www.google.com/maps/dir/?api=1&amp;origin=23.107345%2C105.137749&amp;waypoints=D%E1%BB%91c%20Th%E1%BA%A9m%20M%C3%A3%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang%7C23.253208%2C105.230299%7CDinh%20th%E1%BB%B1%20h%E1%BB%8D%20V%C6%B0%C6%A1ng%2C%20S%C3%A0%20Ph%C3%ACn%2C%20Tuy%C3%AAn%20Quang&amp;destination=23.280154%2C105.359912&amp;travelmode=driving</p>]]></description>
+<styleUrl>#line1</styleUrl>
+<Point><coordinates>104.978400,22.802500,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>▬ Cung đường ngày 1</name>
+<styleUrl>#line1</styleUrl>
+<LineString><tessellate>1</tessellate><coordinates>104.978400,22.802500,0 104.983000,22.948000,0 104.992615,23.049602,0 105.019623,23.117930,0 105.137749,23.107345,0 105.188652,23.187570,0 105.206200,23.221600,0 105.230299,23.253208,0 105.314900,23.293100,0 105.359912,23.280154,0</coordinates></LineString>
+</Placemark>
+</Folder>
+<Folder><name>Ngày 2 · 05/11 — Lũng Cú &amp; Nho Quế</name>
+<Placemark>
+<name>N2·01 · Cột cờ Lũng Cú</name>
+<description>09:25–10:25 · Điểm cực Bắc. Vé 30.000–40.000đ.
+
+Tìm trên Maps: Cột cờ Lũng Cú, Tuyên Quang
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=C%E1%BB%99t%20c%E1%BB%9D%20L%C5%A9ng%20C%C3%BA%2C%20Tuy%C3%AAn%20Quang&amp;query_place_id=ChIJxzMMivbhyzYRH5HpywpNLDA</description>
+<styleUrl>#pin2</styleUrl>
+<Point><coordinates>105.316700,23.391900,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N2·02 · Làng Lô Lô Chải</name>
+<description>10:40–11:20 · Cực Bắc Coffee. Làng du lịch tốt nhất thế giới 2025.
+
+Tìm trên Maps: Lô Lô Chải, Lũng Cú, Tuyên Quang</description>
+<styleUrl>#pin2</styleUrl>
+<Point><coordinates>105.324400,23.387200,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N2·03 · Nhà cổ Ma Lé</name>
+<description>📷 Điểm dừng ven đường — xe chạy ngang qua
+
+11:50–12:10 · Nhà trình tường 1775. Điểm mới trong lịch chốt.
+
+Tìm trên Maps: Ma-Lé Ancient House Homestay, Ma Lé, Đồng Văn
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=Ma-L%C3%A9%20Ancient%20House%20Homestay%2C%20Ma%20L%C3%A9%2C%20%C4%90%E1%BB%93ng%20V%C4%83n&amp;query_place_id=ChIJpUU16P3hyzYR4Svuu3OcFIM</description>
+<styleUrl>#pin2</styleUrl>
+<Point><coordinates>105.348600,23.345000,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N2·04 · Đèo Mã Pì Lèng</name>
+<description>13:50–14:10 · Tứ đại đỉnh đèo. Mỏm Đá Tử Thần ngay gần.
+
+Tìm trên Maps: Mã Pì Lèng Panorama, Pải Lủng, Mèo Vạc</description>
+<styleUrl>#pin2</styleUrl>
+<Point><coordinates>105.419200,23.229900,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N2·05 · Bến thuyền hẻm Tu Sản</name>
+<description>🚶 GỬI XE TRÊN ĐƯỜNG RỒI ĐI BỘ — không dẫn đường xe tới tận nơi được
+
+14:40–16:15 · Thuyền 150.000đ + ăn trưa camping. PHẢI đặt trước.
+
+Tìm trên Maps: Bến thuyền hẻm Tu Sản
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=B%E1%BA%BFn%20thuy%E1%BB%81n%20h%E1%BA%BBm%20Tu%20S%E1%BA%A3n&amp;query_place_id=ChIJV07WEQ7nyzYRZuoZqOouwhM</description>
+<styleUrl>#pin2</styleUrl>
+<Point><coordinates>105.406400,23.221400,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N2·06 · Camping dưới hẻm Tu Sản</name>
+<description>🚶 GỬI XE TRÊN ĐƯỜNG RỒI ĐI BỘ — không dẫn đường xe tới tận nơi được
+
+14:40–16:15 · Ăn trưa bên mép nước, chỉ tới được bằng thuyền. BẮT BUỘC đặt suất ăn trước.
+
+Tìm trên Maps: DN Xê Dịch Camping, Nho Quế
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=DN%20X%C3%AA%20D%E1%BB%8Bch%20Camping%2C%20Nho%20Qu%E1%BA%BF&amp;query_place_id=ChIJVTNJjpHdyzYRlAMXJAh5qGQ</description>
+<styleUrl>#pin2</styleUrl>
+<Point><coordinates>105.418116,23.236037,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N2·07 · Cà phê Mí Pó</name>
+<description>🚶 GỬI XE TRÊN ĐƯỜNG RỒI ĐI BỘ — không dẫn đường xe tới tận nơi được
+
+16:45–17:15 · Phải đi bộ lên. Quá 16:45 thì BỎ.
+
+Tìm trên Maps: Coffee Mí Pó, Pải Lủng, Mèo Vạc
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=Coffee%20M%C3%AD%20P%C3%B3%2C%20P%E1%BA%A3i%20L%E1%BB%A7ng%2C%20M%C3%A8o%20V%E1%BA%A1c&amp;query_place_id=ChIJ59OlcgDdyzYRjvOmQYR9p1w</description>
+<styleUrl>#pin2</styleUrl>
+<Point><coordinates>105.422800,23.210200,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N2·08 · 🛏 Mèo Vạc — Snow Hotel</name>
+<description>17:50 nhận phòng. Lặn 17:20 — đoạn Mí Pó → Mèo Vạc chạy trong tối. Bỏ Mí Pó thì về sớm 30 ph.
+
+Tìm trên Maps: Snow Hotel, Mèo Vạc, Tuyên Quang
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=Snow%20Hotel%2C%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang&amp;query_place_id=ChIJJzsncADDyzYRVXJVVGM1QVg</description>
+<styleUrl>#pin2</styleUrl>
+<Point><coordinates>105.408983,23.163830,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>▶ Ngày 2 — Chỉ đường Sáng</name>
+<description><![CDATA[<p><a href="https://www.google.com/maps/dir/?api=1&amp;origin=23.280154%2C105.359912&amp;waypoints=C%E1%BB%99t%20c%E1%BB%9D%20L%C5%A9ng%20C%C3%BA%2C%20Tuy%C3%AAn%20Quang%7CL%C3%B4%20L%C3%B4%20Ch%E1%BA%A3i%2C%20L%C5%A9ng%20C%C3%BA%2C%20Tuy%C3%AAn%20Quang&amp;destination=23.280154%2C105.359912&amp;travelmode=driving">BẤM ĐỂ MỞ CHỈ ĐƯỜNG TRONG GOOGLE MAPS</a></p><p>23.280154,105.359912 → Cột cờ Lũng Cú, Tuyên Quang → Lô Lô Chải, Lũng Cú, Tuyên Quang → 23.280154,105.359912</p><p style="font-size:11px;word-break:break-all">https://www.google.com/maps/dir/?api=1&amp;origin=23.280154%2C105.359912&amp;waypoints=C%E1%BB%99t%20c%E1%BB%9D%20L%C5%A9ng%20C%C3%BA%2C%20Tuy%C3%AAn%20Quang%7CL%C3%B4%20L%C3%B4%20Ch%E1%BA%A3i%2C%20L%C5%A9ng%20C%C3%BA%2C%20Tuy%C3%AAn%20Quang&amp;destination=23.280154%2C105.359912&amp;travelmode=driving</p>]]></description>
+<styleUrl>#line2</styleUrl>
+<Point><coordinates>105.316700,23.391900,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>▶ Ngày 2 — Chỉ đường Chiều</name>
+<description><![CDATA[<p><a href="https://www.google.com/maps/dir/?api=1&amp;origin=23.280154%2C105.359912&amp;waypoints=%C4%90%C3%A8o%20M%C3%A3%20P%C3%AC%20L%C3%A8ng%2C%20Tuy%C3%AAn%20Quang&amp;destination=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving">BẤM ĐỂ MỞ CHỈ ĐƯỜNG TRONG GOOGLE MAPS</a></p><p>23.280154,105.359912 → Đèo Mã Pì Lèng, Tuyên Quang → Thị trấn Mèo Vạc, Tuyên Quang</p><p style="font-size:11px;word-break:break-all">https://www.google.com/maps/dir/?api=1&amp;origin=23.280154%2C105.359912&amp;waypoints=%C4%90%C3%A8o%20M%C3%A3%20P%C3%AC%20L%C3%A8ng%2C%20Tuy%C3%AAn%20Quang&amp;destination=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving</p>]]></description>
+<styleUrl>#line2</styleUrl>
+<Point><coordinates>105.316700,23.391900,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>▬ Cung đường ngày 2</name>
+<styleUrl>#line2</styleUrl>
+<LineString><tessellate>1</tessellate><coordinates>105.359912,23.280154,0 105.316700,23.391900,0 105.324400,23.387200,0 105.348600,23.345000,0 105.359912,23.280154,0 105.419200,23.229900,0 105.406400,23.221400,0 105.422800,23.210200,0 105.408983,23.163830,0</coordinates></LineString>
+</Placemark>
+</Folder>
+<Folder><name>Ngày 3 · 06/11 — Vào Du Già</name>
+<Placemark>
+<name>N3·01 · Điểm ngắm cua chữ M</name>
+<description>📷 Điểm dừng ven đường — xe chạy ngang qua
+
+09:15–09:40 · Dừng 25 phút.
+
+Tìm trên Maps: Điểm ngắm cua chữ M, Mèo Vạc
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=%C4%90i%E1%BB%83m%20ng%E1%BA%AFm%20cua%20ch%E1%BB%AF%20M%2C%20M%C3%A8o%20V%E1%BA%A1c&amp;query_place_id=ChIJY9CUXTPtyzYR4hBnYNaMOkw</description>
+<styleUrl>#pin3</styleUrl>
+<Point><coordinates>105.335800,23.130100,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N3·02 · Mậu Duệ</name>
+<description>10:10–10:35 · CÂY XĂNG CUỐI CÙNG. Tải bản đồ offline tại đây.
+
+Tìm trên Maps: Mậu Duệ, Yên Minh, Tuyên Quang</description>
+<styleUrl>#pin3</styleUrl>
+<Point><coordinates>105.251900,23.076400,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N3·03 · Suối Bản Án (Ngọc Long)</name>
+<description>11:45–13:00 · Đi bè + ăn trưa trên suối. ĐIỂM MỚI — gọi hỏi trước.
+
+Tìm trên Maps: Suối Bản Án, Ngọc Long, Yên Minh
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=Su%E1%BB%91i%20B%E1%BA%A3n%20%C3%81n%2C%20Ng%E1%BB%8Dc%20Long%2C%20Y%C3%AAn%20Minh&amp;query_place_id=ChIJI8OiVQDtyzYRh3Jq1gmUPlg</description>
+<styleUrl>#pin3</styleUrl>
+<Point><coordinates>105.225000,23.030000,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N3·04 · Lũng Hồ View Point</name>
+<description>14:20–14:45 · Trước đó là đoạn đường xấu nhất tuyến.
+
+Tìm trên Maps: Lung Ho View Point, Yên Minh
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=Lung%20Ho%20View%20Point%2C%20Y%C3%AAn%20Minh&amp;query_place_id=ChIJWdeBZwCTyzYRFMON3152zWo</description>
+<styleUrl>#pin3</styleUrl>
+<Point><coordinates>105.196900,23.003100,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N3·05 · 🛏 Du Già — Pachidua Ecolodge</name>
+<description>15:45 nhận phòng · 16:30 thác Ba Tiên · 19:00 cơm tối combo tặng.
+
+Tìm trên Maps: Du Già, Yên Minh, Tuyên Quang
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=Du%20Gi%C3%A0%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&amp;query_place_id=ChIJKxXGLwCNyzYRw0M2err7YJ4</description>
+<styleUrl>#pin3</styleUrl>
+<Point><coordinates>105.150800,22.935800,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N3·06 · Thác Du Già (thác Ba Tiên)</name>
+<description>🚶 GỬI XE TRÊN ĐƯỜNG RỒI ĐI BỘ — không dẫn đường xe tới tận nơi được
+
+16:30–17:30 · Gửi xe rồi đi bộ ~15 phút. Tháng 11 nước rất lạnh. (Vị trí chấm là ước lượng — bấm link để ra đúng nơi.)
+
+Tìm trên Maps: Thác Du Già, Tuyên Quang
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=Th%C3%A1c%20Du%20Gi%C3%A0%2C%20Tuy%C3%AAn%20Quang&amp;query_place_id=ChIJC3R2A5aTyzYRXBFzqcX-coM</description>
+<styleUrl>#pin3</styleUrl>
+<Point><coordinates>105.160000,22.929000,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>▶ Ngày 3 — Chỉ đường Sáng</name>
+<description><![CDATA[<p><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang&amp;waypoints=M%E1%BA%ADu%20Du%E1%BB%87%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&amp;destination=Ng%E1%BB%8Dc%20Long%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving">BẤM ĐỂ MỞ CHỈ ĐƯỜNG TRONG GOOGLE MAPS</a></p><p>Thị trấn Mèo Vạc, Tuyên Quang → Mậu Duệ, Yên Minh, Tuyên Quang → Ngọc Long, Yên Minh, Tuyên Quang</p><p style="font-size:11px;word-break:break-all">https://www.google.com/maps/dir/?api=1&amp;origin=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang&amp;waypoints=M%E1%BA%ADu%20Du%E1%BB%87%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&amp;destination=Ng%E1%BB%8Dc%20Long%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving</p>]]></description>
+<styleUrl>#line3</styleUrl>
+<Point><coordinates>105.335800,23.130100,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>▶ Ngày 3 — Chỉ đường Chiều</name>
+<description><![CDATA[<p><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Ng%E1%BB%8Dc%20Long%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&amp;waypoints=L%C5%A9ng%20H%E1%BB%93%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&amp;destination=Du%20Gi%C3%A0%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving">BẤM ĐỂ MỞ CHỈ ĐƯỜNG TRONG GOOGLE MAPS</a></p><p>Ngọc Long, Yên Minh, Tuyên Quang → Lũng Hồ, Yên Minh, Tuyên Quang → Du Già, Yên Minh, Tuyên Quang</p><p style="font-size:11px;word-break:break-all">https://www.google.com/maps/dir/?api=1&amp;origin=Ng%E1%BB%8Dc%20Long%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&amp;waypoints=L%C5%A9ng%20H%E1%BB%93%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&amp;destination=Du%20Gi%C3%A0%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving</p>]]></description>
+<styleUrl>#line3</styleUrl>
+<Point><coordinates>105.335800,23.130100,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>▬ Cung đường ngày 3</name>
+<styleUrl>#line3</styleUrl>
+<LineString><tessellate>1</tessellate><coordinates>105.408983,23.163830,0 105.335800,23.130100,0 105.251900,23.076400,0 105.225000,23.030000,0 105.196900,23.003100,0 105.150800,22.935800,0</coordinates></LineString>
+</Placemark>
+</Folder>
+<Folder><name>Ngày 4 · 07/11 — Về TP Hà Giang</name>
+<Placemark>
+<name>N4·01 · Minh Ngọc (cung Bắc Mê)</name>
+<description>12:15–12:35 · Nghỉ 20 phút, đổ xăng lần cuối.
+
+Tìm trên Maps: Minh Ngọc, Bắc Mê, Tuyên Quang</description>
+<styleUrl>#pin4</styleUrl>
+<Point><coordinates>105.062500,22.918600,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>N4·02 · TP Hà Giang — trả xe</name>
+<description>13:30 về tới nơi · 17:00 trả xe · 20:30 lên xe Sao Việt về Nội Bài.
+
+Tìm trên Maps: Thành phố Hà Giang, Tuyên Quang
+Link chính xác (Place ID): https://www.google.com/maps/search/?api=1&amp;query=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang&amp;query_place_id=ChIJb62lFqZ5zDYRvWB8b5MQfMk</description>
+<styleUrl>#pin4</styleUrl>
+<Point><coordinates>104.978400,22.802500,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>▶ Ngày 4 — Chỉ đường Cả ngày</name>
+<description><![CDATA[<p><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Du%20Gi%C3%A0%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&amp;waypoints=Minh%20Ng%E1%BB%8Dc%2C%20B%E1%BA%AFc%20M%C3%AA%2C%20Tuy%C3%AAn%20Quang&amp;destination=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving">BẤM ĐỂ MỞ CHỈ ĐƯỜNG TRONG GOOGLE MAPS</a></p><p>Du Già, Yên Minh, Tuyên Quang → Minh Ngọc, Bắc Mê, Tuyên Quang → Thành phố Hà Giang, Tuyên Quang</p><p style="font-size:11px;word-break:break-all">https://www.google.com/maps/dir/?api=1&amp;origin=Du%20Gi%C3%A0%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&amp;waypoints=Minh%20Ng%E1%BB%8Dc%2C%20B%E1%BA%AFc%20M%C3%AA%2C%20Tuy%C3%AAn%20Quang&amp;destination=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang&amp;travelmode=driving</p>]]></description>
+<styleUrl>#line4</styleUrl>
+<Point><coordinates>105.062500,22.918600,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>▬ Cung đường ngày 4</name>
+<styleUrl>#line4</styleUrl>
+<LineString><tessellate>1</tessellate><coordinates>105.150800,22.935800,0 105.062500,22.918600,0 104.978400,22.802500,0</coordinates></LineString>
+</Placemark>
+</Folder>
+<Folder><name>Hà Nội · Ngày 0 (03/11) &amp; Ngày 5 (08/11)</name>
+<Placemark>
+<name>▶ Ngày 0 — Chỉ đường Nội Bài → VP nhà xe</name>
+<description><![CDATA[<p><a href="https://www.google.com/maps/dir/?api=1&amp;origin=S%C3%A2n%20bay%20N%E1%BB%99i%20B%C3%A0i%2C%20Ga%20T1%2C%20H%C3%A0%20N%E1%BB%99i&amp;destination=16%20Tr%E1%BA%A7n%20Nh%E1%BA%ADt%20Du%E1%BA%ADt%2C%20Ho%C3%A0n%20Ki%E1%BA%BFm%2C%20H%C3%A0%20N%E1%BB%99i&amp;travelmode=driving">BẤM ĐỂ MỞ CHỈ ĐƯỜNG TRONG GOOGLE MAPS</a></p><p>Sân bay Nội Bài, Ga T1, Hà Nội → 16 Trần Nhật Duật, Hoàn Kiếm, Hà Nội</p><p style="font-size:11px;word-break:break-all">https://www.google.com/maps/dir/?api=1&amp;origin=S%C3%A2n%20bay%20N%E1%BB%99i%20B%C3%A0i%2C%20Ga%20T1%2C%20H%C3%A0%20N%E1%BB%99i&amp;destination=16%20Tr%E1%BA%A7n%20Nh%E1%BA%ADt%20Du%E1%BA%ADt%2C%20Ho%C3%A0n%20Ki%E1%BA%BFm%2C%20H%C3%A0%20N%E1%BB%99i&amp;travelmode=driving</p>]]></description>
+<Point><coordinates>105.807200,21.221200,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>▶ Ngày 5 — Chỉ đường Ra sân bay</name>
+<description><![CDATA[<p><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Ph%E1%BB%91%20c%E1%BB%95%20H%C3%A0%20N%E1%BB%99i%2C%20Ho%C3%A0n%20Ki%E1%BA%BFm%2C%20H%C3%A0%20N%E1%BB%99i&amp;destination=S%C3%A2n%20bay%20N%E1%BB%99i%20B%C3%A0i%2C%20Ga%20T1%2C%20H%C3%A0%20N%E1%BB%99i&amp;travelmode=driving">BẤM ĐỂ MỞ CHỈ ĐƯỜNG TRONG GOOGLE MAPS</a></p><p>Phố cổ Hà Nội, Hoàn Kiếm, Hà Nội → Sân bay Nội Bài, Ga T1, Hà Nội</p><p style="font-size:11px;word-break:break-all">https://www.google.com/maps/dir/?api=1&amp;origin=Ph%E1%BB%91%20c%E1%BB%95%20H%C3%A0%20N%E1%BB%99i%2C%20Ho%C3%A0n%20Ki%E1%BA%BFm%2C%20H%C3%A0%20N%E1%BB%99i&amp;destination=S%C3%A2n%20bay%20N%E1%BB%99i%20B%C3%A0i%2C%20Ga%20T1%2C%20H%C3%A0%20N%E1%BB%99i&amp;travelmode=driving</p>]]></description>
+<Point><coordinates>105.850000,21.033300,0</coordinates></Point>
+</Placemark>
+</Folder>
+</Document></kml>
