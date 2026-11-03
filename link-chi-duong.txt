@@ -1,0 +1,55 @@
+🏍️ HÀ GIANG 03–08/11/2026 — LINK CHỈ ĐƯỜNG TỪNG CHẶNG
+Bấm thẳng là mở app Google Maps. Ghim tin nhắn này lại cho cả nhóm.
+
+NGÀY 0 · Thứ Ba 03/11 — Hà Nội
+──────────────────────────────────────────────
+▶ Nội Bài → VP nhà xe
+  Sân bay Nội Bài, Ga T1, Hà Nội → 16 Trần Nhật Duật, Hoàn Kiếm, Hà Nội
+  https://www.google.com/maps/dir/?api=1&origin=S%C3%A2n%20bay%20N%E1%BB%99i%20B%C3%A0i%2C%20Ga%20T1%2C%20H%C3%A0%20N%E1%BB%99i&destination=16%20Tr%E1%BA%A7n%20Nh%E1%BA%ADt%20Du%E1%BA%ADt%2C%20Ho%C3%A0n%20Ki%E1%BA%BFm%2C%20H%C3%A0%20N%E1%BB%99i&travelmode=driving
+
+NGÀY 1 · Thứ Tư 04/11 — Hà Giang → Đồng Văn
+──────────────────────────────────────────────
+▶ Sáng
+  Cột mốc số 0, Thành phố Hà Giang, Tuyên Quang → 23.049602,104.992615 → 23.117930,105.019623 → 23.107345,105.137749
+  https://www.google.com/maps/dir/?api=1&origin=C%E1%BB%99t%20m%E1%BB%91c%20s%E1%BB%91%200%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang&waypoints=23.049602%2C104.992615%7C23.117930%2C105.019623&destination=23.107345%2C105.137749&travelmode=driving
+
+▶ Chiều
+  23.107345,105.137749 → Dốc Thẩm Mã, Yên Minh, Tuyên Quang → 23.253208,105.230299 → Dinh thự họ Vương, Sà Phìn, Tuyên Quang → 23.280154,105.359912
+  https://www.google.com/maps/dir/?api=1&origin=23.107345%2C105.137749&waypoints=D%E1%BB%91c%20Th%E1%BA%A9m%20M%C3%A3%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang%7C23.253208%2C105.230299%7CDinh%20th%E1%BB%B1%20h%E1%BB%8D%20V%C6%B0%C6%A1ng%2C%20S%C3%A0%20Ph%C3%ACn%2C%20Tuy%C3%AAn%20Quang&destination=23.280154%2C105.359912&travelmode=driving
+
+NGÀY 2 · Thứ Năm 05/11 — Lũng Cú & Nho Quế → Mèo Vạc
+──────────────────────────────────────────────
+▶ Sáng
+  23.280154,105.359912 → Cột cờ Lũng Cú, Tuyên Quang → Lô Lô Chải, Lũng Cú, Tuyên Quang → 23.280154,105.359912
+  https://www.google.com/maps/dir/?api=1&origin=23.280154%2C105.359912&waypoints=C%E1%BB%99t%20c%E1%BB%9D%20L%C5%A9ng%20C%C3%BA%2C%20Tuy%C3%AAn%20Quang%7CL%C3%B4%20L%C3%B4%20Ch%E1%BA%A3i%2C%20L%C5%A9ng%20C%C3%BA%2C%20Tuy%C3%AAn%20Quang&destination=23.280154%2C105.359912&travelmode=driving
+
+▶ Chiều
+  23.280154,105.359912 → Đèo Mã Pì Lèng, Tuyên Quang → Thị trấn Mèo Vạc, Tuyên Quang
+  https://www.google.com/maps/dir/?api=1&origin=23.280154%2C105.359912&waypoints=%C4%90%C3%A8o%20M%C3%A3%20P%C3%AC%20L%C3%A8ng%2C%20Tuy%C3%AAn%20Quang&destination=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang&travelmode=driving
+
+NGÀY 3 · Thứ Sáu 06/11 — Mèo Vạc → Du Già
+──────────────────────────────────────────────
+▶ Sáng
+  Thị trấn Mèo Vạc, Tuyên Quang → Mậu Duệ, Yên Minh, Tuyên Quang → Ngọc Long, Yên Minh, Tuyên Quang
+  https://www.google.com/maps/dir/?api=1&origin=Th%E1%BB%8B%20tr%E1%BA%A5n%20M%C3%A8o%20V%E1%BA%A1c%2C%20Tuy%C3%AAn%20Quang&waypoints=M%E1%BA%ADu%20Du%E1%BB%87%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&destination=Ng%E1%BB%8Dc%20Long%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&travelmode=driving
+
+▶ Chiều
+  Ngọc Long, Yên Minh, Tuyên Quang → Lũng Hồ, Yên Minh, Tuyên Quang → Du Già, Yên Minh, Tuyên Quang
+  https://www.google.com/maps/dir/?api=1&origin=Ng%E1%BB%8Dc%20Long%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&waypoints=L%C5%A9ng%20H%E1%BB%93%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&destination=Du%20Gi%C3%A0%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&travelmode=driving
+
+NGÀY 4 · Thứ Bảy 07/11 — Du Già → TP Hà Giang
+──────────────────────────────────────────────
+▶ Cả ngày
+  Du Già, Yên Minh, Tuyên Quang → Minh Ngọc, Bắc Mê, Tuyên Quang → Thành phố Hà Giang, Tuyên Quang
+  https://www.google.com/maps/dir/?api=1&origin=Du%20Gi%C3%A0%2C%20Y%C3%AAn%20Minh%2C%20Tuy%C3%AAn%20Quang&waypoints=Minh%20Ng%E1%BB%8Dc%2C%20B%E1%BA%AFc%20M%C3%AA%2C%20Tuy%C3%AAn%20Quang&destination=Th%C3%A0nh%20ph%E1%BB%91%20H%C3%A0%20Giang%2C%20Tuy%C3%AAn%20Quang&travelmode=driving
+
+NGÀY 5 · Chủ Nhật 08/11 — Hà Nội → sân bay
+──────────────────────────────────────────────
+▶ Ra sân bay
+  Phố cổ Hà Nội, Hoàn Kiếm, Hà Nội → Sân bay Nội Bài, Ga T1, Hà Nội
+  https://www.google.com/maps/dir/?api=1&origin=Ph%E1%BB%91%20c%E1%BB%95%20H%C3%A0%20N%E1%BB%99i%2C%20Ho%C3%A0n%20Ki%E1%BA%BFm%2C%20H%C3%A0%20N%E1%BB%99i&destination=S%C3%A2n%20bay%20N%E1%BB%99i%20B%C3%A0i%2C%20Ga%20T1%2C%20H%C3%A0%20N%E1%BB%99i&travelmode=driving
+
+⚠️ Ba điểm KHÔNG dẫn đường xe tới tận nơi được (gửi xe rồi đi bộ):
+   · Bến thuyền hẻm Tu Sản  · Cà phê Mí Pó  · Thác Du Già
+
+Bản đồ đủ 25 điểm: nhập file .kml vào mymaps.google.com
